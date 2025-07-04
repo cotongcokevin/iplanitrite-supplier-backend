@@ -1,0 +1,18 @@
+// @env ../http-client.env.json
+
+POST {{ host }}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "kevin@cotongco.com",
+  "password": "password"
+}
+###
+
+GET {{ host }}/api/me
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+###

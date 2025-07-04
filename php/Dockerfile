@@ -19,3 +19,15 @@ RUN apt-get update \
 
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy composer files first (to leverage Docker cache)
+COPY src/composer.json src/composer.lock ./
+
+# Now copy the rest of the application code
+COPY src/ .
+
+# Run composer install to install dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction

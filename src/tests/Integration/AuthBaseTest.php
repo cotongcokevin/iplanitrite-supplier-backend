@@ -4,32 +4,51 @@ declare(strict_types=1);
 
 namespace Tests\Integration;
 
-use Illuminate\Foundation\Http\Kernel;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\BaseTestCase;
 
 class AuthBaseTest extends BaseTestCase
 {
 
-    /** @test */
-    public function shouldLoginSuccessfully(): void
+    public function testShouldLoginSuccessfully(): void
     {
         $response = $this->postJson("/api/auth/login", [
             "email" => "admin@ems.com",
             "password" => "password"
         ]);
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertStatus(200);
     }
 
-    /** @test */
-    public function shouldFailLogin(): void
+    public function testShouldLogoutSuccessfully(): void
     {
-        $response = $this->postJson("/api/auth/login", [
-            "email" => "admin@ems.com",
-            "password" => "wrongPassword"
-        ]);
+        $response = $this->postJson(
+            uri: "/api/auth/login",
+            data: [
+                "email" => "admin@ems.com",
+                "password" => "password"
+            ]
+        );
+        $token = $response->json();
 
-        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $response = $this->postJsonAuthorised(
+            uri: "/api/auth/logout",
+            token: $token
+        );
+
+        $response->assertStatus(200);
     }
+
+    public function testShouldFailLogin(): void
+    {
+        $response = $this->postJson(
+            uri: "/api/auth/login",
+            data: [
+                "email" => "admin@ems.com",
+                "password" => "wrongPassword"
+            ]
+        );
+
+        $response->assertStatus(401);
+    }
+
 }

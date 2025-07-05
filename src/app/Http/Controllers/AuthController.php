@@ -34,8 +34,9 @@ class AuthController
     /**
      * @return JsonResponse
      */
-    public function me(): JsonResponse {
-        return response()->json(auth()->id());
+    public function logout(): JsonResponse {
+        auth()->logout();
+        return response()->json();
     }
 
 }

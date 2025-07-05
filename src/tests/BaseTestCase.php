@@ -9,5 +9,4 @@ use Illuminate\Foundation\Testing\TestCase;
 abstract class BaseTestCase extends TestCase
 {
 
-
 }

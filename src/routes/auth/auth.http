@@ -5,12 +5,12 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "kevin@cotongco.com",
-  "password": "password"
+  "email": "admin@ems.com",
+  "password": "passwords"
 }
 ###
 
-GET {{ host }}/api/me
+POST {{ host }}/api/logout
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}

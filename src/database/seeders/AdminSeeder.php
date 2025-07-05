@@ -17,13 +17,13 @@ class AdminSeeder extends Seeder
         $date = Carbon::now()->toDateTimeString();
 
         Admin::firstOrCreate(
-            attributes: ['email' => 'kevin@cotongco.com'],
+            attributes: ['email' => 'admin@ems.com'],
             values: [
                 'id' => Str::uuid()->toString(),
-                'email' => 'kevin@cotongco.com',
+                'email' => 'admin@ems.com',
                 'password' => bcrypt('password'),
-                'first_name' => "Kevin",
-                'last_name' => "Cotongco",
+                'first_name' => "Naruto",
+                'last_name' => "Uzumaki",
                 'created_at' => $date,
                 'updated_at' => $date,
             ]

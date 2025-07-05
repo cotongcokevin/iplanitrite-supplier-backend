@@ -20,7 +20,16 @@ To edit
 
 ```
 function dockerRunTest {
+    docker compose run --rm php php artisan migrate:fresh --seed
     docker compose run --rm php ./vendor/bin/phpunit @args
+}
+
+function dockerArtisan {
+    docker compose run --rm php php artisan $args
+}
+
+function dockerRemigrate {
+    docker compose run --rm php php artisan migrate:refresh --seed
 }
 ```
 

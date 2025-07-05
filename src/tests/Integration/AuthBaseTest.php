@@ -4,27 +4,32 @@ declare(strict_types=1);
 
 namespace Tests\Integration;
 
+use Illuminate\Foundation\Http\Kernel;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\BaseTestCase;
 
 class AuthBaseTest extends BaseTestCase
 {
 
-    /**
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     /** @test */
-    public function shouldLoginSucessfully(): void
+    public function shouldLoginSuccessfully(): void
     {
         $response = $this->postJson("/api/auth/login", [
             "email" => "admin@ems.com",
             "password" => "password"
         ]);
 
-        dd($response);
+        $response->assertStatus(Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function shouldFailLogin(): void
+    {
+        $response = $this->postJson("/api/auth/login", [
+            "email" => "admin@ems.com",
+            "password" => "wrongPassword"
+        ]);
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 }

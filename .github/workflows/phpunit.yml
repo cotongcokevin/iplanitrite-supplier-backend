@@ -70,10 +70,6 @@ jobs:
         working-directory: ./src
         run: php artisan key:generate
 
-      - name: Generate application key
-        working-directory: ./src
-        run: php artisan key:generate
-
       - name: Wait for PostgreSQL to be ready
         working-directory: ./src
         run: |

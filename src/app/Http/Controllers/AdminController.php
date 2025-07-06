@@ -17,6 +17,7 @@ class AdminController
     public function index(AdminService $service): JsonResponse
     {
         $result = $service->search();
+
         $dto = $result->map(function (AdminModelData $entity) {
             return $entity->toDto();
         });

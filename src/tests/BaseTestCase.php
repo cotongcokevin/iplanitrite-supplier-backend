@@ -66,16 +66,24 @@ abstract class BaseTestCase extends TestCase
         );
     }
 
-    public function getToken(): string
-    {
-        $response = $this->postJson(
+    public function login(
+        string $email = 'naruto.uzumaki@ems.com',
+        string $password = 'password'
+    ): TestResponse {
+        return $this->postJson(
             uri: '/api/auth/login',
             data: [
-                'email' => 'naruto.uzumaki@ems.com',
-                'password' => 'password',
+                'email' => $email,
+                'password' => $password,
             ]
         );
+    }
 
-        return $response->json();
+    public function logout(string $token): TestResponse
+    {
+        return $this->postJsonAuthorised(
+            uri: '/api/auth/login',
+            token: $token
+        );
     }
 }

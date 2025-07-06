@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: composer install --no-interaction --no-scripts --no-progress
-        working-directory: ./src
+        #working-directory: ./src
 
       - name: Run Pint
         run: vendor/bin/pint --test --ansi

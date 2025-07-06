@@ -1,4 +1,4 @@
-name: Laravel Pint Code Style
+name: Laravel Pint Check
 
 on:
   pull_request:
@@ -10,23 +10,20 @@ on:
 
 jobs:
   pint:
-    name: Check Pint Formatting
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           tools: composer
 
       - name: Install dependencies
-        run: composer install --no-progress --no-scripts --no-interaction
+        run: composer install --no-interaction --no-scripts --no-progress
         working-directory: ./src
 
-      - name: Run Pint --test
-        run: vendor/bin/pint --test
+      - name: Run Pint
+        run: vendor/bin/pint --test --ansi
         working-directory: ./src

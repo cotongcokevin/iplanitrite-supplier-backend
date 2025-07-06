@@ -7,7 +7,6 @@
   - If yes need to update the `.github/workflows/pint.yml` to the new php version.
 
 ## Admin Section Contains:
-
 - Users
     - (Not for now) Roles & Permissions
 - Company

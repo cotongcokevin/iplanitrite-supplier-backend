@@ -1,4 +1,4 @@
-name: Format Checking
+name: Checking Code Format
 
 on:
   pull_request:

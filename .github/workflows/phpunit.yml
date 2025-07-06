@@ -82,7 +82,7 @@ jobs:
         working-directory: ./src
         env:
           PGPASSWORD: github
-        run: php artisan migrate --force
+        run: php artisan migrate --seed --force
 
       - name: Run PHPUnit tests
         working-directory: ./src

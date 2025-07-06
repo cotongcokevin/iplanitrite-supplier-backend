@@ -8,7 +8,7 @@ use App\Dto\Response\AdminDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class AdminEntity
+class AdminModelData
 {
 
     /**

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Dto\Requests\AdminStoreRequestDto;
 use App\Dto\Requests\AdminUpdateRequestDto;
-use App\Models\Admin\AdminEntity;
+use App\Models\Admin\AdminModelData;
 use App\Services\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class AdminController
     public function index(AdminService $service): JsonResponse
     {
         $result = $service->search();
-        $dto = $result->map(function(AdminEntity $entity) {
+        $dto = $result->map(function(AdminModelData $entity) {
             return $entity->toDto();
         });
 

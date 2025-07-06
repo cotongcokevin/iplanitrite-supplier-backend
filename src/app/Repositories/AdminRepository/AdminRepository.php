@@ -6,9 +6,9 @@ namespace App\Repositories\AdminRepository;
 
 use App\Classes\Accountable;
 use App\Models\Admin\Admin;
-use App\Models\Admin\AdminEntity;
-use App\Repositories\AdminRepository\Models\AdminRepositoryStoreModel;
-use App\Repositories\AdminRepository\Models\AdminRepositoryUpdateModel;
+use App\Models\Admin\AdminModelData;
+use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;
+use App\Repositories\AdminRepository\Data\AdminRepositoryUpdateData;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\UuidFactory;
 use Ramsey\Uuid\UuidInterface;
@@ -39,7 +39,7 @@ class AdminRepository
     }
 
     /**
-     * @return Collection<int, AdminEntity>
+     * @return Collection<int, AdminModelData>
      */
     public function search(): Collection {
         $admins = Admin::get();
@@ -51,19 +51,19 @@ class AdminRepository
 
     /**
      * @param UuidInterface $uuid
-     * @return AdminEntity
+     * @return AdminModelData
      */
-    public function getById(UuidInterface $uuid): AdminEntity
+    public function getById(UuidInterface $uuid): AdminModelData
     {
         $admin = Admin::find($uuid->toString());
         return $admin->toEntity();
     }
 
     /**
-     * @param AdminRepositoryStoreModel $dto
-     * @return AdminEntity
+     * @param AdminRepositoryStoreData $dto
+     * @return AdminModelData
      */
-    public function store(AdminRepositoryStoreModel $dto): AdminEntity
+    public function store(AdminRepositoryStoreData $dto): AdminModelData
     {
         $accountableId = $this->accountable::data()->id;
 
@@ -81,14 +81,14 @@ class AdminRepository
     }
 
     /**
-     * @param AdminRepositoryUpdateModel $dto
+     * @param AdminRepositoryUpdateData $dto
      * @param UuidInterface $id
-     * @return AdminEntity
+     * @return AdminModelData
      */
     public function update(
-        AdminRepositoryUpdateModel $dto,
+        AdminRepositoryUpdateData $dto,
         UuidInterface             $id
-    ): AdminEntity
+    ): AdminModelData
     {
         $admin = Admin::find($id->toString());
         $admin->email = $dto->email;

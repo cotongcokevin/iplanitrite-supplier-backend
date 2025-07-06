@@ -6,10 +6,10 @@ namespace App\Services;
 
 use App\Dto\Requests\AdminStoreRequestDto;
 use App\Dto\Requests\AdminUpdateRequestDto;
-use App\Models\Admin\AdminEntity;
+use App\Models\Admin\AdminModelData;
 use App\Repositories\AdminRepository\AdminRepository;
-use App\Repositories\AdminRepository\Models\AdminRepositoryStoreModel;
-use App\Repositories\AdminRepository\Models\AdminRepositoryUpdateModel;
+use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;
+use App\Repositories\AdminRepository\Data\AdminRepositoryUpdateData;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\UuidInterface;
 
@@ -22,7 +22,7 @@ readonly class AdminService
     public function __construct(private AdminRepository $adminRepo) { }
 
     /**
-     * @return Collection<int, AdminEntity>
+     * @return Collection<int, AdminModelData>
      */
     public function search(): Collection
     {
@@ -31,20 +31,20 @@ readonly class AdminService
 
     /**
      * @param UuidInterface $id
-     * @return AdminEntity
+     * @return AdminModelData
      */
-    public function getById(UuidInterface $id): AdminEntity
+    public function getById(UuidInterface $id): AdminModelData
     {
         return $this->adminRepo->getById($id);
     }
 
     /**
      * @param AdminStoreRequestDto $dto
-     * @return AdminEntity
+     * @return AdminModelData
      */
-    public function store(AdminStoreRequestDto $dto): AdminEntity
+    public function store(AdminStoreRequestDto $dto): AdminModelData
     {
-        $repoDto = new AdminRepositoryStoreModel(
+        $repoDto = new AdminRepositoryStoreData(
             email: $dto->email,
             password: bcrypt($dto->password),
             firstName: $dto->firstName,
@@ -57,14 +57,14 @@ readonly class AdminService
     /**
      * @param AdminUpdateRequestDto $dto
      * @param UuidInterface $id
-     * @return AdminEntity
+     * @return AdminModelData
      */
     public function update(
         AdminUpdateRequestDto $dto,
         UuidInterface        $id
-    ): AdminEntity
+    ): AdminModelData
     {
-        $repoDto = new AdminRepositoryUpdateModel(
+        $repoDto = new AdminRepositoryUpdateData(
             email: $dto->email,
             password: $dto->password ? bcrypt($dto->password) : null,
             firstName: $dto->firstName,

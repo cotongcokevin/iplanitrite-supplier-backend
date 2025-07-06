@@ -7,6 +7,23 @@
 - Company
     - Subscriptions
 
+## LAYER GUIDE
+- Controllers > Services
+  - receives request from frontend
+  - converts the request to Dto
+  - pass the Dto to service
+- Services > Repositories
+  - receives Dto from controllers
+  - converts to RepoData
+  - pass the RepoData to repositories
+- Repositories > Services
+  - receives RepoData from services
+  - returns ModelData to services
+- Services > Controllers
+  - Returns the ModelData to services
+- Controllers
+  - Converts the ModelData to dto
+
 ## TESTS GUIDE
 
 Tests has a custom bootstrapper in phpunit.xml 

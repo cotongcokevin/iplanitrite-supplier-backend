@@ -1,15 +1,11 @@
-name: Laravel Pint Check
+name: Pint Lint with reviewdog
 
 on:
   pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  pint:
+  pint-reviewdog:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,10 +16,14 @@ jobs:
           php-version: '8.2'
           tools: composer
 
-      - name: Install dependencies
-        run: composer install --no-interaction --no-scripts --no-progress
-        working-directory: ./src
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --no-scripts
 
-      - name: Run Pint
-        run: vendor/bin/pint --test --ansi
-        working-directory: ./src
+      - name: Run Pint with reviewdog
+        uses: reviewdog/action-php-cs-fixer@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          filter_mode: diff_context
+          level: error
+          php_cs_fixer_flags: --diff --dry-run

@@ -37,11 +37,6 @@ class AdminController
         );
     }
 
-    /**
-     * @param AdminService $service
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function store(
         AdminService $service,
         Request $request

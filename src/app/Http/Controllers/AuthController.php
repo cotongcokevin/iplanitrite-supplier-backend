@@ -12,11 +12,7 @@ use Illuminate\Http\Request;
 
 class AuthController
 {
-
     /**
-     * @param AuthService $authService
-     * @param Request $request
-     * @return JsonResponse
      * @throws AuthenticationException
      */
     public function login(
@@ -31,12 +27,10 @@ class AuthController
         );
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function logout(): JsonResponse {
+    public function logout(): JsonResponse
+    {
         auth()->logout();
+
         return response()->json();
     }
-
 }

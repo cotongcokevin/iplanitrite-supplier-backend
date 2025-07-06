@@ -15,59 +15,42 @@ use Ramsey\Uuid\UuidInterface;
 
 class AdminRepository
 {
-
-    /**
-     * @var Accountable
-     */
     private Accountable $accountable;
 
-    /**
-     * @var UuidFactory
-     */
     private UuidFactory $uuid;
 
-    /**
-     * @param Accountable $accountable
-     * @param UuidFactory $uuid
-     */
     public function __construct(
         Accountable $accountable,
         UuidFactory $uuid
     ) {
-       $this->accountable = $accountable;
-       $this->uuid = $uuid;
+        $this->accountable = $accountable;
+        $this->uuid = $uuid;
     }
 
     /**
      * @return Collection<int, AdminModelData>
      */
-    public function search(): Collection {
+    public function search(): Collection
+    {
         $admins = Admin::get();
 
-        return $admins->map(function(Admin $admin) {
+        return $admins->map(function (Admin $admin) {
             return $admin->toEntity();
         });
     }
 
-    /**
-     * @param UuidInterface $uuid
-     * @return AdminModelData
-     */
     public function getById(UuidInterface $uuid): AdminModelData
     {
         $admin = Admin::find($uuid->toString());
+
         return $admin->toEntity();
     }
 
-    /**
-     * @param AdminRepositoryStoreData $dto
-     * @return AdminModelData
-     */
     public function store(AdminRepositoryStoreData $dto): AdminModelData
     {
         $accountableId = $this->accountable::data()->id;
 
-        $admin = new Admin();
+        $admin = new Admin;
         $admin->id = $this->uuid->uuid4();
         $admin->email = $dto->email;
         $admin->password = $dto->password;
@@ -80,22 +63,16 @@ class AdminRepository
         return $admin->toEntity();
     }
 
-    /**
-     * @param AdminRepositoryUpdateData $dto
-     * @param UuidInterface $id
-     * @return AdminModelData
-     */
     public function update(
         AdminRepositoryUpdateData $dto,
-        UuidInterface             $id
-    ): AdminModelData
-    {
+        UuidInterface $id
+    ): AdminModelData {
         $admin = Admin::find($id->toString());
         $admin->email = $dto->email;
         $admin->first_name = $dto->firstName;
         $admin->last_name = $dto->lastName;
 
-        if($dto->password !== null) {
+        if ($dto->password !== null) {
             $admin->password = $dto->password;
         }
 
@@ -104,14 +81,9 @@ class AdminRepository
         return $admin->toEntity();
     }
 
-    /**
-     * @param UuidInterface $id
-     * @return void
-     */
     public function destroy(UuidInterface $id): void
     {
         Admin::find($id)
             ->delete();
     }
-
 }

@@ -10,19 +10,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class AdminModelData
 {
-
-    /**
-     * @param UuidInterface $id
-     * @param string $email
-     * @param string $password
-     * @param string $firstName
-     * @param string $lastName
-     * @param UuidInterface $createdBy
-     * @param UuidInterface $updatedBy
-     * @param Carbon $createdAt
-     * @param Carbon $updatedAt
-     * @param ?Carbon $deletedAt
-     */
     public function __construct(
         public UuidInterface $id,
         public string $email,
@@ -34,12 +21,10 @@ class AdminModelData
         public Carbon $createdAt,
         public Carbon $updatedAt,
         public ?Carbon $deletedAt,
-    ) { }
+    ) {}
 
-    /**
-     * @return AdminDto
-     */
-    public function toDto(): AdminDto {
+    public function toDto(): AdminDto
+    {
         return new AdminDto(
             $this->id,
             $this->email,
@@ -52,5 +37,4 @@ class AdminModelData
             $this->deletedAt,
         );
     }
-
 }

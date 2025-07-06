@@ -8,21 +8,14 @@ use App\Models\Admin\Admin;
 
 class Accountable
 {
-
-    /**
-     * @var ?Admin
-     */
     public static ?Admin $admin = null;
 
-    /**
-     * @return Admin
-     */
-    public static function data(): Admin {
-        if(self::$admin === null) {
+    public static function data(): Admin
+    {
+        if (self::$admin === null) {
             self::$admin = auth()->user();
         }
 
         return self::$admin;
     }
-
 }

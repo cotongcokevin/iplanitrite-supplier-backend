@@ -10,17 +10,18 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Admin extends Authenticatable implements JWTSubject
 {
-
     use SoftDeletes;
 
     /**
      * $keyType is the type of the id of the table which is UUID
+     *
      * @var string
      */
     protected $keyType = 'string';
 
     /**
      * Increment is false as we're using UUID
+     *
      * @var bool
      */
     public $incrementing = false;
@@ -30,26 +31,18 @@ class Admin extends Authenticatable implements JWTSubject
      */
     protected $table = 'admin';
 
-    /**
-     * @return string
-     */
     public function getJWTIdentifier(): string
     {
         return $this->getKey();
     }
 
-    /**
-     * @return array
-     */
     public function getJWTCustomClaims(): array
     {
         return [];
     }
 
-    /**
-     * @return AdminModelData
-     */
-    public function toEntity(): AdminModelData {
+    public function toEntity(): AdminModelData
+    {
         return new AdminModelData(
             id: Uuid::fromString($this->id),
             email: $this->email,
@@ -63,5 +56,4 @@ class Admin extends Authenticatable implements JWTSubject
             deletedAt: $this->deleted_at ? Carbon::parse($this->deleted_at) : null,
         );
     }
-
 }

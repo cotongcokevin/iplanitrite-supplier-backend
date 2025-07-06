@@ -14,31 +14,20 @@ use Ramsey\Uuid\Uuid;
 
 class AdminController
 {
-
-    /**
-     * @param AdminService $service
-     * @return JsonResponse
-     */
     public function index(AdminService $service): JsonResponse
     {
         $result = $service->search();
-        $dto = $result->map(function(AdminModelData $entity) {
+        $dto = $result->map(function (AdminModelData $entity) {
             return $entity->toDto();
         });
 
         return response()->json($dto);
     }
 
-    /**
-     * @param AdminService $service
-     * @param string $id
-     * @return JsonResponse
-     */
     public function show(
         AdminService $service,
         string $id
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $entity = $service->getById(
             Uuid::fromString($id)
         );
@@ -48,34 +37,21 @@ class AdminController
         );
     }
 
-    /**
-     * @param AdminService $service
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function store(
         AdminService $service,
         Request $request
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $requestDto = AdminStoreRequestDto::fromRequest($request);
         $entity = $service->store($requestDto);
 
         return response()->json($entity->toDto());
     }
 
-    /**
-     * @param AdminService $service
-     * @param Request $request
-     * @param string $id
-     * @return JsonResponse
-     */
     public function update(
         AdminService $service,
         Request $request,
         string $id
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $requestDto = AdminUpdateRequestDto::fromRequest($request);
         $entity = $service->update(
             $requestDto,
@@ -85,21 +61,14 @@ class AdminController
         return response()->json($entity->toDto());
     }
 
-    /**
-     * @param AdminService $service
-     * @param string $id
-     * @return JsonResponse
-     */
     public function destroy(
         AdminService $service,
         string $id
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $service->destroy(
             Uuid::fromString($id)
         );
 
         return response()->json();
     }
-
 }

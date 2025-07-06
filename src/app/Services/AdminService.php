@@ -15,11 +15,7 @@ use Ramsey\Uuid\UuidInterface;
 
 readonly class AdminService
 {
-
-    /**
-     * @param AdminRepository $adminRepo
-     */
-    public function __construct(private AdminRepository $adminRepo) { }
+    public function __construct(private AdminRepository $adminRepo) {}
 
     /**
      * @return Collection<int, AdminModelData>
@@ -29,19 +25,11 @@ readonly class AdminService
         return $this->adminRepo->search();
     }
 
-    /**
-     * @param UuidInterface $id
-     * @return AdminModelData
-     */
     public function getById(UuidInterface $id): AdminModelData
     {
         return $this->adminRepo->getById($id);
     }
 
-    /**
-     * @param AdminStoreRequestDto $dto
-     * @return AdminModelData
-     */
     public function store(AdminStoreRequestDto $dto): AdminModelData
     {
         $repoDto = new AdminRepositoryStoreData(
@@ -54,16 +42,10 @@ readonly class AdminService
         return $this->adminRepo->store($repoDto);
     }
 
-    /**
-     * @param AdminUpdateRequestDto $dto
-     * @param UuidInterface $id
-     * @return AdminModelData
-     */
     public function update(
         AdminUpdateRequestDto $dto,
-        UuidInterface        $id
-    ): AdminModelData
-    {
+        UuidInterface $id
+    ): AdminModelData {
         $repoDto = new AdminRepositoryUpdateData(
             email: $dto->email,
             password: $dto->password ? bcrypt($dto->password) : null,
@@ -77,13 +59,8 @@ readonly class AdminService
         );
     }
 
-    /**
-     * @param UuidInterface $id
-     * @return void
-     */
     public function destroy(UuidInterface $id): void
     {
         $this->adminRepo->destroy($id);
     }
-
 }

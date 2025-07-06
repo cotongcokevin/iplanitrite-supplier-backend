@@ -9,18 +9,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class AdminDto
 {
-
-    /**
-     * @param UuidInterface $id
-     * @param string $email
-     * @param string $firstName
-     * @param string $lastName
-     * @param UuidInterface $createdBy
-     * @param UuidInterface $updatedBy
-     * @param Carbon $createdAt
-     * @param Carbon $updatedAt
-     * @param ?Carbon $deletedAt
-     */
     public function __construct(
         public UuidInterface $id,
         public string $email,
@@ -31,6 +19,5 @@ class AdminDto
         public Carbon $createdAt,
         public Carbon $updatedAt,
         public ?Carbon $deletedAt,
-    ) { }
-
+    ) {}
 }

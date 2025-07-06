@@ -36,6 +36,7 @@ class AdminController
             $entity->toDto()
         );
     }
+    
 
     public function store(
         AdminService $service,

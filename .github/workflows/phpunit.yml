@@ -37,11 +37,14 @@ jobs:
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --no-scripts --no-progress
+        working-directory: ./src
 
       - name: Copy .env example
         run: cp .env.example .env
+        working-directory: ./src
 
       - name: Configure .env for testing
+        working-directory: ./src
         run: |
           php -r "file_put_contents('.env', str_replace(
             [
@@ -64,9 +67,11 @@ jobs:
           ));"
 
       - name: Generate application key
+        working-directory: ./src
         run: php artisan key:generate
 
       - name: Wait for PostgreSQL to be ready
+        working-directory: ./src
         run: |
           until pg_isready -h 127.0.0.1 -p 5432 -U github; do
             echo "Waiting for PostgreSQL...";
@@ -74,9 +79,11 @@ jobs:
           done
 
       - name: Run migrations
+        working-directory: ./src
         env:
           PGPASSWORD: github
         run: php artisan migrate --force
 
       - name: Run PHPUnit tests
+        working-directory: ./src
         run: vendor/bin/phpunit --verbose --colors=always

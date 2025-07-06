@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Dto\Requests;
 
+use App\Dto\Dto;
 use Illuminate\Http\Request;
 
 class LoginRequestDto extends Dto

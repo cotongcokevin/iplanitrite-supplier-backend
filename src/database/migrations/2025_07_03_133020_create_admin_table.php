@@ -24,7 +24,6 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-
         Schema::table('admin', function (Blueprint $table) {
             $table->foreign('created_by')->references('id')->on("admin");
             $table->foreign('updated_by')->references('id')->on("admin");

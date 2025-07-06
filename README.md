@@ -1,6 +1,13 @@
 # test
 
-### TESTS
+## Admin Section Contains:
+
+- Users
+    - (Not for now) Roles & Permissions
+- Company
+    - Subscriptions
+
+## TESTS GUIDE
 
 Tests has a custom bootstrapper in phpunit.xml 
 `bootstrap=tests/bootstrap.php` Which we create all data that we need for testing.

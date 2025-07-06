@@ -6,13 +6,13 @@ namespace Tests\Integration;
 
 use Tests\BaseTestCase;
 
-class AuthBaseTest extends BaseTestCase
+class AuthTest extends BaseTestCase
 {
 
     public function testShouldLoginSuccessfully(): void
     {
         $response = $this->postJson("/api/auth/login", [
-            "email" => "admin@ems.com",
+            "email" => "naruto.uzumaki@ems.com",
             "password" => "password"
         ]);
 
@@ -24,7 +24,7 @@ class AuthBaseTest extends BaseTestCase
         $response = $this->postJson(
             uri: "/api/auth/login",
             data: [
-                "email" => "admin@ems.com",
+                "email" => "naruto.uzumaki@ems.com",
                 "password" => "password"
             ]
         );
@@ -43,7 +43,7 @@ class AuthBaseTest extends BaseTestCase
         $response = $this->postJson(
             uri: "/api/auth/login",
             data: [
-                "email" => "admin@ems.com",
+                "email" => "naruto.uzumaki@ems.com",
                 "password" => "wrongPassword"
             ]
         );

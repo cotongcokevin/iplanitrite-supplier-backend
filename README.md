@@ -1,4 +1,10 @@
-# test
+# README
+
+## Upgrading Guide
+- When PHP, PGSQL, Nginx has updates make sure to update `docker-compose.yml`
+- For laravel update the `composer.json`
+  - Also check if there are updates with `pint`
+  - If yes need to update the `.github/workflows/pint.yml` to the new php version.
 
 ## Admin Section Contains:
 

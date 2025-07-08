@@ -5,19 +5,22 @@ declare(strict_types=1);
 namespace App\Classes;
 
 use App\Models\Admin\Admin;
-use Illuminate\Support\Facades\App;
 
-class Accountable
+class Accountable extends StaticTestHandler
 {
     private static ?Admin $admin = null;
 
-    public static function get(): Admin
+    public static function handle(): Admin
     {
-        $testing = App::environment('testing');
-        if (! self::$admin || $testing) {
+        if (! self::$admin) {
             self::$admin = auth()->user();
         }
 
         return self::$admin;
+    }
+
+    protected static function handleTest(): Admin
+    {
+        return auth()->user();
     }
 }

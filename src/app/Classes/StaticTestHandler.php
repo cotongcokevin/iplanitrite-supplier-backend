@@ -7,6 +7,10 @@ namespace App\Classes;
 use App\Models\Admin\Admin;
 use Illuminate\Support\Facades\App;
 
+/**
+ * When doing tests static doesn't reset
+ * Add the special handleTest to have a separate way to return the data.
+ */
 abstract class StaticTestHandler
 {
     abstract protected static function handle();

@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace App\Classes;
 
 use App\Models\Admin\Admin;
+use Illuminate\Support\Facades\App;
 
 class Accountable
 {
-    /**
-     * @var Admin
-     */
-    public $admin;
+    private static ?Admin $admin = null;
 
-    public function __construct()
+    public static function get(): Admin
     {
-        $this->admin = auth()->user();
+        $testing = App::environment('testing');
+        if (! self::$admin || $testing) {
+            self::$admin = auth()->user();
+        }
+
+        return self::$admin;
     }
 }

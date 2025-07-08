@@ -48,7 +48,7 @@ class AdminRepository
 
     public function store(AdminRepositoryStoreData $dto): AdminModelData
     {
-        $accountableId = $this->accountable->admin->id;
+        $accountableId = $this->accountable->get()->id;
 
         $admin = new Admin;
         $admin->id = $this->uuid->uuid4();
@@ -71,7 +71,7 @@ class AdminRepository
         $admin->email = $dto->email;
         $admin->first_name = $dto->firstName;
         $admin->last_name = $dto->lastName;
-        $admin->updated_by = $this->accountable->admin->id;
+        $admin->updated_by = $this->accountable->get()->id;
 
         if ($dto->password !== null) {
             $admin->password = $dto->password;

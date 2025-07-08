@@ -17,7 +17,7 @@ class ProfileController
         AdminService $service,
         Accountable $accountable
     ): JsonResponse {
-        $admin = $accountable->admin;
+        $admin = $accountable->get();
         $id = Uuid::fromString($admin->id);
 
         $result = $service->getById($id);
@@ -32,7 +32,7 @@ class ProfileController
         AdminService $service,
         Accountable $accountable
     ): JsonResponse {
-        $admin = $accountable->admin;
+        $admin = $accountable->get();
         $id = Uuid::fromString($admin->id);
 
         $dto = AdminUpdateRequestDto::fromRequest($request);

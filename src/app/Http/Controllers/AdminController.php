@@ -8,10 +8,8 @@ use App\Dto\Requests\AdminStoreRequestDto;
 use App\Dto\Requests\AdminUpdateRequestDto;
 use App\Models\Admin\AdminModelData;
 use App\Services\AdminService;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use Throwable;
 
@@ -22,7 +20,7 @@ class AdminController
      */
     public function index(AdminService $service): JsonResponse
     {
-        return transaction(function() use ($service) {
+        return transaction(function () use ($service) {
             $result = $service->search();
 
             return $result->map(function (AdminModelData $entity) {
@@ -38,7 +36,7 @@ class AdminController
         AdminService $service,
         string $id
     ): JsonResponse {
-        return transaction(function() use ($service, $id) {
+        return transaction(function () use ($service, $id) {
             $entity = $service->getById(
                 Uuid::fromString($id)
             );
@@ -54,7 +52,7 @@ class AdminController
         AdminService $service,
         Request $request
     ): JsonResponse {
-        return transaction(function() use ($service, $request) {
+        return transaction(function () use ($service, $request) {
             $requestDto = AdminStoreRequestDto::fromRequest($request);
             $entity = $service->store($requestDto);
 
@@ -70,7 +68,7 @@ class AdminController
         Request $request,
         string $id
     ): JsonResponse {
-        return transaction(function() use ($service, $request, $id) {
+        return transaction(function () use ($service, $request, $id) {
             $requestDto = AdminUpdateRequestDto::fromRequest($request);
             $entity = $service->update(
                 $requestDto,
@@ -88,7 +86,7 @@ class AdminController
         AdminService $service,
         string $id
     ): JsonResponse {
-        return transaction(function() use ($service, $id) {
+        return transaction(function () use ($service, $id) {
             $service->destroy(
                 Uuid::fromString($id)
             );

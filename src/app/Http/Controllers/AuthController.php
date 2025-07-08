@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Dto\Requests\AdminUpdateRequestDto;
 use App\Dto\Requests\LoginRequestDto;
 use App\Services\AuthService;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Ramsey\Uuid\Uuid;
 
 class AuthController
 {
@@ -21,15 +19,16 @@ class AuthController
         AuthService $authService,
         Request $request
     ): JsonResponse {
-        return transaction(function() use ($authService, $request) {
+        return transaction(function () use ($authService, $request) {
             $requestDto = LoginRequestDto::fromRequest($request);
+
             return $authService->login($requestDto);
         });
     }
 
     public function logout(): JsonResponse
     {
-        return transaction(function() {
+        return transaction(function () {
             auth()->logout();
         });
     }

@@ -8,14 +8,10 @@ use App\Enums\ExceptionCode;
 
 class ExceptionCodeDto
 {
-
-    /**
-     * @var string
-     */
     public string $code;
 
-    public function __construct(ExceptionCode $code) {
+    public function __construct(ExceptionCode $code)
+    {
         $this->code = $code->value;
     }
-
 }

@@ -10,34 +10,44 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
-function transaction(Closure $closure): JsonResponse {
+function transaction(Closure $closure): JsonResponse
+{
     try {
         DB::beginTransaction();
         $result = $closure();
         DB::commit();
 
         return $result ? response()->json($result) : response()->json();
-    }
-    catch(AuthenticationException $e) {
-        try { DB::rollBack(); } catch (Throwable $e) { logError($e); }
+    } catch (AuthenticationException $e) {
+        try {
+            DB::rollBack();
+        } catch (Throwable $e) {
+            logError($e);
+        }
         logError($e);
 
         return response()->json(
             new ExceptionCodeDto(ExceptionCode::UNAUTHORIZED),
             Response::HTTP_UNAUTHORIZED
         );
-    }
-    catch(QueryException $e) {
-        try { DB::rollBack(); } catch (Throwable $e) { logError($e); }
+    } catch (QueryException $e) {
+        try {
+            DB::rollBack();
+        } catch (Throwable $e) {
+            logError($e);
+        }
         logError($e);
 
         return response()->json(
             new ExceptionCodeDto(ExceptionCode::QUERY),
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
-    }
-    catch(Throwable $e) {
-        try { DB::rollBack(); } catch (Throwable $e) { logError($e); }
+    } catch (Throwable $e) {
+        try {
+            DB::rollBack();
+        } catch (Throwable $e) {
+            logError($e);
+        }
         logError($e);
 
         return response()->json(
@@ -47,6 +57,4 @@ function transaction(Closure $closure): JsonResponse {
     }
 }
 
-function logError(Throwable $e) {
-
-}
+function logError(Throwable $e) {}

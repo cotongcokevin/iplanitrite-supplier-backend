@@ -21,7 +21,7 @@ class AdminStoreRequestDto
             'email' => 'required|email',
             'password' => 'required|string',
             'firstName' => 'required|string',
-            'lastName' => 'required|string'
+            'lastName' => 'required|string',
         ]);
 
         return new AdminStoreRequestDto(

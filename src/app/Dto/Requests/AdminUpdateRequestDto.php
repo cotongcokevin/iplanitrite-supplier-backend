@@ -21,7 +21,7 @@ class AdminUpdateRequestDto
             'email' => 'required|email',
             'password' => 'string',
             'firstName' => 'required|string',
-            'lastName' => 'required|string'
+            'lastName' => 'required|string',
         ]);
 
         return new AdminUpdateRequestDto(

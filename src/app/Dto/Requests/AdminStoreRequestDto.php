@@ -17,6 +17,13 @@ class AdminStoreRequestDto
 
     public static function fromRequest(Request $request): AdminStoreRequestDto
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string'
+        ]);
+
         return new AdminStoreRequestDto(
             $request->email,
             $request->password,

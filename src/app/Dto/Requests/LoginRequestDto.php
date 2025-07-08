@@ -16,6 +16,11 @@ class LoginRequestDto extends Dto
 
     public static function fromRequest(Request $request): LoginRequestDto
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+
         return new LoginRequestDto(
             $request->email,
             $request->password

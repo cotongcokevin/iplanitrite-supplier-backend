@@ -17,6 +17,13 @@ class AdminUpdateRequestDto
 
     public static function fromRequest(Request $request): AdminUpdateRequestDto
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'string',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string'
+        ]);
+
         return new AdminUpdateRequestDto(
             $request->email,
             $request->password,

@@ -31,8 +31,7 @@
 
 ## TESTS GUIDE
 
-Tests has a custom bootstrapper in phpunit.xml 
-`bootstrap=tests/bootstrap.php` Which we create all data that we need for testing.
+NEED TO RUN docker-phpunit for testing. Below is a guide to install some of the commands that are usually used.
 
 Create the $PROFILE file if not does not exist
 ```
@@ -48,17 +47,17 @@ To edit
 ```notepad $PROFILE```
 
 ```
-function dockerRunTest {
+function docker-php {
+    docker compose run --rm php @args
+}
+
+function docker-phpunit {
     docker compose run --rm php php artisan migrate:fresh --seed
     docker compose run --rm php ./vendor/bin/phpunit @args
 }
 
-function dockerArtisan {
-    docker compose run --rm php php artisan $args
-}
-
-function dockerRemigrate {
-    docker compose run --rm php php artisan migrate:refresh --seed
+function docker-pint {
+    docker compose run --rm php ./vendor/bin/pint
 }
 ```
 

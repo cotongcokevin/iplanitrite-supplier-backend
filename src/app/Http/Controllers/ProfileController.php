@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\Accountable;
 use App\Dto\Requests\AdminUpdateRequestDto;
+use App\Models\Admin\AdminModelData;
 use App\Services\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,14 +18,14 @@ class ProfileController
         AdminService $service,
         Accountable $accountable
     ): JsonResponse {
-        $admin = $accountable->get();
-        $id = Uuid::fromString($admin->id);
+        return transaction(function() use ($accountable, $service) {
+            $admin = $accountable->get();
+            $id = Uuid::fromString($admin->id);
 
-        $result = $service->getById($id);
+            $result = $service->getById($id);
 
-        return response()->json(
-            $result->toDto()
-        );
+            return $result->toDto();
+        });
     }
 
     public function update(
@@ -32,17 +33,17 @@ class ProfileController
         AdminService $service,
         Accountable $accountable
     ): JsonResponse {
-        $admin = $accountable->get();
-        $id = Uuid::fromString($admin->id);
+        return transaction(function() use ($accountable, $service, $request) {
+            $admin = $accountable->get();
+            $id = Uuid::fromString($admin->id);
 
-        $dto = AdminUpdateRequestDto::fromRequest($request);
-        $result = $service->update(
-            $dto,
-            $id
-        );
+            $dto = AdminUpdateRequestDto::fromRequest($request);
+            $result = $service->update(
+                $dto,
+                $id
+            );
 
-        return response()->json(
-            $result->toDto()
-        );
+            return $result->toDto();
+        });
     }
 }

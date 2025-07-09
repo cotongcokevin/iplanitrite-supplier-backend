@@ -2,13 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Integration;
 
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Testing\TestResponse;
 
-abstract class BaseTestCase extends TestCase
+abstract class AdminTestCase extends TestCase
 {
+    public static string $baseUri = '/api/admin';
+
+    public static function generateUri(string $uri): string
+    {
+        return self::$baseUri.$uri;
+    }
+
     public function getJsonAuthorised(
         string $uri,
         string $token,
@@ -70,20 +77,14 @@ abstract class BaseTestCase extends TestCase
         string $email = 'naruto.uzumaki@ems.com',
         string $password = 'password'
     ): TestResponse {
+        $uri = self::generateUri('/auth/login');
+
         return $this->postJson(
-            uri: '/api/auth/login',
+            uri: $uri,
             data: [
                 'email' => $email,
                 'password' => $password,
             ]
-        );
-    }
-
-    public function logout(string $token): TestResponse
-    {
-        return $this->postJsonAuthorised(
-            uri: '/api/auth/login',
-            token: $token
         );
     }
 }

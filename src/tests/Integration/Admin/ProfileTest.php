@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-use Tests\BaseTestCase;
+namespace Admin;
 
-class ProfileTest extends BaseTestCase
+use Tests\Integration\AdminTestCase;
+
+class ProfileTest extends AdminTestCase
 {
     public function test_should_update_logged_in_user_profile(): void
     {
         // Create a new one
         $token = $this->login();
         $this->postJsonAuthorised(
-            uri: '/api/admin',
+            uri: self::generateUri('/admin'),
             token: $token->json(),
             data: [
                 'email' => 'abc.def@ems.com',
@@ -20,12 +22,11 @@ class ProfileTest extends BaseTestCase
                 'lastName' => 'Def',
             ]
         );
-        $this->logout($token->json());
 
         // Login and Update the profile
         $token = $this->login('abc.def@ems.com');
         $response = $this->postJsonAuthorised(
-            uri: '/api/profile',
+            uri: self::generateUri('/profile'),
             token: $token->json(),
             data: [
                 'email' => 'hinata.hyuga@ems.com',
@@ -36,7 +37,7 @@ class ProfileTest extends BaseTestCase
         );
         $response->assertStatus(200);
 
-        $response = $this->getJsonAuthorised(
+        $this->getJsonAuthorised(
             uri: '/api/admin',
             token: $token->json()
         );
@@ -46,7 +47,7 @@ class ProfileTest extends BaseTestCase
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
-            uri: '/api/profile',
+            uri: self::generateUri('/profile'),
             token: $token->json()
         );
 

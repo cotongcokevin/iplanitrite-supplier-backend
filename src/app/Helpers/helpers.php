@@ -57,4 +57,7 @@ function transaction(Closure $closure): JsonResponse
     }
 }
 
-function logError(Throwable $e) {}
+function logError(Throwable $e)
+{
+    //    dd($e->getMessage(), $e->getFile(), $e->getLine());
+}

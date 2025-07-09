@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\Admin\Admin;
@@ -8,6 +10,10 @@ use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
 {
+    public static string $ADMIN_ONE_ID = 'd611fad5-e65e-4afb-a201-bc3dad9f1e7d';
+
+    public static string $ADMIN_TWO_ID = '8dd17f21-524d-4ad9-8604-b7afe060fe3d';
+
     /**
      * Run the database seeds.
      */
@@ -16,7 +22,7 @@ class AdminSeeder extends Seeder
         $date = Carbon::now()->toDateTimeString();
 
         Admin::create([
-            'id' => 'd611fad5-e65e-4afb-a201-bc3dad9f1e7d',
+            'id' => self::$ADMIN_ONE_ID,
             'email' => 'naruto.uzumaki@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Naruto',
@@ -24,14 +30,9 @@ class AdminSeeder extends Seeder
             'created_at' => $date,
             'updated_at' => $date,
         ]);
-        Admin::find('d611fad5-e65e-4afb-a201-bc3dad9f1e7d')
-            ->update([
-                'created_by' => 'd611fad5-e65e-4afb-a201-bc3dad9f1e7d',
-                'updated_by' => 'd611fad5-e65e-4afb-a201-bc3dad9f1e7d',
-            ]);
 
         Admin::create([
-            'id' => '8dd17f21-524d-4ad9-8604-b7afe060fe3d',
+            'id' => self::$ADMIN_TWO_ID,
             'email' => 'sasuke.uchiha@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Sasuke',

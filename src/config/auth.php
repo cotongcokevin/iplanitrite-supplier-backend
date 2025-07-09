@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin\Admin;
+use App\Models\Organizer\Organizer;
 
 return [
 
@@ -38,9 +39,14 @@ return [
     */
 
     'guards' => [
-        'api' => [
+        'admin' => [
             'driver' => 'jwt',
             'provider' => 'admin',
+        ],
+
+        'organizer' => [
+            'driver' => 'jwt',
+            'provider' => 'organizer',
         ],
     ],
 
@@ -65,6 +71,10 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => Admin::class,
+        ],
+        'organizer' => [
+            'driver' => 'eloquent',
+            'model' => Organizer::class,
         ],
     ],
 

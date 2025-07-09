@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Dto\Requests\LoginRequestDto;
-use App\Services\AuthService;
+use App\Services\Admin\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -15,11 +15,13 @@ class AuthController
         AuthService $authService,
         Request $request
     ): JsonResponse {
-        return transaction(function () use ($authService, $request) {
-            $requestDto = LoginRequestDto::fromRequest($request);
+        return transaction(
+            function () use ($authService, $request) {
+                $requestDto = LoginRequestDto::fromRequest($request);
 
-            return $authService->login($requestDto);
-        });
+                return $authService->login($requestDto);
+            }
+        );
     }
 
     public function logout(): JsonResponse

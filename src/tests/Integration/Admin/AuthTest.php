@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\Integration;
+namespace Admin;
 
-use Tests\BaseTestCase;
+use Tests\Integration\AdminTestCase;
 
-class AuthTest extends BaseTestCase
+class AuthTest extends AdminTestCase
 {
     public function test_should_login_successfully(): void
     {
-        $response = $this->postJson('/api/auth/login', [
+        $response = $this->postJson('/api/admin/auth/login', [
             'email' => 'naruto.uzumaki@ems.com',
             'password' => 'password',
         ]);
@@ -21,7 +21,7 @@ class AuthTest extends BaseTestCase
     public function test_should_logout_successfully(): void
     {
         $response = $this->postJson(
-            uri: '/api/auth/login',
+            uri: '/api/admin/auth/login',
             data: [
                 'email' => 'naruto.uzumaki@ems.com',
                 'password' => 'password',
@@ -30,7 +30,7 @@ class AuthTest extends BaseTestCase
         $token = $response->json();
 
         $response = $this->postJsonAuthorised(
-            uri: '/api/auth/logout',
+            uri: '/api/admin/auth/logout',
             token: $token
         );
 
@@ -40,7 +40,7 @@ class AuthTest extends BaseTestCase
     public function test_should_fail_login(): void
     {
         $response = $this->postJson(
-            uri: '/api/auth/login',
+            uri: '/api/admin/auth/login',
             data: [
                 'email' => 'naruto.uzumaki@ems.com',
                 'password' => 'wrongPassword',

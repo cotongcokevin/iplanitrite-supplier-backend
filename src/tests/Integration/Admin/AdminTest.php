@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-use Tests\BaseTestCase;
+namespace Admin;
 
-class AdminTest extends BaseTestCase
+use Database\Seeders\AdminSeeder;
+use Tests\Integration\AdminTestCase;
+
+class AdminTest extends AdminTestCase
 {
     public function test_should_search_all_data()
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
-            uri: '/api/admin',
+            uri: self::generateUri('/admin'),
             token: $token->json(),
         );
 
@@ -23,7 +26,7 @@ class AdminTest extends BaseTestCase
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
-            uri: '/api/admin/8dd17f21-524d-4ad9-8604-b7afe060fe3d',
+            uri: self::generateUri('/admin/'.AdminSeeder::$ADMIN_TWO_ID),
             token: $token->json(),
         );
 
@@ -36,7 +39,7 @@ class AdminTest extends BaseTestCase
     {
         $token = $this->login();
         $response = $this->postJsonAuthorised(
-            uri: '/api/admin',
+            uri: self::generateUri('/admin'),
             token: $token->json(),
             data: [
                 'email' => 'john@doe.com',
@@ -56,7 +59,7 @@ class AdminTest extends BaseTestCase
     {
         $token = $this->login();
         $response = $this->putJsonAuthorised(
-            uri: '/api/admin/8dd17f21-524d-4ad9-8604-b7afe060fe3d',
+            uri: self::generateUri('/admin/'.AdminSeeder::$ADMIN_TWO_ID),
             token: $token->json(),
             data: [
                 'email' => 'itachi.uchiha@ems.com',
@@ -78,20 +81,20 @@ class AdminTest extends BaseTestCase
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
-            uri: '/api/admin',
+            uri: self::generateUri('/admin'),
             token: $token->json(),
         );
         $toDelete = collect($response->json())->where('email', 'john@doe.com')->first();
 
         $id = $toDelete['id'];
         $response = $this->deleteJsonAuthorised(
-            uri: "/api/admin/$id",
+            uri: self::generateUri('/admin/'.$id),
             token: $token->json()
         );
         $response->assertStatus(200);
 
         $response = $this->getJsonAuthorised(
-            uri: '/api/admin',
+            uri: self::generateUri('/admin'),
             token: $token->json(),
         );
         $this->assertCount(2, $response->json());

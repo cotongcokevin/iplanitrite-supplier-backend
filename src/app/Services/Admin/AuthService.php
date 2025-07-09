@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Services\Admin;
 
 use App\Dto\Requests\LoginRequestDto;
 use App\Enums\AuthGuardType;
@@ -16,7 +16,7 @@ class AuthService
 
     public function __construct(AuthFactory $auth)
     {
-        $this->guard = $auth->guard(AuthGuardType::API->value);
+        $this->guard = $auth->guard(AuthGuardType::ADMIN->value);
     }
 
     /**

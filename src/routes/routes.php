@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
-require __DIR__.'/auth/auth.php';
-require __DIR__.'/admin/admin.php';
-require __DIR__.'/profile/profile.php';
+Route::group(['prefix' => 'admin'], function () {
+    require __DIR__.'/admin/auth/auth.php';
+
+    Route::group(['middleware' => 'auth:admin'], function () {
+        require __DIR__.'/admin/admin/admin.php';
+        require __DIR__.'/admin/profile/profile.php';
+    });
+});

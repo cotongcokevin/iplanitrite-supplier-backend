@@ -12,6 +12,8 @@ class Admin extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
 
+    protected string $guard = 'admin';
+
     /**
      * $keyType is the type of the id of the table which is UUID
      *

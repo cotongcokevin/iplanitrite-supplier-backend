@@ -11,13 +11,9 @@ use App\Services\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
-use Throwable;
 
 class AdminController
 {
-    /**
-     * @throws Throwable
-     */
     public function index(AdminService $service): JsonResponse
     {
         return transaction(function () use ($service) {
@@ -29,9 +25,6 @@ class AdminController
         });
     }
 
-    /**
-     * @throws Throwable
-     */
     public function show(
         AdminService $service,
         string $id
@@ -45,9 +38,6 @@ class AdminController
         });
     }
 
-    /**
-     * @throws Throwable
-     */
     public function store(
         AdminService $service,
         Request $request
@@ -60,9 +50,6 @@ class AdminController
         });
     }
 
-    /**
-     * @throws Throwable
-     */
     public function update(
         AdminService $service,
         Request $request,
@@ -79,9 +66,6 @@ class AdminController
         });
     }
 
-    /**
-     * @throws Throwable
-     */
     public function destroy(
         AdminService $service,
         string $id

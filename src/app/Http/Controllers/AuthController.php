@@ -6,15 +6,11 @@ namespace App\Http\Controllers;
 
 use App\Dto\Requests\LoginRequestDto;
 use App\Services\AuthService;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthController
 {
-    /**
-     * @throws AuthenticationException
-     */
     public function login(
         AuthService $authService,
         Request $request

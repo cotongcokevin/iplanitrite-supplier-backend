@@ -25,10 +25,10 @@ class AdminUpdateRequestDto
         ]);
 
         return new AdminUpdateRequestDto(
-            $request->email,
-            $request->password,
-            $request->firstName,
-            $request->lastName,
+            email: $request->email,
+            password: $request->password,
+            firstName: $request->firstName,
+            lastName: $request->lastName,
         );
     }
 }

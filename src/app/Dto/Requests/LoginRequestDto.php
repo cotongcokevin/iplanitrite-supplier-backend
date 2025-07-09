@@ -22,8 +22,8 @@ class LoginRequestDto extends Dto
         ]);
 
         return new LoginRequestDto(
-            $request->email,
-            $request->password
+            email: $request->email,
+            password: $request->password
         );
     }
 }

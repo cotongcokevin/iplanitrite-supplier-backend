@@ -114,9 +114,9 @@ declare(strict_types=1);
 
 namespace $modelNamespace;
 
+use $dtoNamespace;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
-use $dtoNamespace;
 
 class $modelData
 {
@@ -124,8 +124,7 @@ class $modelData
 {$attributes}
     ) {}
 
-
-    public function toDto(): $dto 
+    public function toDto(): $dto
     {
         return new $dto(
 {$dtoArgs}
@@ -213,9 +212,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class $modelName extends Model
 {
-    
     /**
-     * @var string 
+     * @var string
      */
     protected \$table = '$table';
     
@@ -225,7 +223,6 @@ class $modelName extends Model
 $args
         );
     }
-
 }
 
 PHP;

@@ -216,7 +216,7 @@ class $modelName extends Model
      * @var string
      */
     protected \$table = '$table';
-    
+
     public function toModelData(): $modelData
     {
         return new $modelData(

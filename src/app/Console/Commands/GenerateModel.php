@@ -5,13 +5,10 @@ namespace App\Console\Commands;
 use App\Console\Commands\Data\GenerateModelColumn;
 use App\Console\Commands\Data\UuidType;
 use Doctrine\DBAL\Configuration;
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Types\GuidType;
 use Doctrine\DBAL\Types\Type;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\NoReturn;
 
@@ -33,23 +30,25 @@ class GenerateModel extends Command
 
     /**
      * Execute the console command.
+     *
      * @throws Exception
      */
-    #[NoReturn] public function handle()
+    #[NoReturn]
+    public function handle()
     {
-        $modelName = $this->argument("modelName");
+        $modelName = $this->argument('modelName');
         $table = Str::snake($modelName);
 
         $connectionParams = [
-            'dbname' => env("DB_DATABASE"),
-            'user' => env("DB_USERNAME"),
-            'password' => env("DB_PASSWORD"),
-            'host' => env("DB_HOST"),
+            'dbname' => env('DB_DATABASE'),
+            'user' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'host' => env('DB_HOST'),
             'driver' => 'pdo_pgsql',
         ];
 
-        $conn = DriverManager::getConnection($connectionParams, new Configuration());
-        if (!Type::hasType(UuidType::UUID)) {
+        $conn = DriverManager::getConnection($connectionParams, new Configuration);
+        if (! Type::hasType(UuidType::UUID)) {
             Type::addType(UuidType::UUID, UuidType::class);
         }
         $conn->getDatabasePlatform()->registerDoctrineTypeMapping('uuid', UuidType::UUID);
@@ -57,14 +56,14 @@ class GenerateModel extends Command
 
         $columns = [];
         $result = $schemaManager->listTableColumns($table);
-        foreach($result as $column) {
+        foreach ($result as $column) {
             $columns[] = new GenerateModelColumn(
                 namePlain: Str::camel($column->getName()),
                 nameDollar: '$'.Str::camel($column->getName()),
                 nameDollarThis: '$this->'.Str::camel($column->getName()),
                 dataType: GenerateModelColumn::parseDataType(
                     $column->getType(),
-                    !$column->getNotnull()
+                    ! $column->getNotnull()
                 )
             );
         }
@@ -91,25 +90,21 @@ class GenerateModel extends Command
     }
 
     /**
-     * @param string $modelName
-     * @param GenerateModelColumn[] $columns
-     * @return void
+     * @param  GenerateModelColumn[]  $columns
      */
-    #[NoReturn] private function generateModelData(
+    #[NoReturn]
+    private function generateModelData(
         string $modelName,
         array $columns
-    ): void
-    {
-        $modelData = $modelName."Data";
+    ): void {
+        $modelData = $modelName.'Data';
         $modelNamespace = 'App\Models\\'.$modelName;
-        $dto = $modelName."Dto";
+        $dto = $modelName.'Dto';
         $dtoNamespace = "App\Dto\Response\\".$dto;
-        $attributes = collect($columns)->map(fn(GenerateModelColumn $col) =>
-            "        public {$col->dataType} {$col->nameDollar},"
+        $attributes = collect($columns)->map(fn (GenerateModelColumn $col) => "        public {$col->dataType} {$col->nameDollar},"
         )->join("\n");
 
-        $dtoArgs = collect($columns)->map(fn(GenerateModelColumn $col) =>
-            "            {$col->namePlain}: {$col->nameDollarThis},"
+        $dtoArgs = collect($columns)->map(fn (GenerateModelColumn $col) => "            {$col->namePlain}: {$col->nameDollarThis},"
         )->join("\n");
 
         $content = <<<PHP
@@ -125,13 +120,13 @@ use $dtoNamespace;
 
 class $modelData
 {
-
     public function __construct(
 {$attributes}
-    ) { }
+    ) {}
 
 
-    public function toDto(): $dto {
+    public function toDto(): $dto 
+    {
         return new $dto(
 {$dtoArgs}
         );
@@ -144,16 +139,15 @@ PHP;
     }
 
     /**
-     * @param string $modelName
-     * @param GenerateModelColumn[] $columns
+     * @param  GenerateModelColumn[]  $columns
      */
-    #[NoReturn] public function generateDto(
+    #[NoReturn]
+    public function generateDto(
         string $modelName,
         array $columns
     ) {
-        $dto = $modelName."Dto";
-        $attributes = collect($columns)->map(fn(GenerateModelColumn $col) =>
-        "        public {$col->dataType} {$col->nameDollar},"
+        $dto = $modelName.'Dto';
+        $attributes = collect($columns)->map(fn (GenerateModelColumn $col) => "        public {$col->dataType} {$col->nameDollar},"
         )->join("\n");
 
         $content = <<<PHP
@@ -180,10 +174,7 @@ PHP;
     }
 
     /**
-     * @param string $table
-     * @param GenerateModelColumn[] $columns
-     * @param string $modelName
-     * @return void
+     * @param  GenerateModelColumn[]  $columns
      */
     public function generateModel(
         string $table,
@@ -193,24 +184,21 @@ PHP;
 
         $namespace = "App\Models\\".$modelName;
 
-        $modelData = $modelName."Data";
-        $useModelData = "App\Models\\".$modelName."\\".$modelData;
+        $modelData = $modelName.'Data';
+        $useModelData = "App\Models\\".$modelName.'\\'.$modelData;
 
-
-        $args = collect($columns)->map(function(GenerateModelColumn $col) {
+        $args = collect($columns)->map(function (GenerateModelColumn $col) {
             $label = $col->nameDollarThis;
-            if($col->dataType === "Carbon") {
+            if ($col->dataType === 'Carbon') {
                 $label = "Carbon::parse($col->nameDollarThis)";
-            }
-            else if($col->dataType === "?Carbon") {
+            } elseif ($col->dataType === '?Carbon') {
                 $label = "$col->nameDollarThis ? Carbon::parse($col->nameDollarThis) : null";
-            }
-            else if($col->dataType === "UUID") {
+            } elseif ($col->dataType === 'UUID') {
                 $label = "UuidInterface::fromString($col->nameDollarThis)";
-            }
-            else if($col->dataType === "?UUID") {
+            } elseif ($col->dataType === '?UUID') {
                 $label = "$col->nameDollarThis ? UuidInterface::fromString($col->nameDollarThis) : null";
             }
+
             return "            {$col->namePlain}: {$label},";
         })->join("\n");
         $content = <<<PHP
@@ -222,8 +210,6 @@ namespace $namespace;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\UuidFactory;
-use $useModelData;
 
 class $modelName extends Model
 {
@@ -231,7 +217,7 @@ class $modelName extends Model
     /**
      * @var string 
      */
-    protected \$table = "$table";
+    protected \$table = '$table';
     
     public function toModelData(): $modelData
     {
@@ -252,7 +238,7 @@ PHP;
         string $modelName
     ): void {
 
-        $repositoryName = $modelName."Repository";
+        $repositoryName = $modelName.'Repository';
         $namespace = "App\Repositories\\".$repositoryName;
         $content = <<<PHP
 <?php
@@ -277,9 +263,7 @@ class $repositoryName
         \$this->accountable = \$accountable;
         \$this->uuid = \$uuid;
     }
-    
 }
-
 
 PHP;
 
@@ -290,7 +274,7 @@ PHP;
     public function createFile(string $filePath, string $content): void
     {
         $dir = dirname($filePath);
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             mkdir($dir, 0755, true); // ✅ auto-create nested directory
         }
         if (file_exists($filePath)) {
@@ -299,5 +283,4 @@ PHP;
 
         file_put_contents($filePath, $content);
     }
-
 }

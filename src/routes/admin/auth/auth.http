@@ -1,16 +1,16 @@
 // @env ../http-client.env.json
 
-POST {{ host }}/api/auth/login
+POST {{ host }}/api/admin/auth/login
 Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "admin@ems.com",
-  "password": "passwords"
+  "email": "naruto.uzumaki@ems.com",
+  "password": "password"
 }
 ###
 
-POST {{ host }}/api/logout
+POST {{ host }}/api/admin/logout
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}

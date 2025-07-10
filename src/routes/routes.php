@@ -6,15 +6,21 @@ use App\Http\Middleware\AdminCors;
 use App\Http\Middleware\OrganizerCors;
 use App\Http\Middleware\ParticipantCors;
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function () {
     require __DIR__.'/admin/auth/auth.php';
 
-    Route::group(['middleware' => 'auth:admin'], function () {
+    Route::group(['middleware' => ['auth:admin', AdminCors::class]], function () {
         require __DIR__.'/admin/admin/admin.php';
         require __DIR__.'/admin/profile/profile.php';
     });
-})->middleware([AdminCors::class]);
+});
 
-Route::group(['prefix' => 'organizer'], function () {})->middleware([OrganizerCors::class]);
+Route::group([
+    'prefix' => 'organizer',
+    'middleware' => [OrganizerCors::class],
+], function () {});
 
-Route::group(['prefix' => 'participant'], function () {})->middleware([ParticipantCors::class]);
+Route::group([
+    'prefix' => 'participant',
+    'middleware' => [ParticipantCors::class],
+], function () {});

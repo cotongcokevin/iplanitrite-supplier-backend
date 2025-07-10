@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Handler;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class CorsHandler
 {
@@ -15,15 +15,18 @@ class CorsHandler
         Request $request,
         Closure $next
     ): Response {
-        // Create a basic response, for OPTIONS requests it will be empty
-        if ($request->getMethod() === 'OPTIONS') {
-            $response = response('', 204);
-        } else {
-            $response = $next($request);
+        $origin = $request->headers->get('Origin');
+        if ($origin !== $allowedOrigin) {
+            return $next($request);
         }
 
+        // Create a basic response, for OPTIONS requests it will be empty
+        $response = $request->getMethod() === 'OPTIONS'
+            ? response('', Response::HTTP_NO_CONTENT)
+            : $next($request);
+
         $response->headers->set('Access-Control-Allow-Origin', $allowedOrigin);
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
         $response->headers->set('Access-Control-Allow-Credentials', 'true');
 

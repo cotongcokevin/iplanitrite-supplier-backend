@@ -26,7 +26,7 @@ class AdminTest extends AdminTestCase
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
-            uri: self::generateUri('/admin/'.AdminSeeder::$ADMIN_TWO_ID),
+            uri: self::generateUri('/admin/'.AdminSeeder::ADMIN_TWO_ID),
             token: $token->json(),
         );
 
@@ -59,7 +59,7 @@ class AdminTest extends AdminTestCase
     {
         $token = $this->login();
         $response = $this->putJsonAuthorised(
-            uri: self::generateUri('/admin/'.AdminSeeder::$ADMIN_TWO_ID),
+            uri: self::generateUri('/admin/'.AdminSeeder::ADMIN_TWO_ID),
             token: $token->json(),
             data: [
                 'email' => 'itachi.uchiha@ems.com',

@@ -43,7 +43,7 @@ class Admin extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function toEntity(): AdminModelData
+    public function toModelData(): AdminModelData
     {
         return new AdminModelData(
             id: Uuid::fromString($this->id),

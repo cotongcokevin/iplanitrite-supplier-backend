@@ -10,9 +10,9 @@ use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
 {
-    public static string $ADMIN_ONE_ID = 'd611fad5-e65e-4afb-a201-bc3dad9f1e7d';
+    public const ADMIN_ONE_ID = 'd611fad5-e65e-4afb-a201-bc3dad9f1e7d';
 
-    public static string $ADMIN_TWO_ID = '8dd17f21-524d-4ad9-8604-b7afe060fe3d';
+    public const ADMIN_TWO_ID = '8dd17f21-524d-4ad9-8604-b7afe060fe3d';
 
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
         $date = Carbon::now()->toDateTimeString();
 
         Admin::create([
-            'id' => self::$ADMIN_ONE_ID,
+            'id' => self::ADMIN_ONE_ID,
             'email' => 'naruto.uzumaki@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Naruto',
@@ -32,7 +32,7 @@ class AdminSeeder extends Seeder
         ]);
 
         Admin::create([
-            'id' => self::$ADMIN_TWO_ID,
+            'id' => self::ADMIN_TWO_ID,
             'email' => 'sasuke.uchiha@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Sasuke',

@@ -26,15 +26,15 @@ class AdminModelData
     public function toDto(): AdminDto
     {
         return new AdminDto(
-            $this->id,
-            $this->email,
-            $this->firstName,
-            $this->lastName,
-            $this->createdBy,
-            $this->updatedBy,
-            $this->createdAt,
-            $this->updatedAt,
-            $this->deletedAt,
+            id: $this->id,
+            email: $this->email,
+            firstName: $this->firstName,
+            lastName: $this->lastName,
+            createdBy: $this->createdBy,
+            updatedBy: $this->updatedBy,
+            createdAt: $this->createdAt,
+            updatedAt: $this->updatedAt,
+            deletedAt: $this->deletedAt,
         );
     }
 }

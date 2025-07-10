@@ -35,7 +35,7 @@ class AdminRepository
         $admins = Admin::get();
 
         return $admins->map(function (Admin $admin) {
-            return $admin->toEntity();
+            return $admin->toModelData();
         });
     }
 
@@ -43,7 +43,7 @@ class AdminRepository
     {
         $admin = Admin::find($uuid->toString());
 
-        return $admin->toEntity();
+        return $admin->toModelData();
     }
 
     public function store(AdminRepositoryStoreData $dto): AdminModelData
@@ -60,7 +60,7 @@ class AdminRepository
         $admin->updated_by = $accountableId;
         $admin->save();
 
-        return $admin->toEntity();
+        return $admin->toModelData();
     }
 
     public function update(
@@ -79,7 +79,7 @@ class AdminRepository
 
         $admin->save();
 
-        return $admin->toEntity();
+        return $admin->toModelData();
     }
 
     public function destroy(UuidInterface $id): void

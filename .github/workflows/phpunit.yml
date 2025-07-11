@@ -39,8 +39,8 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-scripts --no-progress
         working-directory: ./src
 
-      - name: Copy .env example
-        run: cp .env.example .env
+      - name: Copy .env
+        run: cp .env.testing.example .env
         working-directory: ./src
 
       - name: Configure .env for testing
@@ -51,9 +51,9 @@ jobs:
               'DB_CONNECTION=pgsql',
               'DB_HOST=db',
               'DB_PORT=5432',
-              'DB_DATABASE=db',
-              'DB_USERNAME=test',
-              'DB_PASSWORD=test'
+              'DB_DATABASE=ems',
+              'DB_USERNAME=root',
+              'DB_PASSWORD=password'
             ],
             [
               'DB_CONNECTION=pgsql',

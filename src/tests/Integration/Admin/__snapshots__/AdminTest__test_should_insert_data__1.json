@@ -1,0 +1,11 @@
+{
+    "id": "__FORMAT_VALIDATED__",
+    "email": "john@doe.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "createdBy": "__FORMAT_VALIDATED__",
+    "updatedBy": "__FORMAT_VALIDATED__",
+    "createdAt": "__FORMAT_VALIDATED__",
+    "updatedAt": "__FORMAT_VALIDATED__",
+    "deletedAt": null
+}

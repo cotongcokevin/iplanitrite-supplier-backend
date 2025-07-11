@@ -19,7 +19,7 @@ class AdminTest extends AdminTestCase
 
         $response->assertStatus(200);
         $resultArray = $response->json();
-        $this->assertCount(2, $resultArray);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
     public function test_should_find_by_id()
@@ -33,6 +33,7 @@ class AdminTest extends AdminTestCase
         $response->assertStatus(200);
         $resultArray = $response->json();
         $this->assertEquals('sasuke.uchiha@ems.com', $resultArray['email']);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
     public function test_should_insert_data()
@@ -53,6 +54,7 @@ class AdminTest extends AdminTestCase
 
         $resultArray = $response->json();
         $this->assertEquals('john@doe.com', $resultArray['email']);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
     public function test_should_update_data()
@@ -75,6 +77,7 @@ class AdminTest extends AdminTestCase
         $this->assertEquals('itachi.uchiha@ems.com', $resultArray['email']);
         $this->assertEquals('Itachi', $resultArray['firstName']);
         $this->assertEquals('Uchiha', $resultArray['lastName']);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
     public function test_should_delete_data()

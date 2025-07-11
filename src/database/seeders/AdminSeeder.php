@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $date = Carbon::now()->toDateTimeString();
+        $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
         Admin::create([
             'id' => self::ADMIN_ONE_ID,

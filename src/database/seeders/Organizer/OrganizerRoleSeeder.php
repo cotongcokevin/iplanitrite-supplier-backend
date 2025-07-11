@@ -19,7 +19,8 @@ class OrganizerRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $date = Carbon::now()->toDateTimeString();
+        $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
+
         OrganizerRole::create([
             'id' => self::ORGANIZER_ROLE_ONE_ID,
             'name' => 'Org Admin',

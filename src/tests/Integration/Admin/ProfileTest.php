@@ -36,6 +36,7 @@ class ProfileTest extends AdminTestCase
             ]
         );
         $response->assertStatus(200);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($response->json());
 
         $this->getJsonAuthorised(
             uri: '/api/admin',
@@ -54,5 +55,6 @@ class ProfileTest extends AdminTestCase
         $response->assertStatus(200);
         $resultArray = $response->json();
         $this->assertEquals('naruto.uzumaki@ems.com', $resultArray['email']);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 }

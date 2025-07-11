@@ -17,7 +17,8 @@ class OrganizerPermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $date = Carbon::now()->toDateTimeString();
+        $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
+
         OrganizerPermission::create([
             'id' => self::ORGANIZER_PERMISSION_ONE_ID,
             'name' => 'Events',

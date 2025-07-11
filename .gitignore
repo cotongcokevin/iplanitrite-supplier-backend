@@ -1,6 +1,7 @@
 *.log
 .DS_Store
 /src/.env
+/src/.env.testing
 /src/.env.backup
 /src/.env.production
 /src/.phpactor.json
@@ -8,7 +9,6 @@
 /src/.fleet
 .idea/
 /src/.nova
-/src/.env*
 /src/.phpunit.cache
 /src/.vscode
 /src/.zed

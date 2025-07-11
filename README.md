@@ -56,6 +56,11 @@ function docker-phpunit {
     docker compose run --rm php ./vendor/bin/phpunit @args
 }
 
+function docker-phpunit-update-snapshots {
+    docker compose run --rm php php artisan migrate:fresh --seed
+    docker compose run --rm php sh -c "UPDATE_SNAPSHOTS=true vendor/bin/phpunit $args"
+}
+
 function docker-pint {
     docker compose run --rm php ./vendor/bin/pint
 }

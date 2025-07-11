@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('organizer_role', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('staff');
-            $table->foreign('updated_by')->references('id')->on('staff');
+            $table->foreign('created_by')->references('id')->on('organizer_staff');
+            $table->foreign('updated_by')->references('id')->on('organizer_staff');
         });
 
         Schema::table('organizer_permission', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('staff');
-            $table->foreign('updated_by')->references('id')->on('staff');
+            $table->foreign('created_by')->references('id')->on('organizer_staff');
+            $table->foreign('updated_by')->references('id')->on('organizer_staff');
         });
     }
 

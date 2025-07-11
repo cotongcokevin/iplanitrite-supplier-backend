@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('staff', function (Blueprint $table) {
+        Schema::create('organizer_staff', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('password');
@@ -33,14 +33,14 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::table('staff', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('staff');
-            $table->foreign('updated_by')->references('id')->on('staff');
+        Schema::table('organizer_staff', function (Blueprint $table) {
+            $table->foreign('created_by')->references('id')->on('organizer_staff');
+            $table->foreign('updated_by')->references('id')->on('organizer_staff');
         });
 
         DB::statement('
             CREATE UNIQUE INDEX unique_email_not_deleted
-            ON staff (email)
+            ON organizer_staff (email)
             WHERE deleted_at IS NULL
         ');
     }
@@ -50,6 +50,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('organizer_staff');
     }
 };

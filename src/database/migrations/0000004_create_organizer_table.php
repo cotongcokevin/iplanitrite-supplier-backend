@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('organizer', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->text('description')->nullable();
             $table->unsignedInteger('max_staff');
 
             $table->uuid('created_by')->nullable();

@@ -18,7 +18,9 @@ Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function
 Route::group([
     'prefix' => 'organizer',
     'middleware' => [OrganizerCors::class],
-], function () {});
+], function () {
+    require __DIR__.'/organizer/auth/auth.php';
+});
 
 Route::group([
     'prefix' => 'participant',

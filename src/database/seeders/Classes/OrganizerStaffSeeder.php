@@ -22,7 +22,7 @@ class OrganizerStaffSeeder extends Seeder
 
         OrganizerStaff::create([
             'id' => self::ORGANIZER_STAFF_ONE_ID,
-            'email' => 'luffy@monkey@ems.com',
+            'email' => 'luffy.monkey@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Luffy',
             'last_name' => 'Monkey',

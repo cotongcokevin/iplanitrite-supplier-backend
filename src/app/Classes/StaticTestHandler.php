@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Classes;
 
+use App\Classes\Env\Env;
+use App\Enums\EnvironmentType;
 use App\Models\Admin\Admin;
-use Illuminate\Support\Facades\App;
 
 /**
  * When doing tests static doesn't reset
@@ -19,7 +20,7 @@ abstract class StaticTestHandler
 
     public static function get(): Admin
     {
-        $testing = App::environment('testing');
+        $testing = Env::get()->environment === EnvironmentType::TESTING;
 
         return ! $testing
             ? static::handle()

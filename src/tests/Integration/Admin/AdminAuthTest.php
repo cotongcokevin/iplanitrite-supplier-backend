@@ -6,11 +6,12 @@ namespace Admin;
 
 use Tests\Integration\AdminTestCase;
 
-class AuthTest extends AdminTestCase
+class AdminAuthTest extends AdminTestCase
 {
     public function test_should_login_successfully(): void
     {
-        $response = $this->postJson('/api/admin/auth/login', [
+        $uri = self::generateUri('/auth/login');
+        $response = $this->postJson($uri, [
             'email' => 'naruto.uzumaki@ems.com',
             'password' => 'password',
         ]);
@@ -20,8 +21,9 @@ class AuthTest extends AdminTestCase
 
     public function test_should_logout_successfully(): void
     {
+        $uri = self::generateUri('/auth/login');
         $response = $this->postJson(
-            uri: '/api/admin/auth/login',
+            uri: $uri,
             data: [
                 'email' => 'naruto.uzumaki@ems.com',
                 'password' => 'password',
@@ -29,8 +31,9 @@ class AuthTest extends AdminTestCase
         );
         $token = $response->json();
 
+        $uriLogout = self::generateUri('/auth/logout');
         $response = $this->postJsonAuthorised(
-            uri: '/api/admin/auth/logout',
+            uri: $uriLogout,
             token: $token
         );
 
@@ -39,8 +42,9 @@ class AuthTest extends AdminTestCase
 
     public function test_should_fail_login(): void
     {
+        $uri = self::generateUri('/auth/login');
         $response = $this->postJson(
-            uri: '/api/admin/auth/login',
+            uri: $uri,
             data: [
                 'email' => 'naruto.uzumaki@ems.com',
                 'password' => 'wrongPassword',

@@ -2,30 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Admin;
+namespace Organizer;
 
-use Tests\Integration\AdminTestCase;
+use Tests\Integration\OrganizerTestCase;
 
-class AdminAuthTest extends AdminTestCase
+class AuthTest extends OrganizerTestCase
 {
-    public function test_should_login_successfully(): void
+    public function test_organizer_should_login_successfully(): void
     {
         $uri = self::generateUri('/auth/login');
+
         $response = $this->postJson($uri, [
-            'email' => 'naruto.uzumaki@ems.com',
+            'email' => 'luffy.monkey@ems.com',
             'password' => 'password',
         ]);
 
         $response->assertStatus(200);
     }
 
-    public function test_should_logout_successfully(): void
+    public function test_organizer_should_logout_successfully(): void
     {
         $uri = self::generateUri('/auth/login');
         $response = $this->postJson(
             uri: $uri,
             data: [
-                'email' => 'naruto.uzumaki@ems.com',
+                'email' => 'luffy.monkey@ems.com',
                 'password' => 'password',
             ]
         );
@@ -40,13 +41,13 @@ class AdminAuthTest extends AdminTestCase
         $response->assertStatus(200);
     }
 
-    public function test_should_fail_login(): void
+    public function test_organizer_should_fail_login(): void
     {
         $uri = self::generateUri('/auth/login');
         $response = $this->postJson(
             uri: $uri,
             data: [
-                'email' => 'naruto.uzumaki@ems.com',
+                'email' => 'luffy.monkey@ems.com',
                 'password' => 'wrongPassword',
             ]
         );

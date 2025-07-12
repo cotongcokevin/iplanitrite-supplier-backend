@@ -9,7 +9,7 @@ use Tests\Integration\AdminTestCase;
 
 class AdminTest extends AdminTestCase
 {
-    public function test_should_search_all_data()
+    public function test_admin_search_all()
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
@@ -22,7 +22,7 @@ class AdminTest extends AdminTestCase
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
-    public function test_should_find_by_id()
+    public function test_admin_find_by_id()
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(
@@ -36,7 +36,7 @@ class AdminTest extends AdminTestCase
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
-    public function test_should_insert_data()
+    public function test_admin_insert()
     {
         $token = $this->login();
         $response = $this->postJsonAuthorised(
@@ -57,7 +57,7 @@ class AdminTest extends AdminTestCase
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
-    public function test_should_update_data()
+    public function test_admin_update()
     {
         $token = $this->login();
         $response = $this->putJsonAuthorised(
@@ -80,7 +80,7 @@ class AdminTest extends AdminTestCase
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
-    public function test_should_delete_data()
+    public function test_admin_delete()
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(

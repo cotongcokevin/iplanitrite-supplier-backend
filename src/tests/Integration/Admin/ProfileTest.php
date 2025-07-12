@@ -8,7 +8,7 @@ use Tests\Integration\AdminTestCase;
 
 class ProfileTest extends AdminTestCase
 {
-    public function test_should_update_logged_in_user_profile(): void
+    public function test_admin_update_profile(): void
     {
         // Create a new one
         $token = $this->login();
@@ -44,7 +44,7 @@ class ProfileTest extends AdminTestCase
         );
     }
 
-    public function test_should_fetch_logged_in_user_profile(): void
+    public function test_admin_get_profile(): void
     {
         $token = $this->login();
         $response = $this->getJsonAuthorised(

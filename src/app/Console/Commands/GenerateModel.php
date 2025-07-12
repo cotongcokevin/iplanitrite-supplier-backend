@@ -19,7 +19,7 @@ class GenerateModel extends Command
      *
      * @var string
      */
-    protected $signature = 'app:generate-model {modelName}';
+    protected $signature = 'app:generate-model {modelName} {--override=}';
 
     /**
      * The console command description.
@@ -27,6 +27,8 @@ class GenerateModel extends Command
      * @var string
      */
     protected $description = 'Command description';
+
+    private bool $override;
 
     /**
      * Execute the console command.
@@ -36,6 +38,8 @@ class GenerateModel extends Command
     #[NoReturn]
     public function handle()
     {
+        $this->override = (bool) $this->option('override');
+
         $modelName = $this->argument('modelName');
         $table = Str::snake($modelName);
 
@@ -184,7 +188,17 @@ PHP;
         $namespace = "App\Models\\".$modelName;
 
         $modelData = $modelName.'Data';
-        $useModelData = "App\Models\\".$modelName.'\\'.$modelData;
+
+        $hasTimestamps = collect($columns)->first(function (GenerateModelColumn $col) {
+            return $col->namePlain === 'createdBy';
+        });
+        $hasSoftDeletes = collect($columns)->first(function (GenerateModelColumn $col) {
+            return $col->namePlain === 'deletedAt';
+        });
+
+        $timestampsSetting = $hasTimestamps ? '' : "\n    public \$timestamps = false;";
+        $softDeletesInclude = $hasSoftDeletes ? "\nuse Illuminate\Database\Eloquent\SoftDeletes;" : '';
+        $softDeletesUse = $hasSoftDeletes ? "\n    use SoftDeletes;" : '';
 
         $args = collect($columns)->map(function (GenerateModelColumn $col) {
             $label = $col->nameDollarThis;
@@ -208,10 +222,11 @@ declare(strict_types=1);
 namespace $namespace;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;$softDeletesInclude
 
 class $modelName extends Model
-{
+{ $timestampsSetting $softDeletesUse
+    
     /**
      * @var string
      */
@@ -274,7 +289,7 @@ PHP;
         if (! is_dir($dir)) {
             mkdir($dir, 0755, true); // ✅ auto-create nested directory
         }
-        if (file_exists($filePath)) {
+        if (file_exists($filePath) && ! $this->override) {
             $this->info("SKIPPING $filePath, already exists");
         }
 

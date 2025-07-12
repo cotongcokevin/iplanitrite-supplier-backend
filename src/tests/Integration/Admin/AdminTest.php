@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Admin;
 
-use Database\Seeders\AdminSeeder;
+use Database\Seeders\Classes\AdminSeeder;
 use Tests\Integration\AdminTestCase;
 
 class AdminTest extends AdminTestCase

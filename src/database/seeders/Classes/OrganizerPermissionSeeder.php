@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders\Organizer;
+namespace Database\Seeders\Classes;
 
+use App\Enums\OrganizerPermissionType;
 use App\Models\OrganizerPermission\OrganizerPermission;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -21,10 +22,10 @@ class OrganizerPermissionSeeder extends Seeder
 
         OrganizerPermission::create([
             'id' => self::ORGANIZER_PERMISSION_ONE_ID,
-            'name' => 'Events',
+            'name' => OrganizerPermissionType::EVENTS,
             'organizer_role_id' => OrganizerRoleSeeder::ORGANIZER_ROLE_ONE_ID,
-            'created_by' => OrganizerStaffSeeder::ORGANIZER_STAFF_ONE_ID,
-            'updated_by' => OrganizerStaffSeeder::ORGANIZER_STAFF_ONE_ID,
+            'created_by' => null,
+            'updated_by' => null,
             'created_at' => $date,
             'updated_at' => $date,
         ]);

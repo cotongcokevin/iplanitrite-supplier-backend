@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders;
+namespace Database\Seeders\Classes;
 
 use App\Models\Admin\Admin;
 use Carbon\Carbon;

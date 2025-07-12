@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders\Organizer;
+namespace Database\Seeders\Classes;
 
 use App\Models\Organizer\Organizer;
 use Carbon\Carbon;
-use Database\Seeders\AdminSeeder;
 use Illuminate\Database\Seeder;
 
 class OrganizerSeeder extends Seeder

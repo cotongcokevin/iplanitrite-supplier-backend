@@ -12,11 +12,12 @@ class OrganizerDto
     public function __construct(
         public UuidInterface $id,
         public string $name,
+        public ?string $description,
         public int $maxStaff,
-        public UuidInterface $createdBy,
-        public UuidInterface $updatedBy,
-        public Carbon $createdAt,
-        public Carbon $updatedAt,
+        public ?UuidInterface $createdBy,
+        public ?UuidInterface $updatedBy,
+        public ?Carbon $createdAt,
+        public ?Carbon $updatedAt,
         public ?Carbon $deletedAt,
     ) {}
 }

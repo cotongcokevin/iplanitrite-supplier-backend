@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactNumber extends Model
 {
-    protected string $guard = 'contact_number';
-
     public $timestamps = false;
 
     /**
@@ -19,6 +17,9 @@ class ContactNumber extends Model
 
     public function toModelData(): ContactNumberData
     {
-        return new ContactNumberData;
+        return new ContactNumberData(
+            id: $this->id,
+            phoneNumber: $this->phoneNumber,
+        );
     }
 }

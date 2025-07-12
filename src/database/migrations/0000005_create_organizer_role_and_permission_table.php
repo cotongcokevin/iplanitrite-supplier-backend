@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('organizer_id')->references('id')->on('organizer');
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('organizer_permission', function (Blueprint $table) {

@@ -18,5 +18,6 @@ class OrganizerRoleDto
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,
+        public ?Carbon $deletedAt,
     ) {}
 }

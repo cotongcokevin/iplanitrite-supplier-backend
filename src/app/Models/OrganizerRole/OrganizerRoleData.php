@@ -19,6 +19,7 @@ class OrganizerRoleData
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,
+        public ?Carbon $deletedAt,
     ) {}
 
     public function toDto(): OrganizerRoleDto
@@ -32,6 +33,7 @@ class OrganizerRoleData
             updatedBy: $this->updatedBy,
             createdAt: $this->createdAt,
             updatedAt: $this->updatedAt,
+            deletedAt: $this->deletedAt,
         );
     }
 }

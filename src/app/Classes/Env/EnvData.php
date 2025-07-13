@@ -10,8 +10,8 @@ readonly class EnvData
 {
     public function __construct(
         public EnvironmentType $environment,
-        public string $adminFrontEndURI,
-        public string $organizerFrontEndURI,
-        public string $participantFrontEndURI,
+        public string          $adminFrontEndURI,
+        public string          $supplierFrontEndURI,
+        public string          $participantFrontEndURI,
     ) {}
 }

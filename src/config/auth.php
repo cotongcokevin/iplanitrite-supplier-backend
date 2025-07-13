@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Admin\Admin;
-use App\Models\OrganizerStaff\OrganizerStaff;
+use App\Models\SupplierStaff\SupplierStaff;
 
 return [
 
@@ -44,9 +44,9 @@ return [
             'provider' => 'admin',
         ],
 
-        'organizer_staff' => [
+        'supplier_staff' => [
             'driver' => 'jwt',
-            'provider' => 'organizer_staff',
+            'provider' => 'supplier_staff',
         ],
     ],
 
@@ -72,9 +72,9 @@ return [
             'driver' => 'eloquent',
             'model' => Admin::class,
         ],
-        'organizer_staff' => [
+        'supplier_staff' => [
             'driver' => 'eloquent',
-            'model' => OrganizerStaff::class,
+            'model' => SupplierStaff::class,
         ],
     ],
 

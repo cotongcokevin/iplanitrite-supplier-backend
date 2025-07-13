@@ -6,10 +6,10 @@ use Database\Seeders\Classes\AddressSeeder;
 use Database\Seeders\Classes\AdminSeeder;
 use Database\Seeders\Classes\ContactNumberSeeder;
 use Database\Seeders\Classes\CountrySeeder;
-use Database\Seeders\Classes\OrganizerPermissionSeeder;
-use Database\Seeders\Classes\OrganizerRoleSeeder;
-use Database\Seeders\Classes\OrganizerSeeder;
-use Database\Seeders\Classes\OrganizerStaffSeeder;
+use Database\Seeders\Classes\SupplierPermissionSeeder;
+use Database\Seeders\Classes\SupplierRoleSeeder;
+use Database\Seeders\Classes\SupplierSeeder;
+use Database\Seeders\Classes\SupplierStaffSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
             // Admin
             AdminSeeder::class,
 
-            // Organizers
-            OrganizerSeeder::class,
-            OrganizerRoleSeeder::class,
-            OrganizerPermissionSeeder::class,
-            OrganizerStaffSeeder::class,
+            // Suppliers
+            SupplierSeeder::class,
+            SupplierRoleSeeder::class,
+            SupplierPermissionSeeder::class,
+            SupplierStaffSeeder::class,
         ]);
     }
 }

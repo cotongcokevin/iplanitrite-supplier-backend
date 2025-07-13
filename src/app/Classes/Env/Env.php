@@ -16,7 +16,7 @@ class Env
             self::$env = new EnvData(
                 environment: EnvironmentType::from(env('APP_ENV')),
                 adminFrontEndURI: env('ADMIN_FRONT_END_URI'),
-                organizerFrontEndURI: env('ORGANIZER_FRONT_END_URI'),
+                supplierFrontEndURI: env('SUPPLIER_FRONT_END_URI'),
                 participantFrontEndURI: env('PARTICIPANT_FRONT_END_URI'),
             );
         }

@@ -7,10 +7,10 @@ namespace App\Models\SupplierPermission;
 use App\Enums\SupplierPermissionType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 
 class SupplierPermission extends Model
-{  
-    
+{
     /**
      * @var string
      */
@@ -19,13 +19,13 @@ class SupplierPermission extends Model
     public function toModelData(): SupplierPermissionData
     {
         return new SupplierPermissionData(
-            id: $this->id,
+            id: Uuid::fromString($this->id),
             name: SupplierPermissionType::from($this->name),
             supplierRoleId: $this->supplierRoleId,
-            createdBy: $this->createdBy,
-            updatedBy: $this->updatedBy,
-            createdAt: $this->createdAt ? Carbon::parse($this->createdAt) : null,
-            updatedAt: $this->updatedAt ? Carbon::parse($this->updatedAt) : null,
+            createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
+            updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
+            createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,
+            updatedAt: $this->updatedAt ? Carbon::parse($this->updated_at) : null,
         );
     }
 }

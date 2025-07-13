@@ -22,6 +22,7 @@ class GenerateModelColumn
         public string $namePlain,
         public string $nameDollar,
         public string $nameDollarThis,
+        public string $nameSnakeThis,
         public string $dataType
     ) {}
 

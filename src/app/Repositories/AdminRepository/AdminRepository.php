@@ -13,19 +13,12 @@ use Illuminate\Support\Collection;
 use Ramsey\Uuid\UuidFactory;
 use Ramsey\Uuid\UuidInterface;
 
-class AdminRepository
+readonly class AdminRepository
 {
-    private Accountable $accountable;
-
-    private UuidFactory $uuid;
-
     public function __construct(
-        Accountable $accountable,
-        UuidFactory $uuid
-    ) {
-        $this->accountable = $accountable;
-        $this->uuid = $uuid;
-    }
+        private Accountable $accountable,
+        private UuidFactory $uuid
+    ) {}
 
     /**
      * @return Collection<int, AdminModelData>

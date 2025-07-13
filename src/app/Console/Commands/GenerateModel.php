@@ -65,6 +65,7 @@ class GenerateModel extends Command
                 namePlain: Str::camel($column->getName()),
                 nameDollar: '$'.Str::camel($column->getName()),
                 nameDollarThis: '$this->'.Str::camel($column->getName()),
+                nameSnakeThis: '$this->'.$column->getName(),
                 dataType: GenerateModelColumn::parseDataType(
                     $column->getType(),
                     ! $column->getNotnull()
@@ -201,19 +202,20 @@ PHP;
         $softDeletesUse = $hasSoftDeletes ? "\n    use SoftDeletes;" : '';
 
         $args = collect($columns)->map(function (GenerateModelColumn $col) {
-            $label = $col->nameDollarThis;
+            $label = $col->nameSnakeThis;
             if ($col->dataType === 'Carbon') {
-                $label = "Carbon::parse($col->nameDollarThis)";
+                $label = "Carbon::parse($col->nameSnakeThis)";
             } elseif ($col->dataType === '?Carbon') {
-                $label = "$col->nameDollarThis ? Carbon::parse($col->nameDollarThis) : null";
-            } elseif ($col->dataType === 'UUID') {
-                $label = "UuidInterface::fromString($col->nameDollarThis)";
-            } elseif ($col->dataType === '?UUID') {
-                $label = "$col->nameDollarThis ? UuidInterface::fromString($col->nameDollarThis) : null";
+                $label = "$col->nameSnakeThis ? Carbon::parse($col->nameSnakeThis) : null";
+            } elseif ($col->dataType === 'UuidInterface') {
+                $label = "UuidInterface::fromString($col->nameSnakeThis)";
+            } elseif ($col->dataType === '?UuidInterface') {
+                $label = "$col->nameSnakeThis ? UuidInterface::fromString($col->nameSnakeThis) : null";
             }
 
             return "            {$col->namePlain}: {$label},";
         })->join("\n");
+
         $content = <<<PHP
 <?php
 
@@ -262,19 +264,16 @@ namespace $namespace;
 use App\Classes\Accountable;
 use Ramsey\Uuid\UuidFactory;
 
-class $repositoryName
+readonly class $repositoryName
 {
     private Accountable \$accountable;
 
     private UuidFactory \$uuid;
 
     public function __construct(
-        Accountable \$accountable,
-        UuidFactory \$uuid
-    ) {
-        \$this->accountable = \$accountable;
-        \$this->uuid = \$uuid;
-    }
+        private Accountable \$accountable,
+        private UuidFactory \$uuid
+    ) { }
 }
 
 PHP;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\ContactNumber;
 
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 
 class ContactNumber extends Model
 {
@@ -18,8 +19,8 @@ class ContactNumber extends Model
     public function toModelData(): ContactNumberData
     {
         return new ContactNumberData(
-            id: $this->id,
-            phoneNumber: $this->phoneNumber,
+            id: Uuid::fromString($this->id),
+            phoneNumber: $this->phone_number,
         );
     }
 }

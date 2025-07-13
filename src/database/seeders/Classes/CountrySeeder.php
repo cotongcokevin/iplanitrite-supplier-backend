@@ -10,6 +10,7 @@ use Illuminate\Database\Seeder;
 class CountrySeeder extends Seeder
 {
     public const COUNTRY_ID_ONE = '5126d5bd-1c8e-48db-94e7-afcd426529e3';
+
     public const COUNTRY_ID_TWO = '9942040e-b66a-442e-b103-8865b2314a68';
 
     /**

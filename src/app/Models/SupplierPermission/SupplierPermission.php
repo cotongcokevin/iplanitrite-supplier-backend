@@ -9,8 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class SupplierPermission extends Model
-{  
-    
+{
     /**
      * @var string
      */

@@ -16,13 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedInteger('max_staff');
-
-            $table->uuid('created_by')->nullable();
-            $table->uuid('updated_by')->nullable();
-
-            $table->foreign('created_by')->references('id')->on('admin');
-            $table->foreign('updated_by')->references('id')->on('admin');
-
+            $table->foreignUuid('created_by')->nullable()->constrained('admin');
+            $table->foreignUuid('updated_by')->nullable()->constrained('admin');
             $table->timestamps();
             $table->softDeletes();
         });

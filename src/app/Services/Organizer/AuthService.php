@@ -16,7 +16,7 @@ class AuthService
 
     public function __construct(AuthFactory $auth)
     {
-        $this->guard = $auth->guard(AuthGuardType::ORGANIZER_STAFF->value);
+        $this->guard = $auth->guard(AuthGuardType::SUPPLIER_STAFF->value);
     }
 
     /**

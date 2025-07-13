@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\AdminCors;
-use App\Http\Middleware\OrganizerCors;
+use App\Http\Middleware\SupplierCors;
 use App\Http\Middleware\ParticipantCors;
 
 Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function () {
@@ -16,10 +16,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function
 });
 
 Route::group([
-    'prefix' => 'organizer',
-    'middleware' => [OrganizerCors::class],
+    'prefix' => 'supplier',
+    'middleware' => [SupplierCors::class],
 ], function () {
-    require __DIR__.'/organizer/auth/auth.php';
+    require __DIR__ . '/supplier/auth/auth.php';
 });
 
 Route::group([

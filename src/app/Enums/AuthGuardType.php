@@ -5,6 +5,6 @@ namespace App\Enums;
 enum AuthGuardType: string
 {
     case ADMIN = 'admin';
-    case ORGANIZER_STAFF = 'organizer_staff';
+    case SUPPLIER_STAFF = 'supplier_staff';
     case PARTICIPANT = 'participant';
 }

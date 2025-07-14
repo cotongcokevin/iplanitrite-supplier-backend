@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Models\Admin\Admin;
+use App\Models\Admin\AdminEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
     {
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
-        Admin::create([
+        AdminEntity::create([
             'id' => self::ADMIN_ONE_ID,
             'email' => 'naruto.uzumaki@ems.com',
             'password' => bcrypt('password'),
@@ -31,7 +31,7 @@ class AdminSeeder extends Seeder
             'updated_at' => $date,
         ]);
 
-        Admin::create([
+        AdminEntity::create([
             'id' => self::ADMIN_TWO_ID,
             'email' => 'sasuke.uchiha@ems.com',
             'password' => bcrypt('password'),

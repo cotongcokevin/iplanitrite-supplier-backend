@@ -102,23 +102,28 @@ abstract class BaseTestCase extends TestCase
     public function cleanAutoBeforeAssertingJsonSnapshot(
         array $resultArray
     ): void {
-        foreach (['createdAt', 'updatedAt'] as $dateCheck) {
-            if (! empty($resultArray[$dateCheck])) {
-                Carbon::parse($resultArray[$dateCheck]);
-                $resultArray[$dateCheck] = '__FORMAT_VALIDATED__';
-            }
-        }
+        $recursiveReplace = function (&$data) use (&$recursiveReplace) {
+            foreach ($data as $key => &$value) {
+                if (is_array($value) || is_object($value)) {
+                    $recursiveReplace($value);
+                } else {
+                    if (in_array($key, ['createdAt', 'updatedAt']) && $value !== null) {
+                        Carbon::parse($value);
+                        $value = '__FORMAT_VALIDATED__';
+                    }
 
-        foreach (['id', 'createdBy', 'updatedBy'] as $idCheck) {
-            if (! empty($resultArray[$idCheck])) {
-                Uuid::fromString($resultArray[$idCheck]);
-                $resultArray[$idCheck] = '__FORMAT_VALIDATED__';
-            }
-        }
+                    if (in_array($key, ['id', 'createdBy', 'updatedBy']) && $value !== null) {
+                        Uuid::fromString($value);
+                        $value = '__FORMAT_VALIDATED__';
+                    }
 
-        if (! empty($resultArray['password'])) {
-            $resultArray['password'] = '__FORMAT_VALIDATED__';
-        }
+                    if ($key === 'password') {
+                        $value = '__FORMAT_VALIDATED__';
+                    }
+                }
+            }
+        };
+        $recursiveReplace($resultArray);
 
         $this->assertMatchesJsonSnapshot($resultArray);
     }

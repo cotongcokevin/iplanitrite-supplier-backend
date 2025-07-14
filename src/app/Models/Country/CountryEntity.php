@@ -7,7 +7,7 @@ namespace App\Models\Country;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Country extends Model
+class CountryEntity extends Model
 {
     public $timestamps = false;
 
@@ -16,9 +16,9 @@ class Country extends Model
      */
     protected $table = 'country';
 
-    public function toModelData(): CountryModelData
+    public function toModel(): CountryModel
     {
-        return new CountryModelData(
+        return new CountryModel(
             id: Uuid::fromString($this->id),
             name: $this->name,
             iso2Code: $this->iso2_code,

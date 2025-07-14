@@ -8,7 +8,7 @@ use App\Dto\Response\SupplierStaffDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class SupplierStaffModelData
+class SupplierStaffModel
 {
     public function __construct(
         public UuidInterface $id,
@@ -39,8 +39,6 @@ class SupplierStaffModelData
             dateOfBirth: $this->dateOfBirth,
             supplierId: $this->supplierId,
             supplierRoleId: $this->supplierRoleId,
-            contactNumberId: $this->contactNumberId,
-            addressId: $this->addressId,
             createdBy: $this->createdBy,
             updatedBy: $this->updatedBy,
             createdAt: $this->createdAt,

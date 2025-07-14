@@ -7,7 +7,7 @@ namespace App\Services\Admin;
 use App\Classes\Principals\Principal;
 use App\Dto\Requests\Admin\AdminStoreRequestDto;
 use App\Dto\Requests\Admin\AdminUpdateRequestDto;
-use App\Models\Admin\AdminModelData;
+use App\Models\Admin\AdminModel;
 use App\Repositories\AdminRepository\AdminRepository;
 use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;
 use App\Repositories\AdminRepository\Data\AdminRepositoryUpdateData;
@@ -24,19 +24,19 @@ readonly class AdminService
     ) {}
 
     /**
-     * @return Collection<int, AdminModelData>
+     * @return Collection<int, AdminModel>
      */
     public function search(): Collection
     {
         return $this->adminRepo->search();
     }
 
-    public function getById(UuidInterface $id): AdminModelData
+    public function getById(UuidInterface $id): AdminModel
     {
         return $this->adminRepo->getById($id);
     }
 
-    public function store(AdminStoreRequestDto $dto): AdminModelData
+    public function store(AdminStoreRequestDto $dto): AdminModel
     {
         $repoDto = new AdminRepositoryStoreData(
             $this->uuid->uuid4(),
@@ -55,7 +55,7 @@ readonly class AdminService
     public function update(
         AdminUpdateRequestDto $dto,
         UuidInterface $id
-    ): AdminModelData {
+    ): AdminModel {
         $repoDto = new AdminRepositoryUpdateData(
             email: $dto->email,
             password: $dto->password ? bcrypt($dto->password) : null,

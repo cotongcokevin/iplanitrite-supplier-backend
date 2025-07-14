@@ -7,18 +7,23 @@ namespace App\Models\Address;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Address extends Model
+class AddressEntity extends Model
 {
     public $timestamps = false;
 
     /**
      * @var string
      */
+    protected $keyType = 'string';
+
+    /**
+     * @var string
+     */
     protected $table = 'address';
 
-    public function toModelData(): AddressModelData
+    public function toModel(): AddressModel
     {
-        return new AddressModelData(
+        return new AddressModel(
             id: Uuid::fromString($this->id),
             line1: $this->line1,
             line2: $this->line2,

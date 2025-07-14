@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             AddressSeeder::class,
             ContactNumberSeeder::class,
 
-            // Admin
+            // AdminEntity
             AdminSeeder::class,
 
             // Suppliers

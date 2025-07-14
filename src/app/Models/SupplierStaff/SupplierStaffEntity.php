@@ -7,12 +7,18 @@ namespace App\Models\SupplierStaff;
 use App\Classes\Principals\PrincipalData;
 use App\Classes\Scopes\Guard\GuardedAuthenticatedModel;
 use App\Enums\AuthGuardType;
+use App\Models\Address\AddressEntity;
+use App\Models\ContactNumber\ContactNumberEntity;
+use App\Models\SupplierStaff\Context\SupplierStaffContext;
+use App\Models\SupplierStaff\Context\SupplierStaffContextException;
+use App\Models\SupplierStaff\Context\SupplierStaffModelContextType;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class SupplierStaff extends GuardedAuthenticatedModel implements JWTSubject
+class SupplierStaffEntity extends GuardedAuthenticatedModel implements JWTSubject
 {
     use SoftDeletes;
 
@@ -47,9 +53,19 @@ class SupplierStaff extends GuardedAuthenticatedModel implements JWTSubject
         return [];
     }
 
-    public function toModelData(): SupplierStaffModelData
+    public function address(): BelongsTo
     {
-        return new SupplierStaffModelData(
+        return $this->belongsTo(AddressEntity::class, 'address_id');
+    }
+
+    public function contactNumber(): BelongsTo
+    {
+        return $this->belongsTo(ContactNumberEntity::class, 'contact_number_id');
+    }
+
+    public function toModel(): SupplierStaffModel
+    {
+        return new SupplierStaffModel(
             id: Uuid::fromString($this->id),
             email: $this->email,
             password: $this->password,
@@ -65,6 +81,36 @@ class SupplierStaff extends GuardedAuthenticatedModel implements JWTSubject
             createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,
             updatedAt: $this->updatedAt ? Carbon::parse($this->updated_at) : null,
             deletedAt: $this->deletedAt ? Carbon::parse($this->deleted_at) : null,
+        );
+    }
+
+    /**
+     * @throws SupplierStaffContextException
+     */
+    public function buildContext($contexts): SupplierStaffContext
+    {
+        $addressContext = null;
+        $contactNumberContext = null;
+        foreach ($contexts as $context) {
+            switch ($context) {
+                case SupplierStaffModelContextType::ADDRESS:
+                    /** @var AddressEntity $address */
+                    $address = $this->address;
+                    $addressContext = $address->toModel();
+                    break;
+                case SupplierStaffModelContextType::CONTACT_NUMBER:
+                    /** @var ContactNumberEntity $contactNumber */
+                    $contactNumber = $this->contactNumber;
+                    $contactNumberContext = $contactNumber->toModel();
+                    break;
+                default:
+                    throw new SupplierStaffContextException("Invalid context $context");
+            }
+        }
+
+        return new SupplierStaffContext(
+            address: $addressContext,
+            contactNumber: $contactNumberContext
         );
     }
 

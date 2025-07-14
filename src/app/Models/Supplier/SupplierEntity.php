@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
 
-class Supplier extends Model
+class SupplierEntity extends Model
 {
     use SoftDeletes;
 
@@ -18,9 +18,9 @@ class Supplier extends Model
      */
     protected $table = 'supplier';
 
-    public function toModelData(): SupplierModelData
+    public function toModel(): SupplierModel
     {
-        return new SupplierModelData(
+        return new SupplierModel(
             id: Uuid::fromString($this->id),
             name: $this->name,
             description: $this->description,

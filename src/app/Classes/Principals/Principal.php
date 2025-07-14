@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Classes\Principals;
 
-use App\Models\Admin\Admin;
-use App\Models\SupplierStaff\SupplierStaff;
+use App\Models\Admin\AdminEntity;
+use App\Models\SupplierStaff\SupplierStaffEntity;
 
 class Principal extends PrincipalStaticHandler
 {
@@ -39,8 +39,8 @@ class Principal extends PrincipalStaticHandler
         $user = auth()->user();
 
         return match (true) {
-            $user instanceof Admin => $user->toPrincipalData(),
-            $user instanceof SupplierStaff => $user->toPrincipalData(),
+            $user instanceof AdminEntity => $user->toPrincipalData(),
+            $user instanceof SupplierStaffEntity => $user->toPrincipalData(),
             default => throw new PrincipalException
         };
     }

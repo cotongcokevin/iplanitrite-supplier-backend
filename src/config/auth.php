@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Admin\Admin;
-use App\Models\SupplierStaff\SupplierStaff;
+use App\Models\Admin\AdminEntity;
+use App\Models\SupplierStaff\SupplierStaffEntity;
 
 return [
 
@@ -52,7 +52,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Admin Providers
+    | AdminEntity Providers
     |--------------------------------------------------------------------------
     |
     | All authentication guards have a user provider, which defines how the
@@ -70,11 +70,11 @@ return [
     'providers' => [
         'admin' => [
             'driver' => 'eloquent',
-            'model' => Admin::class,
+            'model' => AdminEntity::class,
         ],
         'supplier_staff' => [
             'driver' => 'eloquent',
-            'model' => SupplierStaff::class,
+            'model' => SupplierStaffEntity::class,
         ],
     ],
 

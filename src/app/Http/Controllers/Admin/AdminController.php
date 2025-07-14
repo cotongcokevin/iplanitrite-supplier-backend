@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Dto\Requests\Admin\AdminStoreRequestDto;
 use App\Dto\Requests\Admin\AdminUpdateRequestDto;
-use App\Models\Admin\AdminModelData;
+use App\Models\Admin\AdminModel;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class AdminController
         return transaction(function () use ($service) {
             $result = $service->search();
 
-            return $result->map(function (AdminModelData $entity) {
+            return $result->map(function (AdminModel $entity) {
                 return $entity->toDto();
             });
         });

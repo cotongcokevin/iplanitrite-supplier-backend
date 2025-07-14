@@ -18,8 +18,6 @@ class SupplierStaffDto
         public ?Carbon $dateOfBirth,
         public UuidInterface $supplierId,
         public UuidInterface $supplierRoleId,
-        public ?UuidInterface $contactNumberId,
-        public ?UuidInterface $addressId,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,

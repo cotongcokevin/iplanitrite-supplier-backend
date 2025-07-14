@@ -2,33 +2,34 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Supplier;
+namespace App\Models\Admin;
 
-use App\Dto\Response\SupplierDto;
+use App\Dto\Response\AdminDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class SupplierModelData
+class AdminModel
 {
     public function __construct(
         public UuidInterface $id,
-        public string $name,
-        public ?string $description,
-        public int $maxStaff,
+        public string $email,
+        public string $password,
+        public string $firstName,
+        public string $lastName,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
-        public ?Carbon $createdAt,
-        public ?Carbon $updatedAt,
+        public Carbon $createdAt,
+        public Carbon $updatedAt,
         public ?Carbon $deletedAt,
     ) {}
 
-    public function toDto(): SupplierDto
+    public function toDto(): AdminDto
     {
-        return new SupplierDto(
+        return new AdminDto(
             id: $this->id,
-            name: $this->name,
-            description: $this->description,
-            maxStaff: $this->maxStaff,
+            email: $this->email,
+            firstName: $this->firstName,
+            lastName: $this->lastName,
             createdBy: $this->createdBy,
             updatedBy: $this->updatedBy,
             createdAt: $this->createdAt,

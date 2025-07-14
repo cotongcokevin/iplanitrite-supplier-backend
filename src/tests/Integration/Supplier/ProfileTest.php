@@ -40,8 +40,8 @@ class ProfileTest extends SupplierTestCase
 
         $response->assertStatus(200);
         $result = $response->json();
-        $this->assertNotNull($result['addressId']);
-        $this->assertNotNull($result['contactNumberId']);
+        $this->assertNotNull($result['second']['address']);
+        $this->assertNotNull($result['second']['contactNumber']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($response->json());
 
         $this->getJsonAuthorised(
@@ -60,7 +60,9 @@ class ProfileTest extends SupplierTestCase
 
         $response->assertStatus(200);
         $resultArray = $response->json();
-        $this->assertEquals('luffy.monkey@ems.com', $resultArray['email']);
+        $this->assertEquals('luffy.monkey@ems.com', $resultArray['first']['email']);
+        $this->assertNotNull($resultArray['second']['address']);
+        $this->assertNotNull($resultArray['second']['contactNumber']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 }

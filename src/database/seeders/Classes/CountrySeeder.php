@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Models\Country\Country;
+use App\Models\Country\CountryEntity;
 use Illuminate\Database\Seeder;
 
 class CountrySeeder extends Seeder
@@ -18,7 +18,7 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        Country::create([
+        CountryEntity::create([
             'id' => self::COUNTRY_ID_ONE,
             'name' => 'Philippines',
             'iso2_code' => 'PH',
@@ -31,7 +31,7 @@ class CountrySeeder extends Seeder
             'currency_symbol' => '₱',
         ]);
 
-        Country::create([
+        CountryEntity::create([
             'id' => self::COUNTRY_ID_TWO,
             'name' => 'Australia',
             'iso2_code' => 'AU',

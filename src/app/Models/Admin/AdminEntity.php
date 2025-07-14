@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ramsey\Uuid\Uuid;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Admin extends Authenticatable implements JWTSubject
+class AdminEntity extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
 
@@ -45,9 +45,9 @@ class Admin extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function toModelData(): AdminModelData
+    public function toModel(): AdminModel
     {
-        return new AdminModelData(
+        return new AdminModel(
             id: Uuid::fromString($this->id),
             email: $this->email,
             password: $this->password,

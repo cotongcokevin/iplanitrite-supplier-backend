@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Repositories\AdminRepository;
 
 use App\Classes\Principals\PrincipalData;
-use App\Models\Admin\Admin;
-use App\Models\Admin\AdminModelData;
+use App\Models\Admin\AdminEntity;
+use App\Models\Admin\AdminModel;
 use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;
 use App\Repositories\AdminRepository\Data\AdminRepositoryUpdateData;
 use Illuminate\Support\Collection;
@@ -15,29 +15,30 @@ use Ramsey\Uuid\UuidInterface;
 readonly class AdminRepository
 {
     /**
-     * @return Collection<int, AdminModelData>
+     * @return Collection<int, AdminModel>
      */
     public function search(): Collection
     {
-        $admins = Admin::get();
+        $admins = AdminEntity::get();
 
-        return $admins->map(function (Admin $admin) {
-            return $admin->toModelData();
+        return $admins->map(function (AdminEntity $admin) {
+            return $admin->toModel();
         });
     }
 
-    public function getById(UuidInterface $uuid): AdminModelData
+    public function getById(UuidInterface $uuid): AdminModel
     {
-        $admin = Admin::find($uuid->toString());
+        /** @var AdminEntity $admin */
+        $admin = AdminEntity::find($uuid->toString());
 
-        return $admin->toModelData();
+        return $admin->toModel();
     }
 
     public function store(
         AdminRepositoryStoreData $dto,
         PrincipalData $principal
-    ): AdminModelData {
-        $admin = new Admin;
+    ): AdminModel {
+        $admin = new AdminEntity;
         $admin->id = $dto->id;
         $admin->email = $dto->email;
         $admin->password = $dto->password;
@@ -47,15 +48,16 @@ readonly class AdminRepository
         $admin->updated_by = $principal->id;
         $admin->save();
 
-        return $admin->toModelData();
+        return $admin->toModel();
     }
 
     public function update(
         AdminRepositoryUpdateData $dto,
         UuidInterface $id,
         PrincipalData $principal
-    ): AdminModelData {
-        $admin = Admin::find($id->toString());
+    ): AdminModel {
+        /** @var AdminEntity $admin */
+        $admin = AdminEntity::find($id->toString());
         $admin->email = $dto->email;
         $admin->first_name = $dto->firstName;
         $admin->last_name = $dto->lastName;
@@ -67,12 +69,12 @@ readonly class AdminRepository
 
         $admin->save();
 
-        return $admin->toModelData();
+        return $admin->toModel();
     }
 
     public function destroy(UuidInterface $id): void
     {
-        Admin::find($id)
+        AdminEntity::find($id)
             ->delete();
     }
 }

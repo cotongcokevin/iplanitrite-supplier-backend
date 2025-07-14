@@ -1,24 +1,24 @@
 [
     {
-        "id": "d611fad5-e65e-4afb-a201-bc3dad9f1e7d",
+        "id": "__FORMAT_VALIDATED__",
         "email": "naruto.uzumaki@ems.com",
         "firstName": "Naruto",
         "lastName": "Uzumaki",
         "createdBy": null,
         "updatedBy": null,
-        "createdAt": "2025-01-01T00:00:00.000000Z",
-        "updatedAt": "2025-01-01T00:00:00.000000Z",
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
         "deletedAt": null
     },
     {
-        "id": "8dd17f21-524d-4ad9-8604-b7afe060fe3d",
+        "id": "__FORMAT_VALIDATED__",
         "email": "sasuke.uchiha@ems.com",
         "firstName": "Sasuke",
         "lastName": "Uchiha",
-        "createdBy": "d611fad5-e65e-4afb-a201-bc3dad9f1e7d",
-        "updatedBy": "d611fad5-e65e-4afb-a201-bc3dad9f1e7d",
-        "createdAt": "2025-01-01T00:00:00.000000Z",
-        "updatedAt": "2025-01-01T00:00:00.000000Z",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": "__FORMAT_VALIDATED__",
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
         "deletedAt": null
     }
 ]

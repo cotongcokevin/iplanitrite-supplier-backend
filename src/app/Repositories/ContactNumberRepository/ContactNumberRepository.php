@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\ContactNumberRepository;
 
-use App\Models\ContactNumber\ContactNumber;
+use App\Models\ContactNumber\ContactNumberEntity;
 use App\Repositories\ContactNumberRepository\Data\ContactRepositoryUpsertRepoData;
 
 class ContactNumberRepository
@@ -12,6 +12,6 @@ class ContactNumberRepository
     public function upsert(
         ContactRepositoryUpsertRepoData $data,
     ): void {
-        ContactNumber::upsert((array) $data, ['id']);
+        ContactNumberEntity::upsert((array) $data, ['id']);
     }
 }

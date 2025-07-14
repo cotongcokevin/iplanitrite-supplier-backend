@@ -102,7 +102,7 @@ class GenerateModel extends Command
         string $modelName,
         array $columns
     ): void {
-        $modelData = $modelName.'ModelData';
+        $modelData = $modelName.'Model';
         $modelNamespace = 'App\Models\\'.$modelName;
         $dto = $modelName.'Dto';
         $dtoNamespace = "App\Dto\Response\\".$dto;
@@ -188,7 +188,8 @@ PHP;
 
         $namespace = "App\Models\\".$modelName;
 
-        $modelData = $modelName.'Data';
+        $entityClass = $modelName.'Entity';
+        $modelClass = $modelName.'Model';
 
         $hasTimestamps = collect($columns)->first(function (GenerateModelColumn $col) {
             return $col->namePlain === 'createdBy';
@@ -226,17 +227,22 @@ namespace $namespace;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;$softDeletesInclude
 
-class $modelName extends Model
+class $entityClass extends Model
 { $timestampsSetting $softDeletesUse
     
     /**
      * @var string
      */
     protected \$table = '$table';
+    
+    /**
+     * @var string
+     */
+    protected \$keyType = 'string';
 
-    public function toModelData(): $modelData
+    public function toModel(): $modelClass
     {
-        return new $modelData(
+        return new $modelClass(
 $args
         );
     }
@@ -244,7 +250,7 @@ $args
 
 PHP;
 
-        $filePath = app_path("Models/{$modelName}/{$modelName}.php");
+        $filePath = app_path("Models/{$modelName}/{$entityClass}.php");
         $this->createFile($filePath, $content);
     }
 

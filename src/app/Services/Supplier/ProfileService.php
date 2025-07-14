@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\Supplier;
 
+use App\Classes\Pair;
 use App\Classes\Principals\Principal;
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
-use App\Models\SupplierStaff\SupplierStaffModelData;
+use App\Models\SupplierStaff\Context\SupplierStaffContext;
+use App\Models\SupplierStaff\Context\SupplierStaffContextException;
+use App\Models\SupplierStaff\Context\SupplierStaffModelContextType;
+use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
 use App\Repositories\SupplierStaffRepository\SupplierStaffRepository;
 use App\Services\AddressService;
@@ -22,9 +26,20 @@ readonly class ProfileService
         private ContactNumberService $contactNumberService,
     ) {}
 
-    public function get(): SupplierStaffModelData
+    /**
+     * @return Pair<SupplierStaffModel, SupplierStaffContext>
+     *
+     * @throws SupplierStaffContextException
+     */
+    public function get(): Pair
     {
-        return $this->supplierStaffRepository->getById($this->principal::get()->id);
+        return $this->supplierStaffRepository
+            ->getByIdWithContext(
+                $this->principal::get()->id, [
+                    SupplierStaffModelContextType::ADDRESS,
+                    SupplierStaffModelContextType::CONTACT_NUMBER,
+                ]
+            );
     }
 
     public function update(UpdateProfileRequestDto $request): void

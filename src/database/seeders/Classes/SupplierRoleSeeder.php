@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Models\SupplierRole\SupplierRole;
+use App\Models\SupplierRole\SupplierRoleEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class SupplierRoleSeeder extends Seeder
     {
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
-        SupplierRole::create([
+        SupplierRoleEntity::create([
             'id' => self::SUPPLIER_ROLE_ONE_ID,
             'name' => 'Administrator',
             'immutable' => true,

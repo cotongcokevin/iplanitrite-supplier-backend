@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Models\ContactNumber\ContactNumber;
+use App\Models\ContactNumber\ContactNumberEntity;
 use Illuminate\Database\Seeder;
 
 class ContactNumberSeeder extends Seeder
@@ -16,7 +16,7 @@ class ContactNumberSeeder extends Seeder
      */
     public function run(): void
     {
-        ContactNumber::create([
+        ContactNumberEntity::create([
             'id' => self::CONTACT_NUMBER_ONE_ID,
             'number' => '+639171234567',
             'country_id' => CountrySeeder::COUNTRY_ID_ONE,

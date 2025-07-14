@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Supplier;
 
+use App\Classes\Pair;
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
 use App\Services\Supplier\ProfileService;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +18,10 @@ class ProfileController
         return transaction(function () use ($service) {
             $result = $service->get();
 
-            return $result->toDto();
+            return new Pair(
+                $result->first->toDto(),
+                $result->second->toDto()
+            );
         });
     }
 

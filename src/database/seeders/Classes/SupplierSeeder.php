@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Models\Supplier\Supplier;
+use App\Models\Supplier\SupplierEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -21,7 +21,7 @@ class SupplierSeeder extends Seeder
     {
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
-        Supplier::create([
+        SupplierEntity::create([
             'id' => self::SUPPLIER_ONE_ID,
             'name' => 'One Piece',
             'max_staff' => 10,
@@ -31,7 +31,7 @@ class SupplierSeeder extends Seeder
             'updated_at' => $date,
         ]);
 
-        Supplier::create([
+        SupplierEntity::create([
             'id' => self::SUPPLIER_TWO_ID,
             'name' => 'Solo Leveling',
             'max_staff' => '1',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Models\SupplierStaff\SupplierStaff;
+use App\Models\SupplierStaff\SupplierStaffEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +20,7 @@ class SupplierStaffSeeder extends Seeder
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
         $dateOfBirth = Carbon::parse('2005-01-01')->toDate();
 
-        SupplierStaff::create([
+        SupplierStaffEntity::create([
             'id' => self::SUPPLIER_STAFF_ONE_ID,
             'email' => 'luffy.monkey@ems.com',
             'password' => bcrypt('password'),

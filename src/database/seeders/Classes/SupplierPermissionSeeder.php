@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders\Classes;
 
 use App\Enums\SupplierPermissionType;
-use App\Models\SupplierPermission\SupplierPermission;
+use App\Models\SupplierPermission\SupplierPermissionEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +20,7 @@ class SupplierPermissionSeeder extends Seeder
     {
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
-        SupplierPermission::create([
+        SupplierPermissionEntity::create([
             'id' => self::SUPPLIER_PERMISSION_ONE_ID,
             'name' => SupplierPermissionType::EVENTS,
             'supplier_role_id' => SupplierRoleSeeder::SUPPLIER_ROLE_ONE_ID,

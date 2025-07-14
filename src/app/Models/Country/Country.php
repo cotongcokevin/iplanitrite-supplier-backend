@@ -16,9 +16,9 @@ class Country extends Model
      */
     protected $table = 'country';
 
-    public function toModelData(): CountryData
+    public function toModelData(): CountryModelData
     {
-        return new CountryData(
+        return new CountryModelData(
             id: Uuid::fromString($this->id),
             name: $this->name,
             iso2Code: $this->iso2_code,

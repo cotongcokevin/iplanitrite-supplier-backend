@@ -10,6 +10,6 @@ class ContactNumberDto
 {
     public function __construct(
         public UuidInterface $id,
-        public string $phoneNumber,
+        public string $number,
     ) {}
 }

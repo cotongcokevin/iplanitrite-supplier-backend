@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Classes\Principals\PrincipalData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,6 +57,15 @@ class Admin extends Authenticatable implements JWTSubject
             createdAt: Carbon::parse($this->created_at),
             updatedAt: Carbon::parse($this->updated_at),
             deletedAt: $this->deleted_at ? Carbon::parse($this->deleted_at) : null,
+        );
+    }
+
+    public function toPrincipalData(): PrincipalData
+    {
+        return new PrincipalData(
+            id: Uuid::fromString($this->id),
+            firstName: $this->first_name,
+            lastName: $this->last_name
         );
     }
 }

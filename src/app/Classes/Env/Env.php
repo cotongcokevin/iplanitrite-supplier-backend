@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Classes\Env;
 
 use App\Enums\EnvironmentType;
+use Ramsey\Uuid\Uuid;
 
 class Env
 {
@@ -18,6 +19,7 @@ class Env
                 adminFrontEndURI: env('ADMIN_FRONT_END_URI'),
                 supplierFrontEndURI: env('SUPPLIER_FRONT_END_URI'),
                 participantFrontEndURI: env('PARTICIPANT_FRONT_END_URI'),
+                countryId: Uuid::fromString(env('COUNTRY_ID'))
             );
         }
 

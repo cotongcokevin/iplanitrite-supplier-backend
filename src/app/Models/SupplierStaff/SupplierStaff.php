@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierStaff;
 
+use App\Classes\Principals\PrincipalData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,24 +46,33 @@ class SupplierStaff extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function toModelData(): SupplierStaffData
+    public function toModelData(): SupplierStaffModelData
     {
-        return new SupplierStaffData(
+        return new SupplierStaffModelData(
             id: Uuid::fromString($this->id),
             email: $this->email,
             password: $this->password,
-            firstName: $this->firstName,
-            lastName: $this->lastName,
-            dateOfBirth: $this->dateOfBirth ? Carbon::parse($this->dateOfBirth) : null,
-            supplierId: $this->supplierId,
-            supplierRoleId: $this->supplierRoleId,
-            contactNumberId: $this->contactNumberId,
-            addressId: $this->addressId,
+            firstName: $this->first_name,
+            lastName: $this->last_name,
+            dateOfBirth: $this->date_of_birth ? Carbon::parse($this->date_of_birth) : null,
+            supplierId: Uuid::fromString($this->supplier_id),
+            supplierRoleId: Uuid::fromString($this->supplier_role_id),
+            contactNumberId: $this->contact_number_id ? Uuid::fromString($this->contact_number_id) : null,
+            addressId: $this->address_id ? Uuid::fromString($this->address_id) : null,
             createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
             updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
             createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,
             updatedAt: $this->updatedAt ? Carbon::parse($this->updated_at) : null,
             deletedAt: $this->deletedAt ? Carbon::parse($this->deleted_at) : null,
+        );
+    }
+
+    public function toPrincipalData(): PrincipalData
+    {
+        return new PrincipalData(
+            id: Uuid::fromString($this->id),
+            firstName: $this->first_name,
+            lastName: $this->last_name
         );
     }
 }

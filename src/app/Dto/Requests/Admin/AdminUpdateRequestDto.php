@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dto\Requests;
+namespace App\Dto\Requests\Admin;
 
 use Illuminate\Http\Request;
 

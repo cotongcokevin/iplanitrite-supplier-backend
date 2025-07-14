@@ -6,7 +6,6 @@ namespace App\Classes;
 
 use App\Classes\Env\Env;
 use App\Enums\EnvironmentType;
-use App\Models\Admin\Admin;
 
 /**
  * When doing tests static doesn't reset
@@ -18,7 +17,7 @@ abstract class StaticTestHandler
 
     abstract protected static function handleTest();
 
-    public static function get(): Admin
+    public static function get()
     {
         $testing = Env::get()->environment === EnvironmentType::TESTING;
 

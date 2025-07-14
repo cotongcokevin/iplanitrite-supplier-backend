@@ -9,7 +9,7 @@ use App\Enums\SupplierPermissionType;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class SupplierPermissionData
+class SupplierPermissionModelData
 {
     public function __construct(
         public UuidInterface $id,

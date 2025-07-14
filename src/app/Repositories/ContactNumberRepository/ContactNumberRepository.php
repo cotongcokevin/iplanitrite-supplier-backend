@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace App\Repositories\ContactNumberRepository;
 
-use App\Classes\Accountable;
-use Ramsey\Uuid\UuidFactory;
+use App\Models\ContactNumber\ContactNumber;
+use App\Repositories\ContactNumberRepository\Data\ContactRepositoryUpsertRepoData;
 
 class ContactNumberRepository
 {
-    private Accountable $accountable;
-
-    private UuidFactory $uuid;
-
-    public function __construct(
-        Accountable $accountable,
-        UuidFactory $uuid
-    ) {
-        $this->accountable = $accountable;
-        $this->uuid = $uuid;
+    public function upsert(
+        ContactRepositoryUpsertRepoData $data,
+    ): void {
+        ContactNumber::upsert((array) $data, ['id']);
     }
 }

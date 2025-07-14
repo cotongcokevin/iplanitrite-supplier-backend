@@ -8,7 +8,7 @@ use App\Dto\Response\SupplierDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class SupplierData
+class SupplierModelData
 {
     public function __construct(
         public UuidInterface $id,

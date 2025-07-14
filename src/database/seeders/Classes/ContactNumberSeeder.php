@@ -18,7 +18,7 @@ class ContactNumberSeeder extends Seeder
     {
         ContactNumber::create([
             'id' => self::CONTACT_NUMBER_ONE_ID,
-            'phone_number' => '+639171234567',
+            'number' => '+639171234567',
             'country_id' => CountrySeeder::COUNTRY_ID_ONE,
         ]);
     }

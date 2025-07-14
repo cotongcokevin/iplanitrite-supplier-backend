@@ -20,6 +20,10 @@ Route::group([
     'middleware' => [SupplierCors::class],
 ], function () {
     require __DIR__.'/supplier/auth/auth.php';
+
+    Route::group(['middleware' => ['auth:supplier_staff', AdminCors::class]], function () {
+        require __DIR__.'/supplier/profile/profile.php';
+    });
 });
 
 Route::group([

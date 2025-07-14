@@ -4,20 +4,33 @@ declare(strict_types=1);
 
 namespace App\Repositories\SupplierStaffRepository;
 
-use App\Classes\Accountable;
-use Ramsey\Uuid\UuidFactory;
+use App\Models\SupplierStaff\SupplierStaff;
+use App\Models\SupplierStaff\SupplierStaffModelData;
+use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
+use Ramsey\Uuid\UuidInterface;
 
 class SupplierStaffRepository
 {
-    private Accountable $accountable;
+    public function getById(UuidInterface $id): SupplierStaffModelData
+    {
+        $result = SupplierStaff::find($id);
 
-    private UuidFactory $uuid;
+        return $result->toModelData();
+    }
 
-    public function __construct(
-        Accountable $accountable,
-        UuidFactory $uuid
+    public function updateProfile(
+        SupplierStaffUpdateProfileRepoData $data,
+        UuidInterface $id,
     ) {
-        $this->accountable = $accountable;
-        $this->uuid = $uuid;
+        $supplierStaff = SupplierStaff::find($id);
+        if ($data->password !== null) {
+            $supplierStaff->password = $data->password;
+        }
+        $supplierStaff->first_name = $data->firstName;
+        $supplierStaff->last_name = $data->lastName;
+        $supplierStaff->date_of_birth = $data->dateOfBirth;
+        $supplierStaff->contact_number_id = $data->contactNumberId;
+        $supplierStaff->address_id = $data->addressId;
+        $supplierStaff->save();
     }
 }

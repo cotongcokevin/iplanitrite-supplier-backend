@@ -16,9 +16,9 @@ class Address extends Model
      */
     protected $table = 'address';
 
-    public function toModelData(): AddressData
+    public function toModelData(): AddressModelData
     {
-        return new AddressData(
+        return new AddressModelData(
             id: Uuid::fromString($this->id),
             line1: $this->line1,
             line2: $this->line2,

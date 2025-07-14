@@ -18,13 +18,13 @@ class SupplierRole extends Model
      */
     protected $table = 'supplier_role';
 
-    public function toModelData(): SupplierRoleData
+    public function toModelData(): SupplierRoleModelData
     {
-        return new SupplierRoleData(
+        return new SupplierRoleModelData(
             id: Uuid::fromString($this->id),
             name: $this->name,
             immutable: $this->immutable,
-            supplierId: $this->supplierId,
+            supplierId: $this->supplier_id,
             createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
             updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
             createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,

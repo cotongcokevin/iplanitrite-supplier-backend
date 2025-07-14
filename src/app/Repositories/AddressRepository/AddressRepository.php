@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace App\Repositories\AddressRepository;
 
-use App\Classes\Accountable;
-use Ramsey\Uuid\UuidFactory;
+use App\Models\Address\Address;
+use App\Repositories\AddressRepository\Data\AddressRepositoryUpsertRepoData;
 
 class AddressRepository
 {
-    private Accountable $accountable;
-
-    private UuidFactory $uuid;
-
-    public function __construct(
-        Accountable $accountable,
-        UuidFactory $uuid
-    ) {
-        $this->accountable = $accountable;
-        $this->uuid = $uuid;
+    public function upsert(
+        AddressRepositoryUpsertRepoData $data,
+    ): void {
+        Address::upsert((array) $data, ['id']);
     }
 }

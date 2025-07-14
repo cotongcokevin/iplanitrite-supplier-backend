@@ -18,13 +18,13 @@ class Supplier extends Model
      */
     protected $table = 'supplier';
 
-    public function toModelData(): SupplierData
+    public function toModelData(): SupplierModelData
     {
-        return new SupplierData(
+        return new SupplierModelData(
             id: Uuid::fromString($this->id),
             name: $this->name,
             description: $this->description,
-            maxStaff: $this->maxStaff,
+            maxStaff: $this->max_staff,
             createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
             updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
             createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,

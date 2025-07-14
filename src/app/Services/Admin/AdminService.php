@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace App\Services\Admin;
 
-use App\Dto\Requests\AdminStoreRequestDto;
-use App\Dto\Requests\AdminUpdateRequestDto;
+use App\Dto\Requests\Admin\AdminStoreRequestDto;
+use App\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Models\Admin\AdminModelData;
 use App\Repositories\AdminRepository\AdminRepository;
 use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;
 use App\Repositories\AdminRepository\Data\AdminRepositoryUpdateData;
 use Illuminate\Support\Collection;
+use Ramsey\Uuid\UuidFactory;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class AdminService
 {
-    public function __construct(private AdminRepository $adminRepo) {}
+    public function __construct(
+        private AdminRepository $adminRepo,
+        private UuidFactory $uuid
+    ) {}
 
     /**
      * @return Collection<int, AdminModelData>
@@ -33,6 +37,7 @@ readonly class AdminService
     public function store(AdminStoreRequestDto $dto): AdminModelData
     {
         $repoDto = new AdminRepositoryStoreData(
+            $this->uuid->uuid4(),
             email: $dto->email,
             password: bcrypt($dto->password),
             firstName: $dto->firstName,

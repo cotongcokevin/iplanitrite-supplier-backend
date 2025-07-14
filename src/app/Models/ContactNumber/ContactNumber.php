@@ -16,11 +16,11 @@ class ContactNumber extends Model
      */
     protected $table = 'contact_number';
 
-    public function toModelData(): ContactNumberData
+    public function toModelData(): ContactNumberModelData
     {
-        return new ContactNumberData(
+        return new ContactNumberModelData(
             id: Uuid::fromString($this->id),
-            phoneNumber: $this->phone_number,
+            number: $this->number,
         );
     }
 }

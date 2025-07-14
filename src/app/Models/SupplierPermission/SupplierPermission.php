@@ -16,12 +16,12 @@ class SupplierPermission extends Model
      */
     protected $table = 'supplier_permission';
 
-    public function toModelData(): SupplierPermissionData
+    public function toModelData(): SupplierPermissionModelData
     {
-        return new SupplierPermissionData(
+        return new SupplierPermissionModelData(
             id: Uuid::fromString($this->id),
             name: SupplierPermissionType::from($this->name),
-            supplierRoleId: $this->supplierRoleId,
+            supplierRoleId: $this->supplier_role_id,
             createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
             updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
             createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,

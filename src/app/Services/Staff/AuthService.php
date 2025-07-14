@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Organizer;
+namespace App\Services\Staff;
 
-use App\Dto\Requests\LoginRequestDto;
+use App\Dto\Requests\Admin\LoginRequestDto;
 use App\Enums\AuthGuardType;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;

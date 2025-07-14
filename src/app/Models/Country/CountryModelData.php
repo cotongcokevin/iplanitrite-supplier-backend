@@ -7,7 +7,7 @@ namespace App\Models\Country;
 use App\Dto\Response\CountryDto;
 use Ramsey\Uuid\UuidInterface;
 
-class CountryData
+class CountryModelData
 {
     public function __construct(
         public UuidInterface $id,

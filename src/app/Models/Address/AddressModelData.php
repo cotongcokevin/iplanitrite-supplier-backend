@@ -7,7 +7,7 @@ namespace App\Models\Address;
 use App\Dto\Response\AddressDto;
 use Ramsey\Uuid\UuidInterface;
 
-class AddressData
+class AddressModelData
 {
     public function __construct(
         public UuidInterface $id,

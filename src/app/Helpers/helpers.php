@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Classes\Env\Env;
 use App\Dto\Response\ExceptionCodeDto;
-use App\Enums\EnvironmentType;
 use App\Enums\ExceptionCode;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
@@ -59,12 +57,4 @@ function transaction(Closure $closure): JsonResponse
     }
 }
 
-function logError(Throwable $e)
-{
-    if (Env::get()->environment === EnvironmentType::TESTING) {
-
-    } else {
-        // LOG HERE
-    }
-
-}
+function logError(Throwable $e) {}

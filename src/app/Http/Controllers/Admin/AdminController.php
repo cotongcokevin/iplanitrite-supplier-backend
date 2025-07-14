@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dto\Requests\AdminStoreRequestDto;
-use App\Dto\Requests\AdminUpdateRequestDto;
+use App\Dto\Requests\Admin\AdminStoreRequestDto;
+use App\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Models\Admin\AdminModelData;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\JsonResponse;

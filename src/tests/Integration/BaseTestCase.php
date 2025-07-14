@@ -116,6 +116,10 @@ abstract class BaseTestCase extends TestCase
             }
         }
 
+        if (! empty($resultArray['password'])) {
+            $resultArray['password'] = '__FORMAT_VALIDATED__';
+        }
+
         $this->assertMatchesJsonSnapshot($resultArray);
     }
 }

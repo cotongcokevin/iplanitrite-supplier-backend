@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Repositories\AdminRepository\Data;
+namespace App\Classes\Principals;
 
 use Ramsey\Uuid\UuidInterface;
 
-class AdminRepositoryStoreData
+readonly class PrincipalData
 {
     public function __construct(
         public UuidInterface $id,
-        public string $email,
-        public string $password,
         public string $firstName,
-        public string $lastName,
+        public string $lastName
     ) {}
 }

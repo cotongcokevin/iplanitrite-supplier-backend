@@ -102,7 +102,7 @@ class GenerateModel extends Command
         string $modelName,
         array $columns
     ): void {
-        $modelData = $modelName.'Data';
+        $modelData = $modelName.'ModelData';
         $modelNamespace = 'App\Models\\'.$modelName;
         $dto = $modelName.'Dto';
         $dtoNamespace = "App\Dto\Response\\".$dto;
@@ -261,19 +261,8 @@ declare(strict_types=1);
 
 namespace $namespace;
 
-use App\Classes\Accountable;
-use Ramsey\Uuid\UuidFactory;
-
 readonly class $repositoryName
 {
-    private Accountable \$accountable;
-
-    private UuidFactory \$uuid;
-
-    public function __construct(
-        private Accountable \$accountable,
-        private UuidFactory \$uuid
-    ) { }
 }
 
 PHP;

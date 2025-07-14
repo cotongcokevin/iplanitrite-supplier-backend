@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Classes\Accountable;
-use App\Dto\Requests\AdminUpdateRequestDto;
+use App\Classes\Principals\AdminPrincipal;
+use App\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Ramsey\Uuid\Uuid;
 
 class ProfileController
 {
     public function index(
         AdminService $service,
-        Accountable $accountable
+        AdminPrincipal $principal
     ): JsonResponse {
-        return transaction(function () use ($accountable, $service) {
-            $admin = $accountable->get();
-            $id = Uuid::fromString($admin->id);
-
-            $result = $service->getById($id);
+        return transaction(function () use ($principal, $service) {
+            $admin = $principal->get();
+            $result = $service->getById($admin->id);
 
             return $result->toDto();
         });
@@ -30,16 +27,15 @@ class ProfileController
     public function update(
         Request $request,
         AdminService $service,
-        Accountable $accountable
+        AdminPrincipal $principal
     ): JsonResponse {
-        return transaction(function () use ($accountable, $service, $request) {
-            $admin = $accountable->get();
-            $id = Uuid::fromString($admin->id);
+        return transaction(function () use ($principal, $service, $request) {
+            $admin = $principal->get();
 
             $dto = AdminUpdateRequestDto::fromRequest($request);
             $result = $service->update(
                 $dto,
-                $id
+                $admin->id
             );
 
             return $result->toDto();

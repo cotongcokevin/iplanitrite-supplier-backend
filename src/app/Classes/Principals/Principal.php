@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Classes\Principals;
+
+use App\Models\Admin\Admin;
+use App\Models\SupplierStaff\SupplierStaff;
+
+class Principal extends PrincipalStaticHandler
+{
+    private static ?PrincipalData $principal = null;
+
+    /**
+     * @throws PrincipalException
+     */
+    public static function handle(): PrincipalData
+    {
+        if (! self::$principal) {
+            self::$principal = self::getPrincipal();
+        }
+
+        return self::$principal;
+    }
+
+    /**
+     * @throws PrincipalException
+     */
+    protected static function handleTest(): PrincipalData
+    {
+        return self::getPrincipal();
+    }
+
+    /**
+     * @throws PrincipalException
+     */
+    private static function getPrincipal(): PrincipalData
+    {
+        $user = auth()->user();
+
+        return match (true) {
+            $user instanceof Admin => $user->toPrincipalData(),
+            $user instanceof SupplierStaff => $user->toPrincipalData(),
+            default => throw new PrincipalException
+        };
+    }
+}

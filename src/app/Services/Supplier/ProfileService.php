@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Staff;
+namespace App\Services\Supplier;
 
-use App\Classes\Principals\SupplierStaffPrincipal;
+use App\Classes\Principals\Principal;
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
 use App\Models\SupplierStaff\SupplierStaffModelData;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
@@ -16,7 +16,7 @@ use Carbon\Carbon;
 readonly class ProfileService
 {
     public function __construct(
-        private SupplierStaffPrincipal $principal,
+        private Principal $principal,
         private SupplierStaffRepository $supplierStaffRepository,
         private AddressService $addressService,
         private ContactNumberService $contactNumberService,

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Supplier;
 
 use App\Dto\Requests\Admin\LoginRequestDto;
-use App\Services\Staff\AuthService;
+use App\Services\Supplier\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

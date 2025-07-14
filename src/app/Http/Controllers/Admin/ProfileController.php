@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Classes\Principals\AdminPrincipal;
+use App\Classes\Principals\Principal;
 use App\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +14,7 @@ class ProfileController
 {
     public function index(
         AdminService $service,
-        AdminPrincipal $principal
+        Principal $principal
     ): JsonResponse {
         return transaction(function () use ($principal, $service) {
             $admin = $principal->get();
@@ -27,7 +27,7 @@ class ProfileController
     public function update(
         Request $request,
         AdminService $service,
-        AdminPrincipal $principal
+        Principal $principal
     ): JsonResponse {
         return transaction(function () use ($principal, $service, $request) {
             $admin = $principal->get();

@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Classes\Principals\PrincipalData;
+use App\Enums\AuthGuardType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,7 +66,9 @@ class Admin extends Authenticatable implements JWTSubject
         return new PrincipalData(
             id: Uuid::fromString($this->id),
             firstName: $this->first_name,
-            lastName: $this->last_name
+            lastName: $this->last_name,
+            type: AuthGuardType::ADMIN,
+            guardId: null
         );
     }
 }

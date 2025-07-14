@@ -12,7 +12,7 @@ class ProfileTest extends AdminTestCase
     {
         // Create a new one
         $token = $this->login();
-        $this->postJsonAuthorised(
+        $result = $this->postJsonAuthorised(
             uri: self::generateUri('/admin'),
             token: $token->json(),
             data: [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Admin;
 
+use App\Classes\Principals\Principal;
 use App\Dto\Requests\Admin\AdminStoreRequestDto;
 use App\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Models\Admin\AdminModelData;
@@ -18,6 +19,7 @@ readonly class AdminService
 {
     public function __construct(
         private AdminRepository $adminRepo,
+        private Principal $principal,
         private UuidFactory $uuid
     ) {}
 
@@ -44,7 +46,10 @@ readonly class AdminService
             lastName: $dto->lastName
         );
 
-        return $this->adminRepo->store($repoDto);
+        return $this->adminRepo->store(
+            $repoDto,
+            $this->principal::get()
+        );
     }
 
     public function update(
@@ -60,7 +65,8 @@ readonly class AdminService
 
         return $this->adminRepo->update(
             $repoDto,
-            $id
+            $id,
+            $this->principal::get()
         );
     }
 

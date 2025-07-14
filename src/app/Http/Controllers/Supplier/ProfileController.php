@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Supplier;
 
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
-use App\Services\Staff\ProfileService;
+use App\Services\Supplier\ProfileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

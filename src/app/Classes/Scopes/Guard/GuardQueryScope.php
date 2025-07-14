@@ -1,0 +1,38 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Classes\Scopes\Guard;
+
+use App\Classes\Principals\Principal;
+use App\Classes\Principals\PrincipalException;
+use App\Enums\AuthGuardType;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
+
+readonly class GuardQueryScope implements Scope
+{
+    public function __construct(private Principal $principal) {}
+
+    public function apply(
+        Builder $builder,
+        Model $model
+    ): void {
+        try {
+            $principal = $this->principal::get();
+        } catch (PrincipalException $e) {
+            return;
+        }
+
+        $type = $principal->type;
+        $column = match ($type) {
+            AuthGuardType::SUPPLIER_STAFF => 'supplier_id',
+            default => null
+        };
+
+        if ($column !== null) {
+            $builder->where($model->getTable().'.'.$column, $principal->guardId);
+        }
+    }
+}

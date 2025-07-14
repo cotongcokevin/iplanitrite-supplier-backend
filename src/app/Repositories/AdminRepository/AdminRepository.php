@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\AdminRepository;
 
-use App\Classes\Principals\AdminPrincipal;
+use App\Classes\Principals\PrincipalData;
 use App\Models\Admin\Admin;
 use App\Models\Admin\AdminModelData;
 use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;
@@ -14,10 +14,6 @@ use Ramsey\Uuid\UuidInterface;
 
 readonly class AdminRepository
 {
-    public function __construct(
-        private AdminPrincipal $principal,
-    ) {}
-
     /**
      * @return Collection<int, AdminModelData>
      */
@@ -37,18 +33,18 @@ readonly class AdminRepository
         return $admin->toModelData();
     }
 
-    public function store(AdminRepositoryStoreData $dto): AdminModelData
-    {
-        $principalId = $this->principal->get()->id;
-
+    public function store(
+        AdminRepositoryStoreData $dto,
+        PrincipalData $principal
+    ): AdminModelData {
         $admin = new Admin;
         $admin->id = $dto->id;
         $admin->email = $dto->email;
         $admin->password = $dto->password;
         $admin->first_name = $dto->firstName;
         $admin->last_name = $dto->lastName;
-        $admin->created_by = $principalId;
-        $admin->updated_by = $principalId;
+        $admin->created_by = $principal->id;
+        $admin->updated_by = $principal->id;
         $admin->save();
 
         return $admin->toModelData();
@@ -56,13 +52,14 @@ readonly class AdminRepository
 
     public function update(
         AdminRepositoryUpdateData $dto,
-        UuidInterface $id
+        UuidInterface $id,
+        PrincipalData $principal
     ): AdminModelData {
         $admin = Admin::find($id->toString());
         $admin->email = $dto->email;
         $admin->first_name = $dto->firstName;
         $admin->last_name = $dto->lastName;
-        $admin->updated_by = $this->principal->get()->id;
+        $admin->updated_by = $principal->id;
 
         if ($dto->password !== null) {
             $admin->password = $dto->password;

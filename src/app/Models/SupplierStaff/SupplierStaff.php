@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Models\SupplierStaff;
 
 use App\Classes\Principals\PrincipalData;
+use App\Classes\Scopes\Guard\GuardedAuthenticatedModel;
+use App\Enums\AuthGuardType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ramsey\Uuid\Uuid;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class SupplierStaff extends Authenticatable implements JWTSubject
+class SupplierStaff extends GuardedAuthenticatedModel implements JWTSubject
 {
     use SoftDeletes;
 
@@ -72,7 +73,9 @@ class SupplierStaff extends Authenticatable implements JWTSubject
         return new PrincipalData(
             id: Uuid::fromString($this->id),
             firstName: $this->first_name,
-            lastName: $this->last_name
+            lastName: $this->last_name,
+            type: AuthGuardType::SUPPLIER_STAFF,
+            guardId: Uuid::fromString($this->supplier_id)
         );
     }
 }

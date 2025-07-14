@@ -39,12 +39,12 @@ return [
     */
 
     'guards' => [
-        'admin' => [
+        'ADMIN' => [
             'driver' => 'jwt',
             'provider' => 'admin',
         ],
 
-        'supplier_staff' => [
+        'SUPPLIER_STAFF' => [
             'driver' => 'jwt',
             'provider' => 'supplier_staff',
         ],

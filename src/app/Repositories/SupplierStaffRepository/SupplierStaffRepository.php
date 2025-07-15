@@ -18,6 +18,7 @@ class SupplierStaffRepository
     public function getById(
         UuidInterface $id,
     ): SupplierStaffModel {
+        /** @var SupplierStaffEntity $result */
         $result = SupplierStaffEntity::find($id);
 
         return $result->toModel();
@@ -50,6 +51,7 @@ class SupplierStaffRepository
         SupplierStaffUpdateProfileRepoData $data,
         UuidInterface $id,
     ): void {
+        /** @var SupplierStaffEntity $result */
         $supplierStaff = SupplierStaffEntity::find($id);
         if ($data->password !== null) {
             $supplierStaff->password = $data->password;

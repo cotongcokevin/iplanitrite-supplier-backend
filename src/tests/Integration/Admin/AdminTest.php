@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Admin;
+namespace Tests\Integration\Admin;
 
 use Database\Seeders\Classes\AdminSeeder;
 use Tests\Integration\AdminTestCase;

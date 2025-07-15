@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration;
 
-abstract class SupplierTestCase extends \Tests\Integration\BaseTestCase
+abstract class SupplierTestCase extends BaseTestCase
 {
     public function getBaseUri(): string
     {

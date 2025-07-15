@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Admin;
+namespace Tests\Integration\Admin;
 
 use Tests\Integration\AdminTestCase;
 
@@ -51,6 +51,18 @@ class AuthTest extends AdminTestCase
             ]
         );
 
+        $response->assertStatus(401);
+    }
+
+    public function test_admin_token_should_not_work_on_other_supplier(): void
+    {
+        $token = $this->login();
+        $uri = '/api/supplier/profile';
+        $response = $this->postJsonAuthorised(
+            uri: $uri,
+            token: $token->json()
+        );
+        
         $response->assertStatus(401);
     }
 }

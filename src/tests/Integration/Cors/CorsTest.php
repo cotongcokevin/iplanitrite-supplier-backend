@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cors;
+namespace Tests\Integration\Cors;
 
 use App\Classes\Env\Env;
 use Illuminate\Foundation\Testing\TestCase;

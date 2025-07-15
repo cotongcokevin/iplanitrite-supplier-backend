@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Supplier;
+namespace Tests\Integration\Supplier;
 
 use Tests\Integration\SupplierTestCase;
 

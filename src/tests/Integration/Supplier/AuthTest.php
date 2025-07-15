@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Supplier;
+namespace Tests\Integration\Supplier;
 
 use Tests\Integration\SupplierTestCase;
 
@@ -52,6 +52,17 @@ class AuthTest extends SupplierTestCase
             ]
         );
 
+        $response->assertStatus(401);
+    }
+
+    public function test_supplier_token_should_not_work_on_other_admin(): void
+    {
+        $token = $this->login();
+        $uri = '/api/admin/profile';
+        $response = $this->postJsonAuthorised(
+            uri: $uri,
+            token: $token->json()
+        );
         $response->assertStatus(401);
     }
 }

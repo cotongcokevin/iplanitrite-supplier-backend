@@ -37,6 +37,7 @@ class SupplierStaffRepository
             fn ($context) => ($context->value),
             $contexts
         );
+        /** @var SupplierStaffEntity $result */
         $result = SupplierStaffEntity::with($contextNames)->find($id);
 
         return new Pair(

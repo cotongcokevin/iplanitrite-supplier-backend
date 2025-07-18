@@ -6,7 +6,7 @@ namespace App\Dto\Requests\Supplier;
 
 use Illuminate\Http\Request;
 
-class SupplierStoreRequestDto
+class SupplierUpdateRequestDto
 {
     private function __construct(
         public string $name,
@@ -14,14 +14,14 @@ class SupplierStoreRequestDto
         public int $maxStaff
     ) {}
 
-    public static function fromRequest(Request $request): SupplierStoreRequestDto
+    public static function fromRequest(Request $request): SupplierUpdateRequestDto
     {
         $request->validate([
             'name' => 'required',
             'maxStaff' => 'required|numeric',
         ]);
 
-        return new SupplierStoreRequestDto(
+        return new SupplierUpdateRequestDto(
             name: $request->name,
             description: $request->description,
             maxStaff: $request->maxStaff,

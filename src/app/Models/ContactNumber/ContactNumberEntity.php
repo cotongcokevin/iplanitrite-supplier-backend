@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\ContactNumber;
 
+use App\Classes\Cast\UuidCast;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\Uuid;
 
 class ContactNumberEntity extends Model
 {
@@ -21,10 +21,13 @@ class ContactNumberEntity extends Model
      */
     protected $table = 'contact_number';
 
+    protected $casts = [
+        'id' => UuidCast::class];
+
     public function toModel(): ContactNumberModel
     {
         return new ContactNumberModel(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             number: $this->number,
         );
     }

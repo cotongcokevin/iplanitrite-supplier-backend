@@ -6,6 +6,7 @@ namespace Database\Seeders\Classes;
 
 use App\Models\ContactNumber\ContactNumberEntity;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class ContactNumberSeeder extends Seeder
 {
@@ -17,9 +18,9 @@ class ContactNumberSeeder extends Seeder
     public function run(): void
     {
         ContactNumberEntity::create([
-            'id' => self::CONTACT_NUMBER_ONE_ID,
+            'id' => Uuid::fromString(self::CONTACT_NUMBER_ONE_ID),
             'number' => '+639171234567',
-            'country_id' => CountrySeeder::COUNTRY_ID_ONE,
+            'country_id' => Uuid::fromString(CountrySeeder::COUNTRY_ID_ONE),
         ]);
     }
 }

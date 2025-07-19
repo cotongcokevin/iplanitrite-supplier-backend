@@ -1,0 +1,41 @@
+GET {{ host }}/api/admin/suppliers
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+###
+
+GET {{ host }}/api/admin/suppliers/01a1da32-8149-4a93-8270-37d77e447de7
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+###
+
+
+POST {{ host }}/api/admin/suppliers
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Test",
+    "description": "Test Desc",
+    "maxStaff": 5
+}
+###
+
+PUT {{ host }}/api/admin/suppliers/1466f999-fff0-44c5-a5d2-43a6a71a52a4
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Test Updated",
+    "description": "Test Desc 2",
+    "maxStaff": 6
+}
+
+###
+DELETE {{ host }}/api/admin/suppliers/1466f999-fff0-44c5-a5d2-43a6a71a52a4
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}

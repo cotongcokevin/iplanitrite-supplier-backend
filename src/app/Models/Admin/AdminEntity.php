@@ -2,19 +2,19 @@
 
 namespace App\Models\Admin;
 
+use App\Classes\Cast\CarbonCast;
+use App\Classes\Cast\UuidCast;
 use App\Classes\Principals\PrincipalData;
 use App\Enums\AuthGuardType;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Ramsey\Uuid\Uuid;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class AdminEntity extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
 
-    protected string $guard = 'admin';
+    protected string $guard = 'ADMIN';
 
     /**
      * $keyType is the type of the id of the table which is UUID
@@ -35,6 +35,15 @@ class AdminEntity extends Authenticatable implements JWTSubject
      */
     protected $table = 'admin';
 
+    protected $casts = [
+        'id' => UuidCast::class,
+        'created_by' => UuidCast::class,
+        'updated_by' => UuidCast::class,
+        'created_at' => CarbonCast::class,
+        'updated_at' => CarbonCast::class,
+        'deleted_at' => CarbonCast::class,
+    ];
+
     public function getJWTIdentifier(): string
     {
         return $this->getKey();
@@ -48,23 +57,23 @@ class AdminEntity extends Authenticatable implements JWTSubject
     public function toModel(): AdminModel
     {
         return new AdminModel(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             email: $this->email,
             password: $this->password,
             firstName: $this->first_name,
             lastName: $this->last_name,
-            createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
-            updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
-            createdAt: Carbon::parse($this->created_at),
-            updatedAt: Carbon::parse($this->updated_at),
-            deletedAt: $this->deleted_at ? Carbon::parse($this->deleted_at) : null,
+            createdBy: $this->created_by ? $this->created_by : null,
+            updatedBy: $this->updated_by ? $this->updated_by : null,
+            createdAt: $this->created_at,
+            updatedAt: $this->updated_at,
+            deletedAt: $this->deleted_at ? $this->deleted_at : null,
         );
     }
 
     public function toPrincipalData(): PrincipalData
     {
         return new PrincipalData(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             firstName: $this->first_name,
             lastName: $this->last_name,
             type: AuthGuardType::ADMIN,

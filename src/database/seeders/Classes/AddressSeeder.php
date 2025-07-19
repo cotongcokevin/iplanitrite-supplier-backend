@@ -6,6 +6,7 @@ namespace Database\Seeders\Classes;
 
 use App\Models\Address\AddressEntity;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class AddressSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class AddressSeeder extends Seeder
     public function run(): void
     {
         AddressEntity::create([
-            'id' => self::ADDRESS_ONE_ID,
+            'id' => Uuid::fromString(self::ADDRESS_ONE_ID),
             'line1' => 'Eulogio Amang Rodriguez Ave',
             'line2' => null,
             'city' => 'Pasig',

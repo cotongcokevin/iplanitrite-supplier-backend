@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierPermission;
 
+use App\Classes\Cast\CarbonCast;
+use App\Classes\Cast\UuidCast;
 use App\Enums\SupplierPermissionType;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\Uuid;
 
 class SupplierPermissionEntity extends Model
 {
@@ -16,16 +16,24 @@ class SupplierPermissionEntity extends Model
      */
     protected $table = 'supplier_permission';
 
+    protected $casts = [
+        'id' => UuidCast::class,
+        'created_by' => UuidCast::class,
+        'updated_by' => UuidCast::class,
+        'created_at' => CarbonCast::class,
+        'updated_at' => CarbonCast::class,
+    ];
+
     public function toModel(): SupplierPermissionModel
     {
         return new SupplierPermissionModel(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             name: SupplierPermissionType::from($this->name),
             supplierRoleId: $this->supplier_role_id,
-            createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
-            updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
-            createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,
-            updatedAt: $this->updatedAt ? Carbon::parse($this->updated_at) : null,
+            createdBy: $this->created_by ? $this->created_by : null,
+            updatedBy: $this->updated_by ? $this->updated_by : null,
+            createdAt: $this->createdAt ? $this->created_at : null,
+            updatedAt: $this->updatedAt ? $this->updated_at : null,
         );
     }
 }

@@ -4,32 +4,48 @@ declare(strict_types=1);
 
 namespace App\Models\Supplier;
 
-use Carbon\Carbon;
+use App\Classes\Cast\CarbonCast;
+use App\Classes\Cast\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Ramsey\Uuid\Uuid;
 
 class SupplierEntity extends Model
 {
     use SoftDeletes;
 
     /**
+     * $keyType is the type of the id of the table which is UUID
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
      * @var string
      */
     protected $table = 'supplier';
 
+    protected $casts = [
+        'id' => UuidCast::class,
+        'created_by' => UuidCast::class,
+        'updated_by' => UuidCast::class,
+        'created_at' => CarbonCast::class,
+        'updated_at' => CarbonCast::class,
+        'deleted_at' => CarbonCast::class,
+    ];
+
     public function toModel(): SupplierModel
     {
         return new SupplierModel(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             name: $this->name,
             description: $this->description,
             maxStaff: $this->max_staff,
-            createdBy: $this->created_by ? Uuid::fromString($this->created_by) : null,
-            updatedBy: $this->updated_by ? Uuid::fromString($this->updated_by) : null,
-            createdAt: $this->createdAt ? Carbon::parse($this->created_at) : null,
-            updatedAt: $this->updatedAt ? Carbon::parse($this->updated_at) : null,
-            deletedAt: $this->deletedAt ? Carbon::parse($this->deleted_at) : null,
+            createdBy: $this->created_by ? $this->created_by : null,
+            updatedBy: $this->updated_by ? $this->updated_by : null,
+            createdAt: $this->createdAt ? $this->created_at : null,
+            updatedAt: $this->updatedAt ? $this->updated_at : null,
+            deletedAt: $this->deletedAt ? $this->deleted_at : null,
         );
     }
 }

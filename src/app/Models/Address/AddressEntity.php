@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Address;
 
+use App\Classes\Cast\UuidCast;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\Uuid;
 
 class AddressEntity extends Model
 {
@@ -21,10 +21,14 @@ class AddressEntity extends Model
      */
     protected $table = 'address';
 
+    protected $casts = [
+        'id' => UuidCast::class,
+    ];
+
     public function toModel(): AddressModel
     {
         return new AddressModel(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             line1: $this->line1,
             line2: $this->line2,
             city: $this->city,

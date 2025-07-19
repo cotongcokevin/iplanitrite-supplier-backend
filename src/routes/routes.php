@@ -11,6 +11,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function
 
     Route::group(['middleware' => ['auth:ADMIN', AdminCors::class]], function () {
         require __DIR__.'/admin/admin/admin.php';
+        require __DIR__.'/admin/suppliers/suppliers.php';
         require __DIR__.'/admin/profile/profile.php';
     });
 });

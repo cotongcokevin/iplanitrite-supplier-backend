@@ -7,6 +7,7 @@ namespace Database\Seeders\Classes;
 use App\Models\Admin\AdminEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class AdminSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class AdminSeeder extends Seeder
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
         AdminEntity::create([
-            'id' => self::ADMIN_ONE_ID,
+            'id' => Uuid::fromString(self::ADMIN_ONE_ID),
             'email' => 'naruto.uzumaki@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Naruto',
@@ -32,7 +33,7 @@ class AdminSeeder extends Seeder
         ]);
 
         AdminEntity::create([
-            'id' => self::ADMIN_TWO_ID,
+            'id' => Uuid::fromString(self::ADMIN_TWO_ID),
             'email' => 'sasuke.uchiha@ems.com',
             'password' => bcrypt('password'),
             'first_name' => 'Sasuke',

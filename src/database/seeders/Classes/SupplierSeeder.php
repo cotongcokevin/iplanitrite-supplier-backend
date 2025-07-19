@@ -7,6 +7,7 @@ namespace Database\Seeders\Classes;
 use App\Models\Supplier\SupplierEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class SupplierSeeder extends Seeder
 {
@@ -22,21 +23,21 @@ class SupplierSeeder extends Seeder
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
         SupplierEntity::create([
-            'id' => self::SUPPLIER_ONE_ID,
+            'id' => Uuid::fromString(self::SUPPLIER_ONE_ID),
             'name' => 'One Piece',
             'max_staff' => 10,
-            'created_by' => AdminSeeder::ADMIN_ONE_ID,
-            'updated_by' => AdminSeeder::ADMIN_ONE_ID,
+            'created_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
+            'updated_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
             'created_at' => $date,
             'updated_at' => $date,
         ]);
 
         SupplierEntity::create([
-            'id' => self::SUPPLIER_TWO_ID,
+            'id' => Uuid::fromString(self::SUPPLIER_TWO_ID),
             'name' => 'Solo Leveling',
             'max_staff' => '1',
-            'created_by' => AdminSeeder::ADMIN_ONE_ID,
-            'updated_by' => AdminSeeder::ADMIN_ONE_ID,
+            'created_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
+            'updated_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
             'created_at' => $date,
             'updated_at' => $date,
         ]);

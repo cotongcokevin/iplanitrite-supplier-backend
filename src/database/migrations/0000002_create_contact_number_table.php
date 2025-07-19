@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('contact_number', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('number', 20)->unique();
-            $table->foreignUuid('country_id')->constrained('country');
+            $table->uuid('country_id');
+            $table->foreign('country_id')->references('id')->on('country');
         });
     }
 

@@ -62,7 +62,7 @@ class AuthTest extends AdminTestCase
             uri: $uri,
             token: $token->json()
         );
-        
+
         $response->assertStatus(401);
     }
 }

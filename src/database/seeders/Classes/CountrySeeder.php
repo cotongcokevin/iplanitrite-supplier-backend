@@ -6,6 +6,7 @@ namespace Database\Seeders\Classes;
 
 use App\Models\Country\CountryEntity;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class CountrySeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class CountrySeeder extends Seeder
     public function run(): void
     {
         CountryEntity::create([
-            'id' => self::COUNTRY_ID_ONE,
+            'id' => Uuid::fromString(self::COUNTRY_ID_ONE),
             'name' => 'Philippines',
             'iso2_code' => 'PH',
             'iso3_code' => 'PHL',
@@ -32,7 +33,7 @@ class CountrySeeder extends Seeder
         ]);
 
         CountryEntity::create([
-            'id' => self::COUNTRY_ID_TWO,
+            'id' => Uuid::fromString(self::COUNTRY_ID_TWO),
             'name' => 'Australia',
             'iso2_code' => 'AU',
             'iso3_code' => 'AUS',

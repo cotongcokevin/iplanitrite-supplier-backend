@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Country;
 
+use App\Classes\Cast\UuidCast;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\Uuid;
 
 class CountryEntity extends Model
 {
@@ -16,10 +16,13 @@ class CountryEntity extends Model
      */
     protected $table = 'country';
 
+    protected $casts = [
+        'id' => UuidCast::class];
+
     public function toModel(): CountryModel
     {
         return new CountryModel(
-            id: Uuid::fromString($this->id),
+            id: $this->id,
             name: $this->name,
             iso2Code: $this->iso2_code,
             iso3Code: $this->iso3_code,

@@ -1,0 +1,24 @@
+[
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "name": "One Piece",
+        "description": null,
+        "maxStaff": 10,
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": "__FORMAT_VALIDATED__",
+        "createdAt": null,
+        "updatedAt": null,
+        "deletedAt": null
+    },
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "name": "Solo Leveling",
+        "description": null,
+        "maxStaff": 1,
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": "__FORMAT_VALIDATED__",
+        "createdAt": null,
+        "updatedAt": null,
+        "deletedAt": null
+    }
+]

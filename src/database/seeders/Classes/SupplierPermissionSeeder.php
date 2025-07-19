@@ -8,6 +8,7 @@ use App\Enums\SupplierPermissionType;
 use App\Models\SupplierPermission\SupplierPermissionEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class SupplierPermissionSeeder extends Seeder
 {
@@ -21,9 +22,9 @@ class SupplierPermissionSeeder extends Seeder
         $date = Carbon::parse('2025-01-01 00:00:00')->toDateTimeString();
 
         SupplierPermissionEntity::create([
-            'id' => self::SUPPLIER_PERMISSION_ONE_ID,
+            'id' => Uuid::fromString(self::SUPPLIER_PERMISSION_ONE_ID),
             'name' => SupplierPermissionType::EVENTS,
-            'supplier_role_id' => SupplierRoleSeeder::SUPPLIER_ROLE_ONE_ID,
+            'supplier_role_id' => Uuid::fromString(SupplierRoleSeeder::SUPPLIER_ROLE_ONE_ID),
             'created_by' => null,
             'updated_by' => null,
             'created_at' => $date,

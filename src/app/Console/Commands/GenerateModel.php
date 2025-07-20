@@ -105,7 +105,7 @@ class GenerateModel extends Command
     ): void {
         $modelData = $modelName.'Model';
         $modelNamespace = 'App\Models\\'.$modelName;
-        $dto = $modelName.'ResponseDto';
+        $dto = $modelName.'Dto';
         $dtoNamespace = "App\Dto\Response\\".$dto;
         $attributes = collect($columns)->map(fn (GenerateModelColumn $col) => "        public {$col->dataType} {$col->nameDollar},"
         )->join("\n");

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierStaff;
 
+use App\Dto\Response\SupplierStaffContextDto;
 use App\Dto\Response\SupplierStaffDto;
+use App\Dto\Response\SupplierStaffWithContextDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
@@ -44,6 +46,27 @@ class SupplierStaffModel
             createdAt: $this->createdAt,
             updatedAt: $this->updatedAt,
             deletedAt: $this->deletedAt,
+        );
+    }
+
+    public function toDtoWithContext(
+        SupplierStaffContextDto $context,
+    ): SupplierStaffWithContextDto {
+        return new SupplierStaffWithContextDto(
+            id: $this->id,
+            email: $this->email,
+            password: $this->password,
+            firstName: $this->firstName,
+            lastName: $this->lastName,
+            dateOfBirth: $this->dateOfBirth,
+            supplierId: $this->supplierId,
+            supplierRoleId: $this->supplierRoleId,
+            createdBy: $this->createdBy,
+            updatedBy: $this->updatedBy,
+            createdAt: $this->createdAt,
+            updatedAt: $this->updatedAt,
+            deletedAt: $this->deletedAt,
+            context: $context
         );
     }
 }

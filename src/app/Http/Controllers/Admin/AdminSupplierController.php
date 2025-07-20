@@ -19,8 +19,8 @@ class AdminSupplierController
         return transaction(function () use ($service) {
             $result = $service->search();
 
-            return $result->map(function (SupplierModel $entity) {
-                return $entity->toDto();
+            return $result->map(function (SupplierModel $model) {
+                return $model->toDto();
             });
         });
     }
@@ -30,11 +30,11 @@ class AdminSupplierController
         string $id
     ): JsonResponse {
         return transaction(function () use ($service, $id) {
-            $entity = $service->getById(
+            $model = $service->getById(
                 Uuid::fromString($id)
             );
 
-            return $entity->toDto();
+            return $model->toDto();
         });
     }
 
@@ -44,9 +44,9 @@ class AdminSupplierController
     ): JsonResponse {
         return transaction(function () use ($service, $request) {
             $requestDto = SupplierStoreRequestDto::fromRequest($request);
-            $entity = $service->store($requestDto);
+            $model = $service->store($requestDto);
 
-            return $entity->toDto();
+            return $model->toDto();
         });
     }
 
@@ -57,12 +57,12 @@ class AdminSupplierController
     ): JsonResponse {
         return transaction(function () use ($service, $request, $id) {
             $requestDto = SupplierUpdateRequestDto::fromRequest($request);
-            $entity = $service->update(
+            $model = $service->update(
                 $requestDto,
                 Uuid::fromString($id)
             );
 
-            return $entity->toDto();
+            return $model->toDto();
         });
     }
 

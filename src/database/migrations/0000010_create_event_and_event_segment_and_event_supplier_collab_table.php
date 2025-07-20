@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('event', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('status');
+            $table->text('reason_for_cancellation')->nullable();
             $table->string('type');
 
             $table->uuid('participant_one');
@@ -53,7 +55,7 @@ return new class extends Migration
             $table->string('date_to_label');
             $table->dateTime('date_to')->nullable();
 
-            $table->jsonb('udfs')->nullable();
+            $table->jsonb('custom_fields')->nullable();
 
             $table->uuid('event_segment_template_id');
             $table->foreign('event_segment_template_id')->references('id')->on('event_segment_template');

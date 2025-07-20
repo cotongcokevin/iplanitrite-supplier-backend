@@ -7,7 +7,7 @@ namespace App\Dto\Response;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class SupplierStaffDto
+class SupplierStaffWithContextDto
 {
     public function __construct(
         public UuidInterface $id,
@@ -22,6 +22,7 @@ class SupplierStaffDto
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,
-        public ?Carbon $deletedAt
+        public ?Carbon $deletedAt,
+        public SupplierStaffContextDto $context
     ) {}
 }

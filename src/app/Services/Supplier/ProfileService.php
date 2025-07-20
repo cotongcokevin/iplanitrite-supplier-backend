@@ -9,7 +9,7 @@ use App\Classes\Principals\Principal;
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use App\Models\SupplierStaff\Context\SupplierStaffContextException;
-use App\Models\SupplierStaff\Context\SupplierStaffModelContextType;
+use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
 use App\Repositories\SupplierStaffRepository\SupplierStaffRepository;
@@ -36,8 +36,8 @@ readonly class ProfileService
         return $this->supplierStaffRepository
             ->getByIdWithContext(
                 $this->principal::get()->id, [
-                    SupplierStaffModelContextType::ADDRESS,
-                    SupplierStaffModelContextType::CONTACT_NUMBER,
+                    SupplierStaffContextType::ADDRESS,
+                    SupplierStaffContextType::CONTACT_NUMBER,
                 ]
             );
     }

@@ -7,7 +7,7 @@ namespace App\Repositories\SupplierStaffRepository;
 use App\Classes\Pair;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use App\Models\SupplierStaff\Context\SupplierStaffContextException;
-use App\Models\SupplierStaff\Context\SupplierStaffModelContextType;
+use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
@@ -25,7 +25,7 @@ class SupplierStaffRepository
     }
 
     /**
-     * @param  SupplierStaffModelContextType[]  $contexts
+     * @param  SupplierStaffContextType[]  $contexts
      * @return Pair<SupplierStaffModel, SupplierStaffContext>
      *
      * @throws SupplierStaffContextException

@@ -15,7 +15,13 @@ class EventSegmentTemplateSeeder extends Seeder
 {
     public const EVENT_SEGMENT_TEMPLATE_ID_ONE = '5e6895e5-7385-47e6-a054-83cb38d05878';
 
+    public const EVENT_SEGMENT_TEMPLATE_ID_TWO = '4e6895e5-7385-47e6-a054-83cb38d05871';
+
+    public const EVENT_SEGMENT_TEMPLATE_ID_THREE = 'e16895e5-7385-47e6-a054-83cb38d05811';
+
     public const EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_ONE = '3dede20e-b5a9-4a86-9674-2061cca7b32f';
+
+    public const EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_TWO = '4dede20e-b5a9-4a86-9674-2061cca7b32d';
 
     /**
      * Run the database seeds.
@@ -54,7 +60,7 @@ class EventSegmentTemplateSeeder extends Seeder
         ]);
 
         EventSegmentTemplateCustomFieldEntity::create([
-            'id' => self::EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_ONE,
+            'id' => self::EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_TWO,
             'name' => 'Sure Lead',
             'type' => EventSegmentTemplateCustomFieldType::CHECKBOX,
             'required' => true,
@@ -64,7 +70,7 @@ class EventSegmentTemplateSeeder extends Seeder
         ]);
 
         EventSegmentTemplateEntity::create([
-            'id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
+            'id' => self::EVENT_SEGMENT_TEMPLATE_ID_TWO,
             'event_type' => EventType::WEDDING,
             'template_name' => 'Wedding',
             'is_immutable' => true,
@@ -83,7 +89,7 @@ class EventSegmentTemplateSeeder extends Seeder
         ]);
 
         EventSegmentTemplateEntity::create([
-            'id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
+            'id' => self::EVENT_SEGMENT_TEMPLATE_ID_THREE,
             'event_type' => EventType::WEDDING,
             'template_name' => 'Reception',
             'is_immutable' => true,

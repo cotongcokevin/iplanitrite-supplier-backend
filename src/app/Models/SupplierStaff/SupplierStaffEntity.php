@@ -13,7 +13,7 @@ use App\Models\Address\AddressEntity;
 use App\Models\ContactNumber\ContactNumberEntity;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use App\Models\SupplierStaff\Context\SupplierStaffContextException;
-use App\Models\SupplierStaff\Context\SupplierStaffModelContextType;
+use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\UuidInterface;
@@ -108,12 +108,12 @@ class SupplierStaffEntity extends GuardedAuthenticatedModel implements JWTSubjec
         $contactNumberContext = null;
         foreach ($contexts as $context) {
             switch ($context) {
-                case SupplierStaffModelContextType::ADDRESS:
+                case SupplierStaffContextType::ADDRESS:
                     /** @var AddressEntity $address */
                     $address = $this->address;
                     $addressContext = $address->toModel();
                     break;
-                case SupplierStaffModelContextType::CONTACT_NUMBER:
+                case SupplierStaffContextType::CONTACT_NUMBER:
                     /** @var ContactNumberEntity $contactNumber */
                     $contactNumber = $this->contactNumber;
                     $contactNumberContext = $contactNumber->toModel();

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Supplier;
 
-use App\Classes\Pair;
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
+use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Services\Supplier\ProfileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,9 +18,11 @@ class ProfileController
         return transaction(function () use ($service) {
             $result = $service->get();
 
-            return new Pair(
-                $result->first->toDto(),
-                $result->second->toDto()
+            return $result->first->toDtoWithContext(
+                $result->second->toDto([
+                    SupplierStaffContextType::ADDRESS,
+                    SupplierStaffContextType::CONTACT_NUMBER,
+                ]),
             );
         });
     }

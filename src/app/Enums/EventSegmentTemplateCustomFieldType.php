@@ -14,4 +14,5 @@ enum EventSegmentTemplateCustomFieldType: string
     case DATETIME = 'DATETIME';
     case ADDRESS = 'ADDRESS';
     case CHECKBOX = 'CHECKBOX';
+    case CONTACT_NUMBER = 'CONTACT_NUMBER';
 }

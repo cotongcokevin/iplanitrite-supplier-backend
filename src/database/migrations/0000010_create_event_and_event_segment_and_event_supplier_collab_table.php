@@ -35,7 +35,6 @@ return new class extends Migration
         Schema::create('event_segment', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('name_label');
             $table->string('name');
 
             $table->string('location_label');

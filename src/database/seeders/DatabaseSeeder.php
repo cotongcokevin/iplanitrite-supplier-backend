@@ -6,6 +6,7 @@ use Database\Seeders\Classes\AddressSeeder;
 use Database\Seeders\Classes\AdminSeeder;
 use Database\Seeders\Classes\ContactNumberSeeder;
 use Database\Seeders\Classes\CountrySeeder;
+use Database\Seeders\Classes\EventSegmentTemplateSeeder;
 use Database\Seeders\Classes\SupplierPermissionSeeder;
 use Database\Seeders\Classes\SupplierRoleSeeder;
 use Database\Seeders\Classes\SupplierSeeder;
@@ -29,6 +30,9 @@ class DatabaseSeeder extends Seeder
             SupplierRoleSeeder::class,
             SupplierPermissionSeeder::class,
             SupplierStaffSeeder::class,
+
+            // Event Segment Seeder
+            EventSegmentTemplateSeeder::class,
         ]);
     }
 }

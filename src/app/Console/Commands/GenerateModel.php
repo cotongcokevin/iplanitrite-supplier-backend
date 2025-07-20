@@ -205,9 +205,9 @@ PHP;
 
         $args = collect($columns)->map(function (GenerateModelColumn $col) {
             $label = $col->nameSnakeThis;
+
             return "            {$col->namePlain}: {$label},";
         })->join("\n");
-
 
         $casts = collect($columns)
             ->whereIn('dataType', ['Carbon', '?Carbon', 'UuidInterface', '?UuidInterface'])

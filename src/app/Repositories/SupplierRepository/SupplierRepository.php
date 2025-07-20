@@ -29,7 +29,7 @@ class SupplierRepository
     public function getById(UuidInterface $uuid): SupplierModel
     {
         /** @var SupplierEntity $supplier */
-        $supplier = SupplierEntity::find($uuid->toString());
+        $supplier = SupplierEntity::find($uuid);
 
         return $supplier->toModel();
     }
@@ -56,7 +56,7 @@ class SupplierRepository
         PrincipalData $principal
     ): SupplierModel {
         /** @var SupplierEntity $supplier */
-        $supplier = SupplierEntity::find($id->toString());
+        $supplier = SupplierEntity::find($id);
         $supplier->name = $dto->name;
         $supplier->description = $dto->description;
         $supplier->max_staff = $dto->maxStaff;

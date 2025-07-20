@@ -14,20 +14,19 @@ return new class extends Migration
         Schema::create('event_segment_template', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string("event_type");
-            $table->string("template_name");
-            $table->boolean("is_immutable");
-            $table->boolean("is_rsvp");
+            $table->string('event_type');
+            $table->string('template_name');
+            $table->boolean('is_immutable');
+            $table->boolean('is_rsvp');
 
-            $table->uuid("supplier_id");
+            $table->uuid('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('supplier');
 
-            $table->string("default_name_label")->nullable();
-            $table->string("default_location_label")->nullable();
-            $table->string("default_address_label")->nullable();
-            $table->string("default_notes_label")->nullable();
-            $table->string("default_date_from_label")->nullable();
-            $table->string("default_date_to_label")->nullable();
+            $table->string('default_location_label')->nullable();
+            $table->string('default_address_label')->nullable();
+            $table->string('default_notes_label')->nullable();
+            $table->string('default_date_from_label')->nullable();
+            $table->string('default_date_to_label')->nullable();
 
             $table->uuid('created_by');
             $table->foreign('created_by')->references('id')->on('admin');
@@ -39,7 +38,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('event_segment_template_field', function (Blueprint $table) {
+        Schema::create('event_segment_template_custom_field', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('type');
@@ -57,7 +56,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_segment_template_field');
+        Schema::dropIfExists('event_segment_template_custom_field');
         Schema::dropIfExists('event_segment_template');
     }
 };

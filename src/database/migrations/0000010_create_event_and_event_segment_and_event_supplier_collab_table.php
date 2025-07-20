@@ -80,6 +80,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('event_segment');
-        Schema::dropIfExists('event_and_event_segment');
+        Schema::dropIfExists('event');
     }
 };

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Dto\Response;
 
+use App\Dto\ResponseDto;
 use Ramsey\Uuid\UuidInterface;
 
-class CountryDto
+class CountryDto extends ResponseDto
 {
     public function __construct(
         public UuidInterface $id,

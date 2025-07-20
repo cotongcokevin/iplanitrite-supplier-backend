@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dto\Requests\Admin\LoginRequestDto;
+use App\Dto\Requests\Admin\LoginRequestResponseDto;
 use App\Services\Admin\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class AuthController
     ): JsonResponse {
         return transaction(
             function () use ($authService, $request) {
-                $requestDto = LoginRequestDto::fromRequest($request);
+                $requestDto = LoginRequestResponseDto::fromRequest($request);
 
                 return $authService->login($requestDto);
             }

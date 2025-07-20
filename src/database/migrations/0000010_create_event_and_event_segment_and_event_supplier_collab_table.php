@@ -72,6 +72,18 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('event_segment_staff', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+
+            $table->uuid('supplier_staff_id');
+            $table->foreign('supplier_staff_id')->references('id')->on('supplier_staff');
+
+            $table->uuid('event_segment_id');
+            $table->foreign('event_segment_id')->references('id')->on('event_segment');
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -79,6 +91,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('event_segment_staff');
         Schema::dropIfExists('event_segment');
         Schema::dropIfExists('event');
     }

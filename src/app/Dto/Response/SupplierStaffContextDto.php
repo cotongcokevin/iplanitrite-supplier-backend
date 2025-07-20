@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dto\Response;
 
-use App\Classes\ContextDto;
+use App\Dto\ResponseContext;
 
-class SupplierStaffContextDto extends ContextDto
+class SupplierStaffContextDto extends ResponseContext
 {
     public function __construct(
         public ?AddressDto $address,

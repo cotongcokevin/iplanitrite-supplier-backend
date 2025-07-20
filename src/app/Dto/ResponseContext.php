@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Classes;
+namespace App\Dto;
 
 use BackedEnum;
 use JsonSerializable;
 
-abstract class ContextDto implements JsonSerializable
+abstract class ResponseContext implements JsonSerializable
 {
     /**
      * @var BackedEnum[]

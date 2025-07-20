@@ -60,6 +60,7 @@ class ProfileTest extends SupplierTestCase
 
         $response->assertStatus(200);
         $resultArray = $response->json();
+
         $this->assertEquals('luffy.monkey@ems.com', $resultArray['email']);
         $this->assertNotNull($resultArray['context']['address']);
         $this->assertNotNull($resultArray['context']['contactNumber']);

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\Dto\Requests\Admin;
 
-use App\Dto\Dto;
+use App\Dto\ResponseDto;
 use Illuminate\Http\Request;
 
-class LoginRequestDto extends Dto
+class LoginRequestResponseDto extends ResponseDto
 {
     private function __construct(
         public string $email,
         public string $password
     ) {}
 
-    public static function fromRequest(Request $request): LoginRequestDto
+    public static function fromRequest(Request $request): LoginRequestResponseDto
     {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        return new LoginRequestDto(
+        return new LoginRequestResponseDto(
             email: $request->email,
             password: $request->password
         );

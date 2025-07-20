@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dto\Response;
 
-class AddressDto
+use App\Dto\ResponseDto;
+
+class AddressDto extends ResponseDto
 {
     public function __construct(
         public string $line1,

@@ -59,5 +59,5 @@ function transaction(Closure $closure): JsonResponse
 
 function logError(Throwable $e)
 {
-    //    dd($e->getFile(), $e->getLine(), $e->getMessage());
+    //        dd($e->getFile(), $e->getLine(), $e->getMessage());
 }

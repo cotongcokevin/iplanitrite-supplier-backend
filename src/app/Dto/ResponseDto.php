@@ -10,10 +10,8 @@ abstract class ResponseDto implements JsonSerializable
 {
     public function jsonSerialize(): array
     {
-        // Get all public properties
         $data = get_object_vars($this);
 
-        // ✅ Only remove `email` if null
         if (array_key_exists('context', $data) && $data['context'] === null) {
             unset($data['context']);
         }

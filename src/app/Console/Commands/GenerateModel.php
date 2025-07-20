@@ -175,7 +175,7 @@ $attributes
 
 PHP;
 
-        $filePath = app_path("ResponseDto/Response/{$dto}.php");
+        $filePath = app_path("Dto/Response/{$dto}.php");
         $this->createFile($filePath, $content);
     }
 

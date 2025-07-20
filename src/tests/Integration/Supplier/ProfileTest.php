@@ -40,8 +40,8 @@ class ProfileTest extends SupplierTestCase
 
         $response->assertStatus(200);
         $result = $response->json();
-        $this->assertNotNull($result['second']['address']);
-        $this->assertNotNull($result['second']['contactNumber']);
+        $this->assertNotNull($result['context']['address']);
+        $this->assertNotNull($result['context']['contactNumber']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($response->json());
 
         $this->getJsonAuthorised(

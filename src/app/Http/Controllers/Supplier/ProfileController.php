@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Supplier;
 
 use App\Dto\Requests\Staff\UpdateProfileRequestDto;
+use App\Dto\Response\SupplierStaffWithContextDto;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Services\Supplier\ProfileService;
 use Illuminate\Http\JsonResponse;
@@ -18,11 +19,11 @@ class ProfileController
         return transaction(function () use ($service) {
             $result = $service->get();
 
-            return $result->first->toDtoWithContext(
-                $result->second->toDto([
+            return SupplierStaffWithContextDto::buildFromContextPair(
+                $result, [
                     SupplierStaffContextType::ADDRESS,
                     SupplierStaffContextType::CONTACT_NUMBER,
-                ]),
+                ]
             );
         });
     }

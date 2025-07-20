@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\Dto\Response;
 
+use App\Classes\Pair;
+use App\Models\SupplierStaff\Context\SupplierStaffContext;
+use App\Models\SupplierStaff\SupplierStaffModel;
+use BackedEnum;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
 class SupplierStaffWithContextDto
 {
-    public function __construct(
+    private function __construct(
         public UuidInterface $id,
         public string $email,
         public string $password,
@@ -25,4 +29,33 @@ class SupplierStaffWithContextDto
         public ?Carbon $deletedAt,
         public SupplierStaffContextDto $context
     ) {}
+
+    /**
+     * @param  Pair<SupplierStaffModel, SupplierStaffContext>  $supplierStaffWithContext
+     * @param  BackedEnum[]  $expectedContexts
+     */
+    public static function buildFromContextPair(
+        Pair $supplierStaffWithContext,
+        array $expectedContexts,
+    ): SupplierStaffWithContextDto {
+        $supplierStaff = $supplierStaffWithContext->first;
+        $context = $supplierStaffWithContext->second->toDto($expectedContexts);
+
+        return new SupplierStaffWithContextDto(
+            id: $supplierStaff->id,
+            email: $supplierStaff->email,
+            password: $supplierStaff->password,
+            firstName: $supplierStaff->firstName,
+            lastName: $supplierStaff->lastName,
+            dateOfBirth: $supplierStaff->dateOfBirth,
+            supplierId: $supplierStaff->supplierId,
+            supplierRoleId: $supplierStaff->supplierRoleId,
+            createdBy: $supplierStaff->createdBy,
+            updatedBy: $supplierStaff->updatedBy,
+            createdAt: $supplierStaff->createdAt,
+            updatedAt: $supplierStaff->updatedAt,
+            deletedAt: $supplierStaff->deletedAt,
+            context: $context
+        );
+    }
 }

@@ -65,6 +65,7 @@ class GenerateModel extends Command
                 namePlain: Str::camel($column->getName()),
                 nameDollar: '$'.Str::camel($column->getName()),
                 nameDollarThis: '$this->'.Str::camel($column->getName()),
+                nameSnake: $column->getName(),
                 nameSnakeThis: '$this->'.$column->getName(),
                 dataType: GenerateModelColumn::parseDataType(
                     $column->getType(),
@@ -204,18 +205,19 @@ PHP;
 
         $args = collect($columns)->map(function (GenerateModelColumn $col) {
             $label = $col->nameSnakeThis;
-            if ($col->dataType === 'Carbon') {
-                $label = "Carbon::parse($col->nameSnakeThis)";
-            } elseif ($col->dataType === '?Carbon') {
-                $label = "$col->nameSnakeThis ? Carbon::parse($col->nameSnakeThis) : null";
-            } elseif ($col->dataType === 'UuidInterface') {
-                $label = "UuidInterface::fromString($col->nameSnakeThis)";
-            } elseif ($col->dataType === '?UuidInterface') {
-                $label = "$col->nameSnakeThis ? UuidInterface::fromString($col->nameSnakeThis) : null";
-            }
-
             return "            {$col->namePlain}: {$label},";
         })->join("\n");
+
+
+        $casts = collect($columns)
+            ->whereIn('dataType', ['Carbon', '?Carbon', 'UuidInterface', '?UuidInterface'])
+            ->map(function (GenerateModelColumn $col) {
+                if ($col->dataType === 'Carbon' || $col->dataType === '?Carbon') {
+                    return "        '$col->nameSnake' => CarbonCast::class,";
+                } elseif ($col->dataType === 'UuidInterface' || $col->dataType === '?UuidInterface') {
+                    return "        '$col->nameSnake' => UuidCast::class,";
+                }
+            })->join("\n");
 
         $content = <<<PHP
 <?php
@@ -224,7 +226,8 @@ declare(strict_types=1);
 
 namespace $namespace;
 
-use Carbon\Carbon;
+use App\Classes\Casts\UuidCast;
+use App\Classes\Casts\CarbonCast;
 use Illuminate\Database\Eloquent\Model;$softDeletesInclude
 
 class $entityClass extends Model
@@ -239,6 +242,10 @@ class $entityClass extends Model
      * @var string
      */
     protected \$keyType = 'string';
+    
+    protected \$casts = [
+$casts
+    ];
 
     public function toModel(): $modelClass
     {

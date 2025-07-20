@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierStaff;
 
-use App\Classes\Cast\CarbonCast;
-use App\Classes\Cast\UuidCast;
+use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use App\Classes\Principals\PrincipalData;
 use App\Classes\Scopes\Guard\GuardedAuthenticatedModel;
 use App\Enums\AuthGuardType;

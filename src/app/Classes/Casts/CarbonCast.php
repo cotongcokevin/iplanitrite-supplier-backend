@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Classes\Cast;
+namespace App\Classes\Casts;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;

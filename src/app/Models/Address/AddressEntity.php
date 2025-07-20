@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Address;
 
-use App\Classes\Cast\UuidCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 
 class AddressEntity extends Model

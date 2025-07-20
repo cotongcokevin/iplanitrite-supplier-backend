@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Classes\Cast;
+namespace App\Classes\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Ramsey\Uuid\Uuid;

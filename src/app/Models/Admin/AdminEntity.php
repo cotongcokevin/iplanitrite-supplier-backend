@@ -2,8 +2,8 @@
 
 namespace App\Models\Admin;
 
-use App\Classes\Cast\CarbonCast;
-use App\Classes\Cast\UuidCast;
+use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use App\Classes\Principals\PrincipalData;
 use App\Enums\AuthGuardType;
 use Illuminate\Database\Eloquent\SoftDeletes;

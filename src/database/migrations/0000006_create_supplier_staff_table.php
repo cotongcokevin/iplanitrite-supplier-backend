@@ -28,6 +28,8 @@ return new class extends Migration
 
             $table->foreign('supplier_id')->references('id')->on('supplier');
             $table->foreign('supplier_role_id')->references('id')->on('supplier_role');
+            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('contact_number_id')->references('id')->on('contact_number');
 
             $table->timestamps();
             $table->softDeletes();

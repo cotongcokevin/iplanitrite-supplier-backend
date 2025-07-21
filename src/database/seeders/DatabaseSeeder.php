@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             SupplierStaffSeeder::class,
 
             // Event Segment Seeder
-            EventSegmentTemplateSeeder::class,
+            //            EventSegmentTemplateSeeder::class,
         ]);
     }
 }

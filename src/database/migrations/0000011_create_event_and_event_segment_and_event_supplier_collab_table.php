@@ -39,13 +39,13 @@ return new class extends Migration
             $table->string('status');
             $table->text('reason_for_cancellation')->nullable();
 
-            $table->uuid('event_supplier_id');
-            $table->foreign('event_supplier_id')->references('id')->on('event_supplier');
+            $table->uuid('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('supplier');
 
             $table->uuid('event_id');
             $table->foreign('event_id')->references('id')->on('event');
 
-            $table->unique(['event_supplier_id', 'event_id']);
+            $table->unique(['supplier_id', 'event_id']);
             $table->timestamps();
         });
 
@@ -108,6 +108,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('event_segment_staff');
         Schema::dropIfExists('event_segment');
+        Schema::dropIfExists('event_supplier');
         Schema::dropIfExists('event');
     }
 };

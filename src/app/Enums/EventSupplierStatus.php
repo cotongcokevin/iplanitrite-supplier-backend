@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum EventStatus: string
+enum EventSupplierStatus: string
 {
     case PENDING = 'PENDING';
     case CANCELLED = 'CANCELLED';
-    case ONGOING = 'ONGOING';
+    case APPROVED = 'APPROVED';
     case FINISHED = 'FINISHED';
 }

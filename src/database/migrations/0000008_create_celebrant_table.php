@@ -11,19 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('participant', function (Blueprint $table) {
+        Schema::create('celebrant', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
-            $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth')->nullable();
-
-            $table->uuid('contact_number_id')->nullable();
-            $table->foreign('contact_number_id')->references('id')->on('contact_number');
-
-            $table->uuid('address_id')->nullable();
-            $table->foreign('address_id')->references('id')->on('address');
 
             $table->uuid('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('supplier_staff');
@@ -41,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('participant');
+        Schema::dropIfExists('celebrant');
     }
 };

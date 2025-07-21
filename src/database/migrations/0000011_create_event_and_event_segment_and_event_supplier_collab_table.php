@@ -13,25 +13,40 @@ return new class extends Migration
     {
         Schema::create('event', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
             $table->string('status');
-            $table->text('reason_for_cancellation')->nullable();
+            $table->string('name');
             $table->string('type');
 
-            $table->uuid('participant_one');
-            $table->foreign('participant_one')->references('id')->on('participant');
+            $table->uuid('client_id');
+            $table->foreign('client_id')->references('id')->on('client');
 
-            $table->uuid('participant_two');
-            $table->foreign('participant_two')->references('id')->on('participant');
+            $table->uuid('celebrant_one');
+            $table->foreign('celebrant_one')->references('id')->on('celebrant');
 
-            $table->uuid('created_by')->nullable();
-            $table->foreign('created_by')->references('id')->on('supplier');
+            $table->uuid('celebrant_two');
+            $table->foreign('celebrant_two')->references('id')->on('celebrant');
 
-            $table->uuid('updated_by')->nullable();
-            $table->foreign('updated_by')->references('id')->on('supplier');
+            $table->unique(['celebrant_one', 'celebrant_two']);
 
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::create('event_supplier', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+
+            $table->string('name');
+            $table->string('status');
+            $table->text('reason_for_cancellation')->nullable();
+
+            $table->uuid('event_supplier_id');
+            $table->foreign('event_supplier_id')->references('id')->on('event_supplier');
+
+            $table->uuid('event_id');
+            $table->foreign('event_id')->references('id')->on('event');
+
+            $table->unique(['event_supplier_id', 'event_id']);
+            $table->timestamps();
         });
 
         Schema::create('event_segment', function (Blueprint $table) {

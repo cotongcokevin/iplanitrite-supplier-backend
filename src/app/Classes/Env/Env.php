@@ -18,7 +18,7 @@ class Env
                 environment: EnvironmentType::from(env('APP_ENV')),
                 adminFrontEndURI: env('ADMIN_FRONT_END_URI'),
                 supplierFrontEndURI: env('SUPPLIER_FRONT_END_URI'),
-                participantFrontEndURI: env('PARTICIPANT_FRONT_END_URI'),
+                clientFrontEndURI: env('CLIENT_FRONT_END_URI'),
                 countryId: Uuid::fromString(env('COUNTRY_ID'))
             );
         }

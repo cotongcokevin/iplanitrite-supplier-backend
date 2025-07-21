@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ParticipantCors
+class ClientCors
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class ParticipantCors
     public function handle(Request $request, Closure $next): Response
     {
         return CorsHandler::handle(
-            Env::get()->participantFrontEndURI,
+            Env::get()->clientFrontEndURI,
             $request,
             $next
         );

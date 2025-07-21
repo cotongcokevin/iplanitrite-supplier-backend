@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\AdminCors;
-use App\Http\Middleware\ParticipantCors;
+use App\Http\Middleware\ClientCors;
 use App\Http\Middleware\SupplierCors;
 
 Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function () {
@@ -29,5 +29,5 @@ Route::group([
 
 Route::group([
     'prefix' => 'participant',
-    'middleware' => [ParticipantCors::class],
+    'middleware' => [ClientCors::class],
 ], function () {});

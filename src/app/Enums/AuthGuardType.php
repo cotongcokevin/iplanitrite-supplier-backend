@@ -6,5 +6,5 @@ enum AuthGuardType: string
 {
     case ADMIN = 'ADMIN';
     case SUPPLIER_STAFF = 'SUPPLIER_STAFF';
-    case PARTICIPANT = 'PARTICIPANT';
+    case CLIENT = 'CLIENT';
 }

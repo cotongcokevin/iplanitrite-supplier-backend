@@ -13,7 +13,7 @@ readonly class EnvData
         public EnvironmentType $environment,
         public string $adminFrontEndURI,
         public string $supplierFrontEndURI,
-        public string $participantFrontEndURI,
+        public string $clientFrontEndURI,
         public UuidInterface $countryId,
     ) {}
 }

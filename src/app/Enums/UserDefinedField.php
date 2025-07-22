@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum EventSegmentTemplateCustomFieldType: string
+enum UserDefinedField: string
 {
     case TEXTBOX = 'TEXTBOX';
     case TEXTAREA = 'TEXTAREA';
@@ -15,4 +15,5 @@ enum EventSegmentTemplateCustomFieldType: string
     case ADDRESS = 'ADDRESS';
     case CHECKBOX = 'CHECKBOX';
     case CONTACT_NUMBER = 'CONTACT_NUMBER';
+    case COLOR_PALETTE = 'COLOR_PALETTE';
 }

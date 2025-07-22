@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
-use App\Enums\EventSegmentTemplateCustomFieldType;
 use App\Enums\EventType;
+use App\Enums\UserDefinedField;
 use App\Models\EventSegmentTemplate\EventSegmentTemplateEntity;
 use App\Models\EventSegmentTemplateCustomField\EventSegmentTemplateCustomFieldEntity;
 use Carbon\Carbon;
@@ -52,7 +52,7 @@ class EventSegmentTemplateSeeder extends Seeder
         EventSegmentTemplateCustomFieldEntity::create([
             'id' => self::EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_ONE,
             'name' => 'Main Topic',
-            'type' => EventSegmentTemplateCustomFieldType::TEXTBOX,
+            'type' => UserDefinedField::TEXTBOX,
             'required' => true,
             'event_segment_id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
             'created_at' => $date,
@@ -62,7 +62,7 @@ class EventSegmentTemplateSeeder extends Seeder
         EventSegmentTemplateCustomFieldEntity::create([
             'id' => self::EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_TWO,
             'name' => 'Sure Lead',
-            'type' => EventSegmentTemplateCustomFieldType::CHECKBOX,
+            'type' => UserDefinedField::CHECKBOX,
             'required' => true,
             'event_segment_id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
             'created_at' => $date,

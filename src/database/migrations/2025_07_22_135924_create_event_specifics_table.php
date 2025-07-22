@@ -11,20 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('celebrant', function (Blueprint $table) {
+        Schema::create('event_specifics', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('date_of_birth')->nullable();
 
-            $table->uuid('created_by')->nullable();
+            $table->uuid('event_id');
+            $table->foreign('event_id')->references('id')->on('event');
+
+            $table->boolean('udf');
+
+            $table->uuid('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('supplier');
+
+            $table->uuid('created_by');
             $table->foreign('created_by')->references('id')->on('supplier_staff');
 
-            $table->uuid('updated_by')->nullable();
+            $table->uuid('updated_by');
             $table->foreign('updated_by')->references('id')->on('supplier_staff');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('celebrant');
+        Schema::dropIfExists('event_specifics');
     }
 };

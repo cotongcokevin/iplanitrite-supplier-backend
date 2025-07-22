@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('template_name');
             $table->boolean('is_immutable');
             $table->boolean('is_rsvp');
+            $table->boolean('on_field');
 
             $table->uuid('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('supplier');
@@ -28,6 +29,8 @@ return new class extends Migration
             $table->string('default_date_from_label')->nullable();
             $table->string('default_date_to_label')->nullable();
 
+            $table->jsonb('udf')->nullable();
+
             $table->uuid('created_by');
             $table->foreign('created_by')->references('id')->on('admin');
 
@@ -36,18 +39,6 @@ return new class extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-        });
-
-        Schema::create('event_segment_template_custom_field', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('type');
-            $table->boolean('required');
-
-            $table->uuid('event_segment_id')->nullable();
-            $table->foreign('event_segment_id')->references('id')->on('event_segment_template');
-
-            $table->timestamps();
         });
     }
 

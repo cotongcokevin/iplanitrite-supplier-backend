@@ -91,11 +91,56 @@ return new class extends Migration
         Schema::create('event_segment_staff', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
+            $table->uuid('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('supplier');
+
             $table->uuid('supplier_staff_id');
             $table->foreign('supplier_staff_id')->references('id')->on('supplier_staff');
 
             $table->uuid('event_segment_id');
             $table->foreign('event_segment_id')->references('id')->on('event_segment');
+
+            $table->timestamps();
+        });
+
+        Schema::create('event_supplier_collab', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+
+            $table->string('status');
+
+            $table->uuid('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('supplier');
+
+            $table->uuid('supplier_partner_id');
+            $table->foreign('supplier_partner_id')->references('id')->on('supplier');
+
+            $table->uuid('event_id');
+            $table->foreign('event_id')->references('id')->on('event');
+
+            $table->unique(['supplier_id', 'supplier_partner_id', 'event_id']);
+
+            $table->uuid('created_by');
+            $table->foreign('created_by')->references('id')->on('supplier_staff');
+
+            $table->uuid('updated_by');
+            $table->foreign('updated_by')->references('id')->on('supplier_staff');
+
+            $table->timestamps();
+        });
+
+        Schema::create('event_supplier_collab_segment', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+
+            $table->uuid('event_supplier_collab_id');
+            $table->foreign('event_supplier_collab_id')->references('id')->on('event_supplier_collab');
+
+            $table->uuid('event_segment_id');
+            $table->foreign('event_segment_id')->references('id')->on('event_segment');
+
+            $table->unique(['event_supplier_collab_id', 'event_segment_id']);
+
+            $table->uuid('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('supplier');
 
             $table->timestamps();
         });
@@ -106,6 +151,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('event_supplier_collab_segment');
+        Schema::dropIfExists('event_supplier_collab');
         Schema::dropIfExists('event_segment_staff');
         Schema::dropIfExists('event_segment');
         Schema::dropIfExists('event_supplier');

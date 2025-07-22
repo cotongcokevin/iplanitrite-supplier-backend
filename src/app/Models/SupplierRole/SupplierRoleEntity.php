@@ -6,10 +6,10 @@ namespace App\Models\SupplierRole;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Classes\Scopes\Guard\GuardedModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SupplierRoleEntity extends Model
+class SupplierRoleEntity extends GuardedModel
 {
     use SoftDeletes;
 

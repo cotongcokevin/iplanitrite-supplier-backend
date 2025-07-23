@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Client;
 
-use App\Dto\Requests\Client\UpdateProfileRequestDto;
-use App\Dto\Response\ClientDto;
+use App\Data\Dto\Requests\Client\UpdateProfileRequestDto;
+use App\Data\Dto\Response\ClientDto;
 use App\Models\Client\Context\ClientContextType;
 use App\Services\Client\ProfileService;
 use Illuminate\Http\JsonResponse;

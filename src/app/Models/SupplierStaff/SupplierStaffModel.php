@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierStaff;
 
-use App\Dto\Response\SupplierStaffDto;
+use App\Data\Dto\Response\SupplierStaffDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 

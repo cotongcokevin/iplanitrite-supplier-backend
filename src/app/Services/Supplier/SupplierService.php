@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Supplier;
 
 use App\Classes\Principals\Principal;
-use App\Dto\Requests\Supplier\SupplierStoreRequestDto;
-use App\Dto\Requests\Supplier\SupplierUpdateRequestDto;
+use App\Data\Dto\Requests\Supplier\SupplierStoreRequestDto;
+use App\Data\Dto\Requests\Supplier\SupplierUpdateRequestDto;
 use App\Models\Supplier\SupplierModel;
 use App\Repositories\SupplierRepository\Data\SupplierRepositoryStoreData;
 use App\Repositories\SupplierRepository\Data\SupplierRepositoryUpdateData;

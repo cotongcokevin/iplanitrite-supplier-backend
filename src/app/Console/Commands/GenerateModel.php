@@ -106,7 +106,7 @@ class GenerateModel extends Command
         $modelData = $modelName.'Model';
         $modelNamespace = 'App\Models\\'.$modelName;
         $dto = $modelName.'Dto';
-        $dtoNamespace = "App\Dto\Response\\".$dto;
+        $dtoNamespace = "App\Data\Dto\Response\\".$dto;
         $attributes = collect($columns)->map(fn (GenerateModelColumn $col) => "        public {$col->dataType} {$col->nameDollar},"
         )->join("\n");
 
@@ -160,14 +160,15 @@ PHP;
 
 declare(strict_types=1);
 
-namespace App\Dto\Response;
+namespace App\Data\Dto\Response;
 
-use Carbon\Carbon;
+use App\Data\Dto\ResponseDto;
 use Ramsey\Uuid\UuidInterface;
-use App\Dto\ResponseDto;
+use Carbon\Carbon;
 
 class $dto extends ResponseDto
 {
+    
     public function __construct(
 $attributes
     ) {}
@@ -175,7 +176,7 @@ $attributes
 
 PHP;
 
-        $filePath = app_path("Dto/Response/{$dto}.php");
+        $filePath = app_path("Data/Dto/Response/{$dto}.php");
         $this->createFile($filePath, $content);
     }
 

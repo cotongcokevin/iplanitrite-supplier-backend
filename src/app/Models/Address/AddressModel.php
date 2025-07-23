@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Address;
 
-use App\Dto\Response\AddressDto;
+use App\Data\Dto\Response\AddressDto;
 use Ramsey\Uuid\UuidInterface;
 
 class AddressModel

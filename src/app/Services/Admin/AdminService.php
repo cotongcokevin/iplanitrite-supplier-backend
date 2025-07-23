@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Admin;
 
 use App\Classes\Principals\Principal;
-use App\Dto\Requests\Admin\AdminStoreRequestDto;
-use App\Dto\Requests\Admin\AdminUpdateRequestDto;
+use App\Data\Dto\Requests\Admin\AdminStoreRequestDto;
+use App\Data\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Models\Admin\AdminModel;
 use App\Repositories\AdminRepository\AdminRepository;
 use App\Repositories\AdminRepository\Data\AdminRepositoryStoreData;

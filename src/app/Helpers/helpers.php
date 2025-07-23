@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Dto\Response\ExceptionCodeDto;
+use App\Data\Dto\Response\ExceptionCodeDto;
 use App\Enums\ExceptionCode;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;

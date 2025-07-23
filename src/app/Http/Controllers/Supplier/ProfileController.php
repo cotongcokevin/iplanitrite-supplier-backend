@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Supplier;
 
-use App\Dto\Requests\Supplier\UpdateProfileRequestDto;
-use App\Dto\Response\SupplierStaffDto;
+use App\Data\Dto\Requests\Supplier\UpdateProfileRequestDto;
+use App\Data\Dto\Response\SupplierStaffDto;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Services\Supplier\ProfileService;
 use Illuminate\Http\JsonResponse;

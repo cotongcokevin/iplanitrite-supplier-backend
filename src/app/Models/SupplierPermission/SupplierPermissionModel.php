@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierPermission;
 
-use App\Dto\Response\SupplierPermissionDto;
+use App\Data\Dto\Response\SupplierPermissionDto;
 use App\Enums\SupplierPermissionType;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;

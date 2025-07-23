@@ -6,7 +6,7 @@ namespace App\Services\Client;
 
 use App\Classes\Pair;
 use App\Classes\Principals\Principal;
-use App\Dto\Requests\Client\UpdateProfileRequestDto;
+use App\Data\Dto\Requests\Client\UpdateProfileRequestDto;
 use App\Models\Client\ClientModel;
 use App\Models\Client\Context\ClientContext;
 use App\Models\Client\Context\ClientContextException;

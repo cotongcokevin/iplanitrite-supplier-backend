@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\SupplierRole;
 
-use App\Dto\Response\SupplierRoleDto;
+use App\Data\Dto\Response\SupplierRoleDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 

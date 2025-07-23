@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
+use App\Data\Udf\UdfTemplate;
 use App\Enums\EventType;
-use App\Enums\UserDefinedField;
+use App\Enums\UserDefinedFieldType;
 use App\Models\EventSegmentTemplate\EventSegmentTemplateEntity;
-use App\Models\EventSegmentTemplateCustomField\EventSegmentTemplateCustomFieldEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -18,10 +18,6 @@ class EventSegmentTemplateSeeder extends Seeder
     public const EVENT_SEGMENT_TEMPLATE_ID_TWO = '4e6895e5-7385-47e6-a054-83cb38d05871';
 
     public const EVENT_SEGMENT_TEMPLATE_ID_THREE = 'e16895e5-7385-47e6-a054-83cb38d05811';
-
-    public const EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_ONE = '3dede20e-b5a9-4a86-9674-2061cca7b32f';
-
-    public const EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_TWO = '4dede20e-b5a9-4a86-9674-2061cca7b32d';
 
     /**
      * Run the database seeds.
@@ -34,8 +30,16 @@ class EventSegmentTemplateSeeder extends Seeder
             'id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
             'event_type' => EventType::WEDDING,
             'template_name' => 'Meeting',
+            'on_field' => true,
             'is_immutable' => false,
             'is_rsvp' => false,
+            'udf' => json_encode([
+                new UdfTemplate(
+                    name: 'Extra Notes',
+                    type: UserDefinedFieldType::TEXTAREA,
+                    required: false
+                ),
+            ]),
             'supplier_id' => SupplierSeeder::SUPPLIER_ONE_ID,
             'default_location_label' => 'Meetup Location',
             'default_address_label' => 'Meetup Address',
@@ -49,30 +53,11 @@ class EventSegmentTemplateSeeder extends Seeder
             'deleted_at' => $date,
         ]);
 
-        EventSegmentTemplateCustomFieldEntity::create([
-            'id' => self::EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_ONE,
-            'name' => 'Main Topic',
-            'type' => UserDefinedField::TEXTBOX,
-            'required' => true,
-            'event_segment_id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
-            'created_at' => $date,
-            'updated_at' => $date,
-        ]);
-
-        EventSegmentTemplateCustomFieldEntity::create([
-            'id' => self::EVENT_SEGMENT_TEMPLATE_CUSTOM_FIELD_ID_TWO,
-            'name' => 'Sure Lead',
-            'type' => UserDefinedField::CHECKBOX,
-            'required' => true,
-            'event_segment_id' => self::EVENT_SEGMENT_TEMPLATE_ID_ONE,
-            'created_at' => $date,
-            'updated_at' => $date,
-        ]);
-
         EventSegmentTemplateEntity::create([
             'id' => self::EVENT_SEGMENT_TEMPLATE_ID_TWO,
             'event_type' => EventType::WEDDING,
             'template_name' => 'Wedding',
+            'on_field' => true,
             'is_immutable' => true,
             'is_rsvp' => true,
             'supplier_id' => SupplierSeeder::SUPPLIER_ONE_ID,
@@ -92,6 +77,7 @@ class EventSegmentTemplateSeeder extends Seeder
             'id' => self::EVENT_SEGMENT_TEMPLATE_ID_THREE,
             'event_type' => EventType::WEDDING,
             'template_name' => 'Reception',
+            'on_field' => true,
             'is_immutable' => true,
             'is_rsvp' => true,
             'supplier_id' => SupplierSeeder::SUPPLIER_ONE_ID,

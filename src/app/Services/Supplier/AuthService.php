@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Supplier;
 
-use App\Dto\Requests\Admin\LoginRequestResponseDto;
+use App\Data\Dto\Requests\Admin\LoginRequestResponseDto;
 use App\Enums\AuthGuardType;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;

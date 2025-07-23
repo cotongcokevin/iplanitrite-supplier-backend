@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Client\Context;
 
-use App\Dto\Response\ClientContextDto;
+use App\Data\Dto\Response\ClientContextDto;
 use App\Models\ContactNumber\ContactNumberModel;
 use BackedEnum;
 

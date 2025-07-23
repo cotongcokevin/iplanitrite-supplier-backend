@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Dto\Requests\AddressRequestDto;
+use App\Data\Dto\Requests\AddressRequestDto;
 use App\Repositories\AddressRepository\AddressRepository;
 use App\Repositories\AddressRepository\Data\AddressRepositoryUpsertRepoData;
 use Ramsey\Uuid\UuidFactory;

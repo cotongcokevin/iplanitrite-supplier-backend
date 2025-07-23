@@ -6,7 +6,7 @@ namespace App\Services\Supplier;
 
 use App\Classes\Pair;
 use App\Classes\Principals\Principal;
-use App\Dto\Requests\Supplier\UpdateProfileRequestDto;
+use App\Data\Dto\Requests\Supplier\UpdateProfileRequestDto;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use App\Models\SupplierStaff\Context\SupplierStaffContextException;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dto\Requests\Admin\LoginRequestResponseDto;
+use App\Data\Dto\Requests\Admin\LoginRequestResponseDto;
 use App\Services\Admin\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

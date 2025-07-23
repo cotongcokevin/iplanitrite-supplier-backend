@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Country;
 
-use App\Dto\Response\CountryDto;
+use App\Data\Dto\Response\CountryDto;
 use Ramsey\Uuid\UuidInterface;
 
 class CountryModel

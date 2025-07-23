@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Classes\Principals\Principal;
-use App\Dto\Requests\Admin\AdminUpdateRequestDto;
+use App\Data\Dto\Requests\Admin\AdminUpdateRequestDto;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

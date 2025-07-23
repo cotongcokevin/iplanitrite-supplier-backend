@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Celebrant;
 
-use App\Dto\Response\CelebrantDto;
+use App\Data\Dto\Response\CelebrantDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 

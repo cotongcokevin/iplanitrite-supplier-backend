@@ -8,6 +8,7 @@ use Database\Seeders\Classes\ClientSeeder;
 use Database\Seeders\Classes\ContactNumberSeeder;
 use Database\Seeders\Classes\CountrySeeder;
 use Database\Seeders\Classes\EventSegmentTemplateSeeder;
+use Database\Seeders\Classes\EventSpecificTemplateSeeder;
 use Database\Seeders\Classes\SupplierPermissionSeeder;
 use Database\Seeders\Classes\SupplierRoleSeeder;
 use Database\Seeders\Classes\SupplierSeeder;
@@ -32,10 +33,12 @@ class DatabaseSeeder extends Seeder
             SupplierPermissionSeeder::class,
             SupplierStaffSeeder::class,
 
+            // Client
             ClientSeeder::class,
 
-            // Event Segment Seeder
-            //            EventSegmentTemplateSeeder::class,
+            // Event
+            EventSegmentTemplateSeeder::class,
+            EventSpecificTemplateSeeder::class,
         ]);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Admin;
 
-use App\Dto\Response\AdminDto;
+use App\Data\Dto\Response\AdminDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 

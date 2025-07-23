@@ -8,13 +8,12 @@ use App\Classes\Principals\PrincipalData;
 use App\Enums\AuthGuardType;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Ramsey\Uuid\UuidInterface;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class AdminEntity extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
-
-    protected string $guard = 'ADMIN';
 
     /**
      * $keyType is the type of the id of the table which is UUID
@@ -44,7 +43,7 @@ class AdminEntity extends Authenticatable implements JWTSubject
         'deleted_at' => CarbonCast::class,
     ];
 
-    public function getJWTIdentifier(): string
+    public function getJWTIdentifier(): UuidInterface
     {
         return $this->getKey();
     }

@@ -30,6 +30,7 @@ class AuthTest extends SupplierTestCase
                 'password' => 'password',
             ]
         );
+        $response->assertStatus(200);
         $token = $response->json();
 
         $uriLogout = self::generateUri('/auth/logout');
@@ -61,7 +62,20 @@ class AuthTest extends SupplierTestCase
         $uri = '/api/admin/profile';
         $response = $this->postJsonAuthorised(
             uri: $uri,
-            token: $token->json()
+            token: $token->json(),
+            checkOk: false
+        );
+        $response->assertStatus(401);
+    }
+
+    public function test_supplier_token_should_not_work_on_other_client(): void
+    {
+        $token = $this->login();
+        $uri = '/api/client/profile';
+        $response = $this->postJsonAuthorised(
+            uri: $uri,
+            token: $token->json(),
+            checkOk: false
         );
         $response->assertStatus(401);
     }

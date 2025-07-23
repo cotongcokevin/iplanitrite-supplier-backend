@@ -11,8 +11,11 @@ class ExceptionCodeDto extends ResponseDto
 {
     public string $code;
 
-    public function __construct(ExceptionCode $code)
+    public string $message;
+
+    public function __construct(ExceptionCode $code, string $message)
     {
         $this->code = $code->value;
+        $this->message = $message;
     }
 }

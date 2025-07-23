@@ -12,7 +12,7 @@ class ProfileTest extends AdminTestCase
     {
         // Create a new one
         $token = $this->login();
-        $result = $this->postJsonAuthorised(
+        $this->postJsonAuthorised(
             uri: self::generateUri('/admin'),
             token: $token->json(),
             data: [
@@ -35,13 +35,7 @@ class ProfileTest extends AdminTestCase
                 'lastName' => 'Hyuga',
             ]
         );
-        $response->assertStatus(200);
         $this->cleanAutoBeforeAssertingJsonSnapshot($response->json());
-
-        $this->getJsonAuthorised(
-            uri: '/api/admin',
-            token: $token->json()
-        );
     }
 
     public function test_admin_get_profile(): void

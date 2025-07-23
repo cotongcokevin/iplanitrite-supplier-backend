@@ -87,6 +87,7 @@ class AdminTest extends AdminTestCase
             uri: self::generateUri('/admin'),
             token: $token->json(),
         );
+        $total = collect($response->json())->count();
         $toDelete = collect($response->json())->where('email', 'john@doe.com')->first();
 
         $id = $toDelete['id'];
@@ -100,6 +101,6 @@ class AdminTest extends AdminTestCase
             uri: self::generateUri('/admin'),
             token: $token->json(),
         );
-        $this->assertCount(2, $response->json());
+        $this->assertCount($total - 1, $response->json());
     }
 }

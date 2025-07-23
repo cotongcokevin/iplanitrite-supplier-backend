@@ -4,7 +4,7 @@
     "password": "__FORMAT_VALIDATED__",
     "firstName": "Luffy",
     "lastName": "Monkey",
-    "dateOfBirth": "2005-01-01T00:00:00.000000Z",
+    "dateOfBirth": "2020-01-01T00:00:00.000000Z",
     "supplierId": "01a1da32-8149-4a93-8270-37d77e447de7",
     "supplierRoleId": "c4d86258-54fb-42f4-880e-3e5eae34619c",
     "createdBy": null,
@@ -14,16 +14,16 @@
     "deletedAt": null,
     "context": {
         "address": {
-            "line1": "Eulogio Amang Rodriguez Ave",
+            "line1": "Line 1",
             "line2": null,
-            "city": "Pasig",
-            "state": "Metro Manila",
-            "zip": "1800",
+            "city": "SampleCity",
+            "state": "SampleState",
+            "zip": "SampleZip",
             "lat": null,
             "long": null
         },
         "contactNumber": {
-            "number": "+639171234567"
+            "number": "9954585211"
         }
     }
 }

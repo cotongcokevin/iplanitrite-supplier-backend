@@ -54,13 +54,27 @@ class AuthTest extends AdminTestCase
         $response->assertStatus(401);
     }
 
-    public function test_admin_token_should_not_work_on_other_supplier(): void
+    public function test_admin_token_should_not_work_on_supplier(): void
     {
         $token = $this->login();
         $uri = '/api/supplier/profile';
         $response = $this->postJsonAuthorised(
             uri: $uri,
-            token: $token->json()
+            token: $token->json(),
+            checkOk: false
+        );
+
+        $response->assertStatus(401);
+    }
+
+    public function test_admin_token_should_not_work_on_client(): void
+    {
+        $token = $this->login();
+        $uri = '/api/client/profile';
+        $response = $this->postJsonAuthorised(
+            uri: $uri,
+            token: $token->json(),
+            checkOk: false
         );
 
         $response->assertStatus(401);

@@ -54,7 +54,7 @@ class SupplierStaffRepository
         /** @var SupplierStaffEntity $result */
         $supplierStaff = SupplierStaffEntity::find($id);
         if ($data->password !== null) {
-            $supplierStaff->password = $data->password;
+            $supplierStaff->password = bcrypt($data->password);
         }
         $supplierStaff->first_name = $data->firstName;
         $supplierStaff->last_name = $data->lastName;

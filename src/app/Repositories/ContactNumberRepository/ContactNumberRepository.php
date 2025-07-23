@@ -12,6 +12,10 @@ class ContactNumberRepository
     public function upsert(
         ContactRepositoryUpsertRepoData $data,
     ): void {
-        ContactNumberEntity::upsert((array) $data, ['id']);
+        ContactNumberEntity::upsert([
+            'id' => $data->id,
+            'number' => $data->number,
+            'country_id' => $data->countryId,
+        ], ['id']);
     }
 }

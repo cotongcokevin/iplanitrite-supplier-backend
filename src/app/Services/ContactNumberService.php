@@ -24,6 +24,7 @@ readonly class ContactNumberService
     ): UuidInterface {
 
         $contactId = $uuid ?? $this->uuid->uuid4();
+
         $this->contactNumberRepository->upsert(new ContactRepositoryUpsertRepoData(
             $contactId,
             $number,

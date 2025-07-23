@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Classes\Principals;
 
 use App\Models\Admin\AdminEntity;
+use App\Models\Client\ClientEntity;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 
 class Principal extends PrincipalStaticHandler
@@ -41,7 +42,8 @@ class Principal extends PrincipalStaticHandler
         return match (true) {
             $user instanceof AdminEntity => $user->toPrincipalData(),
             $user instanceof SupplierStaffEntity => $user->toPrincipalData(),
-            default => throw new PrincipalException
+            $user instanceof ClientEntity => $user->toPrincipalData(),
+            default => throw new PrincipalException('Invalid principal')
         };
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('event_id');
             $table->foreign('event_id')->references('id')->on('event');
 
-            $table->boolean('udf');
+            $table->jsonb('udf');
 
             $table->uuid('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('supplier');

@@ -27,7 +27,7 @@ function transaction(Closure $closure): JsonResponse
         logError($e);
 
         return response()->json(
-            new ExceptionCodeDto(ExceptionCode::UNAUTHORIZED),
+            new ExceptionCodeDto(ExceptionCode::UNAUTHORIZED, $e->getMessage()),
             Response::HTTP_UNAUTHORIZED
         );
     } catch (QueryException $e) {
@@ -39,7 +39,7 @@ function transaction(Closure $closure): JsonResponse
         logError($e);
 
         return response()->json(
-            new ExceptionCodeDto(ExceptionCode::QUERY),
+            new ExceptionCodeDto(ExceptionCode::QUERY, $e->getMessage()),
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     } catch (Throwable $e) {
@@ -51,7 +51,7 @@ function transaction(Closure $closure): JsonResponse
         logError($e);
 
         return response()->json(
-            new ExceptionCodeDto(ExceptionCode::THROWABLE),
+            new ExceptionCodeDto(ExceptionCode::THROWABLE, $e->getMessage()),
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     }
@@ -59,5 +59,5 @@ function transaction(Closure $closure): JsonResponse
 
 function logError(Throwable $e)
 {
-    //        dd($e->getFile(), $e->getLine(), $e->getMessage());
+    //                dd($e->getFile(), $e->getLine(), $e->getMessage());
 }

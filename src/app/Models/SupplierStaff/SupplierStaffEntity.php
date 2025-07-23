@@ -23,8 +23,6 @@ class SupplierStaffEntity extends GuardedAuthenticatedModel implements JWTSubjec
 {
     use SoftDeletes;
 
-    protected string $guard = 'SUPPLIER_STAFF';
-
     /**
      * $keyType is the type of the id of the table which is UUID
      *

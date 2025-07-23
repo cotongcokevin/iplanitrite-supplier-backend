@@ -6,7 +6,7 @@ namespace App\Services\Supplier;
 
 use App\Classes\Pair;
 use App\Classes\Principals\Principal;
-use App\Dto\Requests\Staff\UpdateProfileRequestDto;
+use App\Dto\Requests\Supplier\UpdateProfileRequestDto;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use App\Models\SupplierStaff\Context\SupplierStaffContextException;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;
@@ -54,7 +54,7 @@ readonly class ProfileService
 
         $contactNumberId = $this->contactNumberService->upsert(
             $request->contactNumber,
-            $supplierStaff->addressId
+            $supplierStaff->contactNumberId
         );
 
         $this->supplierStaffRepository->updateProfile(

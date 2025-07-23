@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
+            $table->uuid('contact_number_id');
+            $table->foreign('contact_number_id')->references('id')->on('contact_number');
 
             $table->timestamps();
             $table->softDeletes();

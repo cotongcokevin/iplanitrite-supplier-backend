@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dto\Requests\Staff;
+namespace App\Dto\Requests\Supplier;
 
 use App\Dto\Requests\AddressRequestDto;
 use Carbon\Carbon;
@@ -29,12 +29,12 @@ class UpdateProfileRequestDto
             'contactNumber' => 'string|required',
             'address' => 'required',
             'address.line1' => 'string|required',
-            'address.line2' => 'string',
+            'address.line2' => 'string|nullable',
             'address.city' => 'string|required',
             'address.state' => 'string|required',
             'address.zip' => 'string|required',
-            'address.lat' => 'string',
-            'address.long' => 'string',
+            'address.lat' => 'string|nullable',
+            'address.long' => 'string|nullable',
         ]);
 
         return new UpdateProfileRequestDto(
@@ -44,13 +44,13 @@ class UpdateProfileRequestDto
             dateOfBirth: Carbon::parse($request->dateOfBirth),
             contactNumber: $request->contactNumber,
             address: $request->address ? new AddressRequestDto(
-                line1: $request->address->line1,
-                line2: $request->address->line2,
-                city: $request->address->city,
-                state: $request->address->state,
-                zip: $request->address->zip,
-                lat: $request->address->lat,
-                long: $request->address->long,
+                line1: $request->address['line1'],
+                line2: $request->address['line2'],
+                city: $request->address['city'],
+                state: $request->address['state'],
+                zip: $request->address['zip'],
+                lat: $request->address['lat'],
+                long: $request->address['long'],
             ) : null
         );
     }

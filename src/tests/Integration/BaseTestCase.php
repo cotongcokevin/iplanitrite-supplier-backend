@@ -30,30 +30,43 @@ abstract class BaseTestCase extends TestCase
     public function getJsonAuthorised(
         string $uri,
         string $token,
-        array $data = []
+        array $data = [],
+        bool $checkOk = true
     ): TestResponse {
         $params = ! empty($data) ? '?'.http_build_query($data) : '';
 
-        return $this->getJson(
+        $response = $this->getJson(
             uri: $uri.$params,
             headers: [
                 'Authorization' => 'Bearer '.$token,
             ]
         );
+        if ($checkOk) {
+            $response->assertStatus(200);
+        }
+
+        return $response;
     }
 
     public function postJsonAuthorised(
         string $uri,
         string $token,
-        array $data = []
+        array $data = [],
+        bool $checkOk = true
     ): TestResponse {
-        return $this->postJson(
+        $response = $this->postJson(
             uri: $uri,
             data: $data,
             headers: [
                 'Authorization' => 'Bearer '.$token,
             ]
         );
+
+        if ($checkOk) {
+            $response->assertStatus(200);
+        }
+
+        return $response;
     }
 
     public function putJsonAuthorised(

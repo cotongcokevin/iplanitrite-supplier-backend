@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\Classes\AddressSeeder;
 use Database\Seeders\Classes\AdminSeeder;
+use Database\Seeders\Classes\ClientSeeder;
 use Database\Seeders\Classes\ContactNumberSeeder;
 use Database\Seeders\Classes\CountrySeeder;
 use Database\Seeders\Classes\EventSegmentTemplateSeeder;
@@ -30,6 +31,8 @@ class DatabaseSeeder extends Seeder
             SupplierRoleSeeder::class,
             SupplierPermissionSeeder::class,
             SupplierStaffSeeder::class,
+
+            ClientSeeder::class,
 
             // Event Segment Seeder
             //            EventSegmentTemplateSeeder::class,

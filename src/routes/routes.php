@@ -9,7 +9,7 @@ use App\Http\Middleware\SupplierCors;
 Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function () {
     require __DIR__.'/admin/auth/auth.php';
 
-    Route::group(['middleware' => ['auth:ADMIN', AdminCors::class]], function () {
+    Route::group(['middleware' => ['auth:ADMIN']], function () {
         require __DIR__.'/admin/admin/admin.php';
         require __DIR__.'/admin/suppliers/suppliers.php';
         require __DIR__.'/admin/profile/profile.php';
@@ -22,12 +22,18 @@ Route::group([
 ], function () {
     require __DIR__.'/supplier/auth/auth.php';
 
-    Route::group(['middleware' => ['auth:SUPPLIER_STAFF', AdminCors::class]], function () {
+    Route::group(['middleware' => ['auth:SUPPLIER_STAFF']], function () {
         require __DIR__.'/supplier/profile/profile.php';
     });
 });
 
 Route::group([
-    'prefix' => 'participant',
+    'prefix' => 'client',
     'middleware' => [ClientCors::class],
-], function () {});
+], function () {
+    require __DIR__.'/client/auth/auth.php';
+
+    Route::group(['middleware' => ['auth:CLIENT']], function () {
+        require __DIR__.'/client/profile/profile.php';
+    });
+});

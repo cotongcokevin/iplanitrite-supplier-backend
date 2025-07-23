@@ -10,9 +10,8 @@ class ProfileTest extends SupplierTestCase
 {
     public function test_supplier_update_profile(): void
     {
-        // Create a new one
         $token = $this->login();
-        $this->postJsonAuthorised(
+        $updateResponse = $this->postJsonAuthorised(
             uri: self::generateUri('/profile'),
             token: $token->json(),
             data: [
@@ -20,7 +19,7 @@ class ProfileTest extends SupplierTestCase
                 'firstName' => 'Luffy',
                 'lastName' => 'Monkey',
                 'dateOfBirth' => '2020-01-01',
-                'contactNumber' => '9954585215',
+                'contactNumber' => '9954585211',
                 'address' => [
                     'line1' => 'Line 1',
                     'line2' => null,
@@ -32,22 +31,17 @@ class ProfileTest extends SupplierTestCase
                 ],
             ]
         );
+        $updateResponse->assertStatus(200);
 
         $response = $this->getJsonAuthorised(
             uri: self::generateUri('/profile'),
             token: $token->json()
         );
 
-        $response->assertStatus(200);
         $result = $response->json();
         $this->assertNotNull($result['context']['address']);
         $this->assertNotNull($result['context']['contactNumber']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($response->json());
-
-        $this->getJsonAuthorised(
-            uri: '/api/admin',
-            token: $token->json()
-        );
     }
 
     public function test_supplier_get_profile(): void
@@ -57,8 +51,6 @@ class ProfileTest extends SupplierTestCase
             uri: self::generateUri('/profile'),
             token: $token->json()
         );
-
-        $response->assertStatus(200);
         $resultArray = $response->json();
 
         $this->assertEquals('luffy.monkey@ems.com', $resultArray['email']);

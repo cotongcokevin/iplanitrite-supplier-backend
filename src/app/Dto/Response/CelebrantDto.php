@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dto\Response;
 
+use App\Dto\ResponseDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
-use App\Dto\ResponseDto;
 
 class CelebrantDto extends ResponseDto
 {

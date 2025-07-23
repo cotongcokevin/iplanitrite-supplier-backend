@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models\Celebrant;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CelebrantEntity extends Model
-{  
+{
     use SoftDeletes;
-    
+
     /**
      * @var string
      */
     protected $table = 'celebrant';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'date_of_birth' => CarbonCast::class,

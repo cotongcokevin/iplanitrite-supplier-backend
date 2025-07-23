@@ -24,6 +24,7 @@ Route::group([
 
     Route::group(['middleware' => ['auth:SUPPLIER_STAFF']], function () {
         require __DIR__.'/supplier/profile/profile.php';
+        require __DIR__.'/supplier/event/event.php';
     });
 });
 

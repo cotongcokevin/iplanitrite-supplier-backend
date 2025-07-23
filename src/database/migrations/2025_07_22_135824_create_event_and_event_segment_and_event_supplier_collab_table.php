@@ -135,7 +135,7 @@ return new class extends Migration
             $table->foreign('event_supplier_collab_id')->references('id')->on('event_supplier_collab');
 
             $table->uuid('event_segment_id');
-            $table->foreign('event_segment_id')->references('id')->on('event_segment');
+            $table->foreign('event_segment_id')->references('id')->on('event_segment')->cascadeOnDelete();
 
             $table->unique(['event_supplier_collab_id', 'event_segment_id']);
 

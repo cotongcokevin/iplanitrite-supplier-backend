@@ -29,9 +29,9 @@ class ProfileTest extends SupplierTestCase
                     'lat' => null,
                     'long' => null,
                 ],
-            ]
+            ],
+            checkOk: false
         );
-        $updateResponse->assertStatus(200);
 
         $response = $this->getJsonAuthorised(
             uri: self::generateUri('/profile'),

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Supplier;
 
-use App\Data\Dto\Requests\Admin\LoginRequestResponseDto;
+use App\Data\Dto\Requests\LoginRequestDto;
 use App\Enums\AuthGuardType;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
@@ -22,7 +22,7 @@ class AuthService
     /**
      * @throws AuthenticationException
      */
-    public function login(LoginRequestResponseDto $request): string
+    public function login(LoginRequestDto $request): string
     {
         $token = $this->guard->attempt([
             'email' => $request->email,

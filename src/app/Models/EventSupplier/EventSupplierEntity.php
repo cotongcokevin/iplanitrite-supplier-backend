@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\Models\EventSupplier;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 
 class EventSupplierEntity extends Model
-{ 
-    public $timestamps = false; 
-    
+{
+    public $timestamps = false;
+
     /**
      * @var string
      */
     protected $table = 'event_supplier';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'supplier_id' => UuidCast::class,

@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace App\Repositories\EventSegmentRepository;
 
-readonly class EventSegmentRepository
-{
-}
+readonly class EventSegmentRepository {}

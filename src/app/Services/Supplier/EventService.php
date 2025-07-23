@@ -6,9 +6,5 @@ namespace App\Services\Supplier;
 
 class EventService
 {
-
-    public function create() {
-
-    }
-
+    public function create() {}
 }

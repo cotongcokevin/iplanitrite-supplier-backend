@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models\EventSegment;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventSegmentEntity extends Model
-{  
+{
     use SoftDeletes;
-    
+
     /**
      * @var string
      */
     protected $table = 'event_segment';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'address_id' => UuidCast::class,

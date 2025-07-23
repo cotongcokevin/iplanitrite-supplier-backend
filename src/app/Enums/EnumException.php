@@ -6,7 +6,4 @@ namespace App\Enums;
 
 use Exception;
 
-class EnumException extends Exception
-{
-
-}
+class EnumException extends Exception {}

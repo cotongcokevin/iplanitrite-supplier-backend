@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace App\Models\EventSpecific;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 
 class EventSpecificEntity extends Model
-{  
-    
+{
     /**
      * @var string
      */
     protected $table = 'event_specific';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'event_id' => UuidCast::class,

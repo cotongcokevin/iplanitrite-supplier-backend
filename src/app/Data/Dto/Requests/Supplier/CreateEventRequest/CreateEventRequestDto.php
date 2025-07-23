@@ -39,7 +39,7 @@ class CreateEventRequestDto extends Data
             'clientDetails.lastName' => 'required',
             'clientDetails.email' => 'required|email',
         ];
-        switch($eventType) {
+        switch ($eventType) {
             case EventType::WEDDING:
             case EventType::ANNIVERSARY_COUPLE:
                 $validation['celebrantTwo.firstName'] = 'required';

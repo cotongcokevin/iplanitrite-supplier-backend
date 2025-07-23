@@ -11,14 +11,12 @@ use Illuminate\Http\Request;
 
 class EventController
 {
-
     public function index(
         EventService $service,
         Request $request
     ): JsonResponse {
         return transaction(
-            function () use ($service, $request) {
-            }
+            function () {}
         );
     }
 
@@ -34,5 +32,4 @@ class EventController
             }
         );
     }
-
 }

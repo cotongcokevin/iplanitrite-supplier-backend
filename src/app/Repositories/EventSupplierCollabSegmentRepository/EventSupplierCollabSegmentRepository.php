@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace App\Repositories\EventSupplierCollabSegmentRepository;
 
-readonly class EventSupplierCollabSegmentRepository
-{
-}
+readonly class EventSupplierCollabSegmentRepository {}

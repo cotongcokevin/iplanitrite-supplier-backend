@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
-use Ramsey\Uuid\UuidInterface;
 use Carbon\Carbon;
+use Ramsey\Uuid\UuidInterface;
 
 class EventSupplierCollabSegmentDto extends ResponseDto
 {
-    
     public function __construct(
         public UuidInterface $id,
         public UuidInterface $eventSupplierCollabId,

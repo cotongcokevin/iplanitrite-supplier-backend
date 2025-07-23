@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace App\Models\EventSupplierCollab;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 
 class EventSupplierCollabEntity extends Model
-{  
-    
+{
     /**
      * @var string
      */
     protected $table = 'event_supplier_collab';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'supplier_id' => UuidCast::class,

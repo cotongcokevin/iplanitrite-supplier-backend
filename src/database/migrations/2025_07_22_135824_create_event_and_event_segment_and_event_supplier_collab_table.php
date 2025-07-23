@@ -70,7 +70,7 @@ return new class extends Migration
             $table->string('date_to_label');
             $table->dateTime('date_to')->nullable();
 
-            $table->jsonb('custom_fields')->nullable();
+            $table->jsonb('udf')->nullable();
 
             $table->uuid('event_segment_template_id');
             $table->foreign('event_segment_template_id')->references('id')->on('event_segment_template');

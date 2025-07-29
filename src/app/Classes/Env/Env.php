@@ -19,7 +19,8 @@ class Env
                 adminFrontEndURI: env('ADMIN_FRONT_END_URI'),
                 supplierFrontEndURI: env('SUPPLIER_FRONT_END_URI'),
                 clientFrontEndURI: env('CLIENT_FRONT_END_URI'),
-                countryId: Uuid::fromString(env('COUNTRY_ID'))
+                countryId: Uuid::fromString(env('COUNTRY_ID')),
+                jwtTTL: (int) env('JWT_TTL')
             );
         }
 

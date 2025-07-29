@@ -15,5 +15,6 @@ readonly class EnvData
         public string $supplierFrontEndURI,
         public string $clientFrontEndURI,
         public UuidInterface $countryId,
+        public int $jwtTTL
     ) {}
 }

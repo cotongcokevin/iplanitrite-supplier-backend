@@ -2,11 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Middleware\AdminCors;
-use App\Http\Middleware\ClientCors;
-use App\Http\Middleware\SupplierCors;
-
-Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function () {
+Route::group(['prefix' => 'admin', 'middleware' => []], function () {
     require __DIR__.'/admin/auth/auth.php';
 
     Route::group(['middleware' => ['auth:ADMIN']], function () {
@@ -18,7 +14,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [AdminCors::class]], function
 
 Route::group([
     'prefix' => 'supplier',
-    'middleware' => [SupplierCors::class],
+    'middleware' => [],
 ], function () {
     require __DIR__.'/supplier/auth/auth.php';
 
@@ -30,7 +26,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'client',
-    'middleware' => [ClientCors::class],
+    'middleware' => [],
 ], function () {
     require __DIR__.'/client/auth/auth.php';
 

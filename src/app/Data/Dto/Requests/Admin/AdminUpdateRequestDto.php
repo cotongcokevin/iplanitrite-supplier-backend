@@ -19,7 +19,7 @@ class AdminUpdateRequestDto
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'string',
+            'password' => 'string|nullable',
             'firstName' => 'required|string',
             'lastName' => 'required|string',
         ]);

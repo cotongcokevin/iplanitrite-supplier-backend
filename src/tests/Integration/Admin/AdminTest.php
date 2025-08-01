@@ -32,7 +32,7 @@ class AdminTest extends AdminTestCase
 
         $response->assertStatus(200);
         $resultArray = $response->json();
-        $this->assertEquals('sasuke.uchiha@ems.com', $resultArray['email']);
+        $this->assertEquals('lloreraandrew@iplanitrite.com', $resultArray['email']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
@@ -64,19 +64,31 @@ class AdminTest extends AdminTestCase
             uri: self::generateUri('/admin/'.AdminSeeder::ADMIN_TWO_ID),
             token: $token->json(),
             data: [
-                'email' => 'itachi.uchiha@ems.com',
+                'email' => 'abcd@iplanitrite.com',
                 'password' => 'password',
-                'firstName' => 'Itachi',
-                'lastName' => 'Uchiha',
+                'firstName' => 'AB',
+                'lastName' => 'CD',
             ]
         );
-
         $response->assertStatus(200);
 
         $resultArray = $response->json();
-        $this->assertEquals('itachi.uchiha@ems.com', $resultArray['email']);
-        $this->assertEquals('Itachi', $resultArray['firstName']);
-        $this->assertEquals('Uchiha', $resultArray['lastName']);
+        $this->assertEquals('abcd@iplanitrite.com', $resultArray['email']);
+        $this->assertEquals('AB', $resultArray['firstName']);
+        $this->assertEquals('CD', $resultArray['lastName']);
+        $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
+
+        $response = $this->putJsonAuthorised(
+            uri: self::generateUri('/admin/'.AdminSeeder::ADMIN_TWO_ID),
+            token: $token->json(),
+            data: [
+                'email' => 'lloreraandrew@iplanitrite.com',
+                'password' => 'password',
+                'firstName' => 'Andrew',
+                'lastName' => 'Llorera',
+            ]
+        );
+        $response->assertStatus(200);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 

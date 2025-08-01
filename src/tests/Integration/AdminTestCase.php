@@ -13,7 +13,7 @@ abstract class AdminTestCase extends BaseTestCase
 
     public function getDefaultAuthEmail(): string
     {
-        return 'naruto.uzumaki@ems.com';
+        return 'cotongcokevin@iplanitrite.com';
     }
 
     public function getDefaultAuthPassword(): string

@@ -12,7 +12,7 @@ class AuthTest extends AdminTestCase
     {
         $uri = self::generateUri('/auth/login');
         $response = $this->postJson($uri, [
-            'email' => 'naruto.uzumaki@ems.com',
+            'email' => 'cotongcokevin@iplanitrite.com',
             'password' => 'password',
         ]);
 
@@ -25,7 +25,7 @@ class AuthTest extends AdminTestCase
         $response = $this->postJson(
             uri: $uri,
             data: [
-                'email' => 'naruto.uzumaki@ems.com',
+                'email' => 'cotongcokevin@iplanitrite.com',
                 'password' => 'password',
             ]
         );
@@ -46,7 +46,7 @@ class AuthTest extends AdminTestCase
         $response = $this->postJson(
             uri: $uri,
             data: [
-                'email' => 'naruto.uzumaki@ems.com',
+                'email' => 'cotongcokevin@iplanitrite.com',
                 'password' => 'wrongPassword',
             ]
         );

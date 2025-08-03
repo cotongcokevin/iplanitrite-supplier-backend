@@ -44,9 +44,9 @@ class SupplierEntity extends Model
             subscriptionTier: SubscriptionTier::from($this->subscription_tier),
             createdBy: $this->created_by ? $this->created_by : null,
             updatedBy: $this->updated_by ? $this->updated_by : null,
-            createdAt: $this->createdAt ? $this->created_at : null,
-            updatedAt: $this->updatedAt ? $this->updated_at : null,
-            deletedAt: $this->deletedAt ? $this->deleted_at : null,
+            createdAt: $this->created_at ? $this->created_at : null,
+            updatedAt: $this->updated_at ? $this->updated_at : null,
+            deletedAt: $this->deleted_at ? $this->deleted_at : null,
         );
     }
 }

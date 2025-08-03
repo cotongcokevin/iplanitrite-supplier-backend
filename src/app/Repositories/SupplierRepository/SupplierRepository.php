@@ -42,7 +42,7 @@ class SupplierRepository
         $supplier->id = $dto->id;
         $supplier->name = $dto->name;
         $supplier->description = $dto->description;
-        $supplier->max_staff = $dto->maxStaff;
+        $supplier->subscription_tier = $dto->subscriptionTier->value;
         $supplier->created_by = $principal->id;
         $supplier->updated_by = $principal->id;
         $supplier->save();
@@ -59,7 +59,7 @@ class SupplierRepository
         $supplier = SupplierEntity::find($id);
         $supplier->name = $dto->name;
         $supplier->description = $dto->description;
-        $supplier->max_staff = $dto->maxStaff;
+        $supplier->subscription_tier = $dto->subscriptionTier->value;
         $supplier->updated_by = $principal->id;
         $supplier->save();
 

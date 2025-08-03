@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Admin;
 
+use App\Enums\SubscriptionTier;
 use Database\Seeders\Classes\SupplierSeeder;
 use Tests\Integration\AdminTestCase;
 
@@ -46,7 +47,7 @@ class SupplierTest extends AdminTestCase
             data: [
                 'name' => 'Supplier Test 1',
                 'description' => 'Supplier Test 1 Description',
-                'maxStaff' => 5,
+                'subscriptionTier' => SubscriptionTier::STANDARD,
             ]
         );
 
@@ -66,7 +67,7 @@ class SupplierTest extends AdminTestCase
             data: [
                 'name' => 'Two Piece',
                 'description' => 'Sample Update Description',
-                'maxStaff' => 10,
+                'subscriptionTier' => SubscriptionTier::PREMIUM,
             ]
         );
 
@@ -75,7 +76,7 @@ class SupplierTest extends AdminTestCase
         $resultArray = $response->json();
         $this->assertEquals('Two Piece', $resultArray['name']);
         $this->assertEquals('Sample Update Description', $resultArray['description']);
-        $this->assertEquals(10, $resultArray['maxStaff']);
+        $this->assertEquals(SubscriptionTier::PREMIUM->value, $resultArray['subscriptionTier']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 

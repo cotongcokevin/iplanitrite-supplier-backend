@@ -38,7 +38,7 @@ readonly class SupplierService
             $this->uuid->uuid4(),
             name: $dto->name,
             description: $dto->description,
-            maxStaff: $dto->maxStaff,
+            subscriptionTier: $dto->subscriptionTier,
         );
 
         return $this->supplierRepository->store(
@@ -54,7 +54,7 @@ readonly class SupplierService
         $repoDto = new SupplierRepositoryUpdateData(
             name: $dto->name,
             description: $dto->description,
-            maxStaff: $dto->maxStaff,
+            subscriptionTier: $dto->subscriptionTier,
         );
 
         return $this->supplierRepository->update(

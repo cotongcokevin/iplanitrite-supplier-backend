@@ -2,7 +2,7 @@
     "id": "__FORMAT_VALIDATED__",
     "name": "Two Piece",
     "description": "Sample Update Description",
-    "maxStaff": 10,
+    "subscriptionTier": "PREMIUM",
     "createdBy": "__FORMAT_VALIDATED__",
     "updatedBy": "__FORMAT_VALIDATED__",
     "createdAt": null,

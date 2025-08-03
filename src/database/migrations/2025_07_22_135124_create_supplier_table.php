@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedInteger('max_staff');
+            $table->string('subscription_tier');
             $table->uuid('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('admin');
             $table->uuid('updated_by')->nullable();

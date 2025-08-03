@@ -2,7 +2,7 @@
     "id": "__FORMAT_VALIDATED__",
     "name": "Supplier Test 1",
     "description": "Supplier Test 1 Description",
-    "maxStaff": 5,
+    "subscriptionTier": "STANDARD",
     "createdBy": "__FORMAT_VALIDATED__",
     "updatedBy": "__FORMAT_VALIDATED__",
     "createdAt": null,

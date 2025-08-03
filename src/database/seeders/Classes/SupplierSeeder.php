@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Classes;
 
+use App\Enums\SubscriptionTier;
 use App\Models\Supplier\SupplierEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -25,7 +26,7 @@ class SupplierSeeder extends Seeder
         SupplierEntity::create([
             'id' => Uuid::fromString(self::SUPPLIER_ONE_ID),
             'name' => 'One Piece',
-            'max_staff' => 10,
+            'subscription_tier' => SubscriptionTier::STANDARD,
             'created_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
             'updated_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
             'created_at' => $date,
@@ -35,7 +36,7 @@ class SupplierSeeder extends Seeder
         SupplierEntity::create([
             'id' => Uuid::fromString(self::SUPPLIER_TWO_ID),
             'name' => 'Solo Leveling',
-            'max_staff' => '1',
+            'subscription_tier' => SubscriptionTier::BASIC,
             'created_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
             'updated_by' => Uuid::fromString(AdminSeeder::ADMIN_ONE_ID),
             'created_at' => $date,

@@ -6,6 +6,7 @@ namespace App\Models\Supplier;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
+use App\Enums\SubscriptionTier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -40,7 +41,7 @@ class SupplierEntity extends Model
             id: $this->id,
             name: $this->name,
             description: $this->description,
-            maxStaff: $this->max_staff,
+            subscriptionTier: SubscriptionTier::from($this->subscription_tier),
             createdBy: $this->created_by ? $this->created_by : null,
             updatedBy: $this->updated_by ? $this->updated_by : null,
             createdAt: $this->createdAt ? $this->created_at : null,

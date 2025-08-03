@@ -2,7 +2,7 @@
     "id": "__FORMAT_VALIDATED__",
     "name": "One Piece",
     "description": null,
-    "maxStaff": 10,
+    "subscriptionTier": "STANDARD",
     "createdBy": "__FORMAT_VALIDATED__",
     "updatedBy": "__FORMAT_VALIDATED__",
     "createdAt": null,

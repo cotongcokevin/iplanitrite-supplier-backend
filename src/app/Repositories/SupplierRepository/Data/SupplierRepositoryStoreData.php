@@ -12,7 +12,7 @@ class SupplierRepositoryStoreData
     public function __construct(
         public UuidInterface $id,
         public string $name,
-        public string $description,
+        public ?string $description,
         public SubscriptionTier $subscriptionTier
     ) {}
 }

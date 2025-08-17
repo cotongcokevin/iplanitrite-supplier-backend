@@ -45,7 +45,7 @@ class AdminEntity extends Authenticatable implements JWTSubject
 
     public function getJWTIdentifier(): UuidInterface
     {
-        return $this->getKey();
+        return $this->getKey(); 
     }
 
     public function getJWTCustomClaims(): array

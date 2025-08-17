@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Dto\Requests\Supplier;
+namespace App\Data\Dto\Requests\Admin;
 
 use App\Enums\SubscriptionTier;
 use Illuminate\Http\Request;

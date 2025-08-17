@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Data\Dto\Requests\Supplier\SupplierStoreRequestDto;
-use App\Data\Dto\Requests\Supplier\SupplierUpdateRequestDto;
+use App\Data\Dto\Requests\Admin\SupplierStoreRequestDto;
+use App\Data\Dto\Requests\Admin\SupplierUpdateRequestDto;
 use App\Models\Supplier\SupplierModel;
-use App\Services\Supplier\SupplierService;
+use App\Services\Admin\SupplierService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;

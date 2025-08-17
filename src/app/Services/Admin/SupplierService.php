@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Supplier;
+namespace App\Services\Admin;
 
 use App\Classes\Principals\Principal;
-use App\Data\Dto\Requests\Supplier\SupplierStoreRequestDto;
-use App\Data\Dto\Requests\Supplier\SupplierUpdateRequestDto;
+use App\Data\Dto\Requests\Admin\SupplierStoreRequestDto;
+use App\Data\Dto\Requests\Admin\SupplierUpdateRequestDto;
 use App\Models\Supplier\SupplierModel;
 use App\Repositories\SupplierRepository\Data\SupplierRepositoryStoreData;
 use App\Repositories\SupplierRepository\Data\SupplierRepositoryUpdateData;

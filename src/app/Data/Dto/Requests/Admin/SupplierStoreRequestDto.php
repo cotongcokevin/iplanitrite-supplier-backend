@@ -2,29 +2,30 @@
 
 declare(strict_types=1);
 
-namespace App\Dto\Requests\Supplier;
+namespace App\Data\Dto\Requests\Admin;
 
+use App\Enums\SubscriptionTier;
 use Illuminate\Http\Request;
 
 class SupplierStoreRequestDto
 {
     private function __construct(
         public string $name,
-        public string $description,
-        public int $maxStaff
+        public ?string $description,
+        public SubscriptionTier $subscriptionTier
     ) {}
 
     public static function fromRequest(Request $request): SupplierStoreRequestDto
     {
         $request->validate([
             'name' => 'required',
-            'maxStaff' => 'required|numeric',
+            'subscriptionTier' => 'required',
         ]);
 
         return new SupplierStoreRequestDto(
             name: $request->name,
             description: $request->description,
-            maxStaff: $request->maxStaff,
+            subscriptionTier: SubscriptionTier::from($request->subscriptionTier),
         );
     }
 }

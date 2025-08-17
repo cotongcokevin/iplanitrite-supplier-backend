@@ -12,8 +12,6 @@ readonly class EnvData
     public function __construct(
         public EnvironmentType $environment,
         public string $adminFrontEndURI,
-        public string $supplierFrontEndURI,
-        public string $clientFrontEndURI,
         public UuidInterface $countryId,
         public int $jwtTTL
     ) {}

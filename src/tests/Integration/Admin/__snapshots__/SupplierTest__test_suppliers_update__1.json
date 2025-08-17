@@ -5,7 +5,7 @@
     "subscriptionTier": "PREMIUM",
     "createdBy": "__FORMAT_VALIDATED__",
     "updatedBy": "__FORMAT_VALIDATED__",
-    "createdAt": null,
-    "updatedAt": null,
+    "createdAt": "__FORMAT_VALIDATED__",
+    "updatedAt": "__FORMAT_VALIDATED__",
     "deletedAt": null
 }

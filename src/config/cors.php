@@ -21,8 +21,6 @@ return [
 
     'allowed_origins' => [
         env('ADMIN_FRONT_END_URI'),
-        env('SUPPLIER_FRONT_END_URI'),
-        env('CLIENT_FRONT_END_URI'),
     ],
 
     'allowed_origins_patterns' => [],

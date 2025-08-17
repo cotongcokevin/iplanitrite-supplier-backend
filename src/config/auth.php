@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Admin\AdminEntity;
-use App\Models\Client\ClientEntity;
-use App\Models\SupplierStaff\SupplierStaffEntity;
 
 return [
 
@@ -44,16 +42,6 @@ return [
             'driver' => 'jwt',
             'provider' => 'admin',
         ],
-
-        'SUPPLIER_STAFF' => [
-            'driver' => 'jwt',
-            'provider' => 'supplier_staff',
-        ],
-
-        'CLIENT' => [
-            'driver' => 'jwt',
-            'provider' => 'client',
-        ],
     ],
 
     /*
@@ -77,14 +65,6 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => AdminEntity::class,
-        ],
-        'supplier_staff' => [
-            'driver' => 'eloquent',
-            'model' => SupplierStaffEntity::class,
-        ],
-        'client' => [
-            'driver' => 'eloquent',
-            'model' => ClientEntity::class,
         ],
     ],
 

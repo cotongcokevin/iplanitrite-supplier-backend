@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Admin;
+namespace App\Services;
 
 use App\Data\Dto\Requests\LoginRequestDto;
 use App\Enums\AuthGuardType;

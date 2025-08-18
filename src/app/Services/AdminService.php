@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Admin;
+namespace App\Services;
 
 use App\Classes\Principals\Principal;
 use App\Data\Dto\Requests\Admin\AdminStoreRequestDto;

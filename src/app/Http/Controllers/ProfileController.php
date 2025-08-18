@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Classes\Principals\Principal;
 use App\Data\Dto\Requests\Admin\AdminUpdateRequestDto;
-use App\Services\Admin\AdminService;
+use App\Services\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

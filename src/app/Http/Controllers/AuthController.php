@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Classes\Env\Env;
 use App\Data\Dto\Requests\LoginRequestDto;
-use App\Services\Admin\AuthService;
+use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

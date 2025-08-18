@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Data\Dto\Requests\Admin\AdminStoreRequestDto;
-use App\Data\Dto\Requests\Admin\AdminUpdateRequestDto;
-use App\Models\Admin\AdminModel;
-use App\Services\Admin\AdminService;
+use App\Data\Dto\Requests\Admin\SupplierStoreRequestDto;
+use App\Data\Dto\Requests\Admin\SupplierUpdateRequestDto;
+use App\Models\Supplier\SupplierModel;
+use App\Services\SupplierService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
-class AdminController
+class SupplierController
 {
-    public function index(AdminService $service): JsonResponse
+    public function index(SupplierService $service): JsonResponse
     {
         return transaction(function () use ($service) {
             $result = $service->search();
 
-            return $result->map(function (AdminModel $model) {
+            return $result->map(function (SupplierModel $model) {
                 return $model->toDto();
             });
         });
     }
 
     public function show(
-        AdminService $service,
+        SupplierService $service,
         string $id
     ): JsonResponse {
         return transaction(function () use ($service, $id) {
@@ -39,11 +39,11 @@ class AdminController
     }
 
     public function store(
-        AdminService $service,
+        SupplierService $service,
         Request $request
     ): JsonResponse {
         return transaction(function () use ($service, $request) {
-            $requestDto = AdminStoreRequestDto::fromRequest($request);
+            $requestDto = SupplierStoreRequestDto::fromRequest($request);
             $model = $service->store($requestDto);
 
             return $model->toDto();
@@ -51,12 +51,12 @@ class AdminController
     }
 
     public function update(
-        AdminService $service,
+        SupplierService $service,
         Request $request,
         string $id
     ): JsonResponse {
         return transaction(function () use ($service, $request, $id) {
-            $requestDto = AdminUpdateRequestDto::fromRequest($request);
+            $requestDto = SupplierUpdateRequestDto::fromRequest($request);
             $model = $service->update(
                 $requestDto,
                 Uuid::fromString($id)
@@ -67,7 +67,7 @@ class AdminController
     }
 
     public function destroy(
-        AdminService $service,
+        SupplierService $service,
         string $id
     ): JsonResponse {
         return transaction(function () use ($service, $id) {

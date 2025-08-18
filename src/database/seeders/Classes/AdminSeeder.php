@@ -28,7 +28,7 @@ class AdminSeeder extends Seeder
 
         AdminEntity::create([
             'id' => Uuid::fromString(self::ADMIN_ONE_ID),
-            'email' => 'cotongcokevin@iplanitrite.com',
+            'email' => 'kevin@iplanitrite.com',
             'password' => bcrypt('password'),
             'first_name' => 'Kevin',
             'last_name' => 'Cotongco',
@@ -38,7 +38,7 @@ class AdminSeeder extends Seeder
 
         AdminEntity::create([
             'id' => Uuid::fromString(self::ADMIN_TWO_ID),
-            'email' => 'lloreraandrew@iplanitrite.com',
+            'email' => 'andrew@iplanitrite.com',
             'password' => bcrypt('password'),
             'first_name' => 'Andrew',
             'last_name' => 'Llorera',
@@ -50,7 +50,7 @@ class AdminSeeder extends Seeder
 
         AdminEntity::create([
             'id' => Uuid::fromString(self::ADMIN_THREE_ID),
-            'email' => 'almiraellaine@iplanitrite.com',
+            'email' => 'ellaine@iplanitrite.com',
             'password' => bcrypt('password'),
             'first_name' => 'Ellaine',
             'last_name' => 'Almira',
@@ -62,7 +62,7 @@ class AdminSeeder extends Seeder
 
         AdminEntity::create([
             'id' => Uuid::fromString(self::ADMIN_FOUR_ID),
-            'email' => 'basajoy@iplanitrite.com',
+            'email' => 'jace@iplanitrite.com',
             'password' => bcrypt('password'),
             'first_name' => 'Joy',
             'last_name' => 'Basa',

@@ -32,7 +32,7 @@ class AdminTest extends AdminTestCase
 
         $response->assertStatus(200);
         $resultArray = $response->json();
-        $this->assertEquals('lloreraandrew@iplanitrite.com', $resultArray['email']);
+        $this->assertEquals('andrew@iplanitrite.com', $resultArray['email']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 
@@ -82,7 +82,7 @@ class AdminTest extends AdminTestCase
             uri: self::generateUri('/admin/'.AdminSeeder::ADMIN_TWO_ID),
             token: $token->json(),
             data: [
-                'email' => 'lloreraandrew@iplanitrite.com',
+                'email' => 'andrew@iplanitrite.com',
                 'password' => 'password',
                 'firstName' => 'Andrew',
                 'lastName' => 'Llorera',

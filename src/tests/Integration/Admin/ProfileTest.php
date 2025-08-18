@@ -48,7 +48,7 @@ class ProfileTest extends AdminTestCase
 
         $response->assertStatus(200);
         $resultArray = $response->json();
-        $this->assertEquals('cotongcokevin@iplanitrite.com', $resultArray['email']);
+        $this->assertEquals('kevin@iplanitrite.com', $resultArray['email']);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }
 }

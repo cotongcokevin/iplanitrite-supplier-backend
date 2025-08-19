@@ -13,6 +13,7 @@ readonly class EnvData
         public EnvironmentType $environment,
         public string $adminFrontEndURI,
         public UuidInterface $countryId,
+        public string $jwtTokenName,
         public int $jwtTTL
     ) {}
 }

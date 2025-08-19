@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Data\Dto\Requests\LoginRequestDto;
 use App\Enums\AuthGuardType;
+use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\Auth\Guard;
@@ -20,7 +21,7 @@ class AuthService
     }
 
     /**
-     * @throws AuthenticationException
+     * @throws Exception
      */
     public function login(LoginRequestDto $request): string
     {
@@ -29,7 +30,7 @@ class AuthService
             'password' => $request->password,
         ]);
         if ($token === false) {
-            throw new AuthenticationException('Unauthenticated.');
+            throw new Exception('Unauthenticated.', 401);
         }
 
         /** @var string $token */

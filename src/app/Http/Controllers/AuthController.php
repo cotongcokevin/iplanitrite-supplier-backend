@@ -20,7 +20,17 @@ class AuthController
         $token = $authService->login($requestDto);
 
         return response()->json($token)
-            ->cookie('ems_sec_token', $token, Env::get()->jwtTTL, '/', null, true, true) // Secure, HttpOnly
+            ->cookie(
+                Env::get()->jwtTokenName,
+                $token,
+                Env::get()->jwtTTL,
+                '/',    // path
+                null,   // domain = null
+                false,  // secure
+                true,   // httpOnly
+                false,  // raw
+                'Lax'   // sameSite
+            )
             ->header('Access-Control-Allow-Origin', Env::get()->adminFrontEndURI)
             ->header('Access-Control-Allow-Credentials', 'true');
     }

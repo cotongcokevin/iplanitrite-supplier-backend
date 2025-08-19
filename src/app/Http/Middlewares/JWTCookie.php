@@ -6,7 +6,6 @@ namespace App\Http\Middlewares;
 
 use App\Classes\Env\Env;
 use Closure;
-use JWTAuth;
 
 class JWTCookie
 {
@@ -15,7 +14,7 @@ class JWTCookie
         $tokenName = Env::get()->jwtTokenName;
         if ($request->hasCookie(Env::get()->jwtTokenName)) {
             $token = $request->cookie($tokenName);
-            $request->headers->set('Authorization', 'Bearer ' . $token);
+            $request->headers->set('Authorization', 'Bearer '.$token);
         }
 
         return $next($request);

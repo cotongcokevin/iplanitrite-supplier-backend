@@ -7,11 +7,16 @@ namespace App\Http\Controllers;
 use App\Classes\Env\Env;
 use App\Data\Dto\Requests\LoginRequestDto;
 use App\Services\AuthService;
+use Cookie;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthController
 {
+    /**
+     * @throws Exception
+     */
     public function login(
         AuthService $authService,
         Request $request
@@ -37,8 +42,11 @@ class AuthController
 
     public function logout(): JsonResponse
     {
-        return transaction(function () {
-            auth()->logout();
-        });
+        auth()->logout();
+
+        return response()->json()
+            ->cookie(
+                Cookie::forget(Env::get()->jwtTokenName)
+            );
     }
 }

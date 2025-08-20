@@ -39,7 +39,7 @@ return [
     */
 
     'guards' => [
-        'SUPPLIER' => [
+        'SUPPLIER_STAFF' => [
             'driver' => 'jwt',
             'provider' => 'supplier_staff',
         ],
@@ -63,7 +63,7 @@ return [
     */
 
     'providers' => [
-        'admin' => [
+        'supplier_staff' => [
             'driver' => 'eloquent',
             'model' => SupplierStaffEntity::class,
         ],

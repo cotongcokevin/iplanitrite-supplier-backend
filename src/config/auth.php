@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin\AdminEntity;
+use App\Models\SupplierStaff\SupplierStaffEntity;
 
 return [
 
@@ -38,9 +39,9 @@ return [
     */
 
     'guards' => [
-        'ADMIN' => [
+        'SUPPLIER' => [
             'driver' => 'jwt',
-            'provider' => 'admin',
+            'provider' => 'supplier_staff',
         ],
     ],
 
@@ -64,7 +65,7 @@ return [
     'providers' => [
         'admin' => [
             'driver' => 'eloquent',
-            'model' => AdminEntity::class,
+            'model' => SupplierStaffEntity::class,
         ],
     ],
 

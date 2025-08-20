@@ -8,16 +8,16 @@ abstract class AdminTestCase extends BaseTestCase
 {
     public function getBaseUri(): string
     {
-        return '/api/admin';
+        return '/api';
     }
 
     public function getDefaultAuthEmail(): string
     {
-        return 'kevin@iplanitrite.com';
+        return '';
     }
 
     public function getDefaultAuthPassword(): string
     {
-        return 'password';
+        return '';
     }
 }

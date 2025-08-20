@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Integration\Admin;
-
-use Tests\Integration\AdminTestCase;
+namespace Tests\Integration;
 
 class AuthTest extends AdminTestCase
 {

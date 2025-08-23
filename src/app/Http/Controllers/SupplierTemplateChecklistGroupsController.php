@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Classes\Pair;
-use App\Data\Dto\Requests\SupplierTemplateChecklistGroupServiceCreateRequestDto;
-use App\Data\Dto\Requests\SupplierTemplateChecklistGroupServiceUpdateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistGroupCreateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistGroupUpdateRequestDto;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContextType;
@@ -45,7 +45,7 @@ class SupplierTemplateChecklistGroupsController
         Request $request
     ) {
         return transaction(function () use ($service, $request) {
-            $requestDto = SupplierTemplateChecklistGroupServiceCreateRequestDto::fromRequest($request);
+            $requestDto = SupplierTemplateChecklistGroupCreateRequestDto::fromRequest($request);
             $service->create($requestDto);
         });
     }
@@ -56,7 +56,7 @@ class SupplierTemplateChecklistGroupsController
         string $id
     ) {
         return transaction(function () use ($service, $request, $id) {
-            $requestDto = SupplierTemplateChecklistGroupServiceUpdateRequestDto::fromRequest($request);
+            $requestDto = SupplierTemplateChecklistGroupUpdateRequestDto::fromRequest($request);
             $service->update(
                 $requestDto,
                 Uuid::fromString($id)

@@ -9,7 +9,7 @@ use App\Enums\SupplierTemplateChecklistGroupSection;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 
-class SupplierTemplateChecklistGroupServiceCreateRequestDto
+class SupplierTemplateChecklistGroupCreateRequestDto
 {
     public function __construct(
         public SupplierTemplateChecklistGroupSection $section,
@@ -17,15 +17,15 @@ class SupplierTemplateChecklistGroupServiceCreateRequestDto
         public string $name,
     ) {}
 
-    public static function fromRequest(Request $request): SupplierTemplateChecklistGroupServiceCreateRequestDto
+    public static function fromRequest(Request $request): SupplierTemplateChecklistGroupCreateRequestDto
     {
         $request->validate([
             'section' => ['required', new Enum(SupplierTemplateChecklistGroupSection::class)],
             'accountableTo' => ['required', new Enum(SupplierTemplateChecklistGroupAccountableTo::class)],
-            'name' => 'required',
+            'name' => ['required', 'min:1'],
         ]);
 
-        return new SupplierTemplateChecklistGroupServiceCreateRequestDto(
+        return new SupplierTemplateChecklistGroupCreateRequestDto(
             SupplierTemplateChecklistGroupSection::from($request->section),
             SupplierTemplateChecklistGroupAccountableTo::from($request->accountableTo),
             $request->name

@@ -1,0 +1,30 @@
+[
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "section": "GENERAL",
+        "accountableTo": "SUPPLIER",
+        "name": "AAA",
+        "sortOrder": 0,
+        "supplierId": "__FORMAT_VALIDATED__",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": null,
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
+        "deletedAt": null,
+        "context": {
+            "checklists": [
+                {
+                    "id": "__FORMAT_VALIDATED__",
+                    "description": "Consectetur adipiscing elit sed do.",
+                    "sortOrder": 5,
+                    "supplierTemplateChecklistGroupId": "__FORMAT_VALIDATED__",
+                    "supplierId": "__FORMAT_VALIDATED__",
+                    "createdBy": "__FORMAT_VALIDATED__",
+                    "updatedBy": "__FORMAT_VALIDATED__",
+                    "createdAt": "__FORMAT_VALIDATED__",
+                    "updatedAt": "__FORMAT_VALIDATED__"
+                }
+            ]
+        }
+    }
+]

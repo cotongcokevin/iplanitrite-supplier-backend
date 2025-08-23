@@ -134,7 +134,7 @@ class BaseTestCase extends TestCase
                         $value = '__FORMAT_VALIDATED__';
                     }
 
-                    if (in_array($key, ['id', 'createdBy', 'updatedBy', 'supplierId']) && $value !== null) {
+                    if (in_array($key, ['id', 'createdBy', 'updatedBy', 'supplierId', 'supplierTemplateChecklistGroupId']) && $value !== null) {
                         Uuid::fromString($value);
                         $value = '__FORMAT_VALIDATED__';
                     }

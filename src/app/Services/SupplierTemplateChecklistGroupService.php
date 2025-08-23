@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Classes\Pair;
-use App\Data\Dto\Requests\SupplierTemplateChecklistGroupServiceCreateRequestDto;
-use App\Data\Dto\Requests\SupplierTemplateChecklistGroupServiceUpdateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistGroupCreateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistGroupUpdateRequestDto;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContext;
@@ -39,7 +39,7 @@ readonly class SupplierTemplateChecklistGroupService
     }
 
     public function create(
-        SupplierTemplateChecklistGroupServiceCreateRequestDto $dto
+        SupplierTemplateChecklistGroupCreateRequestDto $dto
     ): void {
         $lastGroup = $this->groupRepository->getLast(
             $dto->section,
@@ -48,14 +48,14 @@ readonly class SupplierTemplateChecklistGroupService
 
         $this->groupRepository->create(
             name: $dto->name,
-            sortOrder: ($lastGroup?->sortOrder + 1) ?: 0,
+            sortOrder: $lastGroup ? ($lastGroup->sortOrder + 1) : 0,
             section: $dto->section,
             accountableTo: $dto->accountableTo
         );
     }
 
     public function update(
-        SupplierTemplateChecklistGroupServiceUpdateRequestDto $dto,
+        SupplierTemplateChecklistGroupUpdateRequestDto $dto,
         UuidInterface $id,
     ): void {
         $this->groupRepository->update(

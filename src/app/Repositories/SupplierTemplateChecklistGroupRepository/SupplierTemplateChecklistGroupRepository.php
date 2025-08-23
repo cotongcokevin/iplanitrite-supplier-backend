@@ -68,6 +68,7 @@ readonly class SupplierTemplateChecklistGroupRepository
         $group->section = $section;
         $group->supplier_id = $this->principal::get()->guardId;
         $group->created_by = $this->principal::get()->id;
+        $group->created_at = Carbon::now();
         $group->save();
     }
 

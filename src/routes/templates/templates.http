@@ -36,3 +36,33 @@ DELETE {{ host }}/api/templates/checklist-groups/1ceeb4ce-8856-4f79-b325-80aa4e4
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}
+
+### TEMPLATE CHECKLIST BELOW
+
+POST {{ host }}/api/templates/checklist-groups/30d2743a-19b7-4777-ad08-f44de8fe80f6/checklists
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "description": "Lorem ipsum dolor sit amet"
+}
+
+###
+
+PUT {{ host }}/api/templates/checklist-groups/30d2743a-19b7-4777-ad08-f44de8fe80f6/checklists/c38bf99b-0d47-4afb-94df-95389a8304f2
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "description": "Consectetur adipiscing elit.",
+  "sortOrder": 5
+}
+
+###
+
+DELETE {{ host }}/api/templates/checklist-groups/30d2743a-19b7-4777-ad08-f44de8fe80f6/checklists/c38bf99b-0d47-4afb-94df-95389a8304f2
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}

@@ -7,7 +7,7 @@ namespace App\Classes\Scopes\Guard;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 
-class GuardedModel extends Model
+class GuardedEntity extends Model
 {
     /**
      * @throws BindingResolutionException

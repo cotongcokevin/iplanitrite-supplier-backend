@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Admin\AdminEntity;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 
 return [

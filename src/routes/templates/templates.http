@@ -1,0 +1,38 @@
+GET {{ host }}/api/templates/checklist-groups/general/supplier
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+###
+
+POST {{ host }}/api/templates/checklist-groups
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "section": "GENERAL",
+  "accountableTo": "SUPPLIER",
+  "name": "AAA"
+}
+
+###
+
+PUT {{ host }}/api/templates/checklist-groups/acde1471-34fe-445a-a47d-942b7b821487
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "section": "GENERAL",
+  "accountableTo": "SUPPLIER",
+  "name": "AAAA",
+  "sortOrder": 5
+}
+
+###
+
+DELETE {{ host }}/api/templates/checklist-groups/1ceeb4ce-8856-4f79-b325-80aa4e479776
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Integration;
 
-class AuthTest extends AdminTestCase
+class AuthTest extends BaseTestCase
 {
     public function test_admin_login(): void
     {
         $uri = self::generateUri('/auth/login');
         $response = $this->postJson($uri, [
-            'email' => 'kevin@iplanitrite.com',
+            'email' => 'luffy.monkey@onepiece.com',
             'password' => 'password',
         ]);
 
@@ -23,7 +23,7 @@ class AuthTest extends AdminTestCase
         $response = $this->postJson(
             uri: $uri,
             data: [
-                'email' => 'kevin@iplanitrite.com',
+                'email' => 'luffy.monkey@onepiece.com',
                 'password' => 'password',
             ]
         );
@@ -44,7 +44,7 @@ class AuthTest extends AdminTestCase
         $response = $this->postJson(
             uri: $uri,
             data: [
-                'email' => 'kevin@iplanitrite.com',
+                'email' => 'luffy.monkey@onepiece.com',
                 'password' => 'wrongPassword',
             ]
         );

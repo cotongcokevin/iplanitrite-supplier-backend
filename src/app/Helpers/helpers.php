@@ -39,7 +39,7 @@ function transaction(Closure $closure): JsonResponse
         logError($e);
 
         return response()->json(
-            new ExceptionCodeDto(ExceptionCode::QUERY, $e->getMessage()),
+            new ExceptionCodeDto(ExceptionCode::QUERY, $e->getFile().$e->getLine().$e->getMessage()),
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     } catch (Throwable $e) {
@@ -51,7 +51,7 @@ function transaction(Closure $closure): JsonResponse
         logError($e);
 
         return response()->json(
-            new ExceptionCodeDto(ExceptionCode::THROWABLE, $e->getMessage()),
+            new ExceptionCodeDto(ExceptionCode::THROWABLE, $e->getFile().$e->getLine().$e->getMessage()),
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     }

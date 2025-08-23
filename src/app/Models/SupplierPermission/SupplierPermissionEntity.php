@@ -6,10 +6,10 @@ namespace App\Models\SupplierPermission;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
-use App\Classes\Scopes\Guard\GuardedModel;
+use App\Classes\Scopes\Guard\GuardedEntity;
 use App\Enums\SupplierPermissionType;
 
-class SupplierPermissionEntity extends GuardedModel
+class SupplierPermissionEntity extends GuardedEntity
 {
     /**
      * @var string

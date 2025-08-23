@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Classes\Principals;
 
-use App\Models\Admin\AdminEntity;
-use App\Models\Client\ClientEntity;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 
 class Principal extends PrincipalStaticHandler
@@ -40,9 +38,7 @@ class Principal extends PrincipalStaticHandler
         $user = auth()->user();
 
         return match (true) {
-            $user instanceof AdminEntity => $user->toPrincipalData(),
             $user instanceof SupplierStaffEntity => $user->toPrincipalData(),
-            $user instanceof ClientEntity => $user->toPrincipalData(),
             default => throw new PrincipalException('Invalid principal')
         };
     }

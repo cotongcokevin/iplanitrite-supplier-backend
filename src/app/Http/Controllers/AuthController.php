@@ -36,7 +36,7 @@ class AuthController
                 false,  // raw
                 'Lax'   // sameSite
             )
-            ->header('Access-Control-Allow-Origin', Env::get()->adminFrontEndURI)
+            ->header('Access-Control-Allow-Origin', Env::get()->frontEndURI)
             ->header('Access-Control-Allow-Credentials', 'true');
     }
 

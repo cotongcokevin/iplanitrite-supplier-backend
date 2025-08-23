@@ -20,7 +20,7 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        env('ADMIN_FRONT_END_URI'),
+        env('FRONT_END_URI'),
     ],
 
     'allowed_origins_patterns' => [],

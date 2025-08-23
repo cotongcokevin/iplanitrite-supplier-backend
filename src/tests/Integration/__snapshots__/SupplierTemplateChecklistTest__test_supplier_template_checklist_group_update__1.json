@@ -1,0 +1,18 @@
+[
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "section": "GENERAL",
+        "accountableTo": "SUPPLIER",
+        "name": "NEW ONE",
+        "sortOrder": 5,
+        "supplierId": "__FORMAT_VALIDATED__",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": "__FORMAT_VALIDATED__",
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
+        "deletedAt": null,
+        "context": {
+            "checklists": []
+        }
+    }
+]

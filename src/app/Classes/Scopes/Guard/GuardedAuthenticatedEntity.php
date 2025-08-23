@@ -7,7 +7,7 @@ namespace App\Classes\Scopes\Guard;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class GuardedAuthenticatedModel extends Authenticatable
+class GuardedAuthenticatedEntity extends Authenticatable
 {
     /**
      * @throws BindingResolutionException

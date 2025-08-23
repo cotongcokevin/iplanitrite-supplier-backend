@@ -10,15 +10,24 @@ use Illuminate\Testing\TestResponse;
 use Ramsey\Uuid\Uuid;
 use Spatie\Snapshots\MatchesSnapshots;
 
-abstract class BaseTestCase extends TestCase
+class BaseTestCase extends TestCase
 {
     use MatchesSnapshots;
 
-    abstract public function getBaseUri(): string;
+    public function getBaseUri(): string
+    {
+        return '/api';
+    }
 
-    abstract public function getDefaultAuthEmail(): string;
+    public function getDefaultAuthEmail(): string
+    {
+        return 'luffy.monkey@onepiece.com';
+    }
 
-    abstract public function getDefaultAuthPassword(): string;
+    public function getDefaultAuthPassword(): string
+    {
+        return 'password';
+    }
 
     public function generateUri(string $uri): string
     {
@@ -125,7 +134,7 @@ abstract class BaseTestCase extends TestCase
                         $value = '__FORMAT_VALIDATED__';
                     }
 
-                    if (in_array($key, ['id', 'createdBy', 'updatedBy']) && $value !== null) {
+                    if (in_array($key, ['id', 'createdBy', 'updatedBy', 'supplierId']) && $value !== null) {
                         Uuid::fromString($value);
                         $value = '__FORMAT_VALIDATED__';
                     }

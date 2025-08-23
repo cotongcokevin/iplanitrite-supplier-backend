@@ -16,7 +16,7 @@ class Env
         if (! self::$env) {
             self::$env = new EnvData(
                 environment: EnvironmentType::from(env('APP_ENV')),
-                adminFrontEndURI: env('FRONT_END_URI'),
+                frontEndURI: env('FRONT_END_URI'),
                 countryId: Uuid::fromString(env('COUNTRY_ID')),
                 jwtTokenName: env('JWT_TOKEN_NAME'),
                 jwtTTL: (int) env('JWT_TTL')

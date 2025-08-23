@@ -7,8 +7,7 @@ namespace App\Models\SupplierStaff;
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
 use App\Classes\Principals\PrincipalData;
-use App\Classes\Scopes\Guard\GuardedAuthenticatedModel;
-use App\Enums\AuthGuardType;
+use App\Classes\Scopes\Guard\GuardedAuthenticatedEntity;
 use App\Models\Address\AddressEntity;
 use App\Models\ContactNumber\ContactNumberEntity;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
@@ -19,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\UuidInterface;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class SupplierStaffEntity extends GuardedAuthenticatedModel implements JWTSubject
+class SupplierStaffEntity extends GuardedAuthenticatedEntity implements JWTSubject
 {
     use SoftDeletes;
 
@@ -133,7 +132,6 @@ class SupplierStaffEntity extends GuardedAuthenticatedModel implements JWTSubjec
             id: $this->id,
             firstName: $this->first_name,
             lastName: $this->last_name,
-            type: AuthGuardType::SUPPLIER_STAFF,
             guardId: $this->supplier_id
         );
     }

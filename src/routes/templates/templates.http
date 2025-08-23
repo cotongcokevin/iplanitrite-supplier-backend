@@ -1,4 +1,4 @@
-GET {{ host }}/api/templates/checklist-groups/general/supplier
+GET {{ host }}/api/templates/checklist-groups/general/wedding/supplier
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}
@@ -13,6 +13,7 @@ Authorization: Bearer {{ token }}
 {
   "section": "GENERAL",
   "accountableTo": "SUPPLIER",
+  "eventType": "WEDDING",
   "name": "AAA"
 }
 
@@ -39,7 +40,7 @@ Authorization: Bearer {{ token }}
 
 ### TEMPLATE CHECKLIST BELOW
 
-POST {{ host }}/api/templates/checklist-groups/30d2743a-19b7-4777-ad08-f44de8fe80f6/checklists
+POST {{ host }}/api/templates/checklist-groups/8db379ee-c780-41b6-b32b-1cf2b1cc48bb/checklists
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}

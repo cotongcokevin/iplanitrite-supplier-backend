@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Classes\Pair;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupCreateRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupUpdateRequestDto;
+use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContext;
@@ -28,11 +29,13 @@ readonly class SupplierTemplateChecklistGroupService
      */
     public function getWithContext(
         SupplierTemplateChecklistGroupSection $section,
+        EventType $eventType,
         SupplierTemplateChecklistGroupAccountableTo $accountableTo,
         array $contexts
     ): Collection {
         return $this->groupRepository->getWithContext(
             $section,
+            $eventType,
             $accountableTo,
             $contexts
         );
@@ -48,6 +51,7 @@ readonly class SupplierTemplateChecklistGroupService
 
         $this->groupRepository->create(
             name: $dto->name,
+            eventType: $dto->eventType,
             sortOrder: $lastGroup ? ($lastGroup->sortOrder + 1) : 0,
             section: $dto->section,
             accountableTo: $dto->accountableTo

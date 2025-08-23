@@ -7,6 +7,7 @@ namespace App\Models\SupplierTemplateChecklistGroup;
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
 use App\Classes\Scopes\Guard\GuardedEntity;
+use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklist\SupplierTemplateChecklistEntity;
@@ -45,6 +46,7 @@ class SupplierTemplateChecklistGroupEntity extends GuardedEntity
         return new SupplierTemplateChecklistGroupModel(
             id: $this->id,
             section: SupplierTemplateChecklistGroupSection::from($this->section),
+            eventType: EventType::from($this->event_type),
             accountableTo: SupplierTemplateChecklistGroupAccountableTo::from($this->accountable_to),
             name: $this->name,
             sortOrder: $this->sort_order,

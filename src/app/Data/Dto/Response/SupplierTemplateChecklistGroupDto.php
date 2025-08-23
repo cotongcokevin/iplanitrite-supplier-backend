@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
+use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ class SupplierTemplateChecklistGroupDto extends ResponseDto
     public function __construct(
         public UuidInterface $id,
         public SupplierTemplateChecklistGroupSection $section,
+        public EventType $eventType,
         public SupplierTemplateChecklistGroupAccountableTo $accountableTo,
         public string $name,
         public int $sortOrder,

@@ -24,7 +24,7 @@ Route::group(['prefix' => 'templates'], function () {
         });
 
         Route::get(
-            '/{section}/{accountableTo}', [SupplierTemplateChecklistGroupsController::class, 'index']
+            '/{section}/{eventType}/{accountableTo}', [SupplierTemplateChecklistGroupsController::class, 'index']
         )->name('templates.checklist-groups.index');
 
         Route::post(

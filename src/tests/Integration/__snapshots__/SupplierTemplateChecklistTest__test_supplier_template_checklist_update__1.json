@@ -2,6 +2,7 @@
     {
         "id": "__FORMAT_VALIDATED__",
         "section": "GENERAL",
+        "eventType": "WEDDING",
         "accountableTo": "SUPPLIER",
         "name": "AAA",
         "sortOrder": 0,

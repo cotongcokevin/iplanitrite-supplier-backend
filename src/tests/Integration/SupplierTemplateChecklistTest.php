@@ -9,7 +9,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
     private function getGroups(string $token)
     {
         return $this->getJsonAuthorised(
-            uri: self::generateUri('/templates/checklist-groups/general/supplier'),
+            uri: self::generateUri('/templates/checklist-groups/general/wedding/supplier'),
             token: $token,
         )->json();
     }
@@ -30,16 +30,13 @@ class SupplierTemplateChecklistTest extends BaseTestCase
             data: [
                 'section' => 'GENERAL',
                 'accountableTo' => 'SUPPLIER',
+                'eventType' => 'WEDDING',
                 'name' => 'AAA',
             ]
         );
         $response->assertStatus(200);
 
-        $response = $this->getJsonAuthorised(
-            uri: self::generateUri('/templates/checklist-groups/general/supplier'),
-            token: $token->json(),
-        );
-        $resultArray = $response->json();
+        $resultArray = $this->getGroups($token->json());
         $this->assertCount(count($data) + 1, $resultArray);
         $this->cleanAutoBeforeAssertingJsonSnapshot($resultArray);
     }

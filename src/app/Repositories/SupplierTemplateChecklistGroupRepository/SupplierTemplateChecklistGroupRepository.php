@@ -6,6 +6,7 @@ namespace App\Repositories\SupplierTemplateChecklistGroupRepository;
 
 use App\Classes\Pair;
 use App\Classes\Principals\Principal;
+use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContext;
@@ -38,10 +39,12 @@ readonly class SupplierTemplateChecklistGroupRepository
      */
     public function getWithContext(
         SupplierTemplateChecklistGroupSection $section,
+        EventType $eventType,
         SupplierTemplateChecklistGroupAccountableTo $accountableTo,
         array $contexts
     ): Collection {
         $result = SupplierTemplateChecklistGroupEntity::where('section', $section)
+            ->where('event_type', $eventType)
             ->where('accountable_to', $accountableTo)
             ->orderBy('sort_order', 'ASC')
             ->get();
@@ -56,6 +59,7 @@ readonly class SupplierTemplateChecklistGroupRepository
 
     public function create(
         string $name,
+        EventType $eventType,
         int $sortOrder,
         SupplierTemplateChecklistGroupSection $section,
         SupplierTemplateChecklistGroupAccountableTo $accountableTo
@@ -63,6 +67,7 @@ readonly class SupplierTemplateChecklistGroupRepository
         $group = new SupplierTemplateChecklistGroupEntity;
         $group->id = Uuid::uuid4();
         $group->name = $name;
+        $group->event_type = $eventType;
         $group->sort_order = $sortOrder;
         $group->accountable_to = $accountableTo;
         $group->section = $section;

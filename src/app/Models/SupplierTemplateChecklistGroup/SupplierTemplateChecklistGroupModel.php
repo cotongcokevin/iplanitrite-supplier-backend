@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\SupplierTemplateChecklistGroup;
 
 use App\Data\Dto\Response\SupplierTemplateChecklistGroupDto;
+use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContext;
@@ -17,6 +18,7 @@ class SupplierTemplateChecklistGroupModel
     public function __construct(
         public UuidInterface $id,
         public SupplierTemplateChecklistGroupSection $section,
+        public EventType $eventType,
         public SupplierTemplateChecklistGroupAccountableTo $accountableTo,
         public string $name,
         public int $sortOrder,
@@ -38,6 +40,7 @@ class SupplierTemplateChecklistGroupModel
         return new SupplierTemplateChecklistGroupDto(
             id: $this->id,
             section: $this->section,
+            eventType: $this->eventType,
             accountableTo: $this->accountableTo,
             name: $this->name,
             sortOrder: $this->sortOrder,

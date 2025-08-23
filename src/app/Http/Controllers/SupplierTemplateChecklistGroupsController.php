@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Classes\Pair;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupCreateRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupUpdateRequestDto;
+use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContextType;
@@ -20,15 +21,17 @@ class SupplierTemplateChecklistGroupsController
     public function index(
         SupplierTemplateChecklistGroupService $service,
         string $section,
+        string $eventType,
         string $accountableTo
     ) {
         $contexts = [
             SupplierTemplateChecklistGroupContextType::CHECKLISTS,
         ];
 
-        return transaction(function () use ($service, $section, $accountableTo, $contexts) {
+        return transaction(function () use ($service, $section, $eventType, $accountableTo, $contexts) {
             return $service->getWithContext(
                 SupplierTemplateChecklistGroupSection::from(strtoupper($section)),
+                EventType::from(strtoupper($eventType)),
                 SupplierTemplateChecklistGroupAccountableTo::from(strtoupper($accountableTo)),
                 $contexts
             )->map(function (Pair $result) use ($contexts) {

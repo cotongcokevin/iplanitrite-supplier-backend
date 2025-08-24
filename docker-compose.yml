@@ -15,6 +15,9 @@ services:
     build:
       context: .
       dockerfile: php/Dockerfile
+    networks:
+      - default
+      - shared-backend
     volumes:
       - ./src:/var/www/html
     environment:
@@ -22,3 +25,9 @@ services:
       # adjust as needed
       COMPOSER_ALLOW_SUPERUSER: 1
     working_dir: /var/www/html
+
+networks:
+  default:
+    driver: bridge
+  shared-backend:
+    external: true

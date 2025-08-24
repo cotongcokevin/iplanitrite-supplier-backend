@@ -11,10 +11,23 @@ use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\UuidInterface;
 
 class SupplierStaffRepository
 {
+    /**
+     * @return Collection<int, SupplierStaffModel>
+     */
+    public function search(): Collection
+    {
+        $supplierStaffList = SupplierStaffEntity::get();
+
+        return $supplierStaffList->map(function (SupplierStaffEntity $supplierStaff) {
+            return $supplierStaff->toModel();
+        });
+    }
+
     public function getById(
         UuidInterface $id,
     ): SupplierStaffModel {

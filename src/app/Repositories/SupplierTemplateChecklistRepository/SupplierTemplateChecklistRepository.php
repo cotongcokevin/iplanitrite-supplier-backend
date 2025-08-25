@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\SupplierTemplateChecklistRepository;
 
+use App\Classes\Pair;
 use App\Classes\Principals\Principal;
 use App\Models\SupplierTemplateChecklist\SupplierTemplateChecklistEntity;
 use App\Models\SupplierTemplateChecklist\SupplierTemplateChecklistModel;
@@ -55,6 +56,23 @@ readonly class SupplierTemplateChecklistRepository
         $entity->updated_by = $this->principal::get()->id;
         $entity->updated_at = Carbon::now();
         $entity->save();
+    }
+
+    /**
+     * @param array<string,int> $toSort
+     * @return void
+     */
+    public function sort(
+        array $toSort
+    ): void {
+        $ids = collect(array_keys($toSort))->map(fn($id) => Uuid::fromString($id));
+        $checklists = SupplierTemplateChecklistEntity::whereIn("id", $ids)->get()->toArray();
+        foreach($checklists as &$checklist) {
+            $id = (string) $checklist['id'];
+            $checklist['sort_order'] = $toSort[$id];
+        }
+
+        SupplierTemplateChecklistEntity::upsert($checklists, ['id']);
     }
 
     public function delete(

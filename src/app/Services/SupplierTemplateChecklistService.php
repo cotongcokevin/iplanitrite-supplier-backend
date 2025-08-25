@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Data\Dto\Requests\SupplierTemplateChecklistCreateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistSortRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistUpdateRequestDto;
 use App\Repositories\SupplierTemplateChecklistRepository\SupplierTemplateChecklistRepository;
 use Ramsey\Uuid\UuidInterface;
@@ -40,6 +41,14 @@ class SupplierTemplateChecklistService
             id: $id,
             description: $dto->description,
             sortOrder: $dto->sortOrder
+        );
+    }
+
+    public function sort(
+        SupplierTemplateChecklistSortRequestDto $dto
+    ): void {
+        $this->repository->sort(
+            $dto->data
         );
     }
 

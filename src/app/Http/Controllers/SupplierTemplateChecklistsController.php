@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Data\Dto\Requests\SupplierTemplateChecklistCreateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistSortRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistUpdateRequestDto;
 use App\Services\SupplierTemplateChecklistService;
 use Illuminate\Http\Request;
@@ -39,6 +40,16 @@ class SupplierTemplateChecklistsController
                 Uuid::fromString($groupId),
                 Uuid::fromString($id)
             );
+        });
+    }
+
+    public function sort(
+        SupplierTemplateChecklistService $service,
+        Request $request,
+    ) {
+        return transaction(function () use ($service, $request) {
+            $requestDto = SupplierTemplateChecklistSortRequestDto::fromRequest($request);
+            $service->sort($requestDto);
         });
     }
 

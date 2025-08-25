@@ -14,6 +14,7 @@ use App\Enums\SupplierTemplateChecklistGroupSection;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContextType;
 use App\Models\SupplierTemplateChecklistGroup\SupplierTemplateChecklistGroupModel;
 use App\Services\SupplierTemplateChecklistGroupService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -24,7 +25,7 @@ class SupplierTemplateChecklistGroupsController
         string $section,
         string $eventType,
         string $accountableTo
-    ) {
+    ): JsonResponse {
         $contexts = [
             SupplierTemplateChecklistGroupContextType::CHECKLISTS,
         ];
@@ -47,7 +48,7 @@ class SupplierTemplateChecklistGroupsController
     public function store(
         SupplierTemplateChecklistGroupService $service,
         Request $request
-    ) {
+    ): JsonResponse {
         return transaction(function () use ($service, $request) {
             $requestDto = SupplierTemplateChecklistGroupCreateRequestDto::fromRequest($request);
             $service->create($requestDto);
@@ -57,7 +58,7 @@ class SupplierTemplateChecklistGroupsController
     public function sort(
         SupplierTemplateChecklistGroupService $service,
         Request $request
-    ) {
+    ): JsonResponse {
         return transaction(function () use ($service, $request) {
             $requestDto = SupplierTemplateChecklistGroupSortRequestDto::fromRequest($request);
             $service->sort($requestDto);
@@ -68,7 +69,7 @@ class SupplierTemplateChecklistGroupsController
         SupplierTemplateChecklistGroupService $service,
         Request $request,
         string $id
-    ) {
+    ): JsonResponse {
         return transaction(function () use ($service, $request, $id) {
             $requestDto = SupplierTemplateChecklistGroupUpdateRequestDto::fromRequest($request);
             $service->update(
@@ -81,7 +82,7 @@ class SupplierTemplateChecklistGroupsController
     public function destroy(
         SupplierTemplateChecklistGroupService $service,
         string $id
-    ) {
+    ): JsonResponse {
         return transaction(function () use ($service, $id) {
             $service->destroy(
                 Uuid::fromString($id)

@@ -35,7 +35,7 @@ readonly class SupplierTemplateChecklistRepository
     public function getLastChecklist(UuidInterface $groupId): ?SupplierTemplateChecklistModel
     {
         return SupplierTemplateChecklistEntity::where('supplier_template_checklist_group_id', $groupId)
-            ->orderBy('sort_order', 'ASC')
+            ->orderBy('sort_order', 'DESC')
             ->first()
             ?->toModel();
     }

@@ -22,6 +22,17 @@ readonly class SupplierTemplateChecklistGroupRepository
 {
     public function __construct(private Principal $principal) {}
 
+    /**
+     * @param  UuidInterface[]  $ids
+     * @return Collection<SupplierTemplateChecklistGroupModel>
+     */
+    public function getByIds(array $ids): Collection
+    {
+        return SupplierTemplateChecklistGroupEntity::whereIn('id', $ids)->get()->map(
+            fn (SupplierTemplateChecklistGroupEntity $entity) => ($entity->toModel())
+        );
+    }
+
     public function getLast(
         SupplierTemplateChecklistGroupSection $section,
         SupplierTemplateChecklistGroupAccountableTo $accountableTo,
@@ -77,15 +88,27 @@ readonly class SupplierTemplateChecklistGroupRepository
         $group->save();
     }
 
+    /**
+     * @param  SupplierTemplateChecklistGroupEntity[]  $entities
+     */
+    public function sort(
+        array $entities
+    ): void {
+        SupplierTemplateChecklistGroupEntity::upsert(
+            collect($entities)->map(
+                fn (SupplierTemplateChecklistGroupEntity $entity) => ($entity->toArray())
+            )->toArray(),
+            ['id']
+        );
+    }
+
     public function update(
         UuidInterface $id,
         string $name,
-        int $sortOrder,
     ): void {
         SupplierTemplateChecklistGroupEntity::where('id', $id)
             ->update([
                 'name' => $name,
-                'sort_order' => $sortOrder,
                 'updated_by' => $this->principal::get()->id,
                 'updated_at' => Carbon::now(),
             ]);

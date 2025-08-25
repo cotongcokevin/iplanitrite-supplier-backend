@@ -1,0 +1,53 @@
+[
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "section": "GENERAL",
+        "eventType": "WEDDING",
+        "accountableTo": "SUPPLIER",
+        "name": "C",
+        "sortOrder": 0,
+        "supplierId": "__FORMAT_VALIDATED__",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": null,
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
+        "deletedAt": null,
+        "context": {
+            "checklists": []
+        }
+    },
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "section": "GENERAL",
+        "eventType": "WEDDING",
+        "accountableTo": "SUPPLIER",
+        "name": "A",
+        "sortOrder": 1,
+        "supplierId": "__FORMAT_VALIDATED__",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": null,
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
+        "deletedAt": null,
+        "context": {
+            "checklists": []
+        }
+    },
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "section": "GENERAL",
+        "eventType": "WEDDING",
+        "accountableTo": "SUPPLIER",
+        "name": "B",
+        "sortOrder": 2,
+        "supplierId": "__FORMAT_VALIDATED__",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": null,
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
+        "deletedAt": null,
+        "context": {
+            "checklists": []
+        }
+    }
+]

@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Classes\Pair;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupCreateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistGroupSortRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupUpdateRequestDto;
 use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
@@ -15,6 +16,7 @@ use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistG
 use App\Models\SupplierTemplateChecklistGroup\SupplierTemplateChecklistGroupModel;
 use App\Repositories\SupplierTemplateChecklistGroupRepository\SupplierTemplateChecklistGroupRepository;
 use Illuminate\Support\Collection;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class SupplierTemplateChecklistGroupService
@@ -58,6 +60,22 @@ readonly class SupplierTemplateChecklistGroupService
         );
     }
 
+    public function sort(
+        SupplierTemplateChecklistGroupSortRequestDto $dto
+    ): void {
+        $ids = collect(array_keys($dto->data))->map(fn ($id) => Uuid::fromString($id))->all();
+
+        $entities = [];
+
+        $groups = $this->groupRepository->getByIds($ids);
+        foreach ($groups as &$group) {
+            $group->sortOrder = $dto->data[(string) $group->id];
+            $entities[] = $group->toEntity();
+        }
+
+        $this->groupRepository->sort($entities);
+    }
+
     public function update(
         SupplierTemplateChecklistGroupUpdateRequestDto $dto,
         UuidInterface $id,
@@ -65,7 +83,6 @@ readonly class SupplierTemplateChecklistGroupService
         $this->groupRepository->update(
             id: $id,
             name: $dto->name,
-            sortOrder: $dto->sortOrder,
         );
     }
 

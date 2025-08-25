@@ -8,6 +8,7 @@ use App\Data\Dto\Requests\SupplierTemplateChecklistCreateRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistSortRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistUpdateRequestDto;
 use App\Repositories\SupplierTemplateChecklistRepository\SupplierTemplateChecklistRepository;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class SupplierTemplateChecklistService
@@ -40,16 +41,24 @@ class SupplierTemplateChecklistService
             groupId: $groupId,
             id: $id,
             description: $dto->description,
-            sortOrder: $dto->sortOrder
         );
     }
 
     public function sort(
-        SupplierTemplateChecklistSortRequestDto $dto
+        SupplierTemplateChecklistSortRequestDto $dto,
+        UuidInterface $groupId,
     ): void {
-        $this->repository->sort(
-            $dto->data
-        );
+        $ids = collect(array_keys($dto->data))->map(fn ($id) => Uuid::fromString($id))->all();
+
+        $entities = [];
+
+        $checklists = $this->repository->getByIds($groupId, $ids);
+        foreach ($checklists as &$checklist) {
+            $checklist->sortOrder = $dto->data[(string) $checklist->id];
+            $entities[] = $checklist->toEntity();
+        }
+
+        $this->repository->sort($entities);
     }
 
     public function delete(

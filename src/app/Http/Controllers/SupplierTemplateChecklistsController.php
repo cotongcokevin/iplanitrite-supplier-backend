@@ -45,11 +45,15 @@ class SupplierTemplateChecklistsController
 
     public function sort(
         SupplierTemplateChecklistService $service,
+        string $groupId,
         Request $request,
     ) {
-        return transaction(function () use ($service, $request) {
+        return transaction(function () use ($service, $request, $groupId) {
             $requestDto = SupplierTemplateChecklistSortRequestDto::fromRequest($request);
-            $service->sort($requestDto);
+            $service->sort(
+                $requestDto,
+                Uuid::fromString($groupId),
+            );
         });
     }
 

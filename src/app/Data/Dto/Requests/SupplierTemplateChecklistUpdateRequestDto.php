@@ -10,19 +10,16 @@ class SupplierTemplateChecklistUpdateRequestDto
 {
     public function __construct(
         public string $description,
-        public int $sortOrder
     ) {}
 
     public static function fromRequest(Request $request): SupplierTemplateChecklistUpdateRequestDto
     {
         $request->validate([
             'description' => ['required', 'min:1'],
-            'sortOrder' => ['required', 'integer'],
         ]);
 
         return new SupplierTemplateChecklistUpdateRequestDto(
             $request->description,
-            $request->sortOrder
         );
     }
 }

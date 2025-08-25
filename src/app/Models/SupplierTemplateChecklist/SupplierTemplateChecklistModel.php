@@ -36,4 +36,20 @@ class SupplierTemplateChecklistModel
             updatedAt: $this->updatedAt,
         );
     }
+
+    public function toEntity(): SupplierTemplateChecklistEntity
+    {
+        $entity = new SupplierTemplateChecklistEntity;
+        $entity->id = (string) $this->id;
+        $entity->description = $this->description;
+        $entity->sort_order = $this->sortOrder;
+        $entity->supplier_template_checklist_group_id = (string) $this->supplierTemplateChecklistGroupId;
+        $entity->supplier_id = (string) $this->supplierId;
+        $entity->created_by = (string) $this->createdBy;
+        $entity->created_at = (string) $this->createdAt;
+        $entity->updated_by = ((string) $this->updatedBy) ?: null;
+        $entity->updated_at = ((string) $this->updatedAt) ?: null;
+
+        return $entity;
+    }
 }

@@ -35,6 +35,10 @@ Route::group(['prefix' => 'templates'], function () {
             '/', [SupplierTemplateChecklistGroupsController::class, 'store']
         )->name('templates.checklist-groups.store');
 
+        Route::post(
+            '/sort', [SupplierTemplateChecklistGroupsController::class, 'sort']
+        )->name('templates.checklist-groups.sort');
+
         Route::put(
             '/{checklistId}', [SupplierTemplateChecklistGroupsController::class, 'update']
         )->name('templates.checklist-groups.update');

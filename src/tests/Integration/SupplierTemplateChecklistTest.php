@@ -80,7 +80,6 @@ class SupplierTemplateChecklistTest extends BaseTestCase
             token: $token->json(),
             data: [
                 'description' => 'Consectetur adipiscing elit sed do.',
-                'sortOrder' => 5,
             ]
         );
         $response->assertStatus(200);
@@ -109,6 +108,48 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $data = $this->getChecklists($token->json());
         $this->assertCount($lastCount - 1, $data);
         $this->cleanAutoBeforeAssertingJsonSnapshot($this->getGroups($token->json()));
+    }
+
+    public function test_supplier_template_checklist_sort()
+    {
+        $token = $this->login();
+        $data = $this->getGroups($token->json());
+        $groupId = $data[0]['id'];
+
+        foreach (['A', 'B', 'C'] as $description) {
+            $this->postJsonAuthorised(
+                uri: self::generateUri("/templates/checklist-groups/$groupId/checklists"),
+                token: $token->json(),
+                data: [
+                    'description' => $description,
+                ]
+            );
+        }
+        $data = $this->getGroups($token->json());
+        $checklists = $data[0]['context']['checklists'];
+        $request[$checklists[2]['id']] = 0;
+        $request[$checklists[0]['id']] = 1;
+        $request[$checklists[1]['id']] = 2;
+
+        $this->postJsonAuthorised(
+            uri: self::generateUri("/templates/checklist-groups/$groupId/checklists/sort"),
+            token: $token->json(),
+            data: [
+                'data' => $request,
+            ]
+        );
+
+        $data = $this->getGroups($token->json());
+        $this->cleanAutoBeforeAssertingJsonSnapshot($data);
+
+        foreach ($data[0]['context']['checklists'] as $checklist) {
+            $checklistId = $checklist['id'];
+            $response = $this->deleteJsonAuthorised(
+                uri: self::generateUri("/templates/checklist-groups/$groupId/checklists/$checklistId"),
+                token: $token->json(),
+            );
+            $response->assertStatus(200);
+        }
     }
 
     public function test_supplier_template_checklist_group_update()
@@ -149,5 +190,48 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $data = $this->getGroups($token->json());
         $this->assertCount($lastCount - 1, $data);
         $this->cleanAutoBeforeAssertingJsonSnapshot($data);
+    }
+
+    public function test_supplier_template_checklist_group_sort()
+    {
+        $token = $this->login();
+
+        foreach (['A', 'B', 'C'] as $name) {
+            $this->postJsonAuthorised(
+                uri: self::generateUri('/templates/checklist-groups'),
+                token: $token->json(),
+                data: [
+                    'section' => 'GENERAL',
+                    'accountableTo' => 'SUPPLIER',
+                    'eventType' => 'WEDDING',
+                    'name' => $name,
+                ]
+            );
+        }
+
+        $data = $this->getGroups($token->json());
+        $request[$data[2]['id']] = 0;
+        $request[$data[0]['id']] = 1;
+        $request[$data[1]['id']] = 2;
+
+        $this->postJsonAuthorised(
+            uri: self::generateUri('/templates/checklist-groups/sort'),
+            token: $token->json(),
+            data: [
+                'data' => $request,
+            ]
+        );
+
+        $data = $this->getGroups($token->json());
+        $this->cleanAutoBeforeAssertingJsonSnapshot($data);
+
+        foreach ($data as $group) {
+            $groupId = $group['id'];
+            $response = $this->deleteJsonAuthorised(
+                uri: self::generateUri("/templates/checklist-groups/$groupId"),
+                token: $token->json(),
+            );
+            $response->assertStatus(200);
+        }
     }
 }

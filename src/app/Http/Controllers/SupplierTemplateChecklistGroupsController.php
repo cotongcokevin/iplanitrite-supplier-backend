@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\Pair;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupCreateRequestDto;
+use App\Data\Dto\Requests\SupplierTemplateChecklistGroupSortRequestDto;
 use App\Data\Dto\Requests\SupplierTemplateChecklistGroupUpdateRequestDto;
 use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
@@ -50,6 +51,16 @@ class SupplierTemplateChecklistGroupsController
         return transaction(function () use ($service, $request) {
             $requestDto = SupplierTemplateChecklistGroupCreateRequestDto::fromRequest($request);
             $service->create($requestDto);
+        });
+    }
+
+    public function sort(
+        SupplierTemplateChecklistGroupService $service,
+        Request $request
+    ) {
+        return transaction(function () use ($service, $request) {
+            $requestDto = SupplierTemplateChecklistGroupSortRequestDto::fromRequest($request);
+            $service->sort($requestDto);
         });
     }
 

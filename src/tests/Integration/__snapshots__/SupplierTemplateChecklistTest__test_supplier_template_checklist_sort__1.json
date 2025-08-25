@@ -1,0 +1,53 @@
+[
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "section": "GENERAL",
+        "eventType": "WEDDING",
+        "accountableTo": "SUPPLIER",
+        "name": "AAA",
+        "sortOrder": 0,
+        "supplierId": "__FORMAT_VALIDATED__",
+        "createdBy": "__FORMAT_VALIDATED__",
+        "updatedBy": null,
+        "createdAt": "__FORMAT_VALIDATED__",
+        "updatedAt": "__FORMAT_VALIDATED__",
+        "deletedAt": null,
+        "context": {
+            "checklists": [
+                {
+                    "id": "__FORMAT_VALIDATED__",
+                    "description": "C",
+                    "sortOrder": 0,
+                    "supplierTemplateChecklistGroupId": "__FORMAT_VALIDATED__",
+                    "supplierId": "__FORMAT_VALIDATED__",
+                    "createdBy": "__FORMAT_VALIDATED__",
+                    "updatedBy": null,
+                    "createdAt": "__FORMAT_VALIDATED__",
+                    "updatedAt": "__FORMAT_VALIDATED__"
+                },
+                {
+                    "id": "__FORMAT_VALIDATED__",
+                    "description": "A",
+                    "sortOrder": 1,
+                    "supplierTemplateChecklistGroupId": "__FORMAT_VALIDATED__",
+                    "supplierId": "__FORMAT_VALIDATED__",
+                    "createdBy": "__FORMAT_VALIDATED__",
+                    "updatedBy": null,
+                    "createdAt": "__FORMAT_VALIDATED__",
+                    "updatedAt": "__FORMAT_VALIDATED__"
+                },
+                {
+                    "id": "__FORMAT_VALIDATED__",
+                    "description": "B",
+                    "sortOrder": 2,
+                    "supplierTemplateChecklistGroupId": "__FORMAT_VALIDATED__",
+                    "supplierId": "__FORMAT_VALIDATED__",
+                    "createdBy": "__FORMAT_VALIDATED__",
+                    "updatedBy": null,
+                    "createdAt": "__FORMAT_VALIDATED__",
+                    "updatedAt": "__FORMAT_VALIDATED__"
+                }
+            ]
+        }
+    }
+]

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories\SupplierTemplateChecklistRepository;
 
-use App\Classes\Pair;
 use App\Classes\Principals\Principal;
 use App\Models\SupplierTemplateChecklist\SupplierTemplateChecklistEntity;
 use App\Models\SupplierTemplateChecklist\SupplierTemplateChecklistModel;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -17,6 +17,20 @@ readonly class SupplierTemplateChecklistRepository
     public function __construct(
         private Principal $principal
     ) {}
+
+    /**
+     * @param  UuidInterface[]  $ids
+     * @return Collection<SupplierTemplateChecklistModel>
+     */
+    public function getByIds(UuidInterface $groupId, array $ids): Collection
+    {
+        return SupplierTemplateChecklistEntity::where('supplier_template_checklist_group_id', $groupId)
+            ->whereIn('id', $ids)
+            ->get()
+            ->map(
+                fn (SupplierTemplateChecklistEntity $entity) => ($entity->toModel())
+            );
+    }
 
     public function getLastChecklist(UuidInterface $groupId): ?SupplierTemplateChecklistModel
     {
@@ -46,33 +60,28 @@ readonly class SupplierTemplateChecklistRepository
         UuidInterface $groupId,
         UuidInterface $id,
         string $description,
-        int $sortOrder
     ): void {
         $entity = SupplierTemplateChecklistEntity::where('id', $id)
             ->where('supplier_template_checklist_group_id', $groupId)
             ->first();
         $entity->description = $description;
-        $entity->sort_order = $sortOrder;
         $entity->updated_by = $this->principal::get()->id;
         $entity->updated_at = Carbon::now();
         $entity->save();
     }
 
     /**
-     * @param array<string,int> $toSort
-     * @return void
+     * @param  SupplierTemplateChecklistEntity[]  $entities
      */
     public function sort(
-        array $toSort
+        array $entities
     ): void {
-        $ids = collect(array_keys($toSort))->map(fn($id) => Uuid::fromString($id));
-        $checklists = SupplierTemplateChecklistEntity::whereIn("id", $ids)->get()->toArray();
-        foreach($checklists as &$checklist) {
-            $id = (string) $checklist['id'];
-            $checklist['sort_order'] = $toSort[$id];
-        }
-
-        SupplierTemplateChecklistEntity::upsert($checklists, ['id']);
+        SupplierTemplateChecklistEntity::upsert(
+            collect($entities)->map(
+                fn (SupplierTemplateChecklistEntity $entity) => ($entity->toArray())
+            )->toArray(),
+            ['id']
+        );
     }
 
     public function delete(

@@ -53,4 +53,23 @@ class SupplierTemplateChecklistGroupModel
             context: $context?->toDto($expectedContexts) ?: null
         );
     }
+
+    public function toEntity(): SupplierTemplateChecklistGroupEntity
+    {
+        $entity = new SupplierTemplateChecklistGroupEntity;
+        $entity->id = $this->id;
+        $entity->section = $this->section;
+        $entity->event_type = $this->eventType;
+        $entity->accountable_to = $this->accountableTo;
+        $entity->name = $this->name;
+        $entity->sort_order = $this->sortOrder;
+        $entity->supplier_id = (string) $this->supplierId;
+        $entity->created_by = (string) $this->createdBy;
+        $entity->created_at = (string) $this->createdAt;
+        $entity->updated_by = ((string) $this->updatedBy) ?: null;
+        $entity->updated_at = ((string) $this->updatedAt) ?: null;
+        $entity->deleted_at = ((string) $this->deletedAt) ?: null;
+
+        return $entity;
+    }
 }

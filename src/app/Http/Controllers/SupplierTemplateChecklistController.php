@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
-class SupplierTemplateChecklistsController
+class SupplierTemplateChecklistController
 {
     public function store(
         SupplierTemplateChecklistService $service,

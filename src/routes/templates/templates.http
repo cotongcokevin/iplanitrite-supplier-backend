@@ -67,3 +67,42 @@ DELETE {{ host }}/api/templates/checklist-groups/30d2743a-19b7-4777-ad08-f44de8f
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}
+
+
+### TEMPLATE TIMELINE
+GET {{ host }}/api/templates/timelines/WEDDING
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+###
+
+POST {{ host }}/api/templates/timelines
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "name": "Venue Ocular",
+  "isRsvp": false,
+  "eventType": "WEDDING"
+}
+
+###
+
+PUT {{ host }}/api/templates/timelines/8f296751-8564-4976-8d08-bff23a3c94da
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "name": "Venue Ocularsss",
+  "isRsvp": false
+}
+
+###
+
+DELETE {{ host }}/api/templates/timelines/8f296751-8564-4976-8d08-bff23a3c94da
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}

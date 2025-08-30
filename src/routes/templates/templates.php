@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\SupplierTemplateChecklistGroupsController;
 use App\Http\Controllers\SupplierTemplateChecklistsController;
+use App\Http\Controllers\SupplierTemplateTimelineController;
 
 Route::group(['prefix' => 'templates'], function () {
 
@@ -47,6 +48,24 @@ Route::group(['prefix' => 'templates'], function () {
             '/{checklistId}', [SupplierTemplateChecklistGroupsController::class, 'destroy']
         )->name('templates.checklist-groups.destroy');
 
+    });
+
+    Route::group(['prefix' => 'timelines'], function () {
+        Route::get(
+            '/{eventType}', [SupplierTemplateTimelineController::class, 'index']
+        )->name('templates.timeline.index');
+
+        Route::post(
+            '/', [SupplierTemplateTimelineController::class, 'store']
+        )->name('templates.timeline.store');
+
+        Route::put(
+            '/{id}', [SupplierTemplateTimelineController::class, 'update']
+        )->name('templates.timeline.update');
+
+        Route::delete(
+            '/{id}', [SupplierTemplateTimelineController::class, 'destroy']
+        )->name('templates.timeline.update');
     });
 
 });

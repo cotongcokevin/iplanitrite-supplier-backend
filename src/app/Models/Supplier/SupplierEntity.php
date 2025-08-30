@@ -7,10 +7,10 @@ namespace App\Models\Supplier;
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
 use App\Enums\SubscriptionTier;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SupplierEntity extends Model
+class SupplierEntity extends BaseEntity
 {
     use SoftDeletes;
 

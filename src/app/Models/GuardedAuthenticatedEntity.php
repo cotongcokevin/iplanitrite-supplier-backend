@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Classes\Scopes\Guard;
+namespace App\Models;
 
+use App\Classes\Scopes\Guard\GuardQueryScope;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class GuardedEntity extends Model
+class GuardedAuthenticatedEntity extends Authenticatable
 {
     /**
      * @throws BindingResolutionException

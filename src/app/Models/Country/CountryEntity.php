@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Models\Country;
 
 use App\Classes\Casts\UuidCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
-class CountryEntity extends Model
+class CountryEntity extends BaseEntity
 {
     public $timestamps = false;
 

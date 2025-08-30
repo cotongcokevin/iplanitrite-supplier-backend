@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Models\ContactNumber;
 
 use App\Classes\Casts\UuidCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
-class ContactNumberEntity extends Model
+class ContactNumberEntity extends BaseEntity
 {
     public $timestamps = false;
 

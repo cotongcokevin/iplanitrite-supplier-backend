@@ -6,8 +6,8 @@ namespace App\Models\SupplierPermission;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
-use App\Classes\Scopes\Guard\GuardedEntity;
 use App\Enums\SupplierPermissionType;
+use App\Models\GuardedEntity;
 
 class SupplierPermissionEntity extends GuardedEntity
 {

@@ -54,7 +54,8 @@ readonly class SupplierTemplateChecklistGroupRepository
         SupplierTemplateChecklistGroupAccountableTo $accountableTo,
         array $contexts
     ): Collection {
-        $result = SupplierTemplateChecklistGroupEntity::where('section', $section)
+        $result = SupplierTemplateChecklistGroupEntity::with($contexts)
+            ->where('section', $section)
             ->where('event_type', $eventType)
             ->where('accountable_to', $accountableTo)
             ->orderBy('sort_order', 'ASC')

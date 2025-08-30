@@ -6,14 +6,15 @@ namespace App\Models\SupplierTemplateChecklistGroup;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
-use App\Classes\Scopes\Guard\GuardedEntity;
 use App\Enums\EventType;
 use App\Enums\SupplierTemplateChecklistGroupAccountableTo;
 use App\Enums\SupplierTemplateChecklistGroupSection;
+use App\Models\GuardedEntity;
 use App\Models\SupplierTemplateChecklist\SupplierTemplateChecklistEntity;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContext;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContextException;
 use App\Models\SupplierTemplateChecklistGroup\Context\SupplierTemplateChecklistGroupContextType;
+use Exception;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -67,15 +68,17 @@ class SupplierTemplateChecklistGroupEntity extends GuardedEntity
 
     /**
      * @throws SupplierTemplateChecklistGroupContextException
+     * @throws Exception
      */
     public function buildContext($contexts): SupplierTemplateChecklistGroupContext
     {
-        $checklists = collect();
+        $this->validatedContexts($contexts);
 
+        $checklists = collect();
         foreach ($contexts as $context) {
             switch ($context) {
                 case SupplierTemplateChecklistGroupContextType::CHECKLISTS:
-                    $checklists = $this->checklists()->get()->map(
+                    $checklists = $this->checklists->map(
                         fn (SupplierTemplateChecklistEntity $checklist) => $checklist->toModel()
                     );
                     break;

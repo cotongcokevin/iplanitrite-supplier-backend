@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\SupplierStaff;
 
 use App\Data\Dto\Response\SupplierStaffDto;
+use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
@@ -28,7 +29,7 @@ class SupplierStaffModel
         public ?Carbon $deletedAt,
     ) {}
 
-    public function toDto(): SupplierStaffDto
+    public function toDto(?SupplierStaffContext $context,array $expectedContexts): SupplierStaffDto
     {
         return new SupplierStaffDto(
             id: $this->id,
@@ -44,6 +45,7 @@ class SupplierStaffModel
             createdAt: $this->createdAt,
             updatedAt: $this->updatedAt,
             deletedAt: $this->deletedAt,
+            context: $context?->toDto($expectedContexts) ?: null
         );
     }
 }

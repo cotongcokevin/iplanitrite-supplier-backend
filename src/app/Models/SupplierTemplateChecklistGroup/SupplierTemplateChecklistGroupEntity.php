@@ -72,8 +72,6 @@ class SupplierTemplateChecklistGroupEntity extends GuardedEntity
      */
     public function buildContext($contexts): SupplierTemplateChecklistGroupContext
     {
-        $this->validatedContexts($contexts);
-
         $checklists = collect();
         foreach ($contexts as $context) {
             switch ($context) {

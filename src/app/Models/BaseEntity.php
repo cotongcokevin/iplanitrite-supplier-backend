@@ -12,12 +12,14 @@ class BaseEntity extends Model
     /**
      * @throws Exception
      */
-    public function validatedContexts(array $contexts): void
+    public function __get($key)
     {
-        foreach ($contexts as $context) {
-            if (! $this->relationLoaded($context->value)) {
-                throw new Exception("Relationship $context->value not loaded");
+        if (method_exists($this, $key)) {
+            if (! $this->relationLoaded($key)) {
+                throw new Exception("$key relationship not yet loaded.");
             }
         }
+
+        return parent::__get($key);
     }
 }

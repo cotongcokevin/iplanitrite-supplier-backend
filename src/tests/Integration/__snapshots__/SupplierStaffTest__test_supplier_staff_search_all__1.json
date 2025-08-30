@@ -1,0 +1,17 @@
+[
+    {
+        "id": "__FORMAT_VALIDATED__",
+        "email": "luffy.monkey@onepiece.com",
+        "password": "__FORMAT_VALIDATED__",
+        "firstName": "Luffy",
+        "lastName": "Monkey",
+        "dateOfBirth": "2005-01-01T00:00:00.000000Z",
+        "supplierId": "__FORMAT_VALIDATED__",
+        "supplierRoleId": "c4d86258-54fb-42f4-880e-3e5eae34619c",
+        "createdBy": null,
+        "updatedBy": null,
+        "createdAt": null,
+        "updatedAt": null,
+        "deletedAt": null
+    }
+]

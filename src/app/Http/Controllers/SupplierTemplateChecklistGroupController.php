@@ -18,14 +18,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
-class SupplierTemplateChecklistGroupsController
+class SupplierTemplateChecklistGroupController
 {
     public function index(
         SupplierTemplateChecklistGroupService $service,
         string $section,
         string $eventType,
         string $accountableTo
-    ): JsonResponse {
+    ) : JsonResponse{
         $contexts = [
             SupplierTemplateChecklistGroupContextType::CHECKLISTS,
         ];
@@ -48,7 +48,8 @@ class SupplierTemplateChecklistGroupsController
     public function store(
         SupplierTemplateChecklistGroupService $service,
         Request $request
-    ): JsonResponse {
+    ): JsonResponse
+    {
         return transaction(function () use ($service, $request) {
             $requestDto = SupplierTemplateChecklistGroupCreateRequestDto::fromRequest($request);
             $service->create($requestDto);
@@ -69,7 +70,8 @@ class SupplierTemplateChecklistGroupsController
         SupplierTemplateChecklistGroupService $service,
         Request $request,
         string $id
-    ): JsonResponse {
+    ): JsonResponse
+    {
         return transaction(function () use ($service, $request, $id) {
             $requestDto = SupplierTemplateChecklistGroupUpdateRequestDto::fromRequest($request);
             $service->update(
@@ -82,7 +84,8 @@ class SupplierTemplateChecklistGroupsController
     public function destroy(
         SupplierTemplateChecklistGroupService $service,
         string $id
-    ): JsonResponse {
+    ): JsonResponse
+    {
         return transaction(function () use ($service, $id) {
             $service->destroy(
                 Uuid::fromString($id)

@@ -9,7 +9,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
     private function getGroups(string $token)
     {
         return $this->getJsonAuthorised(
-            uri: self::generateUri('/templates/checklist-groups/general/wedding/supplier'),
+            uri: $this->generateUri('/templates/checklist-groups/general/wedding/supplier'),
             token: $token,
         )->json();
     }
@@ -25,7 +25,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $data = $this->getGroups($token->json());
 
         $response = $this->postJsonAuthorised(
-            uri: self::generateUri('/templates/checklist-groups'),
+            uri: $this->generateUri('/templates/checklist-groups'),
             token: $token->json(),
             data: [
                 'section' => 'GENERAL',
@@ -34,6 +34,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
                 'name' => 'AAA',
             ]
         );
+
         $response->assertStatus(200);
 
         $resultArray = $this->getGroups($token->json());
@@ -51,7 +52,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $lastCount = count($checklists);
 
         $response = $this->postJsonAuthorised(
-            uri: self::generateUri("/templates/checklist-groups/$groupId/checklists"),
+            uri: $this->generateUri("/templates/checklist-groups/$groupId/checklists"),
             token: $token->json(),
             data: [
                 'description' => 'Lorem ipsum dolor sit amet',
@@ -76,7 +77,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $lastCount = count($checklists);
 
         $response = $this->putJsonAuthorised(
-            uri: self::generateUri("/templates/checklist-groups/$groupId/checklists/$id"),
+            uri: $this->generateUri("/templates/checklist-groups/$groupId/checklists/$id"),
             token: $token->json(),
             data: [
                 'description' => 'Consectetur adipiscing elit sed do.',
@@ -100,7 +101,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $lastCount = count($checklists);
 
         $response = $this->deleteJsonAuthorised(
-            uri: self::generateUri("/templates/checklist-groups/$groupId/checklists/$id"),
+            uri: $this->generateUri("/templates/checklist-groups/$groupId/checklists/$id"),
             token: $token->json(),
         );
         $response->assertStatus(200);
@@ -160,7 +161,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $id = $data[0]['id'];
 
         $response = $this->putJsonAuthorised(
-            uri: self::generateUri("/templates/checklist-groups/$id"),
+            uri: $this->generateUri("/templates/checklist-groups/$id"),
             token: $token->json(),
             data: [
                 'name' => 'NEW ONE',
@@ -182,7 +183,7 @@ class SupplierTemplateChecklistTest extends BaseTestCase
         $id = $data[0]['id'];
 
         $response = $this->deleteJsonAuthorised(
-            uri: self::generateUri("/templates/checklist-groups/$id"),
+            uri: $this->generateUri("/templates/checklist-groups/$id"),
             token: $token->json(),
         );
         $response->assertStatus(200);

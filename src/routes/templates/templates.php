@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\SupplierTemplateChecklistGroupsController;
-use App\Http\Controllers\SupplierTemplateChecklistsController;
+use App\Http\Controllers\SupplierTemplateChecklistGroupController;
+use App\Http\Controllers\SupplierTemplateChecklistController;
 
 Route::group(['prefix' => 'templates'], function () {
 
@@ -11,7 +11,7 @@ Route::group(['prefix' => 'templates'], function () {
 
         Route::group(['prefix' => '{id}/checklists'], function () {
             Route::post(
-                '/', [SupplierTemplateChecklistsController::class, 'store']
+                '/', [SupplierTemplateChecklistController::class, 'store']
             )->name('templates.checklist-groups.checklists.index');
 
             Route::post(
@@ -19,20 +19,20 @@ Route::group(['prefix' => 'templates'], function () {
             )->name('templates.checklist-groups.checklists.sort');
 
             Route::put(
-                '/{checklistId}', [SupplierTemplateChecklistsController::class, 'update']
+                '/{checklistId}', [SupplierTemplateChecklistController::class, 'update']
             )->name('templates.checklist-groups.checklists.update');
 
             Route::delete(
-                '/{checklistId}', [SupplierTemplateChecklistsController::class, 'destroy']
+                '/{checklistId}', [SupplierTemplateChecklistController::class, 'destroy']
             )->name('templates.checklist-groups.checklists.delete');
         });
 
         Route::get(
-            '/{section}/{eventType}/{accountableTo}', [SupplierTemplateChecklistGroupsController::class, 'index']
+            '/{section}/{eventType}/{accountableTo}', [SupplierTemplateChecklistGroupController::class, 'index']
         )->name('templates.checklist-groups.index');
 
         Route::post(
-            '/', [SupplierTemplateChecklistGroupsController::class, 'store']
+            '/', [SupplierTemplateChecklistGroupController::class, 'store']
         )->name('templates.checklist-groups.store');
 
         Route::post(
@@ -40,11 +40,11 @@ Route::group(['prefix' => 'templates'], function () {
         )->name('templates.checklist-groups.sort');
 
         Route::put(
-            '/{checklistId}', [SupplierTemplateChecklistGroupsController::class, 'update']
+            '/{checklistId}', [SupplierTemplateChecklistGroupController::class, 'update']
         )->name('templates.checklist-groups.update');
 
         Route::delete(
-            '/{checklistId}', [SupplierTemplateChecklistGroupsController::class, 'destroy']
+            '/{checklistId}', [SupplierTemplateChecklistGroupController::class, 'destroy']
         )->name('templates.checklist-groups.destroy');
 
     });

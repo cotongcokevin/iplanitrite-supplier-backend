@@ -17,7 +17,8 @@ use Ramsey\Uuid\UuidInterface;
 class SupplierStaffRepository
 {
     /**
-     * @return Collection<int, SupplierStaffModel>
+     * @return Collection
+     * @throws SupplierStaffContextException
      */
     public function search(): Collection
     {
@@ -26,6 +27,22 @@ class SupplierStaffRepository
         return $supplierStaffList->map(function (SupplierStaffEntity $supplierStaff) {
             return $supplierStaff->toModel();
         });
+    }
+
+    /**
+     * @param array $contexts
+     * @return Collection
+     */
+    public function searchWithContext(array $contexts): Collection
+    {
+        $contextRelationships = SupplierStaffContextType::toValues($contexts);
+        $entities = SupplierStaffEntity::with($contextRelationships)
+            ->orderByDesc('created_at')
+            ->get();
+
+        return $entities->map(
+            fn (SupplierStaffEntity $entity) => new Pair($entity->toModel(), $entity->buildContext())
+        );
     }
 
     public function getById(

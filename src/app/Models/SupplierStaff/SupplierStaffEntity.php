@@ -97,32 +97,21 @@ class SupplierStaffEntity extends GuardedAuthenticatedEntity implements JWTSubje
     }
 
     /**
-     * @throws SupplierStaffContextException
+     * @return SupplierStaffContext
      */
-    public function buildContext($contexts): SupplierStaffContext
+    public function buildContext(): SupplierStaffContext
     {
-        $addressContext = null;
-        $contactNumberContext = null;
-        foreach ($contexts as $context) {
-            switch ($context) {
-                case SupplierStaffContextType::ADDRESS:
-                    /** @var AddressEntity $address */
-                    $address = $this->address;
-                    $addressContext = $address->toModel();
-                    break;
-                case SupplierStaffContextType::CONTACT_NUMBER:
-                    /** @var ContactNumberEntity $contactNumber */
-                    $contactNumber = $this->contactNumber;
-                    $contactNumberContext = $contactNumber->toModel();
-                    break;
-                default:
-                    throw new SupplierStaffContextException("Invalid context $context");
-            }
-        }
+        $addressModel = $this->relationLoaded(SupplierStaffContextType::ADDRESS->value)
+            ? $this->address?->toModel()
+            : null;
+
+        $contactNumberModel = $this->relationLoaded(SupplierStaffContextType::CONTACT_NUMBER->value)
+            ? $this->contactNumber?->toModel()
+            : null;
 
         return new SupplierStaffContext(
-            address: $addressContext,
-            contactNumber: $contactNumberContext
+            address: $addressModel,
+            contactNumber: $contactNumberModel,
         );
     }
 

@@ -29,7 +29,7 @@ class SupplierStaffModel
         public ?Carbon $deletedAt,
     ) {}
 
-    public function toDto(?SupplierStaffContext $context,array $expectedContexts): SupplierStaffDto
+    public function toDto(?SupplierStaffContext $context, array $expectedContexts): SupplierStaffDto
     {
         return new SupplierStaffDto(
             id: $this->id,

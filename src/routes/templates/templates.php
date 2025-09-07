@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\SupplierTemplateChecklistGroupController;
 use App\Http\Controllers\SupplierTemplateChecklistController;
+use App\Http\Controllers\SupplierTemplateChecklistGroupController;
 
 Route::group(['prefix' => 'templates'], function () {
 

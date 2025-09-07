@@ -11,7 +11,6 @@ use App\Models\Address\AddressEntity;
 use App\Models\ContactNumber\ContactNumberEntity;
 use App\Models\GuardedAuthenticatedEntity;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
-use App\Models\SupplierStaff\Context\SupplierStaffContextException;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -96,18 +95,22 @@ class SupplierStaffEntity extends GuardedAuthenticatedEntity implements JWTSubje
         );
     }
 
-    /**
-     * @return SupplierStaffContext
-     */
-    public function buildContext(): SupplierStaffContext
+    public function buildContext($contexts): SupplierStaffContext
     {
-        $addressModel = $this->relationLoaded(SupplierStaffContextType::ADDRESS->value)
-            ? $this->address?->toModel()
-            : null;
+        $addressModel = null;
+        $contactNumberModel = null;
 
-        $contactNumberModel = $this->relationLoaded(SupplierStaffContextType::CONTACT_NUMBER->value)
-            ? $this->contactNumber?->toModel()
-            : null;
+        // Loop through supplied context
+        foreach ($contexts as $context) {
+            switch ($context) {
+                case SupplierStaffContextType::ADDRESS:
+                    $addressModel = $this->address?->toModel();
+                    break;
+                case SupplierStaffContextType::CONTACT_NUMBER:
+                    $contactNumberModel = $this->contactNumber?->toModel();
+                    break;
+            }
+        }
 
         return new SupplierStaffContext(
             address: $addressModel,

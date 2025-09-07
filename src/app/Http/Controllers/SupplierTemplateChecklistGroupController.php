@@ -25,7 +25,7 @@ class SupplierTemplateChecklistGroupController
         string $section,
         string $eventType,
         string $accountableTo
-    ) : JsonResponse{
+    ): JsonResponse {
         $contexts = [
             SupplierTemplateChecklistGroupContextType::CHECKLISTS,
         ];
@@ -48,8 +48,7 @@ class SupplierTemplateChecklistGroupController
     public function store(
         SupplierTemplateChecklistGroupService $service,
         Request $request
-    ): JsonResponse
-    {
+    ): JsonResponse {
         return transaction(function () use ($service, $request) {
             $requestDto = SupplierTemplateChecklistGroupCreateRequestDto::fromRequest($request);
             $service->create($requestDto);
@@ -70,8 +69,7 @@ class SupplierTemplateChecklistGroupController
         SupplierTemplateChecklistGroupService $service,
         Request $request,
         string $id
-    ): JsonResponse
-    {
+    ): JsonResponse {
         return transaction(function () use ($service, $request, $id) {
             $requestDto = SupplierTemplateChecklistGroupUpdateRequestDto::fromRequest($request);
             $service->update(
@@ -84,8 +82,7 @@ class SupplierTemplateChecklistGroupController
     public function destroy(
         SupplierTemplateChecklistGroupService $service,
         string $id
-    ): JsonResponse
-    {
+    ): JsonResponse {
         return transaction(function () use ($service, $id) {
             $service->destroy(
                 Uuid::fromString($id)

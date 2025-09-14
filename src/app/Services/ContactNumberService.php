@@ -33,4 +33,9 @@ readonly class ContactNumberService
         return $contactId;
 
     }
+
+    public function destroy(UuidInterface $id): void
+    {
+        $this->contactNumberRepository->destroy($id);
+    }
 }

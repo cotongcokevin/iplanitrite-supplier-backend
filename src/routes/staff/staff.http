@@ -70,3 +70,11 @@ Authorization: Bearer {{ token }}
         "long": 138.6007
     }
 }
+
+
+###
+
+DELETE {{ host }}/api/staff/b1388446-5433-421d-aa4b-7b8f5a04e111
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}

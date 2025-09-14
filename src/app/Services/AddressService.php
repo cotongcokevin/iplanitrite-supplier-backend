@@ -37,4 +37,9 @@ readonly class AddressService
         return $addressId;
 
     }
+
+    public function destroy(UuidInterface $id): void
+    {
+        $this->addressRepository->destroy($id);
+    }
 }

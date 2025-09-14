@@ -10,5 +10,5 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('/{id}', [SupplierStaffController::class, 'show'])->name('suppliers.staff.show');
     Route::post('/', [SupplierStaffController::class, 'store'])->name('suppliers.staff.store');
     Route::put('/{id}', [SupplierStaffController::class, 'update'])->name('suppliers.staff.update');
-    // Route::delete('/{id}', [SupplierStaffController::class, 'destroy'])->name('suppliers.staff.destroy');
+    Route::delete('/{id}', [SupplierStaffController::class, 'destroy'])->name('suppliers.staff.destroy');
 });

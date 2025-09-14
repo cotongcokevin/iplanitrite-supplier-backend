@@ -70,14 +70,13 @@ class SupplierStaffController
             );
         });
     }
-    //
-    //    public function destroy(
-    //        SupplierStaffService $service,
-    //        string $id
-    //    ): JsonResponse {
-    //        return transaction(function () use ($service, $id) {
-    //            $service->destroy(Uuid::fromString($id));
-    //        });
-    //    }
 
+    public function destroy(
+        SupplierStaffService $service,
+        string $id
+    ): JsonResponse {
+        return transaction(function () use ($service, $id) {
+            $service->destroy(Uuid::fromString($id));
+        });
+    }
 }

@@ -105,4 +105,9 @@ readonly class SupplierStaffService
             attributes: $updates
         );
     }
+
+    public function destroy(UuidInterface $id): void
+    {
+        $this->supplierStaffRepository->destroy($id);
+    }
 }

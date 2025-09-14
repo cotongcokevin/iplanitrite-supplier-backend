@@ -2,3 +2,28 @@ GET {{ host }}/api/staff
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{ token }}
+
+###
+
+GET {{ host }}/api/staff/781479fe-1d65-418a-bc4f-8317452d8452
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+
+###
+
+
+POST {{ host }}/api/staff
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "firstName": "Drew",
+    "lastName": "Llorera",
+    "email": "drewtest@ipr.com",
+    "dateOfBirth": "1993-07-14",
+    "password": "password",
+    "supplierRoleId": "c4d86258-54fb-42f4-880e-3e5eae34619c"
+}

@@ -5,17 +5,22 @@ declare(strict_types=1);
 namespace App\Repositories\SupplierStaffRepository;
 
 use App\Classes\Pair;
+use App\Classes\Principals\Principal;
 use App\Models\SupplierStaff\Context\SupplierStaffContext;
 use App\Models\SupplierStaff\Context\SupplierStaffContextException;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class SupplierStaffRepository
 {
+    public function __construct(private Principal $principal) {}
+
     /**
      * @throws SupplierStaffContextException
      */
@@ -39,6 +44,29 @@ class SupplierStaffRepository
         );
     }
 
+    public function create(
+        string $firstName,
+        string $lastName,
+        string $email,
+        string $password,
+        Carbon $dateOfBirth,
+        UuidInterface $supplierRoleId,
+    ): void {
+        $staff = new SupplierStaffEntity();
+        $staff->id = Uuid::uuid4();
+        $staff->first_name = $firstName;
+        $staff->last_name = $lastName;
+        $staff->email = $email;
+        $staff->password = $password;
+        $staff->date_of_birth = $dateOfBirth;
+        $staff->supplier_id = $this->principal::get()->guardId;
+        $staff->supplier_role_id = $supplierRoleId;
+        $staff->created_by = $this->principal::get()->id;
+        $staff->created_at = Carbon::now();
+        $staff->save();
+    }
+
+
     public function getById(
         UuidInterface $id,
     ): SupplierStaffModel {
@@ -52,18 +80,13 @@ class SupplierStaffRepository
      * @param  SupplierStaffContextType[]  $contexts
      * @return Pair<SupplierStaffModel, SupplierStaffContext>
      *
-     * @throws SupplierStaffContextException
      */
     public function getByIdWithContext(
         UuidInterface $id,
         array $contexts
     ): Pair {
-        $contextNames = array_map(
-            fn ($context) => ($context->value),
-            $contexts
-        );
         /** @var SupplierStaffEntity $result */
-        $result = SupplierStaffEntity::with($contextNames)->find($id);
+        $result = SupplierStaffEntity::with($contexts)->find($id);
 
         return new Pair(
             $result->toModel(),

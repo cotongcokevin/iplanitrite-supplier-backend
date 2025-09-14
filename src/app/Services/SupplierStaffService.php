@@ -12,7 +12,7 @@ use Ramsey\Uuid\UuidInterface;
 
 readonly class SupplierStaffService
 {
-    public function __construct(private SupplierStaffRepository $supplierStaffRepository, private ContactNumberService $contactNumberService) {}
+    public function __construct(private SupplierStaffRepository $supplierStaffRepository, private ContactNumberService $contactNumberService,private AddressService $addressService) {}
 
     public function searchWithContext(array $contexts): Collection
     {
@@ -32,6 +32,32 @@ readonly class SupplierStaffService
             $contactId = $this->contactNumberService->upsert($dto->contactNumber->number, $dto->contactNumber->countryId);
         }
 
+        $addressId = null;
+        if ($dto->address) {
+            $addressId = $this->addressService->upsert($dto->address);
+        }
+
+        $this->supplierStaffRepository->create(
+            firstName: $dto->firstName,
+            lastName: $dto->lastName,
+            email: $dto->email,
+            password: $dto->password,
+            dateOfBirth: $dto->dateOfBirth,
+            supplierRoleId: $dto->supplierRoleId,
+            contactNumberId: $contactId,
+            addressId: $addressId,
+        );
+    }
+
+    public function update(
+        SupplierStaffCreateRequestDto $dto,
+        UuidInterface                 $id,
+    ): void {
+        $contactId = null;
+        if ($dto->contactNumber) {
+            $contactId = $this->contactNumberService->upsert($dto->contactNumber->number, $dto->contactNumber->countryId);
+        }
+
         $this->supplierStaffRepository->create(
             firstName: $dto->firstName,
             lastName: $dto->lastName,
@@ -42,4 +68,6 @@ readonly class SupplierStaffService
             contactNumberId: $contactId,
         );
     }
+
+
 }

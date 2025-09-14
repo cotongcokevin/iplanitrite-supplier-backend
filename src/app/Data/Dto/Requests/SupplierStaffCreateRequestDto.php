@@ -13,41 +13,43 @@ use Ramsey\Uuid\UuidInterface;
 class SupplierStaffCreateRequestDto
 {
     public function __construct(
-        public string $firstName,
-        public string $lastName,
-        public string $email,
-        public string $password,
-        public Carbon $dateOfBirth,
-        public UuidInterface $supplierRoleId,
-        public ?ContactNumberCreateRequestDto $contactNumber = null,
-        public ?AddressRequestDto $address = null,
+        public string                   $firstName,
+        public string                   $lastName,
+        public string                   $email,
+        public string                   $password,
+        public Carbon                   $dateOfBirth,
+        public UuidInterface            $supplierRoleId,
+        public ?ContactNumberRequestDto $contactNumber = null,
+        public ?AddressRequestDto       $address = null,
     ) {}
 
     public static function fromRequest(Request $request): SupplierStaffCreateRequestDto
     {
         $validated = $request->validate([
-            'firstName' => ['required', 'string'],
-            'lastName' => ['required', 'string'],
+            'firstName' => ['string'],
+            'lastName' => ['string'],
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
             'dateOfBirth' => ['date'],
             'supplierRoleId' => ['required', 'uuid'],
-            // Nested: contactNumber
-            'contactNumber.number' => ['nullable', 'string', 'max:64'],
-            'contactNumber.countryId' => ['nullable', 'uuid'],
-
+            ...ContactNumberRequestDto::rules('contactNumber'),
+            ...AddressRequestDto::rules('address'),
         ]);
 
+        //Contact Number DTO
+        $contactNumber = ContactNumberRequestDto::fromValidated($validated, 'contactNumber');
+        //Address DTO
+        $address = AddressRequestDto::fromValidated($validated, 'address');
+
         return new self(
-            firstName: $validated['firstName'],
-            lastName: $validated['lastName'],
+            firstName: $validated['firstName'] ?? "",
+            lastName: $validated['lastName'] ?? "",
             email: $validated['email'],
             password: Hash::make($validated['password']),
             dateOfBirth: ! empty($validated['dateOfBirth']) ? Carbon::parse($validated['dateOfBirth']) : null,
             supplierRoleId: Uuid::fromString($validated['supplierRoleId']),
-            contactNumber: ! empty($validated['contactNumber']['number'] ?? null)
-                ? new ContactNumberCreateRequestDto($validated['contactNumber']['number'], Uuid::fromString($validated['contactNumber']['countryId']))
-                : null,
+            contactNumber: $contactNumber,
+            address: $address,
         );
     }
 }

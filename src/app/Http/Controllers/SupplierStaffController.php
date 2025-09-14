@@ -55,19 +55,19 @@ class SupplierStaffController
         });
     }
 
-    //    public function update(
-    //        SupplierStaffService $service,
-    //        Request $request,
-    //        string $id
-    //    ): JsonResponse {
-    //        return transaction(function () use ($service, $request, $id) {
-    //            $requestDto = SupplierTemplateChecklistGroupUpdateRequestDto::fromRequest($request);
-    //            $service->update(
-    //                $requestDto,
-    //                Uuid::fromString($id)
-    //            );
-    //        });
-    //    }
+    public function update(
+        SupplierStaffService $service,
+        Request $request,
+        string $id
+    ): JsonResponse {
+        return transaction(function () use ($service, $request, $id) {
+            $requestDto = SupplierStaffCreateRequestDto::fromRequest($request);
+            $service->update(
+                $requestDto,
+                Uuid::fromString($id)
+            );
+        });
+    }
     //
     //    public function destroy(
     //        SupplierStaffService $service,

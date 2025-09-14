@@ -51,7 +51,8 @@ class SupplierStaffRepository
         string $password,
         Carbon $dateOfBirth,
         UuidInterface $supplierRoleId,
-        UuidInterface $contactNumberId,
+        ?UuidInterface $contactNumberId,
+        ?UuidInterface $addressId,
     ): void {
         $staff = new SupplierStaffEntity;
         $staff->id = Uuid::uuid4();
@@ -63,8 +64,10 @@ class SupplierStaffRepository
         $staff->supplier_id = $this->principal::get()->guardId;
         $staff->supplier_role_id = $supplierRoleId;
         $staff->created_by = $this->principal::get()->id;
+        $staff->updated_by = $this->principal::get()->id;
         $staff->created_at = Carbon::now();
         $staff->contact_number_id = $contactNumberId;
+        $staff->address_id = $addressId;
         $staff->save();
     }
 

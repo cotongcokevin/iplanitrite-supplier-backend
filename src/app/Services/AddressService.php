@@ -19,7 +19,7 @@ readonly class AddressService
 
     public function upsert(
         AddressRequestDto $request,
-        ?UuidInterface $uuid,
+        ?UuidInterface $uuid = null,
     ): UuidInterface {
 
         $addressId = $uuid ?? $this->uuid->uuid4();

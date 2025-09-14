@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\SupplierTemplateChecklistController;
 use App\Http\Controllers\SupplierTemplateChecklistGroupController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'templates'], function () {
 
@@ -15,7 +16,7 @@ Route::group(['prefix' => 'templates'], function () {
             )->name('templates.checklist-groups.checklists.index');
 
             Route::post(
-                '/sort', [SupplierTemplateChecklistsController::class, 'sort']
+                '/sort', [SupplierTemplateChecklistController::class, 'sort']
             )->name('templates.checklist-groups.checklists.sort');
 
             Route::put(
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'templates'], function () {
         )->name('templates.checklist-groups.store');
 
         Route::post(
-            '/sort', [SupplierTemplateChecklistGroupsController::class, 'sort']
+            '/sort', [SupplierTemplateChecklistGroupController::class, 'sort']
         )->name('templates.checklist-groups.sort');
 
         Route::put(

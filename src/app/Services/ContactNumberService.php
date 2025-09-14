@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Classes\Env\Env;
 use App\Repositories\ContactNumberRepository\ContactNumberRepository;
 use App\Repositories\ContactNumberRepository\Data\ContactRepositoryUpsertRepoData;
 use Ramsey\Uuid\UuidFactory;
@@ -15,20 +14,20 @@ readonly class ContactNumberService
     public function __construct(
         private ContactNumberRepository $contactNumberRepository,
         private UuidFactory $uuid,
-        private Env $env
     ) {}
 
     public function upsert(
         string $number,
-        ?UuidInterface $uuid,
+        UuidInterface $countryId,
+        ?UuidInterface $uuid = null,
     ): UuidInterface {
 
         $contactId = $uuid ?? $this->uuid->uuid4();
 
         $this->contactNumberRepository->upsert(new ContactRepositoryUpsertRepoData(
-            $contactId,
             $number,
-            $this->env::get()->countryId
+            $countryId,
+            $contactId,
         ));
 
         return $contactId;

@@ -22,8 +22,12 @@ Authorization: Bearer {{ token }}
 {
     "firstName": "Drew",
     "lastName": "Llorera",
-    "email": "drewtest@ipr.com",
+    "email": "drewtest@ipr2.com",
     "dateOfBirth": "1993-07-14",
     "password": "password",
-    "supplierRoleId": "c4d86258-54fb-42f4-880e-3e5eae34619c"
+    "supplierRoleId": "c4d86258-54fb-42f4-880e-3e5eae34619c",
+    "contactNumber": {
+        "number": "123",
+        "countryId": "5126d5bd-1c8e-48db-94e7-afcd426529e3"
+    }
 }

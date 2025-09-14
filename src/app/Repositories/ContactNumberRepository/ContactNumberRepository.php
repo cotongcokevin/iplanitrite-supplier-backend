@@ -13,9 +13,9 @@ class ContactNumberRepository
         ContactRepositoryUpsertRepoData $data,
     ): void {
         ContactNumberEntity::upsert([
-            'id' => $data->id,
             'number' => $data->number,
             'country_id' => $data->countryId,
+            'id' => $data->id,
         ], ['id']);
     }
 }

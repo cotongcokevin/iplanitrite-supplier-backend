@@ -19,6 +19,8 @@ class SupplierStaffCreateRequestDto
         public string $password,
         public Carbon $dateOfBirth,
         public UuidInterface $supplierRoleId,
+        public ?ContactNumberCreateRequestDto $contactNumber = null,
+        public ?AddressRequestDto $address = null,
     ) {}
 
     public static function fromRequest(Request $request): SupplierStaffCreateRequestDto
@@ -30,15 +32,22 @@ class SupplierStaffCreateRequestDto
             'password' => ['required', 'string'],
             'dateOfBirth' => ['date'],
             'supplierRoleId' => ['required', 'uuid'],
+            // Nested: contactNumber
+            'contactNumber.number' => ['nullable', 'string', 'max:64'],
+            'contactNumber.countryId' => ['nullable', 'uuid'],
+
         ]);
 
-        return new SupplierStaffCreateRequestDto(
-            $validated['firstName'],
-            $validated['lastName'],
-            $validated['email'],
-            Hash::make($validated['password']),
-            Carbon::parse($validated['dateOfBirth']),
-            Uuid::fromString($validated['supplierRoleId']),
+        return new self(
+            firstName: $validated['firstName'],
+            lastName: $validated['lastName'],
+            email: $validated['email'],
+            password: Hash::make($validated['password']),
+            dateOfBirth: ! empty($validated['dateOfBirth']) ? Carbon::parse($validated['dateOfBirth']) : null,
+            supplierRoleId: Uuid::fromString($validated['supplierRoleId']),
+            contactNumber: ! empty($validated['contactNumber']['number'] ?? null)
+                ? new ContactNumberCreateRequestDto($validated['contactNumber']['number'], Uuid::fromString($validated['contactNumber']['countryId']))
+                : null,
         );
     }
 }

@@ -12,12 +12,14 @@ class ContactNumberModel
     public function __construct(
         public UuidInterface $id,
         public string $number,
+        public UuidInterface $countryId,
     ) {}
 
     public function toDto(): ContactNumberDto
     {
         return new ContactNumberDto(
             number: $this->number,
+            countryId: $this->countryId,
         );
     }
 }

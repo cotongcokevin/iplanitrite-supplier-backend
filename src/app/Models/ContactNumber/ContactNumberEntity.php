@@ -22,7 +22,9 @@ class ContactNumberEntity extends BaseEntity
     protected $table = 'contact_number';
 
     protected $casts = [
-        'id' => UuidCast::class];
+        'id' => UuidCast::class,
+        'country_id' => UuidCast::class,
+    ];
 
     public function toModel(): ContactNumberModel
     {

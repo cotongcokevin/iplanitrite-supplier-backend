@@ -51,8 +51,9 @@ class SupplierStaffRepository
         string $password,
         Carbon $dateOfBirth,
         UuidInterface $supplierRoleId,
+        UuidInterface $contactNumberId,
     ): void {
-        $staff = new SupplierStaffEntity();
+        $staff = new SupplierStaffEntity;
         $staff->id = Uuid::uuid4();
         $staff->first_name = $firstName;
         $staff->last_name = $lastName;
@@ -63,9 +64,9 @@ class SupplierStaffRepository
         $staff->supplier_role_id = $supplierRoleId;
         $staff->created_by = $this->principal::get()->id;
         $staff->created_at = Carbon::now();
+        $staff->contact_number_id = $contactNumberId;
         $staff->save();
     }
-
 
     public function getById(
         UuidInterface $id,
@@ -79,7 +80,6 @@ class SupplierStaffRepository
     /**
      * @param  SupplierStaffContextType[]  $contexts
      * @return Pair<SupplierStaffModel, SupplierStaffContext>
-     *
      */
     public function getByIdWithContext(
         UuidInterface $id,

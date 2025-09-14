@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Dto\Response;
+namespace App\Data\Dto\Requests;
 
-use App\Data\Dto\ResponseDto;
 use Ramsey\Uuid\UuidInterface;
 
-class ContactNumberDto extends ResponseDto
+class ContactNumberCreateRequestDto
 {
     public function __construct(
         public string $number,
         public UuidInterface $countryId,
     ) {}
+
 }

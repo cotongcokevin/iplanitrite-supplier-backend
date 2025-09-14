@@ -6,21 +6,20 @@ namespace App\Data\Dto\Requests;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class SupplierStaffCreateRequestDto
 {
     public function __construct(
-        public string                   $firstName,
-        public string                   $lastName,
-        public string                   $email,
-        public string                   $password,
-        public Carbon                   $dateOfBirth,
-        public UuidInterface            $supplierRoleId,
+        public ?string $firstName,
+        public ?string $lastName,
+        public string $email,
+        public string $password,
+        public ?Carbon $dateOfBirth,
+        public UuidInterface $supplierRoleId,
         public ?ContactNumberRequestDto $contactNumber = null,
-        public ?AddressRequestDto       $address = null,
+        public ?AddressRequestDto $address = null,
     ) {}
 
     public static function fromRequest(Request $request): SupplierStaffCreateRequestDto
@@ -36,16 +35,16 @@ class SupplierStaffCreateRequestDto
             ...AddressRequestDto::rules('address'),
         ]);
 
-        //Contact Number DTO
+        // Contact Number DTO
         $contactNumber = ContactNumberRequestDto::fromValidated($validated, 'contactNumber');
-        //Address DTO
+        // Address DTO
         $address = AddressRequestDto::fromValidated($validated, 'address');
 
         return new self(
-            firstName: $validated['firstName'] ?? "",
-            lastName: $validated['lastName'] ?? "",
+            firstName: $validated['firstName'] ?? '',
+            lastName: $validated['lastName'] ?? '',
             email: $validated['email'],
-            password: Hash::make($validated['password']),
+            password: $validated['password'],
             dateOfBirth: ! empty($validated['dateOfBirth']) ? Carbon::parse($validated['dateOfBirth']) : null,
             supplierRoleId: Uuid::fromString($validated['supplierRoleId']),
             contactNumber: $contactNumber,

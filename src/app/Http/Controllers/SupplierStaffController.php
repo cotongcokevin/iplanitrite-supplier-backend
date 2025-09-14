@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\Pair;
 use App\Data\Dto\Requests\SupplierStaffCreateRequestDto;
+use App\Data\Dto\Requests\SupplierStaffUpdateRequestDto;
 use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Services\SupplierStaffService;
@@ -60,8 +61,9 @@ class SupplierStaffController
         Request $request,
         string $id
     ): JsonResponse {
+
         return transaction(function () use ($service, $request, $id) {
-            $requestDto = SupplierStaffCreateRequestDto::fromRequest($request);
+            $requestDto = SupplierStaffUpdateRequestDto::fromRequest($request);
             $service->update(
                 $requestDto,
                 Uuid::fromString($id)

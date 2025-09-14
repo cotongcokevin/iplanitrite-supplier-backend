@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Data\Dto\Requests;
 
+use Illuminate\Validation\Rule;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -15,22 +17,24 @@ final class ContactNumberRequestDto
         public array $provided = [],               // which keys client sent (incl. null)
     ) {}
 
-    public static function rules(string $prefix = 'contactNumber'): array
+    public static function rules(string $prefix = 'contactNumber', bool $update = false): array
     {
         return [
-            $prefix => ['sometimes', 'array'],
+            $prefix => ['sometimes', 'nullable', 'array'],
 
-            "{$prefix}.id"      => ['sometimes', 'uuid'],
+            "$prefix.id" => $update
+                ? ['uuid', Rule::requiredIf(fn () => is_array(request($prefix)))]
+                : ['sometimes', 'uuid'],
 
             // If NO id -> require both fields to allow "create during update"
-            "{$prefix}.number"  => ['sometimes', 'nullable', 'string', 'max:64', "required_without:{$prefix}.id"],
-            "{$prefix}.countryId"=> ['sometimes', 'nullable', 'uuid', "required_without:{$prefix}.id"],
+            "{$prefix}.number" => ['sometimes', 'nullable', 'string', 'max:64', "required_without:{$prefix}.id"],
+            "{$prefix}.countryId" => ['sometimes', 'nullable', 'uuid', "required_without:{$prefix}.id"],
         ];
     }
 
     public static function fromValidated(array $v, string $prefix = 'contactNumber'): ?self
     {
-        if (!isset($v[$prefix])) {
+        if (! isset($v[$prefix])) {
             return null; // key absent => no change
         }
 

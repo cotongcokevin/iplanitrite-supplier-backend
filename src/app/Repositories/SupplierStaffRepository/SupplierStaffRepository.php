@@ -13,6 +13,7 @@ use App\Models\SupplierStaff\SupplierStaffEntity;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -54,6 +55,8 @@ class SupplierStaffRepository
         ?UuidInterface $contactNumberId,
         ?UuidInterface $addressId,
     ): void {
+        $principal = $this->principal::get();
+
         $staff = new SupplierStaffEntity;
         $staff->id = Uuid::uuid4();
         $staff->first_name = $firstName;
@@ -61,14 +64,30 @@ class SupplierStaffRepository
         $staff->email = $email;
         $staff->password = $password;
         $staff->date_of_birth = $dateOfBirth;
-        $staff->supplier_id = $this->principal::get()->guardId;
+        $staff->supplier_id = $principal->guardId;
         $staff->supplier_role_id = $supplierRoleId;
-        $staff->created_by = $this->principal::get()->id;
-        $staff->updated_by = $this->principal::get()->id;
+        $staff->created_by = $principal->id;
+        $staff->updated_by = $principal->id;
         $staff->created_at = Carbon::now();
         $staff->contact_number_id = $contactNumberId;
         $staff->address_id = $addressId;
         $staff->save();
+    }
+
+    public function update(
+        UuidInterface $id,
+        array $attributes
+    ): void {
+        $affected = SupplierStaffEntity::query()->whereKey($id)->update($attributes);
+        if ($affected === 0) {
+            throw (new ModelNotFoundException)
+                ->setModel(SupplierStaffEntity::class, [(string) $id]);
+        }
+    }
+
+    public function destroy(UuidInterface $id): void
+    {
+        SupplierStaffEntity::query()->whereKey($id)->delete();
     }
 
     public function getById(

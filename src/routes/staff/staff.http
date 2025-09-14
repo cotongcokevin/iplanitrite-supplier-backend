@@ -39,3 +39,34 @@ Authorization: Bearer {{ token }}
         "long": 138.6007
     }
 }
+
+###
+
+PUT {{ host }}/api/staff/b1388446-5433-421d-aa4b-7b8f5a04e111
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "firstName": "Drews",
+    "lastName": "Llorera",
+    "email": "drewtest@ipr.com",
+    "dateOfBirth": "1993-07-14",
+    "password": "",
+    "supplierRoleId": "c4d86258-54fb-42f4-880e-3e5eae34619c",
+    "contactNumber": {
+        "id": "8f770e9e-e47e-4919-896f-86e199a25ec1",
+        "number": "123",
+        "countryId": "5126d5bd-1c8e-48db-94e7-afcd426529e3"
+    },
+    "address": {
+        "id": "641dcf9e-2164-4164-bbb3-ae5dd873d401",
+        "line1": "12345 Example St",
+        "line2": "Unit 5",
+        "city": "Adelaide",
+        "state": "SA",
+        "zip": "5000",
+        "lat": -34.9285,
+        "long": 138.6007
+    }
+}

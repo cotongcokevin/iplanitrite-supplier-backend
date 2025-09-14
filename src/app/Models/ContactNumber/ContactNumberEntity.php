@@ -31,6 +31,7 @@ class ContactNumberEntity extends BaseEntity
         return new ContactNumberModel(
             id: $this->id,
             number: $this->number,
+            countryId: $this->country_id,
         );
     }
 }

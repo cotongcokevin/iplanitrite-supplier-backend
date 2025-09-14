@@ -13,7 +13,6 @@ Authorization: Bearer {{ token }}
 
 ###
 
-
 POST {{ host }}/api/staff
 Accept: application/json
 Content-Type: application/json

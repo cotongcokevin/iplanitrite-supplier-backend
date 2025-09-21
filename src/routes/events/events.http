@@ -1,0 +1,28 @@
+POST {{ host }}/api/events
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "name": "",z
+  "type": "",
+  "client": {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "address": {
+
+    },
+    "contactNumber": ""
+  },
+  "celebrant": {
+    "one": {
+      "firstName": "",
+      "lastName": ""
+    },
+    "two": {
+      "firstName": "",
+      "lastName": ""
+    }
+  }
+}

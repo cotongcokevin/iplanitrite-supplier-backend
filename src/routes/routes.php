@@ -7,5 +7,6 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth/auth.php';
 
 Route::group(['middleware' => ['auth:SUPPLIER_STAFF']], function () {
+    require __DIR__.'/events/events.php';
     require __DIR__.'/templates/templates.php';
 });

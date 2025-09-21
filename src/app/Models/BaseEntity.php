@@ -8,7 +8,6 @@ use BackedEnum;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Mockery\Matcher\Closure;
 
 class BaseEntity extends Model
 {

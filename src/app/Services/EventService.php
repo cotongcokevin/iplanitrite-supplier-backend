@@ -2,28 +2,56 @@
 
 namespace App\Services;
 
+use App\Data\Dto\Requests\EventCelebrant\PairCelebrantRequestDto;
+use App\Data\Dto\Requests\EventCelebrant\SingleCelebrantRequestDto;
+use App\Data\Dto\Requests\EventCreateRequestDto;
+use App\Repositories\EventRepository\Data\EventCreateRepoData;
+use App\Repositories\EventRepository\EventRepository;
+use Exception;
+
 readonly class EventService
 {
+    public function __construct(
+        private EventRepository $eventRepository,
+        private ClientService $clientService,
+        private CelebrantService $celebrantService
+    ) {}
 
-    public function create() {
+    /**
+     * @throws Exception
+     */
+    public function create(EventCreateRequestDto $request): void
+    {
+        $clientId = $this->clientService->create(
+            $request->client
+        );
 
-        /**
-         * Create Client
-         * - call clientService
-         * - save client
-         * - email client for credentials
-         */
+        $celebrantDto = $request->celebrant;
+        $celebrantId = null;
+        $celebrant2Id = null;
+        switch ($celebrantDto::class) {
+            case SingleCelebrantRequestDto::class:
+                /** @var SingleCelebrantRequestDto $celebrantDto */
+                $celebrantId = $this->celebrantService->create($celebrantDto->data);
+                break;
+            case PairCelebrantRequestDto::class:
+                /** @var PairCelebrantRequestDto $celebrantDto */
+                $celebrantId = $this->celebrantService->create($celebrantDto->first);
+                $celebrant2Id = $this->celebrantService->create($celebrantDto->second);
+                break;
+            default:
+                throw new Exception('Invalid Celebrant Request');
+        }
 
-        /**
-         * Create Celebrant
-         * - call celebrantService
-         * - save celebrants
-         */
-
-        /**
-         * Create Event
-         * - email clients on create
-         */
+        $eventRepoData = new EventCreateRepoData(
+            name: $request->name,
+            type: $request->type,
+            notes: $request->notes,
+            clientId: $clientId,
+            celebrantOne: $celebrantId,
+            celebrantTwo: $celebrant2Id
+        );
+        $eventId = $this->eventRepository->create($eventRepoData);
 
         /**
          * Create mandatory schedules
@@ -34,7 +62,5 @@ readonly class EventService
          * Create RSVP
          * call rsvp service
          */
-
     }
-
 }

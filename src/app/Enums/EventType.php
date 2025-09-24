@@ -16,4 +16,11 @@ enum EventType: string
     case ANNIVERSARY = 'ANNIVERSARY';
     case ANNIVERSARY_COUPLE = 'ANNIVERSARY_COUPLE';
     case CORPORATE_EVENT = 'CORPORATE_EVENT';
+
+    public function celebrantCount(): int
+    {
+        return $this === self::WEDDING && $this === self::ANNIVERSARY_COUPLE
+            ? 2
+            : 1;
+    }
 }

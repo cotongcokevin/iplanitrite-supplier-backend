@@ -2,18 +2,13 @@
 
 namespace App\Services;
 
-
 use App\Data\Dto\Requests\ClientRequestDto;
-use App\Repositories\AddressRepository\AddressRepository;
-use App\Repositories\AddressRepository\Data\AddressRepositoryUpsertRepoData;
 use App\Repositories\ClientRepository\ClientRepository;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
-use App\Repositories\ContactNumberRepository\ContactNumberRepository;
 use Ramsey\Uuid\UuidInterface;
 
-class ClientService
+readonly class ClientService
 {
-
     public function __construct(
         private ClientRepository $clientRepository,
         private AddressService $addressService,
@@ -48,5 +43,4 @@ class ClientService
 
         return $clientId;
     }
-
 }

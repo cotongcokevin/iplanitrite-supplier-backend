@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Repositories\ClientRepository\Data;
+namespace App\Repositories\CelebrantRepository\Data;
 
 use Ramsey\Uuid\UuidInterface;
 
-class ClientCreateRepoData
+class CelebrantUpsertRepoData
 {
     public function __construct(
+        public string $title,
         public string $firstName,
         public string $lastName,
-        public string $email,
-        public string $password,
         public UuidInterface $addressId,
         public UuidInterface $contactNumberId
     ) {}

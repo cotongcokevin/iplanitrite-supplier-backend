@@ -6,15 +6,14 @@ namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
 use Ramsey\Uuid\UuidInterface;
-use Carbon\Carbon;
 
 class CelebrantDto extends ResponseDto
 {
-    
     public function __construct(
         public UuidInterface $id,
         public string $title,
-        public string $name,
+        public string $firstName,
+        public string $lastName,
         public ?UuidInterface $contactNumberId,
         public ?UuidInterface $addressId,
     ) {}

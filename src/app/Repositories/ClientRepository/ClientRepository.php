@@ -8,17 +8,21 @@ use App\Classes\Principals\Principal;
 use App\Models\Client\ClientEntity;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
 use Carbon\Carbon;
-use Symfony\Component\Uid\Uuid;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
-readonly class ClientRepository {
-
+readonly class ClientRepository
+{
     public function __construct(
         private Principal $principal
     ) {}
 
-    public function create(ClientCreateRepoData $data) {
-        $client = new ClientEntity();
-        $client->id = Uuid::v4();
+    public function create(ClientCreateRepoData $data): UuidInterface
+    {
+        $id = Uuid::uuid4();
+
+        $client = new ClientEntity;
+        $client->id = $id;
         $client->first_name = $data->firstName;
         $client->last_name = $data->lastName;
         $client->email = $data->email;
@@ -29,7 +33,6 @@ readonly class ClientRepository {
         $client->created_at = Carbon::now();
         $client->save();
 
-        return $client->id;
+        return $id;
     }
-
 }

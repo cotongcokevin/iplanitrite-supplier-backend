@@ -4,25 +4,54 @@ Content-Type: application/json
 Authorization: Bearer {{ token }}
 
 {
-  "name": "",z
+  "name": "",
   "type": "",
+  "notes": "",
   "client": {
     "firstName": "",
     "lastName": "",
     "email": "",
     "address": {
-
+      "line1": "",
+      "line2": null,
+      "city": "",
+      "state": "",
+      "zip": "",
+      "lat": null,
+      "long": null
     },
     "contactNumber": ""
   },
   "celebrant": {
     "one": {
+      "title": "",
       "firstName": "",
-      "lastName": ""
+      "lastName": "",
+      "contactNumber": "",
+      "address": {
+        "line1": "",
+        "line2": null,
+        "city": "",
+        "state": "",
+        "zip": "",
+        "lat": null,
+        "long": null
+      }
     },
     "two": {
+      "title": "",
       "firstName": "",
-      "lastName": ""
+      "lastName": "",
+      "contactNumber": "",
+      "address": {
+        "line1": "",
+        "line2": null,
+        "city": "",
+        "state": "",
+        "zip": "",
+        "lat": null,
+        "long": null
+      }
     }
   }
 }

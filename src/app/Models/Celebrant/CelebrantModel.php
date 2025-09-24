@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Celebrant;
 
 use App\Data\Dto\Response\CelebrantDto;
-use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
 class CelebrantModel
@@ -13,7 +12,8 @@ class CelebrantModel
     public function __construct(
         public UuidInterface $id,
         public string $title,
-        public string $name,
+        public string $firstName,
+        public string $lastName,
         public ?UuidInterface $contactNumberId,
         public ?UuidInterface $addressId,
     ) {}
@@ -23,7 +23,8 @@ class CelebrantModel
         return new CelebrantDto(
             id: $this->id,
             title: $this->title,
-            name: $this->name,
+            firstName: $this->firstName,
+            lastName: $this->lastName,
             contactNumberId: $this->contactNumberId,
             addressId: $this->addressId,
         );

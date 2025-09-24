@@ -17,6 +17,7 @@ readonly class CelebrantRepository
 
         $celebrant = new CelebrantEntity;
         $celebrant->id = $id;
+        $celebrant->title = $data->title;
         $celebrant->first_name = $data->firstName;
         $celebrant->last_name = $data->lastName;
         $celebrant->contact_number_id = $data->contactNumberId;

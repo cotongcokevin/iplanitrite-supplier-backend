@@ -19,7 +19,7 @@ enum EventType: string
 
     public function celebrantCount(): int
     {
-        return $this === self::WEDDING && $this === self::ANNIVERSARY_COUPLE
+        return $this === self::WEDDING || $this === self::ANNIVERSARY_COUPLE
             ? 2
             : 1;
     }

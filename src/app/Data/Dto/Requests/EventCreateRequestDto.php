@@ -14,7 +14,7 @@ class EventCreateRequestDto
     private function __construct(
         public string $name,
         public EventType $type,
-        public string $notes,
+        public ?string $notes,
         public ClientRequestDto $client,
         public EventCelebrantRequestDto $celebrant
     ) {}

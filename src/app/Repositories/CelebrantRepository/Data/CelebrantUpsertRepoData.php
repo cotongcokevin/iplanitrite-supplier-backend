@@ -10,8 +10,8 @@ class CelebrantUpsertRepoData
         public string $title,
         public string $firstName,
         public string $lastName,
-        public UuidInterface $addressId,
-        public UuidInterface $contactNumberId
+        public ?UuidInterface $addressId,
+        public ?UuidInterface $contactNumberId
     ) {}
 
 }

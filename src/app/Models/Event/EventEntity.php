@@ -6,6 +6,8 @@ namespace App\Models\Event;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
+use App\Enums\EventStatus;
+use App\Enums\EventType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -40,8 +42,9 @@ class EventEntity extends Model
         return new EventModel(
             id: $this->id,
             name: $this->name,
-            status: $this->status,
-            type: $this->type,
+            status: EventStatus::from($this->status),
+            type: EventType::from($this->type),
+            notes: $this->notes,
             clientId: $this->client_id,
             celebrantOne: $this->celebrant_one,
             celebrantTwo: $this->celebrant_two,

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models\Event;
 
 use App\Data\Dto\Response\EventDto;
+use App\Enums\EventStatus;
+use App\Enums\EventType;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
@@ -13,8 +15,9 @@ class EventModel
     public function __construct(
         public UuidInterface $id,
         public string $name,
-        public string $status,
-        public string $type,
+        public EventStatus $status,
+        public EventType $type,
+        public ?string $notes,
         public UuidInterface $clientId,
         public UuidInterface $celebrantOne,
         public ?UuidInterface $celebrantTwo,
@@ -32,6 +35,7 @@ class EventModel
             name: $this->name,
             status: $this->status,
             type: $this->type,
+            notes: $this->notes,
             clientId: $this->clientId,
             celebrantOne: $this->celebrantOne,
             celebrantTwo: $this->celebrantTwo,

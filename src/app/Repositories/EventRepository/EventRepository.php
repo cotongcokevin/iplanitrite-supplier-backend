@@ -24,6 +24,9 @@ readonly class EventRepository
         $eventEntity->name = $data->name;
         $eventEntity->type = $data->type;
         $eventEntity->notes = $data->notes;
+        $eventEntity->status = $data->status;
+        $eventEntity->celebrant_one = $data->celebrantOne;
+        $eventEntity->celebrant_two = $data->celebrantTwo;
         $eventEntity->client_id = $data->clientId;
         $eventEntity->created_by = $this->principal::get()->id;
         $eventEntity->created_at = Carbon::now();

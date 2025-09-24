@@ -18,15 +18,21 @@ readonly class ClientService
     public function create(
         ClientRequestDto $request
     ): UuidInterface {
-        $addressId = $this->addressService->upsert(
-            $request->address,
-            null
-        );
+        $addressId = null;
+        if($request->address) {
+            $addressId = $this->addressService->upsert(
+                $request->address,
+                null
+            );
+        }
 
-        $contactNumberId = $this->contactNumberService->upsert(
-            $request->number,
-            null
-        );
+        $contactNumberId = null;
+        if($request->contactNumber) {
+            $contactNumberId = $this->contactNumberService->upsert(
+                $request->contactNumber,
+                null
+            );
+        }
 
         $clientId = $this->clientRepository->create(
             new ClientCreateRepoData(

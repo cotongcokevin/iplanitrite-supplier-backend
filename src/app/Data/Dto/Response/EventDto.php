@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
+use App\Enums\EventStatus;
+use App\Enums\EventType;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
@@ -13,8 +15,9 @@ class EventDto extends ResponseDto
     public function __construct(
         public UuidInterface $id,
         public string $name,
-        public string $status,
-        public string $type,
+        public EventStatus $status,
+        public EventType $type,
+        public string $notes,
         public UuidInterface $clientId,
         public UuidInterface $celebrantOne,
         public ?UuidInterface $celebrantTwo,

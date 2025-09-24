@@ -17,15 +17,21 @@ readonly class CelebrantService
 
     public function create(CelebrantRequestDto $request): UuidInterface
     {
-        $addressId = $this->addressService->upsert(
-            $request->address,
-            null
-        );
+        $addressId = null;
+        if($request->address) {
+            $addressId = $this->addressService->upsert(
+                $request->address,
+                null
+            );
+        }
 
-        $contactNumberId = $this->contactNumberService->upsert(
-            $request->contactNumber,
-            null
-        );
+        $contactNumberId = null;
+        if($request->contactNumber) {
+            $contactNumberId = $this->contactNumberService->upsert(
+                $request->contactNumber,
+                null
+            );
+        }
 
         return $this->celebrantRepository->create(
             new CelebrantUpsertRepoData(

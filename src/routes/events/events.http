@@ -4,51 +4,52 @@ Content-Type: application/json
 Authorization: Bearer {{ token }}
 
 {
-  "name": "",
-  "type": "",
+  "name": "asdf",
+  "type": "WEDDING",
   "notes": "",
   "client": {
-    "firstName": "",
-    "lastName": "",
-    "email": "",
+    "firstName": "Kevin",
+    "lastName": "Cotongco",
+    "password": "password",
+    "email": "cotongcokevin@gmail.com",
     "address": {
-      "line1": "",
+      "line1": "123",
       "line2": null,
-      "city": "",
-      "state": "",
-      "zip": "",
+      "city": "Pasig City",
+      "state": "Metro Manila",
+      "zip": "1610",
       "lat": null,
       "long": null
     },
     "contactNumber": ""
   },
   "celebrant": {
-    "one": {
-      "title": "",
-      "firstName": "",
-      "lastName": "",
+    "first": {
+      "title": "Groom",
+      "firstName": "Kevin",
+      "lastName": "Cotongco",
       "contactNumber": "",
       "address": {
-        "line1": "",
+        "line1": "123",
         "line2": null,
-        "city": "",
-        "state": "",
-        "zip": "",
+        "city": "Pasig City",
+        "state": "Metro Manila",
+        "zip": "1610",
         "lat": null,
         "long": null
       }
     },
-    "two": {
-      "title": "",
-      "firstName": "",
-      "lastName": "",
+    "second": {
+      "title": "BRIDE",
+      "firstName": "Rhoma",
+      "lastName": "Cabacungan",
       "contactNumber": "",
       "address": {
-        "line1": "",
+        "line1": "123",
         "line2": null,
-        "city": "",
-        "state": "",
-        "zip": "",
+        "city": "Pasig City",
+        "state": "Metro Manila",
+        "zip": "1610",
         "lat": null,
         "long": null
       }

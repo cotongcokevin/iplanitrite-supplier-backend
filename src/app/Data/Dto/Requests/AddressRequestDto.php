@@ -25,8 +25,8 @@ class AddressRequestDto
             'city' => ['required'],
             'state' => ['required'],
             'zip' => ['required'],
-            'lat' => ['number'],
-            'long' => ['number'],
+            'lat' => ['numeric', 'nullable'],
+            'long' => ['numeric', 'nullable'],
         ]);
 
         return new AddressRequestDto(

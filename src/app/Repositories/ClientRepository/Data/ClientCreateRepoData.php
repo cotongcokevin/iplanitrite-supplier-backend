@@ -11,8 +11,8 @@ class ClientCreateRepoData
         public string $lastName,
         public string $email,
         public string $password,
-        public UuidInterface $addressId,
-        public UuidInterface $contactNumberId
+        public ?UuidInterface $addressId,
+        public ?UuidInterface $contactNumberId
     ) {}
 
 }

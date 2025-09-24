@@ -5,9 +5,12 @@ namespace App\Services;
 use App\Data\Dto\Requests\EventCelebrant\PairCelebrantRequestDto;
 use App\Data\Dto\Requests\EventCelebrant\SingleCelebrantRequestDto;
 use App\Data\Dto\Requests\EventCreateRequestDto;
+use App\Enums\EventStatus;
+use App\Mail\OnEventCreated;
 use App\Repositories\EventRepository\Data\EventCreateRepoData;
 use App\Repositories\EventRepository\EventRepository;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 readonly class EventService
 {
@@ -45,6 +48,7 @@ readonly class EventService
         $eventRepoData = new EventCreateRepoData(
             name: $request->name,
             type: $request->type,
+            status: EventStatus::PENDING,
             notes: $request->notes,
             clientId: $clientId,
             celebrantOne: $celebrantId,
@@ -52,6 +56,8 @@ readonly class EventService
         );
         $eventId = $this->eventRepository->create($eventRepoData);
 
+        Mail::to($request->client->email)
+            ->send(new OnEventCreated());
         /**
          * Create mandatory schedules
          * call scheduleService

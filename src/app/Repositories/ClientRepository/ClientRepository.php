@@ -6,6 +6,7 @@ namespace App\Repositories\ClientRepository;
 
 use App\Classes\Principals\Principal;
 use App\Models\Client\ClientEntity;
+use App\Models\Client\ClientModel;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -17,7 +18,7 @@ readonly class ClientRepository
         private Principal $principal
     ) {}
 
-    public function create(ClientCreateRepoData $data): UuidInterface
+    public function create(ClientCreateRepoData $data): ClientModel
     {
         $id = Uuid::uuid4();
 
@@ -33,6 +34,6 @@ readonly class ClientRepository
         $client->created_at = Carbon::now();
         $client->save();
 
-        return $id;
+        return $client->toModel();
     }
 }

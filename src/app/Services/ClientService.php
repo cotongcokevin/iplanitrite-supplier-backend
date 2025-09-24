@@ -3,8 +3,12 @@
 namespace App\Services;
 
 use App\Data\Dto\Requests\ClientRequestDto;
+use App\Mail\OnClientCreated;
+use App\Mail\OnEventCreated;
+use App\Models\Client\ClientModel;
 use App\Repositories\ClientRepository\ClientRepository;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
+use Illuminate\Support\Facades\Mail;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class ClientService
@@ -17,7 +21,7 @@ readonly class ClientService
 
     public function create(
         ClientRequestDto $request
-    ): UuidInterface {
+    ): ClientModel {
         $addressId = null;
         if($request->address) {
             $addressId = $this->addressService->upsert(
@@ -34,7 +38,7 @@ readonly class ClientService
             );
         }
 
-        $clientId = $this->clientRepository->create(
+        $client = $this->clientRepository->create(
             new ClientCreateRepoData(
                 firstName: $request->firstName,
                 lastName: $request->lastName,
@@ -45,8 +49,9 @@ readonly class ClientService
             )
         );
 
-        // TODO: Send email here
+        Mail::to($client->email)
+            ->send(new OnClientCreated($client));
 
-        return $clientId;
+        return $client;
     }
 }

@@ -6,6 +6,7 @@ namespace App\Repositories\EventRepository;
 
 use App\Classes\Principals\Principal;
 use App\Models\Event\EventEntity;
+use App\Models\Event\EventModel;
 use App\Repositories\EventRepository\Data\EventCreateRepoData;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -15,7 +16,7 @@ readonly class EventRepository
 {
     public function __construct(private Principal $principal) {}
 
-    public function create(EventCreateRepoData $data): UuidInterface
+    public function create(EventCreateRepoData $data): EventModel
     {
         $id = Uuid::uuid4();
 
@@ -32,6 +33,6 @@ readonly class EventRepository
         $eventEntity->created_at = Carbon::now();
         $eventEntity->save();
 
-        return $id;
+        return $eventEntity->toModel();
     }
 }

@@ -25,7 +25,7 @@ readonly class EventService
      */
     public function create(EventCreateRequestDto $request): void
     {
-        $clientId = $this->clientService->create(
+        $client = $this->clientService->create(
             $request->client
         );
 
@@ -50,14 +50,16 @@ readonly class EventService
             type: $request->type,
             status: EventStatus::PENDING,
             notes: $request->notes,
-            clientId: $clientId,
+            clientId: $client->id,
             celebrantOne: $celebrantId,
             celebrantTwo: $celebrant2Id
         );
-        $eventId = $this->eventRepository->create($eventRepoData);
+
+        $event = $this->eventRepository->create($eventRepoData);
 
         Mail::to($request->client->email)
             ->send(new OnEventCreated());
+
         /**
          * Create mandatory schedules
          * call scheduleService

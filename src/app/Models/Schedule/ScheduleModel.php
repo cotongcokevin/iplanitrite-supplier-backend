@@ -15,7 +15,7 @@ class ScheduleModel
         public string $title,
         public Carbon $startDate,
         public Carbon $endDate,
-        public string $notes,
+        public ?string $notes,
         public string $type,
         public bool $isMandatory,
         public ?UuidInterface $eventId,

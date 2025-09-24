@@ -27,12 +27,11 @@ readonly class EventService
         );
 
         $celebrantDto = $request->celebrant;
-        $celebrantId = null;
-        $celebrant2Id = null;
         switch ($celebrantDto::class) {
             case SingleCelebrantRequestDto::class:
                 /** @var SingleCelebrantRequestDto $celebrantDto */
                 $celebrantId = $this->celebrantService->create($celebrantDto->data);
+                $celebrant2Id = null;
                 break;
             case PairCelebrantRequestDto::class:
                 /** @var PairCelebrantRequestDto $celebrantDto */

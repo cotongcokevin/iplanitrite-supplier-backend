@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models\RsvpGuestGroup;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RsvpGuestGroupEntity extends Model
-{  
+{
     use SoftDeletes;
-    
+
     /**
      * @var string
      */
     protected $table = 'rsvp_guest_group';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'rsvp_id' => UuidCast::class,

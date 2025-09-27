@@ -18,7 +18,7 @@ readonly class CelebrantService
     public function create(CelebrantRequestDto $request): UuidInterface
     {
         $addressId = null;
-        if($request->address) {
+        if ($request->address) {
             $addressId = $this->addressService->upsert(
                 $request->address,
                 null
@@ -26,7 +26,7 @@ readonly class CelebrantService
         }
 
         $contactNumberId = null;
-        if($request->contactNumber) {
+        if ($request->contactNumber) {
             $contactNumberId = $this->contactNumberService->upsert(
                 $request->contactNumber,
                 null

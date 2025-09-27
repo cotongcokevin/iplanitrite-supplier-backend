@@ -8,7 +8,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class RsvpGuestGroupService
 {
-
     public function __construct(
         private RsvpGuestGroupRepository $rsvpGuestGroupRepository
     ) {}

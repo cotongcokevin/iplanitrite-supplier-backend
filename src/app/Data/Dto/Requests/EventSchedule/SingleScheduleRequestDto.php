@@ -2,8 +2,6 @@
 
 namespace App\Data\Dto\Requests\EventSchedule;
 
-use App\Data\Dto\Requests\CelebrantRequestDto;
-use App\Data\Dto\Requests\EventCelebrant\EventCelebrantRequest;
 use Illuminate\Http\Request;
 
 class SingleScheduleRequestDto implements EventScheduleRequest

@@ -6,7 +6,6 @@ use App\Data\Dto\Requests\EventCelebrant\EventCelebrantRequest;
 use App\Data\Dto\Requests\EventCelebrant\PairCelebrantRequestDto;
 use App\Data\Dto\Requests\EventCelebrant\SingleCelebrantRequestDto;
 use App\Data\Dto\Requests\EventSchedule\EventScheduleRequest;
-use App\Data\Dto\Requests\EventSchedule\EventScheduleRequestDto;
 use App\Data\Dto\Requests\EventSchedule\PairScheduleRequestDto;
 use App\Data\Dto\Requests\EventSchedule\SingleScheduleRequestDto;
 use App\Enums\EventType;
@@ -15,14 +14,6 @@ use Illuminate\Validation\Rules\Enum;
 
 class EventCreateRequestDto
 {
-    /**
-     * @param string $name
-     * @param EventType $type
-     * @param string|null $notes
-     * @param EventScheduleRequest $schedule
-     * @param ClientRequestDto $client
-     * @param EventCelebrantRequest $celebrant
-     */
     private function __construct(
         public string $name,
         public EventType $type,

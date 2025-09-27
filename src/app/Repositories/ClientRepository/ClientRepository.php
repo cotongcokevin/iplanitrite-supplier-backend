@@ -20,17 +20,19 @@ readonly class ClientRepository
     ) {}
 
     /**
-     * @param UuidInterface[] $ids
+     * @param  UuidInterface[]  $ids
      * @return Collection<ClientModel>
      */
-    public function getByIds(array $ids): Collection {
-        return ClientEntity::where("id", $ids)
+    public function getByIds(array $ids): Collection
+    {
+        return ClientEntity::where('id', $ids)
             ->get()
-            ->map(fn(ClientEntity $client) => ($client->toModel()));
+            ->map(fn (ClientEntity $client) => ($client->toModel()));
     }
 
-    public function getByEmail(string $email): ?ClientModel {
-        return ClientEntity::where("email", $email)
+    public function getByEmail(string $email): ?ClientModel
+    {
+        return ClientEntity::where('email', $email)
             ->first()
             ?->toModel();
     }

@@ -8,15 +8,8 @@ use Ramsey\Uuid\UuidInterface;
 
 class ScheduleCreateRequestDto
 {
-
     /**
-     * @param string $title
-     * @param Carbon $startDate
-     * @param Carbon $endDate
-     * @param string|null $notes
-     * @param UuidInterface|null $eventId
-     * @param AddressRequestDto|null $address
-     * @param ScheduleAppointeeRequestDto[] $appointees
+     * @param  ScheduleAppointeeRequestDto[]  $appointees
      */
     private function __construct(
         public string $title,
@@ -28,7 +21,8 @@ class ScheduleCreateRequestDto
         public array $appointees
     ) {}
 
-    public static function fromRequest(Request $request): ScheduleCreateRequestDto {
+    public static function fromRequest(Request $request): ScheduleCreateRequestDto
+    {
         return new ScheduleCreateRequestDto(
             $request->title,
             $request->startDate,
@@ -41,7 +35,7 @@ class ScheduleCreateRequestDto
                     : AddressRequestDto::fromRequest(new Request($request->address))
                 : null,
             array_map(
-                function($appointee) {
+                function ($appointee) {
                     return ScheduleAppointeeRequestDto::fromRequest(
                         new Request($appointee)
                     );
@@ -49,5 +43,4 @@ class ScheduleCreateRequestDto
             )
         );
     }
-
 }

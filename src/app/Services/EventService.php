@@ -27,7 +27,7 @@ readonly class EventService
     public function create(EventCreateRequestDto $request): void
     {
         $client = $this->clientService->getByEmail($request->client->email);
-        if(!$client) {
+        if (! $client) {
             $client = $this->clientService->create(
                 $request->client
             );
@@ -62,7 +62,7 @@ readonly class EventService
         $event = $this->eventRepository->create($eventRepoData);
 
         Mail::to($request->client->email)
-            ->queue(new OnEventCreated());
+            ->queue(new OnEventCreated);
 
         $this->scheduleService->createMandatoryEventSchedule(
             $event,

@@ -26,15 +26,15 @@ class SupplierStaffRepository
     }
 
     /**
-     * @param UuidInterface[] $ids
+     * @param  UuidInterface[]  $ids
      * @return Collection<SupplierStaffModel>
      */
     public function getByIds(
         array $ids,
     ): Collection {
-        return SupplierStaffEntity::whereIn("id", $ids)
+        return SupplierStaffEntity::whereIn('id', $ids)
             ->get()
-            ->map(fn(SupplierStaffEntity $staff) => ($staff->toModel()));
+            ->map(fn (SupplierStaffEntity $staff) => ($staff->toModel()));
     }
 
     /**

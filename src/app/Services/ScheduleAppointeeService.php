@@ -8,7 +8,6 @@ use Ramsey\Uuid\UuidInterface;
 
 readonly class ScheduleAppointeeService
 {
-
     public function __construct(
         private ScheduleAppointeeRepository $repository
     ) {}
@@ -17,9 +16,7 @@ readonly class ScheduleAppointeeService
         UuidInterface $appointeeId,
         AppointeeType $appointeeType,
         UuidInterface $scheduleId,
-    ): void
-    {
+    ): void {
         $this->repository->create($appointeeId, $appointeeType, $scheduleId);
     }
-
 }

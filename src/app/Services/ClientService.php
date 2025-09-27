@@ -4,13 +4,11 @@ namespace App\Services;
 
 use App\Data\Dto\Requests\ClientRequestDto;
 use App\Mail\OnClientCreated;
-use App\Mail\OnEventCreated;
 use App\Models\Client\ClientModel;
 use App\Repositories\ClientRepository\ClientRepository;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
-use Ramsey\Uuid\UuidInterface;
 
 readonly class ClientService
 {
@@ -21,14 +19,15 @@ readonly class ClientService
     ) {}
 
     /**
-     * @param array $ids
      * @return Collection<ClientModel>
      */
-    public function getByIds(array $ids): Collection {
+    public function getByIds(array $ids): Collection
+    {
         return $this->clientRepository->getByIds($ids);
     }
 
-    public function getByEmail(string $email): ?ClientModel {
+    public function getByEmail(string $email): ?ClientModel
+    {
         return $this->clientRepository->getByEmail($email);
     }
 
@@ -36,7 +35,7 @@ readonly class ClientService
         ClientRequestDto $request
     ): ClientModel {
         $addressId = null;
-        if($request->address) {
+        if ($request->address) {
             $addressId = $this->addressService->upsert(
                 $request->address,
                 null
@@ -44,7 +43,7 @@ readonly class ClientService
         }
 
         $contactNumberId = null;
-        if($request->contactNumber) {
+        if ($request->contactNumber) {
             $contactNumberId = $this->contactNumberService->upsert(
                 $request->contactNumber,
                 null

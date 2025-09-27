@@ -13,13 +13,13 @@ use Ramsey\Uuid\Uuid;
 
 readonly class ScheduleRepository
 {
-
     public function __construct(
         private Principal $principal
     ) {}
 
-    public function create(ScheduleCreateRepoData $data): ScheduleModel {
-        $schedule = new ScheduleEntity();
+    public function create(ScheduleCreateRepoData $data): ScheduleModel
+    {
+        $schedule = new ScheduleEntity;
         $schedule->id = Uuid::uuid4();
         $schedule->title = $data->title;
         $schedule->start_date = $data->startDate;
@@ -34,5 +34,4 @@ readonly class ScheduleRepository
 
         return $schedule->toModel();
     }
-
 }

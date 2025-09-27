@@ -7,7 +7,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class RsvpService
 {
-
     public function __construct(
         private RsvpRepository $rsvpRepository,
         private RsvpGuestGroupService $rspvGuestGroupService
@@ -16,8 +15,7 @@ class RsvpService
     public function create(
         UuidInterface $scheduleId,
         int $guestsCount
-    ): void
-    {
+    ): void {
         $rsvp = $this->rsvpRepository->create(
             $scheduleId,
             $guestsCount
@@ -25,7 +23,7 @@ class RsvpService
 
         $this->rspvGuestGroupService->create(
             $rsvp->id,
-            "All Guests"
+            'All Guests'
         );
     }
 }

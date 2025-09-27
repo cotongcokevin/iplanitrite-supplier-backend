@@ -10,7 +10,6 @@ use App\Models\Event\EventModel;
 use App\Repositories\EventRepository\Data\EventCreateRepoData;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 readonly class EventRepository
 {

@@ -21,7 +21,7 @@ readonly class RsvpRepository
         UuidInterface $scheduleId,
         int $guestsCount
     ): RsvpModel {
-        $rsvpEntity = new RsvpEntity();
+        $rsvpEntity = new RsvpEntity;
         $rsvpEntity->id = Uuid::uuid4();
         $rsvpEntity->schedule_id = $scheduleId;
         $rsvpEntity->guests_count = $guestsCount;

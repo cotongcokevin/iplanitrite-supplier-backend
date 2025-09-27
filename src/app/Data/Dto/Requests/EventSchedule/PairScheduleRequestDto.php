@@ -2,8 +2,6 @@
 
 namespace App\Data\Dto\Requests\EventSchedule;
 
-use App\Data\Dto\Requests\CelebrantRequestDto;
-use App\Data\Dto\Requests\EventCelebrant\EventCelebrantRequest;
 use Illuminate\Http\Request;
 
 class PairScheduleRequestDto implements EventScheduleRequest
@@ -17,7 +15,7 @@ class PairScheduleRequestDto implements EventScheduleRequest
     {
         $request->validate([
             'first' => ['required'],
-            'second' => ['required']
+            'second' => ['required'],
         ]);
 
         return new PairScheduleRequestDto(

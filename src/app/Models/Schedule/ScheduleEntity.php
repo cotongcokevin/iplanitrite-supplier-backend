@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models\Schedule;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ScheduleEntity extends Model
-{  
+{
     use SoftDeletes;
-    
+
     /**
      * @var string
      */
     protected $table = 'schedule';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'start_date' => CarbonCast::class,

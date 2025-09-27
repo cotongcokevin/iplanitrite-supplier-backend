@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Client\ClientModel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -17,7 +16,7 @@ class OnClientCreated extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private readonly ClientModel $client) { }
+    public function __construct(private readonly ClientModel $client) {}
 
     /**
      * Get the message envelope.

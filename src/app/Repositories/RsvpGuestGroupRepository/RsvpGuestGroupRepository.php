@@ -13,7 +13,6 @@ use Ramsey\Uuid\UuidInterface;
 
 readonly class RsvpGuestGroupRepository
 {
-
     public function __construct(
         private Principal $principal
     ) {}
@@ -22,7 +21,7 @@ readonly class RsvpGuestGroupRepository
         UuidInterface $rsvpId,
         string $name,
     ): RsvpGuestGroupModel {
-        $entity = new RsvpGuestGroupEntity();
+        $entity = new RsvpGuestGroupEntity;
         $entity->id = Uuid::uuid4();
         $entity->name = $name;
         $entity->rsvp_id = $rsvpId;
@@ -32,5 +31,4 @@ readonly class RsvpGuestGroupRepository
 
         return $entity->toModel();
     }
-
 }

@@ -11,16 +11,19 @@ class EventScheduleRequestDto
 
     private function __construct(
         public Carbon $date,
+        public ?int $guestsCount,
         public ?AddressRequestDto $address
     ) {}
 
     public static function fromRequest(Request $request): EventScheduleRequestDto {
         $request->validate([
-            'date' => ['required', 'date']
+            'date' => ['required', 'date'],
+            'guestsCount' => ['nullable', 'numeric', 'gt:0'],
         ]);
 
         return new EventScheduleRequestDto(
             Carbon::parse($request->date),
+            $request->guestsCount ?? null,
             $request->address
                 ? AddressRequestDto::fromRequest(
                     new Request($request->address)

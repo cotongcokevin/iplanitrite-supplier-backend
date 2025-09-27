@@ -12,7 +12,7 @@ class RsvpModel
 {
     public function __construct(
         public UuidInterface $id,
-        public string $description,
+        public ?string $description,
         public int $guestsCount,
         public UuidInterface $scheduleId,
         public ?UuidInterface $createdBy,

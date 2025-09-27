@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
-use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
+use Carbon\Carbon;
 
 class RsvpDto extends ResponseDto
 {
+    
     public function __construct(
         public UuidInterface $id,
-        public string $description,
+        public ?string $description,
         public int $guestsCount,
         public UuidInterface $scheduleId,
         public ?UuidInterface $createdBy,

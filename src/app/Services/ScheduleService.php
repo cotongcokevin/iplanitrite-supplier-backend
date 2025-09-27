@@ -15,6 +15,7 @@ use App\Enums\EventType;
 use App\Mail\OnClientCreated;
 use App\Mail\OnScheduleAssigned;
 use App\Models\Event\EventModel;
+use App\Models\Schedule\ScheduleModel;
 use App\Repositories\EventRepository\EventRepository;
 use App\Repositories\ScheduleRepository\Data\ScheduleCreateRepoData;
 use App\Repositories\ScheduleRepository\ScheduleRepository;
@@ -33,6 +34,7 @@ readonly class ScheduleService
         private ClientService $clientService,
         private SupplierStaffRepository $supplierStaffRepository,
         private AddressService $addressService,
+        private RsvpService $rsvpService,
         private Principal $principal
     ) {}
 
@@ -40,7 +42,7 @@ readonly class ScheduleService
         ScheduleCreateRequestDto $request,
         bool $isMandatory,
         bool $sendEmail = true
-    ): void
+    ): ScheduleModel
     {
         $addressId = null;
         if($request->address !== null) {
@@ -70,34 +72,34 @@ readonly class ScheduleService
             );
         }
 
-        if(!$sendEmail) {
-            return;
+        if($sendEmail) {
+            $groupedAppointees = collect($request->appointees)
+                ->groupBy('type')
+                ->map(fn ($items) => $items->pluck('id')->all())
+                ->toArray();
+
+            $staffIds = $groupedAppointees[AppointeeType::SUPPLIER_STAFF->value];
+            $staffs = $this->supplierStaffRepository->getByIds($staffIds);
+            foreach($staffs as $staff) {
+                Mail::to($staff->email)
+                    ->queue(new OnScheduleAssigned(
+                        $schedule,
+                        "$staff->firstName $staff->lastName"
+                    ));
+            }
+
+            $clientIds = $groupedAppointees[AppointeeType::CLIENT->value];
+            $clients = $this->clientService->getByIds($clientIds);
+            foreach($clients as $client) {
+                Mail::to($client->email)
+                    ->queue(new OnScheduleAssigned(
+                        $schedule,
+                        "$client->firstName $client->lastName"
+                    ));
+            }
         }
 
-        $groupedAppointees = collect($request->appointees)
-            ->groupBy('type')
-            ->map(fn ($items) => $items->pluck('id')->all())
-            ->toArray();
-
-        $staffIds = $groupedAppointees[AppointeeType::SUPPLIER_STAFF->value];
-        $staffs = $this->supplierStaffRepository->getByIds($staffIds);
-        foreach($staffs as $staff) {
-            Mail::to($staff->email)
-                ->queue(new OnScheduleAssigned(
-                    $schedule,
-                    "$staff->firstName $staff->lastName"
-                ));
-        }
-
-        $clientIds = $groupedAppointees[AppointeeType::CLIENT->value];
-        $clients = $this->clientService->getByIds($clientIds);
-        foreach($clients as $client) {
-            Mail::to($client->email)
-                ->queue(new OnScheduleAssigned(
-                    $schedule,
-                    "$client->firstName $client->lastName"
-                ));
-        }
+        return $schedule;
     }
 
     /**
@@ -156,7 +158,13 @@ readonly class ScheduleService
             "appointee" => $this->generateDefaultAppointee($event)
         ]));
 
-        $this->create($request, true);
+        if($scheduleRequest->data->guestsCount > 0) {
+            $schedule = $this->create($request, true);
+            $this->rsvpService->create(
+                $schedule->id,
+                $scheduleRequest->data->guestsCount
+            );
+        }
     }
 
     private function createPairMandatoryEventSchedule(
@@ -178,7 +186,14 @@ readonly class ScheduleService
                 "appointees" => $this->generateDefaultAppointee($event)
             ]));
 
-            $this->create($createRequest, true, $key === 0);
+            $schedule = $this->create($createRequest, true, $key === 0);
+
+            if($request->guestsCount > 0) {
+                $this->rsvpService->create(
+                    $schedule->id,
+                    $request->guestsCount
+                );
+            }
         }
     }
 

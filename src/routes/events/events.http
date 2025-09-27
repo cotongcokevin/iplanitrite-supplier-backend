@@ -10,6 +10,7 @@ Authorization: Bearer {{ token }}
   "schedule": {
     "first": {
       "date": "2026-01-01 00:00:00",
+      "guestsCount": null,
       "address": {
         "line1": "123",
         "line2": null,
@@ -22,6 +23,7 @@ Authorization: Bearer {{ token }}
     },
     "second": {
       "date": "2026-01-01 00:00:00",
+      "guestsCount": 150,
       "address": {
         "line1": "123",
         "line2": null,

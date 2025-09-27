@@ -68,10 +68,5 @@ readonly class EventService
             $event,
             $request->schedule
         );
-
-        /**
-         * Create RSVP
-         * call rsvp service
-         */
     }
 }

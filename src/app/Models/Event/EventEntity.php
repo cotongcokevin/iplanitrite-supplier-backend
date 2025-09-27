@@ -8,10 +8,10 @@ use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
 use App\Enums\EventStatus;
 use App\Enums\EventType;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\GuardedEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class EventEntity extends Model
+class EventEntity extends GuardedEntity
 {
     use SoftDeletes;
 

@@ -6,10 +6,10 @@ namespace App\Models\Rsvp;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\GuardedEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RsvpEntity extends Model
+class RsvpEntity extends GuardedEntity
 {
     use SoftDeletes;
 

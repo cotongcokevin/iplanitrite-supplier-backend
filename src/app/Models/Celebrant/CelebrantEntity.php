@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Models\Celebrant;
 
 use App\Classes\Casts\UuidCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\GuardedEntity;
 
-class CelebrantEntity extends Model
+class CelebrantEntity extends GuardedEntity
 {
     public $timestamps = false;
 

@@ -5,25 +5,19 @@ namespace App\Services;
 use App\Repositories\RsvpRepository\RsvpRepository;
 use Ramsey\Uuid\UuidInterface;
 
-class RsvpService
+readonly class RsvpService
 {
     public function __construct(
-        private RsvpRepository $rsvpRepository,
-        private RsvpGuestGroupService $rspvGuestGroupService
+        private RsvpRepository $rsvpRepository
     ) {}
 
     public function create(
         UuidInterface $scheduleId,
         int $guestsCount
     ): void {
-        $rsvp = $this->rsvpRepository->create(
+        $this->rsvpRepository->create(
             $scheduleId,
             $guestsCount
-        );
-
-        $this->rspvGuestGroupService->create(
-            $rsvp->id,
-            'All Guests'
         );
     }
 }

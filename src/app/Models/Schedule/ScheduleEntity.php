@@ -6,10 +6,10 @@ namespace App\Models\Schedule;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\GuardedEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ScheduleEntity extends Model
+class ScheduleEntity extends GuardedEntity
 {
     use SoftDeletes;
 

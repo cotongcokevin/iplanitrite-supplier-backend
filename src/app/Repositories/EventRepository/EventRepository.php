@@ -23,9 +23,9 @@ readonly class EventRepository
         $eventEntity = new EventEntity;
         $eventEntity->id = $id;
         $eventEntity->name = $data->name;
-        $eventEntity->type = $data->type;
+        $eventEntity->type = $data->type->value;
         $eventEntity->notes = $data->notes;
-        $eventEntity->status = $data->status;
+        $eventEntity->status = $data->status->value;
         $eventEntity->celebrant_one = $data->celebrantOne;
         $eventEntity->celebrant_two = $data->celebrantTwo;
         $eventEntity->client_id = $data->clientId;

@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Client\ClientModel;
+use App\Models\Schedule\ScheduleModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,14 +10,15 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OnClientCreated extends Mailable
+class OnScheduleAssigned extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(private readonly ClientModel $client) { }
+
+    public function __construct(
+        private ScheduleModel $scheduleModel,
+        private $appointeeName
+    ) {}
 
     /**
      * Get the message envelope.
@@ -25,7 +26,7 @@ class OnClientCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'On Client Created',
+            subject: 'On Schedule Assigned',
         );
     }
 
@@ -35,7 +36,7 @@ class OnClientCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.client.on-client-created',
+            view: 'email.schedule.on-schedule-assigned',
         );
     }
 }

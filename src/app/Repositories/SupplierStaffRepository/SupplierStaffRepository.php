@@ -11,6 +11,7 @@ use App\Models\SupplierStaff\Context\SupplierStaffContextType;
 use App\Models\SupplierStaff\SupplierStaffEntity;
 use App\Models\SupplierStaff\SupplierStaffModel;
 use App\Repositories\SupplierStaffRepository\Data\SupplierStaffUpdateProfileRepoData;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\UuidInterface;
 
 class SupplierStaffRepository
@@ -22,6 +23,18 @@ class SupplierStaffRepository
         $result = SupplierStaffEntity::find($id);
 
         return $result->toModel();
+    }
+
+    /**
+     * @param UuidInterface[] $ids
+     * @return Collection<SupplierStaffModel>
+     */
+    public function getByIds(
+        array $ids,
+    ): Collection {
+        return SupplierStaffEntity::whereIn("id", $ids)
+            ->get()
+            ->map(fn(SupplierStaffEntity $staff) => ($staff->toModel()));
     }
 
     /**

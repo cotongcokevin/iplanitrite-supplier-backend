@@ -13,7 +13,7 @@ class ScheduleAppointeeModel
         public UuidInterface $id,
         public string $appointeeType,
         public string $appointeeId,
-        public ?UuidInterface $eventId,
+        public UuidInterface $scheduleId,
     ) {}
 
     public function toDto(): ScheduleAppointeeDto
@@ -22,7 +22,7 @@ class ScheduleAppointeeModel
             id: $this->id,
             appointeeType: $this->appointeeType,
             appointeeId: $this->appointeeId,
-            eventId: $this->eventId,
+            scheduleId: $this->scheduleId,
         );
     }
 }

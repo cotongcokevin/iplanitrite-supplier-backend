@@ -9,6 +9,7 @@ use App\Models\Client\ClientEntity;
 use App\Models\Client\ClientModel;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -17,6 +18,22 @@ readonly class ClientRepository
     public function __construct(
         private Principal $principal
     ) {}
+
+    /**
+     * @param UuidInterface[] $ids
+     * @return Collection<ClientModel>
+     */
+    public function getByIds(array $ids): Collection {
+        return ClientEntity::where("id", $ids)
+            ->get()
+            ->map(fn(ClientEntity $client) => ($client->toModel()));
+    }
+
+    public function getByEmail(string $email): ?ClientModel {
+        return ClientEntity::where("email", $email)
+            ->first()
+            ?->toModel();
+    }
 
     public function create(ClientCreateRepoData $data): ClientModel
     {

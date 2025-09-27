@@ -5,7 +5,7 @@ namespace App\Data\Dto\Requests\EventCelebrant;
 use App\Data\Dto\Requests\CelebrantRequestDto;
 use Illuminate\Http\Request;
 
-class SingleCelebrantRequestDto implements EventCelebrantRequestDto
+class SingleCelebrantRequestDto implements EventCelebrantRequest
 {
     private function __construct(
         public CelebrantRequestDto $data

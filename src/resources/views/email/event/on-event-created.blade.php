@@ -32,21 +32,6 @@
 <body>
 <div class="container">
     <h1>New Event Created!</h1>
-
-    <p>Hello Test,</p>
-
-    <p>A new event has been created: <strong>Test</strong>.</p>
-
-    <p>
-        Date: Some Date<br>
-        Location: Some Location
-    </p>
-
-    <p>Thank you for staying up to date with our events!</p>
-
-    <div class="footer">
-        &copy; {{ date('Y') }} Your Company. All rights reserved.
-    </div>
 </div>
 </body>
 </html>

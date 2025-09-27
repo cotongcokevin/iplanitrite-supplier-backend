@@ -13,6 +13,6 @@ class ScheduleAppointeeDto extends ResponseDto
         public UuidInterface $id,
         public string $appointeeType,
         public string $appointeeId,
-        public ?UuidInterface $eventId,
+        public UuidInterface $scheduleId,
     ) {}
 }

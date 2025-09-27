@@ -17,7 +17,8 @@ readonly class EventService
     public function __construct(
         private EventRepository $eventRepository,
         private ClientService $clientService,
-        private CelebrantService $celebrantService
+        private CelebrantService $celebrantService,
+        private ScheduleService $scheduleService
     ) {}
 
     /**
@@ -25,9 +26,12 @@ readonly class EventService
      */
     public function create(EventCreateRequestDto $request): void
     {
-        $client = $this->clientService->create(
-            $request->client
-        );
+        $client = $this->clientService->getByEmail($request->client->email);
+        if(!$client) {
+            $client = $this->clientService->create(
+                $request->client
+            );
+        }
 
         $celebrantDto = $request->celebrant;
         switch ($celebrantDto::class) {
@@ -58,12 +62,12 @@ readonly class EventService
         $event = $this->eventRepository->create($eventRepoData);
 
         Mail::to($request->client->email)
-            ->send(new OnEventCreated());
+            ->queue(new OnEventCreated());
 
-        /**
-         * Create mandatory schedules
-         * call scheduleService
-         */
+        $this->scheduleService->createMandatoryEventSchedule(
+            $event,
+            $request->schedule
+        );
 
         /**
          * Create RSVP

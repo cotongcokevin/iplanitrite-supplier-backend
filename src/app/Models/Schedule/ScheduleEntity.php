@@ -44,7 +44,6 @@ class ScheduleEntity extends Model
             startDate: $this->start_date,
             endDate: $this->end_date,
             notes: $this->notes,
-            type: $this->type,
             isMandatory: $this->is_mandatory,
             eventId: $this->event_id,
             addressId: $this->address_id,

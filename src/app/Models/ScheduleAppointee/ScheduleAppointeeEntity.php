@@ -23,7 +23,7 @@ class ScheduleAppointeeEntity extends Model
 
     protected $casts = [
         'id' => UuidCast::class,
-        'event_id' => UuidCast::class,
+        'schedule_id' => UuidCast::class,
     ];
 
     public function toModel(): ScheduleAppointeeModel
@@ -32,7 +32,7 @@ class ScheduleAppointeeEntity extends Model
             id: $this->id,
             appointeeType: $this->appointee_type,
             appointeeId: $this->appointee_id,
-            eventId: $this->event_id,
+            scheduleId: $this->event_id,
         );
     }
 }

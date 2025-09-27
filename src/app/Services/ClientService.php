@@ -8,6 +8,7 @@ use App\Mail\OnEventCreated;
 use App\Models\Client\ClientModel;
 use App\Repositories\ClientRepository\ClientRepository;
 use App\Repositories\ClientRepository\Data\ClientCreateRepoData;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
 use Ramsey\Uuid\UuidInterface;
 
@@ -18,6 +19,18 @@ readonly class ClientService
         private AddressService $addressService,
         private ContactNumberService $contactNumberService
     ) {}
+
+    /**
+     * @param array $ids
+     * @return Collection<ClientModel>
+     */
+    public function getByIds(array $ids): Collection {
+        return $this->clientRepository->getByIds($ids);
+    }
+
+    public function getByEmail(string $email): ?ClientModel {
+        return $this->clientRepository->getByEmail($email);
+    }
 
     public function create(
         ClientRequestDto $request
@@ -50,7 +63,7 @@ readonly class ClientService
         );
 
         Mail::to($client->email)
-            ->send(new OnClientCreated($client));
+            ->queue(new OnClientCreated($client));
 
         return $client;
     }

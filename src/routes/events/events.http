@@ -7,6 +7,32 @@ Authorization: Bearer {{ token }}
   "name": "asdf",
   "type": "WEDDING",
   "notes": "",
+  "schedule": {
+    "first": {
+      "date": "2026-01-01 00:00:00",
+      "address": {
+        "line1": "123",
+        "line2": null,
+        "city": "Pasig City",
+        "state": "Metro Manila",
+        "zip": "1610",
+        "lat": null,
+        "long": null
+      }
+    },
+    "second": {
+      "date": "2026-01-01 00:00:00",
+      "address": {
+        "line1": "123",
+        "line2": null,
+        "city": "Pasig City",
+        "state": "Metro Manila",
+        "zip": "1610",
+        "lat": null,
+        "long": null
+      }
+    }
+  },
   "client": {
     "firstName": "Kevin",
     "lastName": "Cotongco",

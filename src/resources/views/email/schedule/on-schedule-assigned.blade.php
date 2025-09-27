@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>New Client Created!</h1>
+    SCHEDULE ASSIGNED
 </div>
 </body>
 </html>

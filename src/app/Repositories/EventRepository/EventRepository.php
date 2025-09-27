@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Repositories\EventRepository;
 
 use App\Classes\Principals\Principal;
+use App\Enums\EventStatus;
 use App\Models\Event\EventEntity;
 use App\Models\Event\EventModel;
 use App\Repositories\EventRepository\Data\EventCreateRepoData;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 readonly class EventRepository
 {
@@ -33,5 +35,14 @@ readonly class EventRepository
         $eventEntity->save();
 
         return $eventEntity->toModel();
+    }
+
+    public function updateStatus(
+        EventStatus $status,
+        UuidInterface $eventId
+    ): void {
+        $entity = EventEntity::where("id", $eventId)->first();
+        $entity->status = $status;
+        $entity->save();
     }
 }

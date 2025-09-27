@@ -11,6 +11,8 @@ use App\Repositories\EventRepository\Data\EventCreateRepoData;
 use App\Repositories\EventRepository\EventRepository;
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 readonly class EventService
 {
@@ -61,6 +63,7 @@ readonly class EventService
 
         $event = $this->eventRepository->create($eventRepoData);
 
+        // We need to add in the invoice here as attachment
         Mail::to($request->client->email)
             ->queue(new OnEventCreated);
 
@@ -68,5 +71,18 @@ readonly class EventService
             $event,
             $request->schedule
         );
+    }
+
+    public function updateStatus(
+        EventStatus $status,
+        UuidInterface $eventId
+    ): void {
+        $this->eventRepository->updateStatus(
+            $status,
+            $eventId
+        );
+
+
+        // TODO Email client
     }
 }

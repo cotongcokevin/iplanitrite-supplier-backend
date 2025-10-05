@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\EventInvoiceStatus;
 use App\Enums\EventStatus;
 use App\Models\Client\ClientModel;
+use App\Models\EventInvoice\EventInvoiceModel;
 use App\Repositories\EventInvoiceRepository\EventInvoiceRepository;
 use App\Repositories\EventInvoiceRepository\Data\EventInvoiceCreateRepoData;
 use Ramsey\Uuid\UuidInterface;
@@ -26,7 +27,7 @@ readonly class EventInvoiceService
         UuidInterface $eventId,
         UuidInterface $eventCostId,
         ClientModel $client,
-    ): void
+    ): EventInvoiceModel
     {
         $addressId = $this->addressService->duplicate($client->addressId);
         $contactId = $this->contactNumberService->duplicate($client->contactNumberId);
@@ -48,6 +49,8 @@ readonly class EventInvoiceService
             eventInvoiceId: $invoice->id,
             eventCostId: $eventCostId,
         );
+
+        return $invoice;
     }
 
     private function getNextInvoiceNumber(): string {

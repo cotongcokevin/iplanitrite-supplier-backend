@@ -8,6 +8,7 @@ use App\Data\Dto\Requests\EventCostRequestDto;
 use App\Data\Dto\Requests\EventCreateRequestDto;
 use App\Enums\EventStatus;
 use App\Mail\OnEventCreated;
+use App\Mail\OnInvoiceSent;
 use App\Repositories\EventRepository\Data\EventCreateRepoData;
 use App\Repositories\EventRepository\EventRepository;
 use Exception;
@@ -87,13 +88,15 @@ readonly class EventService
                 )
             );
 
-            $this->eventInvoiceService->createInitialDeposit(
+            $invoice = $this->eventInvoiceService->createInitialDeposit(
                 $event->id,
                 $initialDeposit->id,
                 $client
             );
-        }
 
+            Mail::to($request->client->email)
+                ->queue(new OnInvoiceSent($invoice));
+        }
     }
 
     public function updateStatus(

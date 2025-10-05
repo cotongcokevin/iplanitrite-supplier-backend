@@ -6,10 +6,11 @@ namespace App\Models\RsvpGuest;
 
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
+use App\Models\GuardedEntity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RsvpGuestEntity extends Model
+class RsvpGuestEntity extends GuardedEntity
 {
     use SoftDeletes;
 
@@ -27,6 +28,7 @@ class RsvpGuestEntity extends Model
         'id' => UuidCast::class,
         'rsvp_id' => UuidCast::class,
         'rsvp_guest_group_id' => UuidCast::class,
+        'supplier_id' => UuidCast::class,
         'created_by' => UuidCast::class,
         'updated_by' => UuidCast::class,
         'created_at' => CarbonCast::class,
@@ -44,6 +46,7 @@ class RsvpGuestEntity extends Model
             status: $this->status,
             rsvpId: $this->rsvp_id,
             rsvpGuestGroupId: $this->rsvp_guest_group_id,
+            supplierId: $this->supplier_id,
             createdBy: $this->created_by,
             updatedBy: $this->updated_by,
             createdAt: $this->created_at,

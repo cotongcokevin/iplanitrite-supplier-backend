@@ -14,6 +14,7 @@ class RsvpGuestGroupDto extends ResponseDto
         public UuidInterface $id,
         public string $name,
         public UuidInterface $rsvpId,
+        public UuidInterface $supplierId,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,

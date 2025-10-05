@@ -5,17 +5,24 @@ declare(strict_types=1);
 namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
-use Carbon\Carbon;
+use App\Enums\EventInvoiceStatus;
 use Ramsey\Uuid\UuidInterface;
+use Carbon\Carbon;
 
-class RsvpDto extends ResponseDto
+class EventInvoiceDto extends ResponseDto
 {
+    
     public function __construct(
         public UuidInterface $id,
-        public ?string $description,
-        public int $guestsCount,
-        public UuidInterface $scheduleId,
+        public string $invoiceNumber,
+        public string $name,
+        public string $email,
+        public ?UuidInterface $contactNumberId,
+        public ?UuidInterface $addressId,
+        public EventInvoiceStatus $status,
+        public UuidInterface $clientId,
         public UuidInterface $supplierId,
+        public UuidInterface $eventId,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,

@@ -7,6 +7,7 @@ Authorization: Bearer {{ token }}
   "name": "asdf",
   "type": "WEDDING",
   "notes": "",
+  "initialDeposit": 20,
   "schedule": {
     "first": {
       "date": "2026-01-01 00:00:00",
@@ -49,7 +50,7 @@ Authorization: Bearer {{ token }}
       "lat": null,
       "long": null
     },
-    "contactNumber": ""
+    "contactNumber": "04444444"
   },
   "celebrant": {
     "first": {

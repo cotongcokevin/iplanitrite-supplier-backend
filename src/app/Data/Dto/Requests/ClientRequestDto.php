@@ -12,7 +12,7 @@ class ClientRequestDto
         public string $email,
         public string $password,
         public AddressRequestDto $address,
-        public ?string $contactNumber
+        public string $contactNumber
     ) {}
 
     public static function fromRequest(Request $request): ClientRequestDto
@@ -30,7 +30,7 @@ class ClientRequestDto
             $request->email,
             $request->password,
             AddressRequestDto::fromRequest(new Request($request->address)),
-            $request->contactNumber ?? null
+            $request->contactNumber
         );
     }
 }

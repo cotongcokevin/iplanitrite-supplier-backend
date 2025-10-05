@@ -18,6 +18,7 @@ class EventCreateRequestDto
         public string $name,
         public EventType $type,
         public ?string $notes,
+        public ?float $initialDeposit,
         public EventScheduleRequest $schedule,
         public ClientRequestDto $client,
         public EventCelebrantRequest $celebrant
@@ -30,6 +31,7 @@ class EventCreateRequestDto
             'type' => ['required', new Enum(EventType::class)],
             'client' => ['required'],
             'schedule' => ['required', 'array'],
+            'initialDeposit' => ['nullable', 'numeric', 'gt:0'],
             'celebrant' => ['required'],
         ]);
 
@@ -39,6 +41,7 @@ class EventCreateRequestDto
             name: $request->name,
             type: $eventType,
             notes: $request->notes,
+            initialDeposit: $request->initialDeposit,
             schedule: $eventType === EventType::WEDDING
                 ? PairScheduleRequestDto::fromRequest(new Request($request->schedule))
                 : SingleScheduleRequestDto::fromRequest(new Request($request->schedule)),

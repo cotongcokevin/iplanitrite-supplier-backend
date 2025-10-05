@@ -26,6 +26,7 @@ class RsvpEntity extends GuardedEntity
     protected $casts = [
         'id' => UuidCast::class,
         'schedule_id' => UuidCast::class,
+        'supplier_id' => UuidCast::class,
         'created_by' => UuidCast::class,
         'updated_by' => UuidCast::class,
         'created_at' => CarbonCast::class,
@@ -40,6 +41,7 @@ class RsvpEntity extends GuardedEntity
             description: $this->description,
             guestsCount: $this->guests_count,
             scheduleId: $this->schedule_id,
+            supplierId: $this->supplier_id,
             createdBy: $this->created_by,
             updatedBy: $this->updated_by,
             createdAt: $this->created_at,

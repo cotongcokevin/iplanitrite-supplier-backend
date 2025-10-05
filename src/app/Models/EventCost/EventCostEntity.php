@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Models\RsvpGuestGroup;
+namespace App\Models\EventCost;
 
-use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
+use App\Classes\Casts\CarbonCast;
 use App\Models\GuardedEntity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RsvpGuestGroupEntity extends GuardedEntity
-{
+class EventCostEntity extends GuardedEntity
+{  
     use SoftDeletes;
-
+    
     /**
      * @var string
      */
-    protected $table = 'rsvp_guest_group';
-
+    protected $table = 'event_cost';
+    
     /**
      * @var string
      */
     protected $keyType = 'string';
-
+    
     protected $casts = [
         'id' => UuidCast::class,
-        'rsvp_id' => UuidCast::class,
+        'event_id' => UuidCast::class,
         'supplier_id' => UuidCast::class,
         'created_by' => UuidCast::class,
         'updated_by' => UuidCast::class,
@@ -35,12 +35,13 @@ class RsvpGuestGroupEntity extends GuardedEntity
         'deleted_at' => CarbonCast::class,
     ];
 
-    public function toModel(): RsvpGuestGroupModel
+    public function toModel(): EventCostModel
     {
-        return new RsvpGuestGroupModel(
+        return new EventCostModel(
             id: $this->id,
             name: $this->name,
-            rsvpId: $this->rsvp_id,
+            amount: $this->amount,
+            eventId: $this->event_id,
             supplierId: $this->supplier_id,
             createdBy: $this->created_by,
             updatedBy: $this->updated_by,

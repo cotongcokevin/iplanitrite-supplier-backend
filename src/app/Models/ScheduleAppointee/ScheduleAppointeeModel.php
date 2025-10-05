@@ -14,6 +14,7 @@ class ScheduleAppointeeModel
         public string $appointeeType,
         public string $appointeeId,
         public UuidInterface $scheduleId,
+        public UuidInterface $supplierId,
     ) {}
 
     public function toDto(): ScheduleAppointeeDto
@@ -23,6 +24,7 @@ class ScheduleAppointeeModel
             appointeeType: $this->appointeeType,
             appointeeId: $this->appointeeId,
             scheduleId: $this->scheduleId,
+            supplierId: $this->supplierId
         );
     }
 }

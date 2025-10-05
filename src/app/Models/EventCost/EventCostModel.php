@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Models\RsvpGuest;
+namespace App\Models\EventCost;
 
-use App\Data\Dto\Response\RsvpGuestDto;
+use App\Data\Dto\Response\EventCostDto;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class RsvpGuestModel
+class EventCostModel
 {
     public function __construct(
         public UuidInterface $id,
-        public string $firstName,
-        public string $lastName,
-        public string $email,
-        public string $status,
-        public UuidInterface $rsvpId,
+        public string $name,
+        public float $amount,
+        public UuidInterface $eventId,
         public UuidInterface $supplierId,
-        public ?UuidInterface $rsvpGuestGroupId,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,
@@ -26,17 +23,14 @@ class RsvpGuestModel
         public ?Carbon $deletedAt,
     ) {}
 
-    public function toDto(): RsvpGuestDto
+    public function toDto(): EventCostDto
     {
-        return new RsvpGuestDto(
+        return new EventCostDto(
             id: $this->id,
-            firstName: $this->firstName,
-            lastName: $this->lastName,
-            email: $this->email,
-            status: $this->status,
-            rsvpId: $this->rsvpId,
+            name: $this->name,
+            amount: $this->amount,
+            eventId: $this->eventId,
             supplierId: $this->supplierId,
-            rsvpGuestGroupId: $this->rsvpGuestGroupId,
             createdBy: $this->createdBy,
             updatedBy: $this->updatedBy,
             createdAt: $this->createdAt,

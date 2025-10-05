@@ -19,6 +19,7 @@ class EventDto extends ResponseDto
         public EventType $type,
         public string $notes,
         public UuidInterface $clientId,
+        public UuidInterface $supplierId,
         public UuidInterface $celebrantOne,
         public ?UuidInterface $celebrantTwo,
         public ?UuidInterface $createdBy,

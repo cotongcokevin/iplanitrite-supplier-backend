@@ -21,12 +21,15 @@ readonly class RsvpRepository
         UuidInterface $scheduleId,
         int $guestsCount
     ): RsvpModel {
+        $principal = $this->principal::get();
+
         $rsvpEntity = new RsvpEntity;
         $rsvpEntity->id = Uuid::uuid4();
         $rsvpEntity->schedule_id = $scheduleId;
+        $rsvpEntity->supplier_id = $principal->guardId;
         $rsvpEntity->guests_count = $guestsCount;
         $rsvpEntity->created_at = Carbon::now();
-        $rsvpEntity->created_by = $this->principal::get()->id;
+        $rsvpEntity->created_by = $principal->id;
         $rsvpEntity->save();
 
         return $rsvpEntity->toModel();

@@ -19,6 +19,8 @@ readonly class ScheduleRepository
 
     public function create(ScheduleCreateRepoData $data): ScheduleModel
     {
+        $principal = $this->principal::get();
+
         $schedule = new ScheduleEntity;
         $schedule->id = Uuid::uuid4();
         $schedule->title = $data->title;
@@ -28,7 +30,8 @@ readonly class ScheduleRepository
         $schedule->is_mandatory = $data->isMandatory;
         $schedule->event_id = $data->eventId;
         $schedule->address_id = $data->addressId;
-        $schedule->created_by = $this->principal::get()->id;
+        $schedule->supplier_id = $principal->guardId;
+        $schedule->created_by = $principal->id;
         $schedule->created_at = Carbon::now();
         $schedule->save();
 

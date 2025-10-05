@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Models\RsvpGuest;
+namespace App\Models\EventInvoice;
 
-use App\Data\Dto\Response\RsvpGuestDto;
+use App\Data\Dto\Response\EventInvoiceDto;
+use App\Enums\EventInvoiceStatus;
 use Carbon\Carbon;
 use Ramsey\Uuid\UuidInterface;
 
-class RsvpGuestModel
+class EventInvoiceModel
 {
     public function __construct(
         public UuidInterface $id,
-        public string $firstName,
-        public string $lastName,
+        public string $invoiceNumber,
+        public string $name,
         public string $email,
-        public string $status,
-        public UuidInterface $rsvpId,
+        public ?UuidInterface $contactNumberId,
+        public ?UuidInterface $addressId,
+        public EventInvoiceStatus $status,
+        public UuidInterface $eventId,
+        public UuidInterface $clientId,
         public UuidInterface $supplierId,
-        public ?UuidInterface $rsvpGuestGroupId,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,
@@ -26,17 +29,19 @@ class RsvpGuestModel
         public ?Carbon $deletedAt,
     ) {}
 
-    public function toDto(): RsvpGuestDto
+    public function toDto(): EventInvoiceDto
     {
-        return new RsvpGuestDto(
+        return new EventInvoiceDto(
             id: $this->id,
-            firstName: $this->firstName,
-            lastName: $this->lastName,
+            invoiceNumber: $this->invoiceNumber,
+            name: $this->name,
             email: $this->email,
+            contactNumberId: $this->contactNumberId,
+            addressId: $this->addressId,
             status: $this->status,
-            rsvpId: $this->rsvpId,
+            clientId: $this->clientId,
             supplierId: $this->supplierId,
-            rsvpGuestGroupId: $this->rsvpGuestGroupId,
+            eventId: $this->eventId,
             createdBy: $this->createdBy,
             updatedBy: $this->updatedBy,
             createdAt: $this->createdAt,

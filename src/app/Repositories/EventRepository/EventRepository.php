@@ -20,6 +20,7 @@ readonly class EventRepository
     public function create(EventCreateRepoData $data): EventModel
     {
         $id = Uuid::uuid4();
+        $principal = $this->principal::get();
 
         $eventEntity = new EventEntity;
         $eventEntity->id = $id;
@@ -30,7 +31,8 @@ readonly class EventRepository
         $eventEntity->celebrant_one = $data->celebrantOne;
         $eventEntity->celebrant_two = $data->celebrantTwo;
         $eventEntity->client_id = $data->clientId;
-        $eventEntity->created_by = $this->principal::get()->id;
+        $eventEntity->supplier_id = $principal->guardId;
+        $eventEntity->created_by = $principal->id;
         $eventEntity->created_at = Carbon::now();
         $eventEntity->save();
 

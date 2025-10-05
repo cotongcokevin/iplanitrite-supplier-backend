@@ -37,4 +37,8 @@ readonly class AddressService
         return $addressId;
 
     }
+
+    public function duplicate(UuidInterface $id): UuidInterface {
+        return $this->addressRepository->duplicate($id);
+    }
 }

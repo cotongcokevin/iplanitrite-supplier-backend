@@ -19,6 +19,7 @@ class ScheduleDto extends ResponseDto
         public bool $isMandatory,
         public ?UuidInterface $eventId,
         public ?UuidInterface $addressId,
+        public UuidInterface $supplierId,
         public ?UuidInterface $createdBy,
         public ?UuidInterface $updatedBy,
         public ?Carbon $createdAt,

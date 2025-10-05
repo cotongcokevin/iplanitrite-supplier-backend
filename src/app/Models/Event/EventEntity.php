@@ -28,6 +28,7 @@ class EventEntity extends GuardedEntity
     protected $casts = [
         'id' => UuidCast::class,
         'client_id' => UuidCast::class,
+        'supplier_id' => UuidCast::class,
         'celebrant_one' => UuidCast::class,
         'celebrant_two' => UuidCast::class,
         'created_by' => UuidCast::class,
@@ -46,6 +47,7 @@ class EventEntity extends GuardedEntity
             type: EventType::from($this->type),
             notes: $this->notes,
             clientId: $this->client_id,
+            supplierId: $this->supplier_id,
             celebrantOne: $this->celebrant_one,
             celebrantTwo: $this->celebrant_two,
             createdBy: $this->created_by,

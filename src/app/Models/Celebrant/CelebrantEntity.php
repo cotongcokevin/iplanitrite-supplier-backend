@@ -23,6 +23,7 @@ class CelebrantEntity extends GuardedEntity
 
     protected $casts = [
         'id' => UuidCast::class,
+        'supplier_id' => UuidCast::class,
         'contact_number_id' => UuidCast::class,
         'address_id' => UuidCast::class,
     ];
@@ -34,6 +35,7 @@ class CelebrantEntity extends GuardedEntity
             title: $this->title,
             firstName: $this->first_name,
             lastName: $this->last_name,
+            supplierId: $this->supplier_id,
             contactNumberId: $this->contact_number_id,
             addressId: $this->address_id,
         );

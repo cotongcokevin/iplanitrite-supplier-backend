@@ -34,21 +34,15 @@ readonly class ClientService
     public function create(
         ClientRequestDto $request
     ): ClientModel {
-        $addressId = null;
-        if ($request->address) {
-            $addressId = $this->addressService->upsert(
-                $request->address,
-                null
-            );
-        }
+        $addressId = $this->addressService->upsert(
+            $request->address,
+            null
+        );
 
-        $contactNumberId = null;
-        if ($request->contactNumber) {
-            $contactNumberId = $this->contactNumberService->upsert(
-                $request->contactNumber,
-                null
-            );
-        }
+        $contactNumberId = $this->contactNumberService->upsert(
+            $request->contactNumber,
+            null
+        );
 
         $client = $this->clientRepository->create(
             new ClientCreateRepoData(

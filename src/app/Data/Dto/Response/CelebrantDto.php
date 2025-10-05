@@ -14,6 +14,7 @@ class CelebrantDto extends ResponseDto
         public string $title,
         public string $firstName,
         public string $lastName,
+        public UuidInterface $supplierId,
         public ?UuidInterface $contactNumberId,
         public ?UuidInterface $addressId,
     ) {}

@@ -14,6 +14,7 @@ class CelebrantModel
         public string $title,
         public string $firstName,
         public string $lastName,
+        public UuidInterface $supplierId,
         public ?UuidInterface $contactNumberId,
         public ?UuidInterface $addressId,
     ) {}
@@ -25,6 +26,7 @@ class CelebrantModel
             title: $this->title,
             firstName: $this->firstName,
             lastName: $this->lastName,
+            supplierId: $this->supplierId,
             contactNumberId: $this->contactNumberId,
             addressId: $this->addressId,
         );

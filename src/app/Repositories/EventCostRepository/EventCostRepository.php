@@ -12,7 +12,6 @@ use Ramsey\Uuid\Uuid;
 
 readonly class EventCostRepository
 {
-
     public function __construct(
         private Principal $principal,
     ) {}
@@ -24,7 +23,7 @@ readonly class EventCostRepository
     ): EventCostModel {
         $principal = $this->principal::get();
 
-        $cost = new EventCostEntity();
+        $cost = new EventCostEntity;
         $cost->id = Uuid::uuid4();
         $cost->name = $name;
         $cost->amount = $amount;

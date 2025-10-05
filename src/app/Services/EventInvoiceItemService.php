@@ -8,7 +8,6 @@ use Ramsey\Uuid\UuidInterface;
 
 readonly class EventInvoiceItemService
 {
-
     public function __construct(
         private EventInvoiceItemRepository $repository,
     ) {}
@@ -22,5 +21,4 @@ readonly class EventInvoiceItemService
             eventCostId: $eventCostId,
         );
     }
-
 }

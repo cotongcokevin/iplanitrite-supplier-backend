@@ -14,7 +14,6 @@ use App\Repositories\EventRepository\EventRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class EventService
@@ -77,13 +76,13 @@ readonly class EventService
             $request->schedule
         );
 
-        if($request->initialDeposit !== null) {
+        if ($request->initialDeposit !== null) {
             $initialDeposit = $this->eventCostService->create(
                 EventCostRequestDto::fromRequest(
                     new Request([
-                        "name" => "Initial Deposit",
-                        "amount" => $request->initialDeposit,
-                        "eventId" => $event->id
+                        'name' => 'Initial Deposit',
+                        'amount' => $request->initialDeposit,
+                        'eventId' => $event->id,
                     ])
                 )
             );
@@ -107,7 +106,6 @@ readonly class EventService
             $status,
             $eventId
         );
-
 
         // TODO Email client
     }

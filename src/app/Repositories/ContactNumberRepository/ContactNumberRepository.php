@@ -21,10 +21,11 @@ class ContactNumberRepository
         ], ['id']);
     }
 
-    public function duplicate(UuidInterface $id): UuidInterface {
+    public function duplicate(UuidInterface $id): UuidInterface
+    {
         $original = ContactNumberEntity::where('id', $id)->first();
 
-        $contact = new ContactNumberEntity();
+        $contact = new ContactNumberEntity;
         $contact->id = Uuid::uuid4();
         $contact->number = $original->number;
         $contact->country_id = $original->country_id;

@@ -10,7 +10,7 @@ Route::group(['prefix' => 'events'], function () {
         '/', [EventController::class, 'store']
     )->name('events.store');
 
-    Route::group(['prefix' => '/{id}'], function() {
+    Route::group(['prefix' => '/{id}'], function () {
         Route::put(
             '/{id}/update-status', [EventController::class, 'updateStatus']
         )->name('events.update-status');

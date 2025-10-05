@@ -6,12 +6,11 @@ namespace App\Data\Dto\Response;
 
 use App\Data\Dto\ResponseDto;
 use App\Enums\EventInvoiceStatus;
-use Ramsey\Uuid\UuidInterface;
 use Carbon\Carbon;
+use Ramsey\Uuid\UuidInterface;
 
 class EventInvoiceDto extends ResponseDto
 {
-    
     public function __construct(
         public UuidInterface $id,
         public string $invoiceNumber,

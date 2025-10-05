@@ -3,17 +3,16 @@
 namespace App\Services;
 
 use App\Enums\EventInvoiceStatus;
-use App\Enums\EventStatus;
 use App\Models\Client\ClientModel;
 use App\Models\EventInvoice\EventInvoiceModel;
-use App\Repositories\EventInvoiceRepository\EventInvoiceRepository;
 use App\Repositories\EventInvoiceRepository\Data\EventInvoiceCreateRepoData;
+use App\Repositories\EventInvoiceRepository\EventInvoiceRepository;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class EventInvoiceService
 {
+    public const INVOICE_SUFFIX = 'INV';
 
-    public const INVOICE_SUFFIX = "INV";
     public const INVOICE_PADDING = 5;
 
     public function __construct(
@@ -27,8 +26,7 @@ readonly class EventInvoiceService
         UuidInterface $eventId,
         UuidInterface $eventCostId,
         ClientModel $client,
-    ): EventInvoiceModel
-    {
+    ): EventInvoiceModel {
         $addressId = $this->addressService->duplicate($client->addressId);
         $contactId = $this->contactNumberService->duplicate($client->contactNumberId);
 
@@ -53,9 +51,10 @@ readonly class EventInvoiceService
         return $invoice;
     }
 
-    private function getNextInvoiceNumber(): string {
+    private function getNextInvoiceNumber(): string
+    {
         $totalInvoices = $this->repository->totalInvoice() + 1;
-        return self::INVOICE_SUFFIX."-".str_pad($totalInvoices, self::INVOICE_PADDING, "0", STR_PAD_LEFT);
-    }
 
+        return self::INVOICE_SUFFIX.'-'.str_pad($totalInvoices, self::INVOICE_PADDING, '0', STR_PAD_LEFT);
+    }
 }

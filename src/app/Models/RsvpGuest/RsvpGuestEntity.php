@@ -7,7 +7,6 @@ namespace App\Models\RsvpGuest;
 use App\Classes\Casts\CarbonCast;
 use App\Classes\Casts\UuidCast;
 use App\Models\GuardedEntity;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RsvpGuestEntity extends GuardedEntity

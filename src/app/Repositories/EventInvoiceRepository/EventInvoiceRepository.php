@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Repositories\EventInvoiceRepository;
 
 use App\Classes\Principals\Principal;
-use App\Enums\EventInvoiceStatus;
-use App\Models\Client\ClientModel;
 use App\Models\EventInvoice\EventInvoiceEntity;
 use App\Models\EventInvoice\EventInvoiceModel;
 use App\Repositories\EventInvoiceRepository\Data\EventInvoiceCreateRepoData;
@@ -14,19 +12,20 @@ use Ramsey\Uuid\Uuid;
 
 readonly class EventInvoiceRepository
 {
-
     public function __construct(
         private Principal $principal,
     ) {}
 
-    public function totalInvoice(): int {
+    public function totalInvoice(): int
+    {
         return EventInvoiceEntity::withTrashed()->count();
     }
 
-    public function create(EventInvoiceCreateRepoData $data): EventInvoiceModel {
+    public function create(EventInvoiceCreateRepoData $data): EventInvoiceModel
+    {
         $principal = $this->principal::get();
 
-        $invoice = new EventInvoiceEntity();
+        $invoice = new EventInvoiceEntity;
         $invoice->id = Uuid::uuid4();
         $invoice->invoice_number = $data->invoiceNumber;
         $invoice->name = $data->name;

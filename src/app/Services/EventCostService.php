@@ -8,7 +8,6 @@ use App\Repositories\EventCostRepository\EventCostRepository;
 
 class EventCostService
 {
-
     public function __construct(
         private EventCostRepository $repository,
     ) {}
@@ -21,5 +20,4 @@ class EventCostService
             eventId: $request->eventId,
         );
     }
-
 }

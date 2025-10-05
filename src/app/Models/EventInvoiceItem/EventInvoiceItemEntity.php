@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models\EventInvoiceItem;
 
-use App\Classes\Casts\UuidCast;
 use App\Classes\Casts\CarbonCast;
+use App\Classes\Casts\UuidCast;
 use App\Models\GuardedEntity;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventInvoiceItemEntity extends GuardedEntity
-{  
+{
     use SoftDeletes;
-    
+
     /**
      * @var string
      */
     protected $table = 'event_invoice_item';
-    
+
     /**
      * @var string
      */
     protected $keyType = 'string';
-    
+
     protected $casts = [
         'id' => UuidCast::class,
         'event_cost_id' => UuidCast::class,

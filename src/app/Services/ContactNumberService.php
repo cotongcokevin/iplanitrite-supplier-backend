@@ -34,7 +34,9 @@ readonly class ContactNumberService
         return $contactId;
 
     }
-    public function duplicate(UuidInterface $id): UuidInterface {
+
+    public function duplicate(UuidInterface $id): UuidInterface
+    {
         return $this->contactNumberRepository->duplicate($id);
     }
 }

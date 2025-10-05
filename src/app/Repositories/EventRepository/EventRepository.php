@@ -43,7 +43,7 @@ readonly class EventRepository
         EventStatus $status,
         UuidInterface $eventId
     ): void {
-        $entity = EventEntity::where("id", $eventId)->first();
+        $entity = EventEntity::where('id', $eventId)->first();
         $entity->status = $status;
         $entity->save();
     }

@@ -22,7 +22,7 @@ readonly class EventInvoiceItemRepository
     ): EventInvoiceItemModel {
         $principal = $this->principal::get();
 
-        $invoiceItem = new EventInvoiceItemEntity();
+        $invoiceItem = new EventInvoiceItemEntity;
         $invoiceItem->id = Uuid::uuid4();
         $invoiceItem->event_invoice_id = $eventInvoiceId;
         $invoiceItem->event_cost_id = $eventCostId;

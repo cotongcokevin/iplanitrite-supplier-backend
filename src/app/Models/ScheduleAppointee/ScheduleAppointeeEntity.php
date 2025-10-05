@@ -6,7 +6,6 @@ namespace App\Models\ScheduleAppointee;
 
 use App\Classes\Casts\UuidCast;
 use App\Models\GuardedEntity;
-use Illuminate\Database\Eloquent\Model;
 
 class ScheduleAppointeeEntity extends GuardedEntity
 {
